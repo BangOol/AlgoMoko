@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html  lang="ko"
        xmlns:th="http://www.thymeleaf.org"
-       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+       >
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -21,8 +21,8 @@
     <link rel="stylesheet" href="css/style.css" type="text/css">
 </head>
 <body>
-    <div class="footer">
-<div class="footer">
+
+    <th:block th:fragment="header">
        <!-- Footer Section Begin -->
      <footer class="footer spad">
         <div class="container">
@@ -70,7 +70,7 @@
             </div>
         </div>
     </footer>
-    <!-- Footer Section End -->   
-    </div>
+    <!-- Footer Section End -->
+    </th:block>
 </body>
 </html>
