@@ -13,7 +13,7 @@ public class BoardController {
 	
 	@RequestMapping("/boardList")
 	public String boardList(Model model) {
-		model.addAttribute("boardList",dao.getBoardList(null));
+		model.addAttribute("boardList",dao.getBoardList());
 		return "contents/community/board";
 	}
 }
