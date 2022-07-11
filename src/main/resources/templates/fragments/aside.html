@@ -1,14 +1,13 @@
 <!DOCTYPE html>
-<html lang="zxx">
-
+<html  lang="ko"
+       xmlns:th="http://www.thymeleaf.org"
+       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+       >
+       
 <head>
     <meta charset="UTF-8">
-    <meta name="description" content="Ogani Template">
-    <meta name="keywords" content="Ogani, unica, creative, html">
+    <title>Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Ogani | Template</title>
-
       <!-- jquery CDN -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <!-- fullcalendar CDN -->
@@ -73,7 +72,6 @@
     <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
     <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
     <link rel="stylesheet" href="css/nice-select.css" type="text/css">
-    <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
     <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
@@ -84,7 +82,7 @@
 
     <link rel="stylesheet" href="StyleCards.css"/>
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+   
     <script>
     $( function() {
       $( "#datepicker" ).datepicker({
@@ -103,80 +101,42 @@
     
     </script>
 </head>
-
 <body>
-  <div th:replace="~{fragments/header}"></div>
- 
 
-    <!-- Breadcrumb Section Begin -->
-    <section class="breadcrumb-section set-bg" data-setbg="img/breadcrumb.jpg">
-        <div class="container">
+    <th:block th:fragment="aside">
+        <section class="blog spad">
+        <div class="container" style="float: left; width: 440px;">
+          <div id="datepicker" onclick="location.href='cal'" ></div>
             <div class="row">
-                <div class="col-lg-12 text-center">
-                    <div class="breadcrumb__text">
-                        <h2>식단일지</h2>
-                        <div class="breadcrumb__option">
-                            <span>Challenge</span>
+                <div class="col-lg-4 col-md-5">
+                    <div class="blog__sidebar">
+                        
+                        <div class="blog__sidebar__item" >
+                            <h4><a href="./sicmain">Categories</a></h4>
+                            <ul>
+                                <li><a href="./todaysic">오늘의 식단</a></li>
+                                <li><a href="./myre">나만의 레시피</a></li>
+                                <li><a href="./weeklybest">이주의 음식</a></li>
+                            </ul>
+                            
                         </div>
+
+                    </div>
+                </div>
+                
+                        
+                        
+                        
+                        
                     </div>
                 </div>
             </div>
         </div>
+        
+     
+<!-- Table End -->
     </section>
-    <!-- Breadcrumb Section End -->
-
-   <div th:replace="~{fragments/aside}"></div>
-    <div id='wrap'>
- <div id='wrap'>
-
-    <!-- calendar 태그 -->
-    <div id='calendar-wrap'>
-      <div id='calendar1'></div>
-    </div>
-  </div>
-  <script>
-  (function(){
-    $(function(){
-
-       // calendar element 취득
-      var calendarEl = $('#calendar1')[0];
-      // full-calendar 생성하기
-      var calendar = new FullCalendar.Calendar(calendarEl, {
-        // 해더에 표시할 툴바
-        headerToolbar: {
-          left: 'prev,next today',
-          center: 'title',
-          
-        },
-        
-        locale: 'ko', // 한국어 설정
-
-        
-      });
-      // 캘린더 랜더링
-      calendar.render();
-    });
-  })();
-</script>
-
-    
-    <br/>
-
-<div th:replace="~{fragments/footer}"></div>
-    
-
-    <!-- Js Plugins -->
-    <script src="js/jquery-3.3.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.nice-select.min.js"></script>
-    <script src="js/jquery-ui.min.js"></script>
-    <script src="js/jquery.slicknav.js"></script>
-    <script src="js/mixitup.min.js"></script>
-    <script src="js/owl.carousel.min.js"></script>
-    <script src="js/main.js"></script>
-
-
-
+    <!-- Blog Section End -->
+    </th:block>
 </body>
-
 </html>
