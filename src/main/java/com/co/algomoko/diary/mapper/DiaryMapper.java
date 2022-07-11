@@ -7,8 +7,6 @@ import org.springframework.stereotype.Repository;
 
 import com.co.algomoko.diary.domain.DiaryVO;
 
-@Repository
-@Mapper
 public interface DiaryMapper {
 	public List<DiaryVO> findDay();
 }

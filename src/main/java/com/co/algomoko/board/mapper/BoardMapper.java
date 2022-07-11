@@ -5,5 +5,5 @@ import java.util.List;
 import com.co.algomoko.board.domain.BoardVO;
 
 public interface BoardMapper {
-	public List<BoardVO> getBoardList(BoardVO boardvo);
+	public List<BoardVO> getBoardList();
 }
