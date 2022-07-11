@@ -1,0 +1,265 @@
+DROP TABLE members;
+
+CREATE TABLE members (
+	mid	VARCHAR2(50)		NOT NULL,
+	mpw	VARCHAR2(50)		NULL,
+	uname	VARCHAR2(50)		NULL,
+	nick	VARCHAR2(50)		NULL,
+	birth	date		NULL,
+	sex	VARCHAR2(10)		NULL,
+	height	NUMBER		NULL,
+	weight	NUMBER		NULL,
+	bmi	NUMBER		NULL,
+	tcal	NUMBER		NULL,
+	tweight	NUMBER		NULL,
+	U0	VARCHAR2(10)		NULL,
+	B0	VARCHAR2(10)		NULL
+);
+
+DROP TABLE Alarm;
+
+CREATE TABLE Alarm (
+	ano	NUMBER		NOT NULL,
+	mid	VARCHAR2(50)		NOT NULL,
+	adate	date		NULL,
+	atitle	VARCHAR2(50)		NULL,
+	aconent	VARCHAR2(200)		NULL,
+	atime	date		NULL
+);
+
+DROP TABLE diary;
+
+CREATE TABLE diary (
+	ddate	date		NULL,
+	mid	VARCHAR2(50)		NOT NULL,
+	ucon	VARCHAR2(200)		NULL
+);
+
+DROP TABLE food;
+
+CREATE TABLE food (
+	ing	VARCHAR2(50)		NOT NULL,
+	cal	NUMBER		NULL,
+	amount	NUMBER		NULL,
+	carb	NUMBER		NULL,
+	prot	NUMBER		NULL,
+	fat	NUMBER		NULL,
+	F0	VARCHAR2(10)		NULL
+);
+
+DROP TABLE recipe;
+
+CREATE TABLE recipe (
+	rno	NUMBER		NOT NULL,
+	rname	VARCHAR2(50)		NULL,
+	rnick	VARCHAR2(50)		NULL,
+	cal	NUMBER		NULL,
+	amount	NUMBER		NULL,
+	carb	NUMBER		NULL,
+	prot	NUMBER		NULL,
+	rfat	NUMBER		NULL,
+	rrecipe	VARCHAR2(500)		NULL,
+	mid	VARCHAR2(50)		NOT NULL,
+	unitcd	VARCHAR2(10)		NULL
+);
+
+DROP TABLE recipe_ing;
+
+CREATE TABLE recipe_ing (
+	fing	VARCHAR2(50)		NOT NULL,
+	rno	NUMBER		NOT NULL,
+	cnt	NUMBER		NULL
+);
+
+DROP TABLE diary_detail;
+
+CREATE TABLE diary_detail (
+	ddno	NUMBER(20)		NOT NULL,
+	ddate	date		NULL,
+	mid	VARCHAR2(50)		NOT NULL,
+	dddo	varchar2(20)		NULL,
+	ddrena	VARCHAR2(10)		NULL,
+	ddname	VARCHAR2(50)		NULL,
+	amount	NUMBER		NULL,
+	F0	VARCHAR2(10)		NULL,
+	cal	NUMBER		NULL,
+	carb	NUMBER		NULL,
+	prot	NUMBER		NULL,
+	fat	NUMBER		NULL
+);
+
+DROP TABLE Challenge;
+
+CREATE TABLE Challenge (
+	cno	NUMBER		NOT NULL,
+	ctitle	VARCHAR2(50)		NULL,
+	ccon	VARCHAR2(300)		NULL,
+	cdday	NUMBER		NULL,
+	cimg	CLOB		NULL
+);
+
+DROP TABLE Challenge_Validation;
+
+CREATE TABLE Challenge_Validation (
+	cvno	NUMBER		NOT NULL,
+	mycno	NUMBER		NOT NULL,
+	cvimg	CLOB		NULL,
+	cvdate	date		NULL
+);
+
+DROP TABLE My_Challenge;
+
+CREATE TABLE My_Challenge (
+	mycno	NUMBER		NOT NULL,
+	cno2	NUMBER		NOT NULL,
+	mid	VARCHAR2(50)		NOT NULL,
+	cper	NUMBER		NULL,
+	sdate	date		NULL,
+	edate	date		NULL
+);
+
+COMMENT ON COLUMN My_Challenge.cper IS 'insert로 지속적으로 이행률 관리. 후에 관리자 통계에 이용할 것.,';
+
+DROP TABLE Board;
+
+CREATE TABLE Board (
+	bno	number		NOT NULL,
+	mid	VARCHAR2(50)		NOT NULL,
+	btitle	varchar2(100)		NULL,
+	bnick	varchar2(50)		NULL,
+	bcon	CLOB		NULL,
+	bdate	date		NULL,
+	bhit	number		NULL,
+	bup	number		NULL
+);
+
+DROP TABLE Notice;
+
+CREATE TABLE Notice (
+	Key	number		NOT NULL,
+	ntitle	varchar2(50)		NULL,
+	ndate	date		NULL,
+	ncon	varchar2(1000)		NULL,
+	nfile	BLOB		NULL,
+	nhit	number		NULL
+);
+
+DROP TABLE FAQ;
+
+CREATE TABLE FAQ (
+	faqno	number		NOT NULL,
+	faqtitle	varchar2(50)		NULL,
+	faqcon	varchar2(1000)		NULL,
+	faqfile	varchar2(100)		NULL,
+	Q0	VARCHAR2(10)		NULL
+);
+
+DROP TABLE Question;
+
+CREATE TABLE Question (
+	qno	number		NOT NULL,
+	C0	VARCHAR2(10)		NULL,
+	mid	VARCHAR2(50)		NOT NULL,
+	nick	varchar2(50)		NULL,
+	qtitle	varchar2(50)		NULL,
+	qcon	CLOB		NULL,
+	qdate	date		NULL,
+	qfile	BLOB		NULL,
+	Field2	CLOB		NULL,
+	A0	VARCHAR2(10)		NULL
+);
+
+DROP TABLE Comments;
+
+CREATE TABLE Comments (
+	cno	number		NOT NULL,
+	bno	number		NOT NULL,
+	ccon	varchar2(500)		NULL,
+	cdate	date		NULL,
+	cnick	varchar2(50)		NULL,
+	Field	VARCHAR2(50)		NULL
+);
+
+DROP TABLE ccode;
+
+CREATE TABLE ccode (
+	code	VARCHAR2(10)		NOT NULL,
+	ccode	VARCHAR2(10)		NULL,
+	codename	VARCHAR2(10)		NULL,
+	codeexp	VARCHAR2(10)		NULL,
+	resdate	VARCHAR2(10)		NULL,
+	insertdate	VARCHAR2(10)		NULL
+);
+
+ALTER TABLE members ADD CONSTRAINT PK_MEMBERS PRIMARY KEY (
+	mid
+);
+
+ALTER TABLE Alarm ADD CONSTRAINT PK_ALARM PRIMARY KEY (
+	ano
+);
+
+ALTER TABLE diary ADD CONSTRAINT PK_DIARY PRIMARY KEY (
+	ddate,
+	mid
+);
+
+ALTER TABLE food ADD CONSTRAINT PK_FOOD PRIMARY KEY (
+	ing
+);
+
+ALTER TABLE recipe ADD CONSTRAINT PK_RECIPE PRIMARY KEY (
+	rno
+);
+
+ALTER TABLE recipe_ing ADD CONSTRAINT PK_RECIPE_ING PRIMARY KEY (
+	fing
+);
+
+ALTER TABLE diary_detail ADD CONSTRAINT PK_DIARY_DETAIL PRIMARY KEY (
+	ddno
+);
+
+ALTER TABLE Challenge ADD CONSTRAINT PK_CHALLENGE PRIMARY KEY (
+	cno
+);
+
+ALTER TABLE Challenge_Validation ADD CONSTRAINT PK_CHALLENGE_VALIDATION PRIMARY KEY (
+	cvno
+);
+
+ALTER TABLE My_Challenge ADD CONSTRAINT PK_MY_CHALLENGE PRIMARY KEY (
+	mycno
+);
+
+ALTER TABLE Board ADD CONSTRAINT PK_BOARD PRIMARY KEY (
+	bno
+);
+
+ALTER TABLE Notice ADD CONSTRAINT PK_NOTICE PRIMARY KEY (
+	Key
+);
+
+ALTER TABLE FAQ ADD CONSTRAINT PK_FAQ PRIMARY KEY (
+	faqno
+);
+
+ALTER TABLE Question ADD CONSTRAINT PK_QUESTION PRIMARY KEY (
+	qno
+);
+
+ALTER TABLE Comments ADD CONSTRAINT PK_COMMENTS PRIMARY KEY (
+	cno
+);
+
+ALTER TABLE ccode ADD CONSTRAINT PK_CCODE PRIMARY KEY (
+	code
+);
+
+ALTER TABLE recipe_ing ADD CONSTRAINT FK_food_TO_recipe_ing_1 FOREIGN KEY (
+	fing
+)
+REFERENCES food (
+	ing
+);
+
