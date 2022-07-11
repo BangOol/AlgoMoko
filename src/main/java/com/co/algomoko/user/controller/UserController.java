@@ -3,7 +3,8 @@ package com.co.algomoko.user.controller;
 import com.co.algomoko.user.domain.AlarmVO;
 import com.co.algomoko.user.domain.UserVO;
 import com.co.algomoko.user.service.UserService;
-import com.co.algomoko.user.service.UserServiceImpl;
+import com.co.algomoko.user.service.impl.UserServiceImpl;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
