@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Ogani Template">
+    <meta name="keywords" content="Ogani, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ogani | Template</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+</head>
+
+<body>
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+ 
+ 	<div th:replace="~{fragments/header}"></div>
+ 
+    <!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-section set-bg" data-setbg="img/breadcrumb.jpg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb__text">
+                        <a href="food">
+                            <h2>음식</h2>
+                        </a>
+                        <div class="breadcrumb__option">
+                            <span>Food-Search</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+    <!-- Blog Section Begin -->
+    <section class="blog spad" style="padding-bottom: 20px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-7">
+                    <div class="blog__sidebar__search" style="margin-bottom: 10px;">
+                        <form action="#">
+                            <input type="text" placeholder="검색어 입력">
+                            <button type="submit"><span class="icon_search"></span></button>
+                        </form>
+                    </div>
+                    <div class="blog__sidebar__item">
+                        <section class="shoping-cart spad" style="padding-top: 5px;">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="section-title product__discount__title" style="margin-bottom: 0;">
+                                            <p>검색결과</p>
+                                        </div>
+                                        <div class="product__details__text"
+                                            style="margin-left: 200px; margin-right: -200px;">
+                                            <div class="section-title related__product__title"
+                                                style="margin-bottom: 10px;">
+                                                <h2>계란</h2>
+                                            </div>
+                                            <ul style="margin-top: 30px;">
+                                                <li><b>단위</b> <span>100g</span></li>
+                                                <li><b>칼로리</b> <span>50kcal</span></li>
+                                                <li><b>탄수화물</b> <span>10g <samp></li>
+                                                <li><b>단백질</b> <span>25g</span></li>
+                                                <li><b>지방</b> <span>5g</span></li>
+                                            </ul></br>
+                                            <hr></br>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-5" style="float: right;">
+                    <div class="blog__sidebar" style="padding: 0px; margin-left: 30px;">
+                        <div class="blog__sidebar__item">
+                            <h4>최근 음식 소식</h4>
+                            <div class="blog__sidebar__recent">
+                                <a href="https://www.naver.com/" class="blog__sidebar__recent__item">
+                                    <div class="blog__sidebar__recent__item__pic">
+                                        <img src="img/blog/sidebar/sr-1.jpg" alt="">
+                                    </div>
+                                    <div class="blog__sidebar__recent__item__text">
+                                        <h6>09 Kinds Of Vegetables<br /> Protect The Liver</h6>
+                                        <span>MAR 05, 2019</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="blog__sidebar__recent__item">
+                                    <div class="blog__sidebar__recent__item__pic">
+                                        <img src="img/blog/sidebar/sr-2.jpg" alt="">
+                                    </div>
+                                    <div class="blog__sidebar__recent__item__text">
+                                        <h6>Tips You To Balance<br /> Nutrition Meal Day</h6>
+                                        <span>MAR 05, 2019</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="blog__sidebar__recent__item">
+                                    <div class="blog__sidebar__recent__item__pic">
+                                        <img src="img/blog/sidebar/sr-3.jpg" alt="">
+                                    </div>
+                                    <div class="blog__sidebar__recent__item__text">
+                                        <h6>4 Principles Help You Lose <br />Weight With Vegetables</h6>
+                                        <span>MAR 05, 2019</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="blog__sidebar__item">
+                            <h4>인기 검색어</h4>
+                            <div class="blog__sidebar__item__tags">
+                                <a
+                                    href="https://terms.naver.com/entry.naver?docId=1993159&cid=48180&categoryId=48249">계란</a>
+                                <a href="#">바나나</a>
+                                <a href="#">닭가슴살</a>
+                                <a href="#">아메리카노</a>
+                                <a href="#">쌀</a>
+                                <a href="#">콜라</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+    <!-- Blog Section End -->
+    
+	<div th:replace="~{fragments/footer}"></div>
+
+    <!-- Js Plugins -->
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.nice-select.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <script src="js/jquery.slicknav.js"></script>
+    <script src="js/mixitup.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/main.js"></script>
+
+
+
+</body>
+
+</html>

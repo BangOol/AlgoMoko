@@ -29,6 +29,80 @@
 /*----------------------------------------*/
 /* Template default CSS
 /*----------------------------------------*/
+/* 챌린지 모달창 시작 */
+.modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  display: none;
+
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal.show {
+  display: block;
+}
+
+.modal_body {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 400px;
+  height: 300px;
+  padding: 40px;
+  text-align: center;
+  background: rgba(69, 139, 197, 0.70);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 10px;
+  box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.modal_title h2 {
+
+  padding-left: 10px;
+  margin-bottom: 10px;
+  display: inline;
+  text-shadow: 1px 1px 2px gray;
+  color: white;
+}
+
+.modal_content p {
+  margin-top: 20px;
+  padding: 0px 10px;
+  text-shadow: 1px 1px 2px gray;
+  color: white;
+}
+
+.modal_btn .modal_s {
+  display: inline-block;
+  font-size: 14px;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border: none;
+  padding: 14px 20px 12px;
+  border-radius: 25px;
+  background-color: black;
+}
+
+.modal_btn .modal_c {
+  display: inline-block;
+  font-size: 14px;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border: none;
+  padding: 14px 20px 12px;
+  border-radius: 25px;
+  background-color: black;
+}
+
+/* 챌린지 모달창 끝 */
 @keyframes down-btn {
 	0% { bottom:20px; }    
 	100% { bottom:0px; }
@@ -12041,97 +12115,9 @@ h1{
   font-weight: 600;
 }
 
-/* ###### Modal ###### */
 
-.modal-wrapper {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 1050;
-  visibility: hidden;
-  opacity: 0;
-  overflow-x: hidden;
-  overflow-y: auto;
-  outline: 0;
-  -webkit-transition: opacity 400ms;
-  transition: opacity 400ms;
-}
 
-.modal {
-  position: relative;
-  width: auto;
-  margin: .5rem;
-  pointer-events: none;
-  -webkit-transform: translateY(-20%);
-  -o-transform: translateY(-20%);
-  transform: translateY(-20%);
-  -webkit-transition: 300ms;
-  transition: 300ms;
-}
 
-.modal-wrapper .overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.5);
-  z-index: -1;
-}
-
-.modal-is-open{
-  visibility: visible;
-  opacity: 1;
-}
-
-.modal-is-open > .modal{
-  -webkit-transform: translateY(0);
-  -o-transform: translateY(0);
-  transform: translateY(0)
-}
-
-.modal-centered {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  min-height: calc(100% - (.5rem * 2));
-}
-
-@media (min-width: 576px){
-  .modal{
-    max-width: 500px;
-    margin: 1.75rem auto;
-  }
-
-  .modal.modal-lg{ max-width: 800px !important
-  }
-
-  .modal-centered { min-height: calc(100% - (1.75rem * 2))
-  }
-}
-
-.modal-content {
-  position: relative;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  width: 100%;
-  pointer-events: auto;
-  background-color: #fff;
-  background-clip: padding-box;
-  border: 1px solid rgba(0,0,0,.2);
-  border-radius: .3rem;
-  outline: 0;
-}
 
 @media (min-width: 640px) {
   .sm\:sr-only {
@@ -59901,6 +59887,11 @@ ol {
 
 .blog__item__pic img {
 	min-width: 100%;
+}
+
+.blog__item__cpic img {
+  width: 360px;
+  height: 240px;
 }
 
 .blog__item__text {
