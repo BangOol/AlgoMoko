@@ -1,4 +1,4 @@
-package com.co.algomoko.board.service.impl;
+package com.co.algomoko.board.serviceimpl;
 
 import java.util.List;
 
