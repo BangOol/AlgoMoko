@@ -101,7 +101,6 @@
                         </tr>
                         </thead>
                         <tbody>
-
                         <tr th:each="lists:${list}">
                             <td th:text="${lists.uid}"></td>
                             <td th:text="${lists.sex}"></td>
@@ -113,13 +112,13 @@
                 </div>
                 <div class="form-group" style="text-align: center; margin: 100px 0 0 0">
                     <div style="text-align: center; font-family: 'Cairo', 'Jua', sans-serif">
-                        <form action="/searchUser" method="get">
+                        <form name="search-form" autocomplete="off">
                             <input type="text" placeholder="검색어 입력" style="border: 1px solid" id = "searchUser">
                             <select id = "selectOption">
                                 <option value="email">이메일</option>
                                 <option value="nick">닉네임</option>
                             </select>
-                            <button class="btn btn-success" type="button" id="button-addon2">검색</button>
+                            <button class="btn btn-success" onclick="findUser()" type="button" id="button-addon2">검색</button>
                         </form>
                     </div>
                 </div>
@@ -130,4 +129,29 @@
 <!-- Product Section End -->
 <div th:replace="fragments/footer"></div>
 </body>
+    <script>
+        function findUser(){
+            $.ajax({
+                type: 'GET',
+                url : "/findUser",
+                data : $("form[name=search-form]").serialize(),
+                success : function(result){
+                    //테이블 초기화
+                    $('#boardtable > tbody').empty();
+                    if(result.length>=1){
+                        result.forEach(function(item){
+                            str='<tr>'
+                            str += "<td>"+item.uid +"</td>";
+                            str+="<td>" +item.sex +"</td>";
+                            // str+="<td><a href = '/board/detail?idx=" + item.idx + "'>" + item.title + "</a></td>";
+                            str+="<td>"+item.date+"</td>";
+                            str+="<td>"+item.B0 +"</td>";
+                            str+="</tr>"
+                            $('#boardtable').append(str);
+                        })
+                    }
+                }
+            })
+        }
+    </script>
 </html>

@@ -1,15 +1,13 @@
 package com.co.algomoko.admin.controller;
 
+import com.co.algomoko.admin.domain.AdminVO;
 import com.co.algomoko.admin.mapper.AdminMapper;
 import com.co.algomoko.admin.service.AdminService;
 import com.co.algomoko.user.domain.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -48,16 +46,12 @@ public class AdminController {
 
 
     // 유저 리스트 - 검색
-    @RequestMapping("/searchUser")
-    public String findUser(HttpServletRequest httpServletRequest, Model model){
-        String searchUser = httpServletRequest.getParameter("searchUser");
-        String selectOption = httpServletRequest.getParameter("selectOption");
-
-        model.addAttribute(searchUser);
-        model.addAttribute(selectOption);
+    @RequestMapping("/findUser")
+    public String findUser(@RequestParam("type") String type, @RequestParam("keyword") String keyword, Model model) throws  Exception{
+        UserVO userVO = new UserVO();
 
 
-        return "";
+        return null;
     }
 
 

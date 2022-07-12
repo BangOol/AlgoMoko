@@ -6,7 +6,8 @@ import org.apache.ibatis.type.Alias;
 
 @Data
 @AllArgsConstructor
-@Alias("AdminVO")
 public class AdminVO {
-
+    // 검색 필터
+    private String type;
+    private String keyword;
 }
