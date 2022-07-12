@@ -6,14 +6,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.co.algomoko.board.mapper.BoardMapper;
+import com.co.algomoko.board.service.BoardService;
 
 @Controller
 public class BoardController {
-	@Autowired BoardMapper dao;
+	@Autowired BoardService boardService;
 	
 	@RequestMapping("/boardList")
 	public String boardList(Model model) {
-		model.addAttribute("boardList",dao.getBoardList());
+		model.addAttribute("boardList",boardService.getBoardList());
 		return "contents/community/board";
 	}
 }

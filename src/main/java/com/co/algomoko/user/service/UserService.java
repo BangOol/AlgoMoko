@@ -1,12 +1,11 @@
 package com.co.algomoko.user.service;
 
-import com.co.algomoko.user.domain.UserVO;
-import com.co.algomoko.user.mapper.UserMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import java.util.List;
 
+import com.co.algomoko.user.domain.UserVO;
 
 public interface UserService {
-    String testUser();
+	public UserVO memberInfo(UserVO uservo);
+	public UserVO login(UserVO uservo);
+	public int signup(UserVO uservo);
 }
