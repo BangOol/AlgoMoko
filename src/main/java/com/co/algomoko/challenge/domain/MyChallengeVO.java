@@ -1,4 +1,4 @@
-package com.co.algomoko.challenge.vo;
+package com.co.algomoko.challenge.domain;
 
 import java.util.Date;
 
