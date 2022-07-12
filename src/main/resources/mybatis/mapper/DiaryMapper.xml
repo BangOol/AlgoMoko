@@ -8,11 +8,16 @@
 <mapper namespace="com.co.algomoko.diary.mapper.DiaryMapper">
 <!-- 해당날짜 식단 조회 --> 
 <select id="findDay" resultType="DiaryVO">
-select ddname,amount, f0, cal, carb, prot, fat
+select ddname,amount, f0, cal, carb, prot, fat, dddo, trunc(ddate) as ddate
 from diary_detail
-where to_char(ddate, 'yymmdd')='220711' and mid = 'user3'
+where trunc(ddate)=trunc(#{ddate}) and mid = #{mid}
 
 </select>
-
+<select id="sicDay" resultType="DiaryVO">
+select ddname,amount, f0, cal, carb, prot, fat, dddo, trunc(ddate) as ddate, to_char(ddate, 'day') as dday
+from diary_detail
+where TO_CHAR(ddate,'ww')  =TO_CHAr(to_date(sysdate,'yy-MM-dd'),'ww') 
+order by ddate
+</select>
 
 </mapper>

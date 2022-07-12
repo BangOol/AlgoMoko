@@ -12,5 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public interface DiaryService {
-    public List<DiaryVO> findDay();
+    public List<DiaryVO> findDay(DiaryVO diaryVO);
+    public List<DiaryVO> sicDay(DiaryVO diaryVO);
+    
+    
 }
+
