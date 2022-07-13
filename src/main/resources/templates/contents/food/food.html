@@ -56,7 +56,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-8 col-md-7">
-					<div class="blog__sidebar__search">
+					<div class="blog__sidebar__search" style="margin-bottom: 30px;">
 						<form name="search-form">
 							<input name="ing" type="text" placeholder="검색어 입력">
 							<button type="button" onclick="getSearchList()" value="검색">
@@ -70,6 +70,7 @@
 								<div class="row">
 									<div class="col-lg-12">
 										<div class="shoping__cart__table">
+										<h4 style="text-align: center;">검색결과</h4></br>
 											<table id="foodTable">
 												<thead>
 													<tr>
@@ -79,7 +80,7 @@
 														<th>단위</th>
 													</tr>
 												</thead>
-												<tbody>													
+												<tbody>
 												</tbody>
 											</table>
 										</div>
@@ -132,7 +133,7 @@
 							<h4>인기 검색어</h4>
 							<div class="blog__sidebar__item__tags">
 								<a
-									href="https://terms.naver.com/entry.naver?docId=1993159&cid=48180&categoryId=48249">계란</a>
+									href="">계란</a>
 								<a href="#">바나나</a> <a href="#">닭가슴살</a> <a href="#">아메리카노</a> <a
 									href="#">쌀</a> <a href="#">콜라</a>
 							</div>
@@ -157,30 +158,30 @@
 	<script src="js/owl.carousel.min.js"></script>
 	<script src="js/main.js"></script>
 	<script>
-	function getSearchList(){
-		
-	$.ajax({
-		type:'get',
-		url:"/getSearchList",
-		data:$("form[name=search-form]").serialize(),
-		success:function(result){
-			//테이블 초기화
-			$('#foodTable > tbody').empty();
-			if(result.length>=1){
-				result.forEach(function(food){
-					sts='<tr>'
-					sts+="<td><a href='/contents/food/foodContents?ing=" + food.ing +"'>" + food.ing+ "</a></td>";
-					sts+="<td></td>";
-					sts+="<td>"+food.cal+"kcal"+"</td>";			
-					sts+="<td>"+food.amount+food.f0+"</td>";
-					sts+="</tr>"
-					$('#foodTable').append(sts);
-        		})				 
-			}
+		function getSearchList() {
+
+			$.ajax({
+				type : 'get',
+				url : "/getSearchList",
+				data : $("form[name=search-form]").serialize(),
+				success : function(result) {
+					//테이블 초기화
+					$('#foodTable > tbody').empty();
+					if (result.length >= 1) {
+						result.forEach(function(food) {
+							sts = '<tr>'
+							sts += "<td><a href='/foodContents?ing=" + food.ing + "'>" + food.ing + "</a></td>";
+							sts += "<td></td>";
+							sts += "<td>" + food.cal + "kcal" + "</td>";
+							sts += "<td>" + food.amount + food.f0 + "</td>";
+							sts += "</tr>"
+							$('#foodTable').append(sts);
+						})
+					}
+				}
+			})
 		}
-	})
-}	
-</script>
+	</script>
 
 
 </body>
