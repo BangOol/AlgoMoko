@@ -14,9 +14,15 @@ public class DiaryServiceImpl implements DiaryService {
 	@Autowired DiaryMapper diaryMapper;
 
     @Override
-	public List<DiaryVO> findDay() {
+	public List<DiaryVO> findDay(DiaryVO diaryVO) {
     	
-		return diaryMapper.findDay();
+		return diaryMapper.findDay(diaryVO);
+	}
+
+	@Override
+	public List<DiaryVO> sicDay(DiaryVO diaryVO) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

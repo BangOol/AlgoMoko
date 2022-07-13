@@ -78,12 +78,6 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
 }
 
 
-console.log(vvv[0])
-
-
-
-
-
 
 
 });
@@ -118,49 +112,91 @@ console.log(vvv[0])
 </head>
 
 <body>
+
    <div th:replace="~{fragments/header}"></div>
 <div th:replace="~{fragments/aside}"></div>
 
 
-    <div class="container">
 
-        <table class="table table-hover" style="text-align: center">
-            <thead>
-                <tr>
-                    <th scope="col">아디</th>
-            <th scope="col"  style="margin:20px 0">내용</th>
-            <th scope="col">a량</th>
-            <th scope="col">음식</th>
-            <th scope="col">조회수</th>
-          </tr>
-        </thead>
-        <tbody>
-            
-            <tr th:each="today:${todaysic}">
-                <th th:text="${today.uid}" scope="row"></th>
-                <td th:text="${today.ucon}"></td>
-                <td th:text="${today.amount}"></td>
-                <td th:text="${today.ddname}"></td>
-                <td th:text="${today.cal}"></td>
-            </tr>
-            
-        </tbody>
-        <div>
-            
-        </table>
-    </div>
-   
         <div class="card-category-1 row">
         
             <div class="basic-card basic-card-light m-10">
                 
                 <div id="ssuunn" class="card-content">
-                    <span id="ssuunn"  class="card-title">?</span>
+                    <span id="ssuunn"  class="card-title"></span>
                     
                 </div>
     
                 <div class="card-link">
-                    <a href="#" title="Read Full"><span>Read Full</span></a>
+                    
+                    <table>
+                              <thead>
+                                  <tr>
+                                      <th class="shoping__product" >아침</th>
+
+                                  </tr>
+                              </thead>
+                              <tbody>
+                              
+                              <th:block th:each="today:${todaysic}" >
+                              
+                              
+                              <tr th:if= "${today.dddo == 'aa'} and ${today.dday}=='일요일'">
+                              <td th:text="${today.ddname}" class="shoping__cart__item" onclick="location.href='write'">
+                                          <img src="img/cart/cart-1.jpg" alt="">
+                                          <h5></h5>
+                                      </td>
+                                      <td <td th:text="|${today.cal}kcal|"  class="shoping__cart__price">
+                                          
+                                      
+                                  </tr>
+                             </th:block>
+                             </tbody>
+                             
+                             <thead>
+                                  <tr>
+                                      <th class="shoping__product" >점심</th>
+
+                                  </tr>
+                              </thead>
+                              <tbody>
+                              <th:block th:each="today:${todaysic}" >
+                              <tr th:if="${today.dddo == 'bb'} and ${today.dday}=='일요일'">
+                              <td th:text="${today.ddname}" class="shoping__cart__item" onclick="location.href='write'">
+                                          <img src="img/cart/cart-1.jpg" alt="">
+                                          <h5></h5>
+                                      </td>
+                                      <td <td th:text="|${today.cal}kcal|"  class="shoping__cart__price">
+                                          
+                                      
+                                  </tr>
+                             </th:block>
+                             </tbody>
+                             
+                             <thead>
+                                  <tr>
+                                  
+                                      <th class="shoping__product" >저녁</th>
+
+                                  </tr>
+                              </thead>
+                              <tbody>
+                              <th:block th:each="today:${todaysic}" >
+                              <tr th:if="${today.dddo == 'cc'} and ${today.dday}=='일요일'">
+                              <td th:text="${today.ddname}" class="shoping__cart__item" onclick="location.href='write'">
+                                          <img src="img/cart/cart-1.jpg" alt="">
+                                          <h5></h5>
+                                      </td>
+                                      <td <td th:text="|${today.cal}kcal|"  class="shoping__cart__price">
+                                          
+                                      
+                                  </tr>
+                             </th:block>
+                             </tbody>
+                                  
+                               
+                          </table>
+                    
                 </div>
             </div>
     
@@ -173,7 +209,71 @@ console.log(vvv[0])
                 </div>
 
                 <div class="card-link">
-                    <a href="#" title="Read Full"><span>Read Full</span></a>
+                   <table>
+                              <thead>
+                                  <tr>
+                                      <th class="shoping__product" >아침</th>
+
+                                  </tr>
+                              </thead>
+                              <tbody>
+                              
+                              <th:block th:each="today:${todaysic}" >
+                              
+                              <tr th:if="${today.dddo == 'aa'} and ${today.dday}=='월요일'">
+                              <td th:text="${today.ddname}" class="shoping__cart__item" onclick="location.href='write'">
+                                          <img src="img/cart/cart-1.jpg" alt="">
+                                          <h5></h5>
+                                      </td>
+                                      <td <td th:text="|${today.cal}kcal|"  class="shoping__cart__price">
+                                          
+                                      
+                                  </tr>
+                             </th:block>
+                             </tbody>
+                             
+                             <thead>
+                                  <tr>
+                                      <th class="shoping__product" >점심</th>
+
+                                  </tr>
+                              </thead>
+                              <tbody>
+                              <th:block th:each="today:${todaysic}" >
+                              <tr th:if="${today.dddo == 'bb'} and ${today.dday}=='월요일'">
+                              <td th:text="${today.ddname}" class="shoping__cart__item" onclick="location.href='write'">
+                                          <img src="img/cart/cart-1.jpg" alt="">
+                                          <h5></h5>
+                                      </td>
+                                      <td <td th:text="|${today.cal}kcal|"  class="shoping__cart__price">
+                                          
+                                      
+                                  </tr>
+                             </th:block>
+                             </tbody>
+                             
+                             <thead>
+                                  <tr>
+                                      <th class="shoping__product" >저녁</th>
+
+                                  </tr>
+                              </thead>
+                              <tbody>
+                              <th:block th:each="today:${todaysic}" >
+                              <tr th:if="${today.dddo == 'cc'} and ${today.dday}=='월요일'">
+                              <td th:text="${today.ddname}" class="shoping__cart__item" onclick="location.href='write'">
+                                          <img src="img/cart/cart-1.jpg" alt="">
+                                          <h5></h5>
+                                      </td>
+                                      <td <td th:text="|${today.cal}kcal|"  class="shoping__cart__price">
+                                          
+                                      
+                                  </tr>
+                             </th:block>
+                             </tbody>
+                                  
+                               
+                          </table>
                 </div>
             </div>
             <div class="basic-card basic-card-light">
@@ -183,7 +283,71 @@ console.log(vvv[0])
                 </div>
     
                 <div class="card-link">
-                    <a href="#" title="Read Full"><span>Read Full</span></a>
+                    <table>
+                              <thead>
+                                  <tr>
+                                      <th class="shoping__product" >아침</th>
+
+                                  </tr>
+                              </thead>
+                              <tbody>
+                              
+                              <th:block th:each="today:${todaysic}" >
+                              
+                              <tr th:if="${today.dddo == 'aa'} and ${today.dday}=='화요일'">
+                              <td th:text="${today.ddname}" class="shoping__cart__item" onclick="location.href='write'">
+                                          <img src="img/cart/cart-1.jpg" alt="">
+                                          <h5></h5>
+                                      </td>
+                                      <td <td th:text="|${today.cal}kcal|"  class="shoping__cart__price">
+                                          
+                                      
+                                  </tr>
+                             </th:block>
+                             </tbody>
+                             
+                             <thead>
+                                  <tr>
+                                      <th class="shoping__product" >점심</th>
+
+                                  </tr>
+                              </thead>
+                              <tbody>
+                              <th:block th:each="today:${todaysic}" >
+                              <tr th:if="${today.dddo == 'bb'} and ${today.dday}=='화요일'">
+                              <td th:text="${today.ddname}" class="shoping__cart__item" onclick="location.href='write'">
+                                          <img src="img/cart/cart-1.jpg" alt="">
+                                          <h5></h5>
+                                      </td>
+                                      <td <td th:text="|${today.cal}kcal|"  class="shoping__cart__price">
+                                          
+                                      
+                                  </tr>
+                             </th:block>
+                             </tbody>
+                             
+                             <thead>
+                                  <tr>
+                                      <th class="shoping__product" >저녁</th>
+
+                                  </tr>
+                              </thead>
+                              <tbody>
+                              <th:block th:each="today:${todaysic}" >
+                              <tr th:if="${today.dddo == 'cc'} and ${today.dday}=='화요일'">
+                              <td th:text="${today.ddname}" class="shoping__cart__item" onclick="location.href='write'">
+                                          <img src="img/cart/cart-1.jpg" alt="">
+                                          <h5></h5>
+                                      </td>
+                                      <td <td th:text="|${today.cal}kcal|"  class="shoping__cart__price">
+                                          
+                                      
+                                  </tr>
+                             </th:block>
+                             </tbody>
+                                  
+                               
+                          </table>
                 </div>
             </div>
             <div class="basic-card basic-card-light">
@@ -193,7 +357,71 @@ console.log(vvv[0])
                 </div>
     
                 <div class="card-link">
-                    <a href="#" title="Read Full"><span>Read Full</span></a>
+                    <table>
+                              <thead>
+                                  <tr>
+                                      <th class="shoping__product" >아침</th>
+
+                                  </tr>
+                              </thead>
+                              <tbody>
+                              
+                              <th:block th:each="today:${todaysic}" >
+                              
+                              <tr th:if="${today.dddo == 'aa'} and ${today.dday}=='수요일'">
+                              <td th:text="${today.ddname}" class="shoping__cart__item" onclick="location.href='write'">
+                                          <img src="img/cart/cart-1.jpg" alt="">
+                                          <h5></h5>
+                                      </td>
+                                      <td <td th:text="|${today.cal}kcal|"  class="shoping__cart__price">
+                                          
+                                      
+                                  </tr>
+                             </th:block>
+                             </tbody>
+                             
+                             <thead>
+                                  <tr>
+                                      <th class="shoping__product" >점심</th>
+
+                                  </tr>
+                              </thead>
+                              <tbody>
+                              <th:block th:each="today:${todaysic}" >
+                              <tr th:if="${today.dddo == 'bb'} and ${today.dday}=='수요일'">
+                              <td th:text="${today.ddname}" class="shoping__cart__item" onclick="location.href='write'">
+                                          <img src="img/cart/cart-1.jpg" alt="">
+                                          <h5></h5>
+                                      </td>
+                                      <td <td th:text="|${today.cal}kcal|"  class="shoping__cart__price">
+                                          
+                                      
+                                  </tr>
+                             </th:block>
+                             </tbody>
+                             
+                             <thead>
+                                  <tr>
+                                      <th class="shoping__product" >저녁</th>
+
+                                  </tr>
+                              </thead>
+                              <tbody>
+                              <th:block th:each="today:${todaysic}" >
+                              <tr th:if="${today.dddo == 'cc'} and ${today.dday}=='수요일'">
+                              <td th:text="${today.ddname}" class="shoping__cart__item" onclick="location.href='write'">
+                                          <img src="img/cart/cart-1.jpg" alt="">
+                                          <h5></h5>
+                                      </td>
+                                      <td <td th:text="|${today.cal}kcal|"  class="shoping__cart__price">
+                                          
+                                      
+                                  </tr>
+                             </th:block>
+                             </tbody>
+                                  
+                               
+                          </table>
                 </div>
             </div>
             <div class="basic-card basic-card-light">
@@ -203,7 +431,71 @@ console.log(vvv[0])
                 </div>
     
                 <div class="card-link">
-                    <a href="#" title="Read Full"><span>Read Full</span></a>
+                   <table>
+                              <thead>
+                                  <tr>
+                                      <th class="shoping__product" >아침</th>
+
+                                  </tr>
+                              </thead>
+                              <tbody>
+                              
+                              <th:block th:each="today:${todaysic}" >
+                              
+                              <tr th:if="${today.dddo == 'aa'} and ${today.dday}=='목요일'">
+                              <td th:text="${today.ddname}" class="shoping__cart__item" onclick="location.href='write'">
+                                          <img src="img/cart/cart-1.jpg" alt="">
+                                          <h5></h5>
+                                      </td>
+                                      <td <td th:text="|${today.cal}kcal|"  class="shoping__cart__price">
+                                          
+                                      
+                                  </tr>
+                             </th:block>
+                             </tbody>
+                             
+                             <thead>
+                                  <tr>
+                                      <th class="shoping__product" >점심</th>
+
+                                  </tr>
+                              </thead>
+                              <tbody>
+                              <th:block th:each="today:${todaysic}" >
+                              <tr th:if="${today.dddo == 'bb'} and ${today.dday}=='목요일'">
+                              <td th:text="${today.ddname}" class="shoping__cart__item" onclick="location.href='write'">
+                                          <img src="img/cart/cart-1.jpg" alt="">
+                                          <h5></h5>
+                                      </td>
+                                      <td <td th:text="|${today.cal}kcal|"  class="shoping__cart__price">
+                                          
+                                      
+                                  </tr>
+                             </th:block>
+                             </tbody>
+                             
+                             <thead>
+                                  <tr>
+                                      <th class="shoping__product" >저녁</th>
+
+                                  </tr>
+                              </thead>
+                              <tbody>
+                              <th:block th:each="today:${todaysic}" >
+                              <tr th:if="${today.dddo == 'cc'} and ${today.dday}=='목요일'">
+                              <td th:text="${today.ddname}" class="shoping__cart__item" onclick="location.href='write'">
+                                          <img src="img/cart/cart-1.jpg" alt="">
+                                          <h5></h5>
+                                      </td>
+                                      <td <td th:text="|${today.cal}kcal|"  class="shoping__cart__price">
+                                          
+                                      
+                                  </tr>
+                             </th:block>
+                             </tbody>
+                                  
+                               
+                          </table>
                 </div>
             </div>
             <div class="basic-card basic-card-light">
@@ -213,7 +505,71 @@ console.log(vvv[0])
                 </div>
     
                 <div class="card-link">
-                    <a href="#" title="Read Full"><span>Read Full</span></a>
+                   <table>
+                              <thead>
+                                  <tr>
+                                      <th class="shoping__product" >아침</th>
+
+                                  </tr>
+                              </thead>
+                              <tbody>
+                              
+                              <th:block th:each="today:${todaysic}" >
+                              
+                              <tr th:if="${today.dddo == 'aa'} and ${today.dday}=='금요일'">
+                              <td th:text="${today.ddname}" class="shoping__cart__item" onclick="location.href='write'">
+                                          <img src="img/cart/cart-1.jpg" alt="">
+                                          <h5></h5>
+                                      </td>
+                                      <td <td th:text="|${today.cal}kcal|"  class="shoping__cart__price">
+                                          
+                                      
+                                  </tr>
+                             </th:block>
+                             </tbody>
+                             
+                             <thead>
+                                  <tr>
+                                      <th class="shoping__product" >점심</th>
+
+                                  </tr>
+                              </thead>
+                              <tbody>
+                              <th:block th:each="today:${todaysic}" >
+                              <tr th:if="${today.dddo == 'bb'} and ${today.dday}=='금요일'">
+                              <td th:text="${today.ddname}" class="shoping__cart__item" onclick="location.href='write'">
+                                          <img src="img/cart/cart-1.jpg" alt="">
+                                          <h5></h5>
+                                      </td>
+                                      <td <td th:text="|${today.cal}kcal|"  class="shoping__cart__price">
+                                          
+                                      
+                                  </tr>
+                             </th:block>
+                             </tbody>
+                             
+                             <thead>
+                                  <tr>
+                                      <th class="shoping__product" >저녁</th>
+
+                                  </tr>
+                              </thead>
+                              <tbody>
+                              <th:block th:each="today:${todaysic}" >
+                              <tr th:if="${today.dddo == 'cc'} and ${today.dday}=='금요일'">
+                              <td th:text="${today.ddname}" class="shoping__cart__item" onclick="location.href='write'">
+                                          <img src="img/cart/cart-1.jpg" alt="">
+                                          <h5></h5>
+                                      </td>
+                                      <td <td th:text="|${today.cal}kcal|"  class="shoping__cart__price">
+                                          
+                                      
+                                  </tr>
+                             </th:block>
+                             </tbody>
+                                  
+                               
+                          </table>
                 </div>
             </div>
             <div class="basic-card basic-card-light">
@@ -223,7 +579,71 @@ console.log(vvv[0])
                 </div>
     
                 <div class="card-link">
-                    <a href="#" title="Read Full"><span>Read Full</span></a>
+                    <table>
+                              <thead>
+                                  <tr>
+                                      <th class="shoping__product" >아침</th>
+
+                                  </tr>
+                              </thead>
+                              <tbody>
+                              
+                              <th:block th:each="today:${todaysic}" >
+                              
+                              <tr th:if="${today.dddo == 'aa'} and ${today.dday}=='토요일'">
+                              <td th:text="${today.ddname}" class="shoping__cart__item" onclick="location.href='write'">
+                                          <img src="img/cart/cart-1.jpg" alt="">
+                                          <h5></h5>
+                                      </td>
+                                      <td <td th:text="|${today.cal}kcal|"  class="shoping__cart__price">
+                                          
+                                      
+                                  </tr>
+                             </th:block>
+                             </tbody>
+                             
+                             <thead>
+                                  <tr>
+                                      <th class="shoping__product" >점심</th>
+
+                                  </tr>
+                              </thead>
+                              <tbody>
+                              <th:block th:each="today:${todaysic}" >
+                              <tr th:if="${today.dddo == 'bb'} and ${today.dday}=='토요일'">
+                              <td th:text="${today.ddname}" class="shoping__cart__item" onclick="location.href='write'">
+                                          <img src="img/cart/cart-1.jpg" alt="">
+                                          <h5></h5>
+                                      </td>
+                                      <td <td th:text="|${today.cal}kcal|"  class="shoping__cart__price">
+                                          
+                                      
+                                  </tr>
+                             </th:block>
+                             </tbody>
+                             
+                             <thead>
+                                  <tr>
+                                      <th class="shoping__product" >저녁</th>
+
+                                  </tr>
+                              </thead>
+                              <tbody>
+                              <th:block th:each="today:${todaysic}" >
+                              <tr th:if="${today.dddo == 'cc'} and ${today.dday}=='토요일'">
+                              <td th:text="${today.ddname}" class="shoping__cart__item" onclick="location.href='write'">
+                                          <img src="img/cart/cart-1.jpg" alt="">
+                                          <h5></h5>
+                                      </td>
+                                      <td <td th:text="|${today.cal}kcal|"  class="shoping__cart__price">
+                                          
+                                      
+                                  </tr>
+                             </th:block>
+                             </tbody>
+                                  
+                               
+                          </table>
                 </div>
             </div>
     
@@ -249,6 +669,13 @@ console.log(vvv[0])
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/main.js"></script>
 
+
+
+
+
+
+    // 결과
+</script>
 
 
 </body>

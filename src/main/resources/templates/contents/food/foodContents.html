@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zxx">
+<html lang="zxx" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -56,10 +56,12 @@
             <div class="row">
                 <div class="col-lg-8 col-md-7">
                     <div class="blog__sidebar__search" style="margin-bottom: 10px;">
-                        <form action="#">
-                            <input type="text" placeholder="검색어 입력">
-                            <button type="submit"><span class="icon_search"></span></button>
-                        </form>
+                       <form name="search-form">
+							<input name="ing" type="text" placeholder="검색어 입력">
+							<button type="button" onclick="getSearchList()" value="검색">
+								<span class="icon_search"></span>
+							</button>
+						</form>
                     </div>
                     <div class="blog__sidebar__item">
                         <section class="shoping-cart spad" style="padding-top: 5px;">
@@ -73,14 +75,14 @@
                                             style="margin-left: 200px; margin-right: -200px;">
                                             <div class="section-title related__product__title"
                                                 style="margin-bottom: 10px;">
-                                                <h2>계란</h2>
+                                                <h2 th:text="${food.ing}">계란</h2>
                                             </div>
-                                            <ul style="margin-top: 30px;">
-                                                <li><b>단위</b> <span>100g</span></li>
-                                                <li><b>칼로리</b> <span>50kcal</span></li>
-                                                <li><b>탄수화물</b> <span>10g <samp></li>
-                                                <li><b>단백질</b> <span>25g</span></li>
-                                                <li><b>지방</b> <span>5g</span></li>
+                                            <ul th:each="food:${foods}" style="margin-top: 30px;">
+                                                <li><b>단위</b> <span th:text="${food.amount}"></span></li>
+                                                <li><b>칼로리</b> <span th:text="${food.cal}"></span></li>
+                                                <li><b>탄수화물</b> <span th:text="${food.carb}"></span></li>
+                                                <li><b>단백질</b> <span th:text="${food.prot}"></span></li>
+                                                <li><b>지방</b> <span th:text="${food.fat}"></span></li>
                                             </ul></br>
                                             <hr></br>
                                         </div>
@@ -153,6 +155,31 @@
     <script src="js/mixitup.min.js"></script>
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/main.js"></script>
+    <script>
+	function getSearchList(){
+		
+	$.ajax({
+		type:'get',
+		url:"/getSearchList",
+		data:$("form[name=search-form]").serialize(),
+		success:function(result){
+			//테이블 초기화
+			$('#foodTable > tbody').empty();
+			if(result.length>=1){
+				result.forEach(function(food){
+					sts='<tr>'
+					sts+="<td><a href='/contents/food/foodContents?ing=" + food.ing +"'>" + food.ing+ "</a></td>";
+					sts+="<td></td>";
+					sts+="<td>"+food.cal+"kcal"+"</td>";			
+					sts+="<td>"+food.amount+food.f0+"</td>";
+					sts+="</tr>"
+					$('#foodTable').append(sts);
+        		})				 
+			}
+		}
+	})
+}	
+</script>
 
 
 
