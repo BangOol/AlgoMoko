@@ -11,13 +11,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.co.algomoko.food.domain.FoodVO;
 import com.co.algomoko.food.mapper.FoodMapper;
-import com.co.algomoko.food.service.FoodService;
-import com.co.algomoko.food.serviceImpl.FoodServiceImpl;
 
 @Controller
 public class FoodController {
 	@Autowired
 	FoodMapper dao;
+	
+	@GetMapping("foodtest")
+	public String foodtest() {
+		return "contents/food/foodtest";
+	}
 
 	@GetMapping("food")
 	public String food() {
@@ -25,10 +28,14 @@ public class FoodController {
 	}
 
 	@GetMapping("foodContents")
-	public String foodContents(@RequestParam(value="ing", required = true) String ing, Model model) {
-		model.addAttribute("foodOne");
+	public String foodContents(@RequestParam(value="ing", required=false) String ing, Model model) {
+		FoodVO foodVO = new FoodVO();
+		foodVO.setIng(ing);
+		FoodVO result = dao.fListOne(foodVO); 
+		model.addAttribute("fListOne", result);
+		return "contents/food/foodContents";
 		
-	}		
+	}
 	@GetMapping("getSearchList")
 	@ResponseBody
 	public List<FoodVO>  getSearchList(Model model, FoodVO foodVO) {
