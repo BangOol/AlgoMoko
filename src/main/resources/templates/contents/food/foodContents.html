@@ -59,9 +59,9 @@
 			<div class="row">
 				<div class="col-lg-8 col-md-7">
 					<div class="blog__sidebar__search">
-						<form name="search-form">
+						<form name="search-form" action="/food?ing=" method="get">
 							<input name="ing" type="text" placeholder="검색어 입력">
-							<button type="button" onclick="getSearchList()" value="검색">
+							<button type="submit" value="검색">
 								<span class="icon_search"></span>
 							</button>
 						</form>
@@ -115,9 +115,7 @@
 									</thead>
 									<tbody th:each="food:${fList}">
 										<tr>
-											<td class="shoping__cart__price"><a href="${food.ing}">
-													<h5>계란</h5>
-											</a></td>
+											<td th:text="${food.ing}" class="shoping__cart__price"></td>
 											<td class="shoping__cart__price"></td>
 											<td th:text="${food.cal}" class="shoping__cart__total"></td>
 											<td th:text="${food.amount}" class="shoping__cart__total"></td>

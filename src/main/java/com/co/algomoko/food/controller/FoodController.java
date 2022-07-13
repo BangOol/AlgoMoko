@@ -16,16 +16,26 @@ import com.co.algomoko.food.mapper.FoodMapper;
 public class FoodController {
 	@Autowired
 	FoodMapper dao;
-	
-	@GetMapping("foodtest")
-	public String foodtest() {
-		return "contents/food/foodtest";
-	}
-
-
 
 	@GetMapping("food")
-	public String food() {
+	public String food(@RequestParam(value="ing", required=false) String ing, Model model) {
+		if(ing != null) {
+			// 검색어가 있으면 검색해서 띄우기
+			FoodVO foodVO = new FoodVO();
+			foodVO.setIng(ing);
+			List<FoodVO> result = dao.fList(foodVO);
+			model.addAttribute("fList", result);
+
+			for (FoodVO r : result) {
+				System.out.println(r.getIng());
+			}
+			// 인기검색어 구상
+			// ing 검색수 +1
+			// 조회수하듯이
+			// 계란 0, 바나나 0, 물 3
+			// order by 조회수 내림차순 불러오면 인기순임
+		}
+		// 초기페이지는 검색없이 바로 화면띄우기
 		return "contents/food/food";
 	}
   
@@ -35,6 +45,18 @@ public class FoodController {
 		foodVO.setIng(ing);
 		FoodVO result = dao.fListOne(foodVO); 
 		model.addAttribute("fListOne", result);
+		
+		if(ing != null) {
+			// 검색어가 있으면 검색해서 띄우기
+			FoodVO foodVO2 = new FoodVO();
+			foodVO2.setIng(ing);
+			List<FoodVO> result2 = dao.fList(foodVO2);
+			result2.remove(0);
+			for (FoodVO r : result2) {
+				System.out.println(r.getIng());
+			}
+			model.addAttribute("fList", result2);
+		}
 		return "contents/food/foodContents";
 	}
   
