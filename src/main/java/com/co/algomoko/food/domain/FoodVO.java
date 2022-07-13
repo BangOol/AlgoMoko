@@ -1,4 +1,4 @@
-package com.co.algomoko.food.vo;
+package com.co.algomoko.food.domain;
 
 import lombok.Data;
 

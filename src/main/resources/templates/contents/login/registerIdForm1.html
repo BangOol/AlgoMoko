@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html lang="zxx">
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
 
 <head>
     <meta charset="UTF-8">
@@ -8,34 +11,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Ogani | Template</title>
-
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
-
-
-    <!-- Css Styles -->
-    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
-    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
-    <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
-    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="css/style.css" type="text/css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Jua:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+	  <!-- Google Font -->
 </head>
 
 <body>
-    <!-- Page Preloder -->
-    <div id="preloder">
-        <div class="loader"></div>
-    </div>  
-
-
-
-     <div th:replace="~{fragments/header}"></div>
+  
+   <th:block layout:fragment="content">
+     <script type="text/javascript">
+        $(document).ready(function(){
+    
+            $("#nextBtn").click(function(){    
+                if($("#check_1").is(":checked") == false){
+                    alert("모든 약관에 동의 하셔야 다음 단계로 진행 가능합니다.");
+                    return;
+                }else if($("#check_2").is(":checked") == false){
+                    alert("모든 약관에 동의 하셔야 다음 단계로 진행 가능합니다..");
+                    return;
+                }else{
+                    $("#terms_form").submit();
+                }
+            });    
+        });
+    </script>
+     
      
     <!--회원 목록 body-->
    <!-- Breadcrumb Section Begin -->
@@ -52,7 +50,7 @@
             </div>
         </div>
     </div>
-</section>
+	</section>
 
 <!-- 회원 정보 Begin -->
 
@@ -65,8 +63,8 @@
                   <div class="sidebar__item" style="background-color:#f5f5f5; height :600px; font-family: 'Jua';">
                       <h4 style="font-family: 'Jua';">회원 가입</h4>
                       <ul>
-                          <li style="margin : 20px 0 "><a href="registerIdForm1.html">step 1. 정보 활용 동의</a></li>
-                          <li style="margin : 20px 0 "><a href="registerFrom2.html">step 2. 회원 가입</a></li>
+                          <li style="margin : 20px 0 "><a href=#>step 1. 정보 활용 동의</a></li>
+                          <li style="margin : 20px 0 "><a href=#>step 2. 회원 가입</a></li>
                           <li style="margin : 20px 0 "><a href=#>step 3. 가입 완료</a></li>
                       </ul>
                   </div>
@@ -76,41 +74,34 @@
            <div class="col-lg-9 col-md-7" style="font-family: 'Jua';">
              <div class = "register_Agreement">
               <h3 style="font-family: 'Jua';">step 1. 정보 활용 동의</h3>
+              <form id="terms_form" action="registerIdForm2">
               <div>
                 <p style="font-family: Jua; margin-top: 70px;">개인 정보 활용에 대한 동의</p>
                 <textarea  readonly style = "background-color: #f5f5f5; width : 900px; height : 200px; resize: none;">개인 정보 활용에 대한 법적 내용이 들어갑니다.</textarea>
               </div>
-
+					<p style="font-family: Jua;">
+               			 <input type="checkbox" id="check_1"  name="" /> 위의 약관에 동의 합니다.<br />
+            		</p>   				
               <div>
                 <p style="font-family: Jua; margin-top: 70px;">이용 약관에 대한 동의</p>
                 <textarea readonly style = "background-color: #f5f5f5; width : 900px; height : 200px; resize: none;">이용 약관에 대한 법적 내용이 들어갑니다.</textarea>
               </div>
+              		<p style="font-family: Jua;">
+               			 <input type="checkbox" id="check_2"  name="" /> 위의 약관에 동의 합니다.<br />
+            		</p>
              </div>
-             <input onclick="location.href='registerIdForm2'" type = "button" value = "다음" style = "margin: 30px 0 0 820px; width : 80px;">
+             <input id ="nextBtn" type = "button" value = "다음" style = "margin: 30px 0 0 820px; width : 80px;">
           </div>
+          </form>
       </div>
   </div>
 </section>
 
 
-<!-- Product Section End -->
-
-    <!-- Footer Section Begin -->
-    <div th:replace="~{fragments/footer}"></div>
-    <!-- Footer Section End -->
-
-    <!-- Js Plugins -->
-    <script src="js/jquery-3.3.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.nice-select.min.js"></script>
-    <script src="js/jquery-ui.min.js"></script>
-    <script src="js/jquery.slicknav.js"></script>
-    <script src="js/mixitup.min.js"></script>
-    <script src="js/owl.carousel.min.js"></script>
-    <script src="js/main.js"></script>
+</th:block>
 
 
-
+    
 </body>
 
 </html>

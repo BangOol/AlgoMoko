@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserService{
     	//단건조회
     	UserVO user = mapper.search(uservo);
     	//비밀번호일치 검사
-    	if(user != null && uservo.getUpw().equals(user.getUpw())) {
+    	if(user != null && uservo.getMpw().equals(user.getMpw())) {
     		return user;
     	} else {
     		return null;

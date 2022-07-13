@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html  lang="ko"
-       xmlns:th="http://www.thymeleaf.org"
-       >
+       xmlns:th="http://www.thymeleaf.org">
+      
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -22,9 +22,9 @@
 </head>
 <body>
 
-    <th:block th:fragment="header">
+     
        <!-- Footer Section Begin -->
-     <footer class="footer spad">
+     <footer th:fragment="footer" class="footer spad">
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-md-6 col-sm-6">
@@ -71,6 +71,6 @@
         </div>
     </footer>
     <!-- Footer Section End -->
-    </th:block>
+   
 </body>
 </html>
