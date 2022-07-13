@@ -55,10 +55,11 @@
 
 <div th:replace="~{fragments/header}"></div>
 <div th:replace="~{fragments/aside}"></div>
-[[${localDateTime}]]
+
         <!-- Shoping Cart Section Begin -->
-  
-        
+
+
+      
         <section class="shoping-cart spad">
           <div class="container">
               <div class="row">
@@ -77,7 +78,7 @@
                               <tbody>
                               <th:block th:each="today:${todaysic}" >
                               <tr th:if= "${today.dddo == 'aa'}">
-                              <td th:text="${today.ddname}" class="shoping__cart__item" onclick="location.href='write'">
+                              <td th:text="${today.ddname}" class="shoping__cart__item" onclick="location.href='modify'">
                                           <img src="img/cart/cart-1.jpg" alt="">
                                           <h5></h5>
                                       </td>
@@ -106,15 +107,18 @@
                               <tbody>
                               <th:block th:each="today:${todaysic}" >
                               <tr th:if="${today.dddo == 'bb'}">
-                              <td th:text="${today.ddname}" class="shoping__cart__item" onclick="location.href='write'">
+                              <td th:text="${today.ddname}" class="shoping__cart__item" onclick="location.href='modify'">
                                           <img src="img/cart/cart-1.jpg" alt="">
                                           <h5></h5>
                                       </td>
-                                      <td <td th:text="${today.cal}"  class="shoping__cart__price">
+                                      <td <td th:text="|${today.cal}kcal|"  class="shoping__cart__price">
                                           
                                       </td>
 
-                                      <td th:text="${today.cal}" class="shoping__cart__total">
+                                      <td th:text="${today.amount}" class="shoping__cart__total">
+                                          
+                                      </td>
+                                      <td th:text="|${today.carb},${today.prot},${today.fat}|" class="shoping__cart__total">
                                           
                                       </td>
                                   </tr>
@@ -130,20 +134,44 @@
                               <tbody>
                               <th:block th:each="today:${todaysic}" >
                               <tr th:if="${today.dddo == 'cc'}">
-                              <td th:text="${today.ddname}" class="shoping__cart__item" onclick="location.href='write'">
+                              <td th:text="${today.ddname}" class="shoping__cart__item" onclick="location.href='modify'">
                                           <img src="img/cart/cart-1.jpg" alt="">
                                           <h5></h5>
                                       </td>
-                                      <td <td th:text="${today.cal}"  class="shoping__cart__price">
+                                      <td <td th:text="|${today.cal}kcal|"  class="shoping__cart__price">
                                           
                                       </td>
 
-                                      <td th:text="${today.cal}" class="shoping__cart__total">
+                                      <td th:text="${today.amount}" class="shoping__cart__total">
+                                          
+                                      </td>
+                                      <td th:text="|${today.carb},${today.prot},${today.fat}|" class="shoping__cart__total">
                                           
                                       </td>
                                   </tr>
                              </th:block>
                              </tbody>
+                             <thead>
+                                  <tr>
+                                      <th class="shoping__product" >총 칼로리</th>
+
+                                  </tr>
+                              </thead>
+                              <tbody>
+                              
+                              <th:block th:each="result:${resultCal}" >
+                              
+                              
+                              <tr th:if="${todaysic[0].ddate==result.ddate}" >
+                              <td th:text="${result.sumcal}" class="shoping__cart__item" onclick="location.href='write'">
+                                          
+                                          <img src="img/cart/cart-1.jpg" alt="">
+                                          <h5></h5>
+                                      </td>
+                                      
+                                  </tr>
+                             </th:block>
+                                                          
                                   
                                
                           </table>

@@ -15,10 +15,12 @@ public class DiaryVO {
     private String ddname;
     private String f0;
     private String dday;
+    
     private int amount;
     private int cal;
     private int carb;
     private int prot;
     private int fat;
+    private int sumcal;
     
 }

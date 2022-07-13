@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 public interface DiaryService {
     public List<DiaryVO> findDay(DiaryVO diaryVO);
     public List<DiaryVO> sicDay(DiaryVO diaryVO);
-    
+    public List<DiaryVO> resultCal(DiaryVO diaryVO);
     
 }
 

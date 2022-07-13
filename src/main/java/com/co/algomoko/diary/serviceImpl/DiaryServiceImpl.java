@@ -19,4 +19,15 @@ public class DiaryServiceImpl implements DiaryService {
 		return diaryMapper.findDay(diaryVO);
 	}
 
+	@Override
+	public List<DiaryVO> sicDay(DiaryVO diaryVO) {
+		
+		return diaryMapper.sicDay(diaryVO);
+	}
+
+	@Override
+	public List<DiaryVO> resultCal(DiaryVO diaryVO) {
+		return diaryMapper.resultCal(diaryVO);
+	}
+
 }

@@ -55,7 +55,7 @@ for(var i=0; i<7; i++) {
 var resultDay = new Date(theYear, theMonth, theDate + (i - theDayOfWeek));
 var yyyy = resultDay.getFullYear();
 var mm = Number(resultDay.getMonth()) + 1;
-var dd = resultDay.getDate();
+var dd = resultDay.getDate()+1;
 var 
 mm = String(mm).length === 1 ? '0' + mm : mm;
 dd = String(dd).length === 1 ? '0' + dd : dd;
@@ -118,6 +118,8 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
 
 
 
+
+
         <div class="card-category-1 row">
         
             <div class="basic-card basic-card-light m-10">
@@ -141,95 +143,17 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
                               <th:block th:each="today:${todaysic}" >
                               
                               
-                              <tr th:if= "${today.dddo == 'aa'} and ${today.dday}=='일요일'">
-                              <td th:text="${today.ddname}" class="shoping__cart__item" onclick="location.href='write'">
+                              <tr th:if= "${today.dddo == 'aa'} and ${today.dday}=='월요일'">
+                              		  <td th:text="${today.ddname}" class="shoping__cart__item" onclick="location.href='write'">
                                           <img src="img/cart/cart-1.jpg" alt="">
-                                          <h5></h5>
+                                          <br><br>
                                       </td>
-                                      <td <td th:text="|${today.cal}kcal|"  class="shoping__cart__price">
+                                      <td th:text="|${today.cal}kcal|"  class="shoping__cart__price"></td>
                                           
                                       
                                   </tr>
                              </th:block>
-                             </tbody>
                              
-                             <thead>
-                                  <tr>
-                                      <th class="shoping__product" >점심</th>
-
-                                  </tr>
-                              </thead>
-                              <tbody>
-                              <th:block th:each="today:${todaysic}" >
-                              <tr th:if="${today.dddo == 'bb'} and ${today.dday}=='일요일'">
-                              <td th:text="${today.ddname}" class="shoping__cart__item" onclick="location.href='write'">
-                                          <img src="img/cart/cart-1.jpg" alt="">
-                                          <h5></h5>
-                                      </td>
-                                      <td <td th:text="|${today.cal}kcal|"  class="shoping__cart__price">
-                                          
-                                      
-                                  </tr>
-                             </th:block>
-                             </tbody>
-                             
-                             <thead>
-                                  <tr>
-                                  
-                                      <th class="shoping__product" >저녁</th>
-
-                                  </tr>
-                              </thead>
-                              <tbody>
-                              <th:block th:each="today:${todaysic}" >
-                              <tr th:if="${today.dddo == 'cc'} and ${today.dday}=='일요일'">
-                              <td th:text="${today.ddname}" class="shoping__cart__item" onclick="location.href='write'">
-                                          <img src="img/cart/cart-1.jpg" alt="">
-                                          <h5></h5>
-                                      </td>
-                                      <td <td th:text="|${today.cal}kcal|"  class="shoping__cart__price">
-                                          
-                                      
-                                  </tr>
-                             </th:block>
-                             </tbody>
-                                  
-                               
-                          </table>
-                    
-                </div>
-            </div>
-    
-    
-            
-            <div class="basic-card basic-card-light">
-                <div id="ssuunn" class="card-content">
-                    <span id="ssuunn" class="card-title">날짜</span>
-                    
-                </div>
-
-                <div class="card-link">
-                   <table>
-                              <thead>
-                                  <tr>
-                                      <th class="shoping__product" >아침</th>
-
-                                  </tr>
-                              </thead>
-                              <tbody>
-                              
-                              <th:block th:each="today:${todaysic}" >
-                              
-                              <tr th:if="${today.dddo == 'aa'} and ${today.dday}=='월요일'">
-                              <td th:text="${today.ddname}" class="shoping__cart__item" onclick="location.href='write'">
-                                          <img src="img/cart/cart-1.jpg" alt="">
-                                          <h5></h5>
-                                      </td>
-                                      <td <td th:text="|${today.cal}kcal|"  class="shoping__cart__price">
-                                          
-                                      
-                                  </tr>
-                             </th:block>
                              </tbody>
                              
                              <thead>
@@ -254,36 +178,64 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
                              
                              <thead>
                                   <tr>
+                                  
                                       <th class="shoping__product" >저녁</th>
 
                                   </tr>
                               </thead>
                               <tbody>
-                              <th:block th:each="today:${todaysic}" >
+                              <th:block th:each="today:${todaysic}">
+                              
                               <tr th:if="${today.dddo == 'cc'} and ${today.dday}=='월요일'">
                               <td th:text="${today.ddname}" class="shoping__cart__item" onclick="location.href='write'">
                                           <img src="img/cart/cart-1.jpg" alt="">
                                           <h5></h5>
                                       </td>
-                                      <td <td th:text="|${today.cal}kcal|"  class="shoping__cart__price">
+                                      <td th:text="|${today.cal}kcal|"  class="shoping__cart__price">
                                           
                                       
                                   </tr>
-                             </th:block>
+
+                              </th:block>
+                                    
+                             
+ 								<thead>
+                                  <tr>
+                                  		
+                                      <th class="shoping__product" >총 칼로리</th>
+
+                                  </tr>
+                              </thead>
+                              <tbody>
+                              <th:block th:each="result:${resultCal}">
+                              <tr th:if="${result.dday=='월요일'}">
+                              <td th:text="|${result.sumcal} kcal|" class="shoping__cart__item">
+                                          <img src="img/cart/cart-1.jpg" alt="">
+                                          <h5></h5>
+                                      </td>
+                                                                         
+                                      
+                                  </tr>
+                              
+                     		 </th:block>
                              </tbody>
                                   
                                
                           </table>
+                    
                 </div>
             </div>
+    
+    
+            
             <div class="basic-card basic-card-light">
                 <div id="ssuunn" class="card-content">
                     <span id="ssuunn" class="card-title">날짜</span>
                     
                 </div>
-    
+
                 <div class="card-link">
-                    <table>
+                   <table>
                               <thead>
                                   <tr>
                                       <th class="shoping__product" >아침</th>
@@ -344,6 +296,26 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
                                       
                                   </tr>
                              </th:block>
+                             <thead>
+                                  <tr>
+                                  		
+                                      <th class="shoping__product" >총 칼로리</th>
+
+                                  </tr>
+                              </thead>
+                              <tbody>
+                              <th:block th:each="result:${resultCal}">
+                              <tr th:if="${result.dday=='화요일'}">
+                              <td th:text="|${result.sumcal} kcal|" class="shoping__cart__item">
+                                          <img src="img/cart/cart-1.jpg" alt="">
+                                          <h5></h5>
+                                      </td>
+                                                                         
+                                      
+                                  </tr>
+                              
+                     		 </th:block>
+                             </tbody>
                              </tbody>
                                   
                                
@@ -418,6 +390,26 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
                                       
                                   </tr>
                              </th:block>
+                             <thead>
+                                  <tr>
+                                  		
+                                      <th class="shoping__product" >총 칼로리</th>
+
+                                  </tr>
+                              </thead>
+                              <tbody>
+                              <th:block th:each="result:${resultCal}">
+                              <tr th:if="${result.dday=='수요일'}">
+                              <td th:text="|${result.sumcal} kcal|" class="shoping__cart__item">
+                                          <img src="img/cart/cart-1.jpg" alt="">
+                                          <h5></h5>
+                                      </td>
+                                                                         
+                                      
+                                  </tr>
+                              
+                     		 </th:block>
+                             </tbody>
                              </tbody>
                                   
                                
@@ -431,7 +423,8 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
                 </div>
     
                 <div class="card-link">
-                   <table>
+                
+                    <table>
                               <thead>
                                   <tr>
                                       <th class="shoping__product" >아침</th>
@@ -487,11 +480,33 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
                                           <img src="img/cart/cart-1.jpg" alt="">
                                           <h5></h5>
                                       </td>
-                                      <td <td th:text="|${today.cal}kcal|"  class="shoping__cart__price">
+                                       <td th:text="|${today.cal}kcal|"  class="shoping__cart__price"> </td>
                                           
                                       
                                   </tr>
-                             </th:block>
+                             
+                             
+                              </th:block>
+                              <thead>
+                                  <tr>
+                                  		
+                                      <th class="shoping__product" >총 칼로리</th>
+
+                                  </tr>
+                              </thead>
+                              <tbody>
+                              <th:block th:each="result:${resultCal}">
+                              <tr th:if="${result.dday=='목요일'}">
+                              <td th:text="|${result.sumcal} kcal|" class="shoping__cart__item">
+                                          <img src="img/cart/cart-1.jpg" alt="">
+                                          <h5></h5>
+                                      </td>
+                                                                         
+                                      
+                                  </tr>
+                              
+                     		 </th:block>
+                             </tbody>
                              </tbody>
                                   
                                
@@ -566,6 +581,26 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
                                       
                                   </tr>
                              </th:block>
+                             <thead>
+                                  <tr>
+                                  		
+                                      <th class="shoping__product" >총 칼로리</th>
+
+                                  </tr>
+                              </thead>
+                              <tbody>
+                              <th:block th:each="result:${resultCal}">
+                              <tr th:if="${result.dday=='금요일'}">
+                              <td th:text="|${result.sumcal} kcal|" class="shoping__cart__item">
+                                          <img src="img/cart/cart-1.jpg" alt="">
+                                          <h5></h5>
+                                      </td>
+                                                                         
+                                      
+                                  </tr>
+                              
+                     		 </th:block>
+                             </tbody>
                              </tbody>
                                   
                                
@@ -579,7 +614,7 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
                 </div>
     
                 <div class="card-link">
-                    <table>
+                   <table>
                               <thead>
                                   <tr>
                                       <th class="shoping__product" >아침</th>
@@ -640,6 +675,120 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
                                       
                                   </tr>
                              </th:block>
+                             <thead>
+                                  <tr>
+                                  		
+                                      <th class="shoping__product" >총 칼로리</th>
+
+                                  </tr>
+                              </thead>
+                              <tbody>
+                              <th:block th:each="result:${resultCal}">
+                              <tr th:if="${result.dday=='토요일'}">
+                              <td th:text="|${result.sumcal} kcal|" class="shoping__cart__item">
+                                          <img src="img/cart/cart-1.jpg" alt="">
+                                          <h5></h5>
+                                      </td>
+                                                                         
+                                      
+                                  </tr>
+                              
+                     		 </th:block>
+                             </tbody>
+                             </tbody>
+                                  
+                               
+                          </table>
+                </div>
+            </div>
+            <div class="basic-card basic-card-light">
+                <div id="ssuunn" class="card-content">
+                    <span id="ssuunn" class="card-title">날짜</span>
+                    
+                </div>
+    
+                <div class="card-link">
+                    <table>
+                              <thead>
+                                  <tr>
+                                      <th class="shoping__product" >아침</th>
+
+                                  </tr>
+                              </thead>
+                              <tbody>
+                              
+                              <th:block th:each="today:${todaysic}" >
+                              
+                              <tr th:if="${today.dddo == 'aa'} and ${today.dday}=='일요일'">
+                              <td th:text="${today.ddname}" class="shoping__cart__item" onclick="location.href='write'">
+                                          <img src="img/cart/cart-1.jpg" alt="">
+                                          <h5></h5>
+                                      </td>
+                                      <td <td th:text="|${today.cal}kcal|"  class="shoping__cart__price">
+                                          
+                                      
+                                  </tr>
+                             </th:block>
+                             </tbody>
+                             
+                             <thead>
+                                  <tr>
+                                      <th class="shoping__product" >점심</th>
+
+                                  </tr>
+                              </thead>
+                              <tbody>
+                              <th:block th:each="today:${todaysic}" >
+                              <tr th:if="${today.dddo == 'bb'} and ${today.dday}=='일요일'">
+                              <td th:text="${today.ddname}" class="shoping__cart__item" onclick="location.href='write'">
+                                          <img src="img/cart/cart-1.jpg" alt="">
+                                          <h5></h5>
+                                      </td>
+                                      <td <td th:text="|${today.cal}kcal|"  class="shoping__cart__price">
+                                          
+                                      
+                                  </tr>
+                             </th:block>
+                             </tbody>
+                             
+                             <thead>
+                                  <tr>
+                                      <th class="shoping__product" >저녁</th>
+
+                                  </tr>
+                              </thead>
+                              <tbody>
+                              <th:block th:each="today:${todaysic}" >
+                              <tr th:if="${today.dddo == 'cc'} and ${today.dday}=='일요일'">
+                              <td th:text="${today.ddname}" class="shoping__cart__item" onclick="location.href='write'">
+                                          <img src="img/cart/cart-1.jpg" alt="">
+                                          <h5></h5>
+                                      </td>
+                                      <td <td th:text="|${today.cal}kcal|"  class="shoping__cart__price">
+                                          
+                                      
+                                  </tr>
+                             </th:block>
+                             <thead>
+                                  <tr>
+                                  		
+                                      <th class="shoping__product" >총 칼로리</th>
+
+                                  </tr>
+                              </thead>
+                              <tbody>
+                              <th:block th:each="result:${resultCal}">
+                              <tr th:if="${result.dday=='일요일'}">
+                              <td th:text="|${result.sumcal} kcal|" class="shoping__cart__item">
+                                          <img src="img/cart/cart-1.jpg" alt="">
+                                          <h5></h5>
+                                      </td>
+                                                                         
+                                      
+                                  </tr>
+                              
+                     		 </th:block>
+                             </tbody>
                              </tbody>
                                   
                                
