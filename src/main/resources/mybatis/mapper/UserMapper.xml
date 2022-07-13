@@ -8,9 +8,12 @@
 <mapper namespace="com.co.algomoko.user.mapper.UserMapper">
     <insert id="insert">
     	INSERT INTO MEMBERS
-    	VALUES(${mid},${mpw},${uname},${nick},${birth},
-    		   ${sex},${height},${weight},${bmi},${tcal},
-    		   ${tweight},${u0},${b0},)
+    	(MID,MPW,UNAME,NICK,BIRTH,
+    		   SEX,HEIGHT,WEIGHT,BMI,TCAL,
+    		   TWEIGHT)
+    	VALUES(#{mid},#{mpw},#{uname},#{nick},#{birth},
+    		   #{sex},#{height},#{weight},#{bmi},#{tcal},
+    		   #{tweight})
     </insert>
     
     <select id="search">

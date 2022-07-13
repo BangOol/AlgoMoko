@@ -6,8 +6,8 @@ import java.sql.Date;
 
 @Data
 public class UserVO {
-    private String uid;
-    private String upw;
+    private String mid;
+    private String mpw;
     private String uname;
     private String nick;
     private Date birth;
