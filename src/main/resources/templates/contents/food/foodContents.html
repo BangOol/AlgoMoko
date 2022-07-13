@@ -75,7 +75,7 @@
                                             style="margin-left: 200px; margin-right: -200px;">
                                             <div class="section-title related__product__title"
                                                 style="margin-bottom: 10px;">
-                                                <h2>계란</h2>
+                                                <h2 th:text="${food.ing}">계란</h2>
                                             </div>
                                             <ul th:each="food:${foods}" style="margin-top: 30px;">
                                                 <li><b>단위</b> <span th:text="${food.amount}"></span></li>

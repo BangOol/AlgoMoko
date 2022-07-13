@@ -25,8 +25,9 @@ public class FoodController {
 	}
 
 	@GetMapping("foodContents")
-	public String foodContents() {
-		return "contents/food/foodContents";
+	public String foodContents(@RequestParam(value="ing", required = true) String ing, Model model) {
+		model.addAttribute("foodOne");
+		
 	}		
 	@GetMapping("getSearchList")
 	@ResponseBody
