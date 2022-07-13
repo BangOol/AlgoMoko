@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zxx">
+<html lang="zxx" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layouts/layout}">
 
 <head>
     <meta charset="UTF-8">
@@ -9,22 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Ogani | Template</title>
 
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
-
-
-    <!-- Css Styles -->
-    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
-    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
-    <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
-    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="css/style.css" type="text/css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Jua:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+    
 </head>
 
 <body>
@@ -32,11 +17,10 @@
     <div id="preloder">
         <div class="loader"></div>
     </div>  
+<th:block layout:fragment="content">
 
 
-
-    <!-- Header Section Begin -->
-   <div th:replace="~{fragments/header}"></div>
+   
     <!--회원 목록 body-->
    <!-- Breadcrumb Section Begin -->
    <section class="breadcrumb-section set-bg" data-setbg="img/breadcrumb.jpg">
@@ -76,29 +60,15 @@
         <div class="col-lg-9 col-md-7">
           <h3 style="font-family: 'Jua';">step 3. 가입 완료</h3>
           <div style = "width: 860px; height: 300px; margin-top: 60px; background-color: #f5f5f5;">
-            
+            <h4>가입이 완료 되었습니다! 이제 각종 혜택들을 누려보세요!</h4>
+            <a href="/main">메인으로</a>
           </div>
         </div>
     </div>
 </section>
-<!-- Product Section End -->
-
-    <!-- Footer Section Begin -->
-    <div th:replace="~{fragments/footer}"></div>
-    <!-- Footer Section End -->
-
-    <!-- Js Plugins -->
-    <script src="js/jquery-3.3.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.nice-select.min.js"></script>
-    <script src="js/jquery-ui.min.js"></script>
-    <script src="js/jquery.slicknav.js"></script>
-    <script src="js/mixitup.min.js"></script>
-    <script src="js/owl.carousel.min.js"></script>
-    <script src="js/main.js"></script>
 
 
-
+</th:block>
 </body>
 
 </html>

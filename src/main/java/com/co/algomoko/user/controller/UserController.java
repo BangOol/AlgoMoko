@@ -62,7 +62,7 @@ public class UserController {
     	
     	int num = userService.signup(vo);
     	if(num == 1) {
-		return "redirect:main";
+		return "redirect:registerIdForm3";
     	} else {
     		return "contents/login/signup";
     	}

@@ -21,6 +21,7 @@ public class DiaryServiceImpl implements DiaryService {
 
 	@Override
 	public List<DiaryVO> sicDay(DiaryVO diaryVO) {
+
 		
 		return diaryMapper.sicDay(diaryVO);
 	}
@@ -28,6 +29,7 @@ public class DiaryServiceImpl implements DiaryService {
 	@Override
 	public List<DiaryVO> resultCal(DiaryVO diaryVO) {
 		return diaryMapper.resultCal(diaryVO);
+
 	}
 
 }

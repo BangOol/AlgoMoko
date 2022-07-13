@@ -61238,5 +61238,19 @@ ol {
 .sidebar_item_res ul li a:hover{
   background-color: #007368;
 }
+  .hero__item__btn {
+    height: 230px;
+    width: 230px;
+    display: flex;
+    align-items: center;
+    padding-left: 45px;
+    padding-top : 170px;
+    margin-left: 15px;
+  }
+  .hero__item__btn a{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: 600;
+    text-align: center;
+  }
 
 }

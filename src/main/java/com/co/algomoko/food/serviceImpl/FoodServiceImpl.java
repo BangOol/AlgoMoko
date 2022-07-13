@@ -18,7 +18,7 @@ public class FoodServiceImpl implements FoodService {
 	}
 
 	@Override
-	public FoodVO fListOne() {
-		return mapper.fListOne();
+	public FoodVO fListOne(FoodVO foodVO) {
+		return null;
 	}
 }
