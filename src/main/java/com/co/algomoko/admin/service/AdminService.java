@@ -6,7 +6,7 @@ import com.co.algomoko.user.domain.UserVO;
 import java.util.List;
 
 public interface AdminService {
-    public List<UserVO> makeList();
-
-    public List<UserVO> findUser();
+    public List<AdminVO> makeList();
+    List<AdminVO> findUserList(AdminVO adminVO);
+    List<AdminVO> findDetailUser(AdminVO adminVO);
 }
