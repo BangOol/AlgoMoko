@@ -40,7 +40,7 @@
 </head>
 
 <body>
-<div th:replace="fragments/header"></div>
+<th:block layout:fragment="content">
 <!--회원 목록 body-->
 <!-- Breadcrumb Section Begin -->
 <section class="breadcrumb-section set-bg" data-setbg="img/breadcrumb.jpg">
@@ -100,25 +100,25 @@
                             <th scope="col">상태</th>
                         </tr>
                         </thead>
-                        <tbody>
-                        <tr th:each="lists:${list}">
-                            <td th:text="${lists.uid}"></td>
-                            <td th:text="${lists.sex}"></td>
-                            <td th:text="${lists.nick}"></td>
-                            <td th:text="${lists.B0}"></td>
-                        </tr>
+                        <tbody id ='boardtable'>
+                            <tr th:each="lists:${list}">
+                                <td th:text="${lists.uid}"></td>
+                                <td th:text="${lists.sex}"></td>
+                                <td th:text="${lists.nick}"></td>
+                                <td th:text="${lists.b0}"></td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
                 <div class="form-group" style="text-align: center; margin: 100px 0 0 0">
                     <div style="text-align: center; font-family: 'Cairo', 'Jua', sans-serif">
                         <form name="search-form" autocomplete="off">
-                            <input type="text" placeholder="검색어 입력" style="border: 1px solid" id = "searchUser">
-                            <select id = "selectOption">
+                            <input type="text" placeholder="검색어 입력" style="border: 1px solid" name ="keyword" id="findUserPress">
+                            <select id = "selectOption" name = "type">
                                 <option value="email">이메일</option>
                                 <option value="nick">닉네임</option>
                             </select>
-                            <button class="btn btn-success" onclick="findUser()" type="button" id="button-addon2">검색</button>
+                            <button class="btn btn-success" onclick="findUserList()" type="button" id="button-addon2">검색</button>
                         </form>
                     </div>
                 </div>
@@ -127,25 +127,24 @@
     </div>
 </section>
 <!-- Product Section End -->
-<div th:replace="fragments/footer"></div>
+</th:block>
 </body>
     <script>
-        function findUser(){
+        function findUserList(){
             $.ajax({
                 type: 'GET',
-                url : "/findUser",
+                url : "/findUserList",
                 data : $("form[name=search-form]").serialize(),
                 success : function(result){
                     //테이블 초기화
-                    $('#boardtable > tbody').empty();
+                    $('#boardtable').empty();
                     if(result.length>=1){
-                        result.forEach(function(item){
+                        result.forEach(function(lists){
                             str='<tr>'
-                            str += "<td>"+item.uid +"</td>";
-                            str+="<td>" +item.sex +"</td>";
-                            // str+="<td><a href = '/board/detail?idx=" + item.idx + "'>" + item.title + "</a></td>";
-                            str+="<td>"+item.date+"</td>";
-                            str+="<td>"+item.B0 +"</td>";
+                            str += "<td>"+lists.uid +"</td>";
+                            str+="<td>" +lists.sex +"</td>";
+                            str+="<td>"+lists.nick +"</td>";
+                            str+="<td>"+lists.b0 +"</td>";
                             str+="</tr>"
                             $('#boardtable').append(str);
                         })
@@ -153,5 +152,9 @@
                 }
             })
         }
+
+        // let findUserPress = document.getElementById('findUserPress');
+        // findUserPress.addEventListener("keypress", findUserList);
+
     </script>
 </html>
