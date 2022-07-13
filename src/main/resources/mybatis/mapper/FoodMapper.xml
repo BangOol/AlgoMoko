@@ -7,13 +7,13 @@
 	<select id="fList" resultType="com.co.algomoko.food.domain.FoodVO">
 		select ing, cal, amount, F0
 		from food
-		where ing like '%' || #{ing} || '%'		
+		where ing like '%' || #{ing} || '%'	
 		order by ing
 	</select>
 	<!--  음식 검색 결과 단건 조회-->
 	<select id="fListOne" resultType="com.co.algomoko.food.domain.FoodVO">
-		select ing, cal, carb, prot, fat, F0
+		select ing, amount, cal, carb, prot, fat, F0
 		from food
-		where ing = ?
+		where ing = #{ing}
 	</select>
 </mapper>
