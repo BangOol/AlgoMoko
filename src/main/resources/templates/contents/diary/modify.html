@@ -124,11 +124,12 @@
       <div class="container">
         <div class="row">
     <div class="col-sm-7 col-xl-6">
-
+[[${todaysic[1]}]]
 
               
       <table class="table table-borderless">
           <thead>
+           
               <tr>
                   <th scope="col"></th>
                   <th scope="col">재료명</th>
@@ -137,12 +138,15 @@
               </tr>
           </thead>
           <tbody>
+          <th:block th:each="today:${todaysic}" >
+              <tr th:if= "${today.dddo == 'aa'}">
               <tr>
                   <th scope="row">1</th>
-                  <td>John</td>
-                  <td>Doe</td>
-                  <td>jhon@email.com</td>
+                  <td th:text="${today.ddname}"></td>
+                  <td th:text="${today.amount}"></td>
+                  <td th:text="${today.cal}"></td>
               </tr>
+              </th:block>
               <tr>
                   <th scope="row">2</th>
                   <td>Mark</td>
@@ -216,8 +220,8 @@
   </div>
   
 </div>
-<button type="button" class="btn btn-primary" onclick="location.href='writema.html'" >등록</button>
-<button type="button" class="btn btn-primary " onclick="location.href='todaysic.html'">취소</button>
+<button type="button" class="btn btn-primary" onclick="location.href='writema'" >등록</button>
+<button type="button" class="btn btn-primary " onclick="location.href='todaysic'">취소</button>
     
 
       <div th:replace="~{fragments/footer}"></div>

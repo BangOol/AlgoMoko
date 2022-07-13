@@ -21,8 +21,15 @@ public class DiaryServiceImpl implements DiaryService {
 
 	@Override
 	public List<DiaryVO> sicDay(DiaryVO diaryVO) {
-		// TODO Auto-generated method stub
-		return null;
+
+		
+		return diaryMapper.sicDay(diaryVO);
+	}
+
+	@Override
+	public List<DiaryVO> resultCal(DiaryVO diaryVO) {
+		return diaryMapper.resultCal(diaryVO);
+
 	}
 
 }

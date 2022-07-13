@@ -1,7 +1,9 @@
 package com.co.algomoko.diary.controller;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Calendar;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,11 +24,11 @@ public class DiaryController {
 	@RequestMapping("sicmain")
     public String sicmain(Model model, DiaryVO diaryVO){
 		Calendar calendar= Calendar.getInstance();
-		calendar.set(2022, 6, 12);
+		
 		diaryVO.setDdate(calendar.getTime());
 		diaryVO.setMid("user3");
 		model.addAttribute("todaysic",dao.sicDay(diaryVO));
-		model.addAttribute("localDateTime",LocalDateTime.now());
+		model.addAttribute("resultCal",dao.resultCal(diaryVO));
 		
 		
         return "contents/diary/sicmain";
@@ -46,11 +48,15 @@ public class DiaryController {
 	@RequestMapping("/todaysic")
     public String todaysic(Model model, DiaryVO diaryVO){
 		Calendar calendar= Calendar.getInstance();
-		calendar.set(2022, 6, 11);
+		calendar.set(Calendar.HOUR_OF_DAY, 0);
+		calendar.set(Calendar.MINUTE, 0);
+		calendar.set(Calendar.SECOND, 0);
+		calendar.set(Calendar.MILLISECOND, 0);
 		diaryVO.setDdate(calendar.getTime());
 		diaryVO.setMid("user3");
 		model.addAttribute("todaysic",dao.findDay(diaryVO));
-		model.addAttribute("localDateTime",LocalDateTime.now());
+		model.addAttribute("resultCal",dao.resultCal(diaryVO));
+		model.addAttribute("ddd",calendar.getTime());
 		return "contents/diary/todaysic";
     }
 	@RequestMapping("weeklybest")
@@ -65,7 +71,21 @@ public class DiaryController {
     public String writema(){
         return "contents/diary/writema";
     }
-	
+	@RequestMapping("modify")
+    public String modify(Model model, DiaryVO diaryVO){
+		Calendar calendar= Calendar.getInstance();
+		calendar.set(Calendar.HOUR_OF_DAY, 0);
+		calendar.set(Calendar.MINUTE, 0);
+		calendar.set(Calendar.SECOND, 0);
+		calendar.set(Calendar.MILLISECOND, 0);
+		diaryVO.setDdate(calendar.getTime());
+		diaryVO.setMid("user3");
+		model.addAttribute("todaysic",dao.findDay(diaryVO));
+		model.addAttribute("resultCal",dao.resultCal(diaryVO));
+		model.addAttribute("ddd",calendar.getTime());
+		return "contents/diary/modify";
+        
+    }
 	
 	
 }
