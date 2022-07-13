@@ -8,4 +8,5 @@ import java.util.List;
 public interface AdminService {
     public List<AdminVO> makeList();
     List<AdminVO> findUserList(AdminVO adminVO);
+    List<AdminVO> findDetailUser(AdminVO adminVO);
 }

@@ -25,4 +25,9 @@ public class AdminServiceImpl implements AdminService {
         return adminMapper.findUserList(adminVO);
     }
 
+    @Override
+    public List<AdminVO> findDetailUser(AdminVO adminVO) {
+        return adminMapper.findDetailUser(adminVO);
+    }
+
 }

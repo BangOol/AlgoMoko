@@ -32,4 +32,10 @@
         </choose>
     </select>
 
+    <select id="findDetailUser" resultMap="members" resultType="com.co.algomoko.admin.domain.AdminVO">
+        SELECT MID, NICK, BIRTH, HEIGHT, WEIGHT, TWEIGHT, TCAL
+        FROM MEMBERS
+        WHERE MID = #{username}
+    </select>
+
 </mapper>

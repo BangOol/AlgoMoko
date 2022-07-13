@@ -106,6 +106,9 @@
                                 <td th:text="${lists.sex}"></td>
                                 <td th:text="${lists.nick}"></td>
                                 <td th:text="${lists.b0}"></td>
+                                <td>
+                                    <a th:href="@{/userRestrict(uid=${lists.uid})}">변경</a>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -153,6 +156,34 @@
             })
         }
 
+        function moveUserRestrict() {
+            fetch({
+                url : '/userRestrict',
+                method : 'GET'
+            }).then()
+        }
+        // function moveUserRestrict(){
+        //     $.ajax({
+        //         type: 'GET',
+        //         url : "/userRestrict",
+        //         data : $("form[name=userRestrict]").serialize(),
+        //         success : function(result){
+        //             //테이블 초기화
+        //             $('#boardtable').empty();
+        //             if(result.length>=1){
+        //                 result.forEach(function(lists){
+        //                     str='<tr>'
+        //                     str += "<td>"+lists.uid +"</td>";
+        //                     str+="<td>" +lists.sex +"</td>";
+        //                     str+="<td>"+lists.nick +"</td>";
+        //                     str+="<td>"+lists.b0 +"</td>";
+        //                     str+="</tr>"
+        //                     $('#boardtable').append(str);
+        //                 })
+        //             }
+        //         }
+        //     })
+        // }
         // let findUserPress = document.getElementById('findUserPress');
         // findUserPress.addEventListener("keypress", findUserList);
 

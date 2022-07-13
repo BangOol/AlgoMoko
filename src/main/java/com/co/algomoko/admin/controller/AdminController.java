@@ -46,6 +46,17 @@ public class AdminController {
         model.addAttribute("list", adminService.makeList());
         return "contents/admin/userFormUserlist";
     }
+
+    // 유저 리스트 - 상세 조회 및 제한 여부 창 이동
+    @GetMapping("/userRestrict")
+    @ResponseBody
+    public String moveUserRestrict(@RequestParam("uid") String uid, Model model){
+        AdminVO adminVO = new AdminVO();
+        adminVO.setUid(uid);
+        model.addAttribute("detailList", adminMapper.findDetailUser(adminVO));
+        return "contents/admin/userFormRestrict";
+    }
+
     // 유저 리스트 - 검색
     @GetMapping("/findUserList")
     @ResponseBody
