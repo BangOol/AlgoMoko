@@ -11,5 +11,5 @@ public interface DiaryMapper {
 	public List<DiaryVO> findDay(DiaryVO diaryVO);
 	public List<DiaryVO> sicDay(DiaryVO diaryVO);
 	public List<DiaryVO> resultCal(DiaryVO diaryVO);
-	
+	public List<DiaryVO> daydetail(DiaryVO diaryVO);
 }

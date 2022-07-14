@@ -80,8 +80,9 @@ public class DiaryController {
 		calendar.set(Calendar.MILLISECOND, 0);
 		diaryVO.setDdate(calendar.getTime());
 		diaryVO.setMid("user3");
-		model.addAttribute("todaysic",dao.findDay(diaryVO));
+		model.addAttribute("todaysic",dao.sicDay(diaryVO));
 		model.addAttribute("resultCal",dao.resultCal(diaryVO));
+		model.addAttribute("dayde",dao.daydetail(diaryVO));
 		model.addAttribute("ddd",calendar.getTime());
 		return "contents/diary/modify";
         
