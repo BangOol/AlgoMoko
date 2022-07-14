@@ -112,7 +112,7 @@
 <body>
    <div th:replace="~{fragments/header}"></div>
 <div th:replace="~{fragments/aside}"></div>
-       [[${today}]]
+      
      
 	
     <!-- Blog Section End -->
@@ -137,18 +137,18 @@
               </tr>
           </thead>
           <tbody>
-          <th:block th:each="day:${dayde}" >
+          <th:block th:each="today:${todaysic}" >
           
-              <tr th:if= "${day.dddo == 'aa'}">
+              <tr>
               
                   <th scope="row">1</th>
-                  <td th:text="${day.ddname}"></td>
-                  <td th:text="${day.amount}"></td>
-                  <td th:text="${day.cal}"></td>
+                  <td th:text="${today.ddname}"></td>
+                  <td th:text="${today.amount}"></td>
+                  <td th:text="${today.cal}"></td>
                   
               </tr>
-             </th:block> 
-              
+             
+              </th:block> 
 
           </tbody>
           
@@ -163,8 +163,9 @@
          
             <div class="product__details__tab__desc">
                 <h3>내용</h3>
+              <p th:text="${con[0].ucon}"></p>  
                 <br>
-
+			
               
               
               </div>

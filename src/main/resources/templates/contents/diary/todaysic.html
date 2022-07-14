@@ -75,10 +75,16 @@
                                   </tr>
                                   
                               </thead>
-                              <tbody>
-                              <th:block th:each="today:${todaysic}" >
-                              <tr th:if= "${today.dddo == 'aa'}">
-                              <td th:text="${today.ddname}" class="shoping__cart__item" onclick="location.href='modify'">
+                              <tbody data-dddo='aa'>
+                             
+                              <th:block th:each="today:${todaysic}">
+                              
+                              
+                              
+                              
+                              <tr th:if= "${today.dddo == 'aa'}" class="detail">
+                              
+                              <td th:text="${today.ddname}" class="shoping__cart__item">
                                           <img src="img/cart/cart-1.jpg" alt="">
                                           <h5></h5>
                                       </td>
@@ -104,10 +110,12 @@
 
                                   </tr>
                               </thead>
-                              <tbody>
+                              <tbody data-dddo='bb'>
                               <th:block th:each="today:${todaysic}" >
-                              <tr th:if="${today.dddo == 'bb'}">
-                              <td th:text="${today.ddname}" class="shoping__cart__item" onclick="location.href='modify'">
+                              <tr th:if= "${today.ddname == null }" class="detail">
+                              <td class="shoping__cart__price"><a href="write"><img src="img/list-icon.png" style="width: 200px; height: 100px;"></a></td>
+                              <tr th:if="${today.dddo == 'bb'}" class="detail">
+                              <td th:text="${today.ddname}" class="shoping__cart__item">
                                           <img src="img/cart/cart-1.jpg" alt="">
                                           <h5></h5>
                                       </td>
@@ -128,14 +136,18 @@
                              <thead>
                                   <tr>
                                       <th class="shoping__product" >저녁</th>
-
+										<td></td>
                                   </tr>
                               </thead>
-                              <tbody>
+                              <tbody data-dddo='cc'>
+                               <td></td>
                               <th:block th:each="today:${todaysic}" >
-                              <tr th:if="${today.dddo == 'cc'}">
-                              <td th:text="${today.ddname}" class="shoping__cart__item" onclick="location.href='modify'">
+                              
+                              <tr th:if="${today.dddo == 'cc'}" class="detail">
+                              
+                              <td th:text="${today.ddname}" class="shoping__cart__item">
                                           <img src="img/cart/cart-1.jpg" alt="">
+                                          
                                           <h5></h5>
                                       </td>
                                       <td <td th:text="|${today.cal}kcal|"  class="shoping__cart__price">
@@ -150,6 +162,7 @@
                                       </td>
                                   </tr>
                              </th:block>
+                             
                              </tbody>
                              <thead>
                                   <tr>
@@ -163,7 +176,7 @@
                               
                               
                               <tr th:if="${todaysic[0].ddate==result.ddate}" >
-                              <td th:text="${result.sumcal}" class="shoping__cart__item" onclick="location.href='write'">
+                              <td th:text="${result.sumcal}" class="shoping__cart__item">
                                           
                                           <img src="img/cart/cart-1.jpg" alt="">
                                           <h5></h5>
@@ -191,7 +204,25 @@
 
 <div th:replace="~{fragments/footer}"></div>
      
+<script>
+        $(function () {
+            
+            
+			
+			$("tbody").click(function(){
+			
+			var no = $(this).attr('data-dddo')
+                location.href='/modify?dddo='+no;
+                    
+                
+               
 
+
+            })
+			})
+        	
+        
+    </script>
     <!-- Js Plugins -->
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
