@@ -11,7 +11,6 @@
             <result property="upw" column="mpw"/>
             <result property="B0" column="B0"/>
             <result property="nick" column="NICK"/>
-
         </resultMap>
     <!-- 관리자 유저 목록 조희 -->
     <select id="makeList" resultMap="members" resultType="com.co.algomoko.admin.domain.AdminVO">
@@ -35,7 +34,7 @@
     <select id="findDetailUser" resultMap="members" resultType="com.co.algomoko.admin.domain.AdminVO">
         SELECT MID, NICK, BIRTH, HEIGHT, WEIGHT, TWEIGHT, TCAL
         FROM MEMBERS
-        WHERE MID = #{username}
+        WHERE MID = #{uid}
     </select>
 
 </mapper>
