@@ -31,5 +31,10 @@ public class DiaryServiceImpl implements DiaryService {
 		return diaryMapper.resultCal(diaryVO);
 
 	}
+	@Override
+	public List<DiaryVO> daydetail(DiaryVO diaryVO) {
+		return diaryMapper.daydetail(diaryVO);
+
+	}
 
 }
