@@ -14,26 +14,34 @@ where trunc(ddate)=trunc(#{ddate}) and mid = #{mid}
 
 </select>
 <select id="sicDay" resultType="DiaryVO">
-select a.ddname,a.amount, a.f0, a.cal, a.carb, a.prot, a.fat, a.dddo, trunc(a.ddate) as ddate, to_char(a.ddate, 'day') as dday, b.ucon
+select b.mid, a.ddname,a.dddo,a.amount, a.cal, a.carb, a.prot, a.fat, trunc(a.ddate) as ddate, to_char(a.ddate, 'day') as dday, b.ucon
 from diary_detail a, diary b
-where TO_CHAR(a.ddate,'iw')  =TO_CHAr(to_date(sysdate,'yy-MM-dd'),'iw') and a.mid = b.mid and TRUNC(a.ddate) = trunc(b.ddate)
-order by a.ddate
+where TO_CHAR(a.ddate,'iw')  =TO_CHAr(to_date(sysdate,'yy-MM-dd'),'iw') and a.dddo=b.dddo and a.mid = b.mid and TRUNC(a.ddate) = trunc(b.ddate) and trunc(sysdate)=TRUNC(a.ddate) and b.mid = #{mid}
+order by b.ucon
 </select>
+<!-- 총 칼로리 -->
 <select id="resultCal" resultType="DiaryVO">
-select trunc(a.ddate) as ddate, a.mid, b.mid, sum(b.cal) as sumcal, to_char(a.ddate, 'day') as dday
+select trunc(a.ddate) as ddate, a.mid, sum(b.cal) as sumcal, to_char(a.ddate, 'day') as dday
 from diary a,diary_detail b
-WHERE a.mid = 'user3'
-   AND a.mid = b.mid and  trunc(a.ddate)=trunc(b.ddate) and TO_CHAR(a.ddate,'iw')  =TO_CHAr(to_date(sysdate,'yy-MM-dd'),'iw')
-   GROUP BY a.ddate, a.mid, b.mid
-   order by ddate
+where TO_CHAR(a.ddate,'iw')  =TO_CHAr(to_date(sysdate,'yy-MM-dd'),'iw') and a.dddo=b.dddo and a.mid = b.mid and TRUNC(a.ddate) = trunc(b.ddate) and trunc(sysdate)=TRUNC(a.ddate) and b.mid = #{mid}
+   GROUP BY a.ddate, a.mid
 </select>
 
-<select id="daydetail" resultType="DiaryVO">
-select a.ddname,a.amount, a.f0, a.cal, a.carb, a.prot, a.fat, a.dddo, trunc(a.ddate) as ddate, to_char(a.ddate, 'day') as dday, b.ucon
+<select id="detail" resultType="DiaryVO">
+select b.mid, a.ddname,a.dddo,a.amount, a.cal, a.carb, a.prot, a.fat, trunc(a.ddate) as ddate, to_char(a.ddate, 'day') as dday, b.ucon
 from diary_detail a, diary b
-where TO_CHAR(a.ddate,'iw')  =TO_CHAr(to_date(sysdate,'yy-MM-dd'),'iw') and a.mid = b.mid and TRUNC(a.ddate) = trunc(b.ddate) and trunc(sysdate)=TRUNC(a.ddate)
-order by a.ddate
+where TO_CHAR(a.ddate,'iw')  =TO_CHAr(to_date(sysdate,'yy-MM-dd'),'iw') and a.dddo=b.dddo and a.mid = b.mid and TRUNC(a.ddate) = trunc(b.ddate) and trunc(sysdate)=TRUNC(a.ddate) and b.mid = #{mid} and a.dddo=#{dddo}
+order by b.ucon
 </select>
+
+
+<select id="con" resultType="DiaryVO">
+select ucon
+from diary
+where mid=#{mid} and ddate= #{ddate} and dddo=#{dddo}
+</select>
+
+
 
 
 
