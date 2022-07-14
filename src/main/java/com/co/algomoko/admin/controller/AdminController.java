@@ -46,6 +46,16 @@ public class AdminController {
         model.addAttribute("list", adminService.makeList());
         return "contents/admin/userFormUserlist";
     }
+    @GetMapping("/moveInquiry")
+    public String moveInquiry(){
+        return "contents/support/Inquiry";
+    }
+
+    @GetMapping("/moveFAQ")
+    public String moveFAQ(){
+        return "contents/support/FAQ";
+    }
+
 
     // 유저 리스트 - 상세 조회 및 제한 여부 창 이동
     @GetMapping("/userRestrict")
@@ -64,7 +74,11 @@ public class AdminController {
         AdminVO adminVO = new AdminVO();
         adminVO.setType(type);
         adminVO.setKeyword(keyword);
-        return adminMapper.findUserList(adminVO);
+        if(keyword == ""){
+            return adminMapper.makeList();
+        } else {
+            return adminMapper.findUserList(adminVO);
+        }
     }
 
 
