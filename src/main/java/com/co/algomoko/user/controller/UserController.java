@@ -17,7 +17,11 @@ public class UserController {
 	public String mainPage() {
 		return "contents/index";
 	}
-	
+	//로그인페이지이동
+	@GetMapping("loginForm")
+	public String login() {
+		return "contents/login/loginForm";
+	}
 	
 	//회원가입 과정 페이지들
 	@GetMapping("/registerIdForm1")
@@ -39,7 +43,7 @@ public class UserController {
 	//로그인 페이지 이동
 	@GetMapping("/login")
     public String loginPage(UserVO vo) {
-		return "contents/login/login";
+		return "contents/login/loginForm";
 	}
 	
 	//로그인 처리
@@ -64,6 +68,7 @@ public class UserController {
     	if(num == 1) {
 		return "redirect:registerIdForm3";
     	} else {
+    		
     		return "contents/login/signup";
     	}
     }
