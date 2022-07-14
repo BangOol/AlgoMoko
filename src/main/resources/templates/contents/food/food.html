@@ -68,17 +68,17 @@
 												</thead>
 												<tbody th:each="food:${fList}">
 													<tr>													
-														<td><a th:href="@{/foodContents?ing={ing}(ing=${food.ing})}" th:text="${food.ing}">여기다걸려야함</a></td>
+														<td class="shoping__cart__total"><a th:href="@{/foodContents(ing=${food.ing})}" th:text="${food.ing}"></a></td>
 														<td class="shoping__cart__price"></td>
-														<td th:text="${food.cal}" class="shoping__cart__total"></td>
-														<td th:text="${food.amount}" class="shoping__cart__total"></td>
+														<td th:text="${food.cal}+kcal" class="shoping__cart__total"></td>
+														<td th:text="${food.amount}+${food.f0}" class="shoping__cart__total"></td>
 													</tr>
 												</tbody>
 											</table>
 										</div>
 									</div>
 								</div>
-							</div>
+							</div>           
 						</section>
 					</div>
 				</div>
@@ -122,8 +122,7 @@
 						<div class="blog__sidebar__item">
 							<h4>인기 검색어</h4>
 							<div class="blog__sidebar__item__tags">
-								<a href="">계란</a> <a href="#">바나나</a> <a href="#">닭가슴살</a> <a
-									href="#">아메리카노</a> <a href="#">쌀</a> <a href="#">콜라</a>
+								<a th:each="food:${pList}" th:text="${food.ing}" th:href="@{/foodContents(ing=${food.ing})}"></a> 
 							</div>
 						</div>
 					</div>

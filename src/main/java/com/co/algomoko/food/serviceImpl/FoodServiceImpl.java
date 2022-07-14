@@ -21,4 +21,14 @@ public class FoodServiceImpl implements FoodService {
 	public FoodVO fListOne(FoodVO foodVO) {
 		return null;
 	}
+
+	@Override
+	public int plusView(String ing) {
+		return mapper.plusView(ing);
+	}
+
+	@Override
+	public List<FoodVO> pList(FoodVO foodVO) {
+		return mapper.pList(foodVO);
+	}	
 }
