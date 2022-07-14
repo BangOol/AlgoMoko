@@ -4,16 +4,33 @@
 <mapper namespace="com.co.algomoko.food.mapper.FoodMapper">
 
 	<!-- 음식 검색 결과 리스트 -->
-	<select id="fList" resultType="com.co.algomoko.food.domain.FoodVO">
+	<select id="fList"
+		resultType="com.co.algomoko.food.domain.FoodVO">
 		select ing, cal, amount, F0
 		from food
-		where ing like '%' || #{ing} || '%'	
+		where ing like '%' ||
+		#{ing} || '%'
 		order by ing
 	</select>
-	<!--  음식 검색 결과 단건 조회-->
-	<select id="fListOne" resultType="com.co.algomoko.food.domain.FoodVO">
+	<!-- 음식 검색 결과 단건 조회 -->
+	<select id="fListOne"
+		resultType="com.co.algomoko.food.domain.FoodVO">
 		select ing, amount, cal, carb, prot, fat, F0
 		from food
+		where
+		ing = #{ing}
+	</select>
+	<!-- 음식 검색 조회수 -->
+	<update id="plusView">
+		update food
+		set fview = fview +1
 		where ing = #{ing}
+	</update>
+	<!-- 음식 인기검색어 순위 6등까지 -->
+	<select id="pList"
+		resultType="com.co.algomoko.food.domain.FoodVO">
+		<![CDATA[select ing
+		from (select * from food order by fview desc)
+		where rownum <= 6]]>
 	</select>
 </mapper>
