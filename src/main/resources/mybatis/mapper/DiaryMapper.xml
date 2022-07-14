@@ -14,10 +14,10 @@ where trunc(ddate)=trunc(#{ddate}) and mid = #{mid}
 
 </select>
 <select id="sicDay" resultType="DiaryVO">
-select ddname,amount, f0, cal, carb, prot, fat, dddo, trunc(ddate) as ddate, to_char(ddate, 'day') as dday
-from diary_detail
-where TO_CHAR(ddate,'iw')  =TO_CHAr(to_date(sysdate,'yy-MM-dd'),'iw') 
-order by ddate
+select a.ddname,a.amount, a.f0, a.cal, a.carb, a.prot, a.fat, a.dddo, trunc(a.ddate) as ddate, to_char(a.ddate, 'day') as dday, b.ucon
+from diary_detail a, diary b
+where TO_CHAR(a.ddate,'iw')  =TO_CHAr(to_date(sysdate,'yy-MM-dd'),'iw') and a.mid = b.mid and TRUNC(a.ddate) = trunc(b.ddate)
+order by a.ddate
 </select>
 <select id="resultCal" resultType="DiaryVO">
 select trunc(a.ddate) as ddate, a.mid, b.mid, sum(b.cal) as sumcal, to_char(a.ddate, 'day') as dday
@@ -27,4 +27,14 @@ WHERE a.mid = 'user3'
    GROUP BY a.ddate, a.mid, b.mid
    order by ddate
 </select>
+
+<select id="daydetail" resultType="DiaryVO">
+select a.ddname,a.amount, a.f0, a.cal, a.carb, a.prot, a.fat, a.dddo, trunc(a.ddate) as ddate, to_char(a.ddate, 'day') as dday, b.ucon
+from diary_detail a, diary b
+where TO_CHAR(a.ddate,'iw')  =TO_CHAr(to_date(sysdate,'yy-MM-dd'),'iw') and a.mid = b.mid and TRUNC(a.ddate) = trunc(b.ddate) and trunc(sysdate)=TRUNC(a.ddate)
+order by a.ddate
+</select>
+
+
+
 </mapper>

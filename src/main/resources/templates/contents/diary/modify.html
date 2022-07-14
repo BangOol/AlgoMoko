@@ -112,10 +112,9 @@
 <body>
    <div th:replace="~{fragments/header}"></div>
 <div th:replace="~{fragments/aside}"></div>
-        
+       [[${today}]]
      
-<!-- Table End -->
-    </section>
+	
     <!-- Blog Section End -->
     <input type="text" readonly placeholder="재료 입력" style ="outline:1px solid #c3bfbf";>
     <button type="button" id="btnmod" class="btn btn-primary">검색</button>
@@ -124,7 +123,7 @@
       <div class="container">
         <div class="row">
     <div class="col-sm-7 col-xl-6">
-[[${todaysic[1]}]]
+
 
               
       <table class="table table-borderless">
@@ -138,39 +137,18 @@
               </tr>
           </thead>
           <tbody>
-          <th:block th:each="today:${todaysic}" >
-              <tr th:if= "${today.dddo == 'aa'}">
-              <tr>
+          <th:block th:each="day:${dayde}" >
+          
+              <tr th:if= "${day.dddo == 'aa'}">
+              
                   <th scope="row">1</th>
-                  <td th:text="${today.ddname}"></td>
-                  <td th:text="${today.amount}"></td>
-                  <td th:text="${today.cal}"></td>
+                  <td th:text="${day.ddname}"></td>
+                  <td th:text="${day.amount}"></td>
+                  <td th:text="${day.cal}"></td>
+                  
               </tr>
-              </th:block>
-              <tr>
-                  <th scope="row">2</th>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>mark@email.com</td>
-              </tr>
-              <tr>
-                  <th scope="row">3</th>
-                  <td>Jacob</td>
-                  <td>Thornton</td>
-                  <td>jacob@email.com</td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>jacob@email.com</td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>jacob@email.com</td>
-          </tr>
+             </th:block> 
+              
 
           </tbody>
           
@@ -187,7 +165,8 @@
                 <h3>내용</h3>
                 <br>
 
-              <p>잘먹</p>
+              
+              
               </div>
         </div>
       </div>
