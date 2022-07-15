@@ -1,6 +1,7 @@
 package com.co.algomoko.user.mapper;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.co.algomoko.user.domain.UserVO;
 
@@ -11,4 +12,6 @@ public interface UserMapper {
 	public int update(UserVO uservo);
 	public UserVO search(UserVO uservo);
 	public List<UserVO> userlist(UserVO uservo);
+	
+	public boolean existByMid(String mid);
 }

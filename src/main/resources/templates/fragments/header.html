@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html  lang="ko"
-       xmlns:th= "http://www.thymeleaf.org">
+       xmlns:th= "http://www.w3.org/1999/xhtml" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+       >
 
 <head>
     <meta charset="UTF-8">
@@ -21,12 +22,20 @@
 
                 </div>
                 <div class="col-md-4">
-                    <div class="header__top__right">
+                    <div sec:authorize="isAnonymous()" class="header__top__right" id="menu_anonymous">
                         <div class="header__top__right__auth" style="font-family: 'Jua'">
                             <a href="loginForm" style="float: right; margin : 0 0 0 10px"><i class="fa fa-user" ></i>Login</a>
                             <a href="#" style="float: right; margin : 0 10px">아이디 찾기</a>
                             <a href="#" style="float: right; margin : 0 10px">비밀번호 찾기</a>
                             <a href="#" style="float: right; margin : 0 10px">회원 가입</a>
+                        </div>
+                    </div>
+                    <div sec:authorize="isAuthenticated()" class="header__top__right" id="menu_authenticated">
+                        <div class="header__top__right__auth" style="font-family: 'Jua'">
+                            <a href="logout" style="float: right; margin : 0 0 0 10px" id="logout"><i class="fa fa-user" ></i>Logout</a>
+                            <a href="#" style="float: right; margin : 0 10px">#{nick} 님, 반갑습니다!</a>
+                            <a href="mypage" style="float: right; margin : 0 10px">내정보</a>
+                            <a href="adminpage" style="float: right; margin : 0 10px">관리자정보</a>
                         </div>
                     </div>
                 </div>
@@ -75,7 +84,20 @@
             </div>
         </div>
     </div>
-
+ <script th:inline="javascript">
+ 	
+        // 동적으로 만들어진 버튼의 이벤트 처리를 하려면 선택자를 2개 주어야 한다. -> $(넓은 선택자).on("이벤트 이름", "실제 선택자", function())
+        $("#menu_authenticated").on("click", "#logout", (e)=> {
+            
+            e.preventDefault();
+            var choice = confirm('로그아웃하시겠습니까?');
+            if(choice==false)
+                return;
+          	else if(choice ==true)
+          	return "/main";
+        });	
+    </script>
 </body>
+
 </th:block>
 </html>
