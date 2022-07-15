@@ -61,6 +61,29 @@
   box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
   transform: translateX(-50%) translateY(-50%);
 }
+.modal1_body {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 700px;
+  height: 500px;
+  
+  text-align: center;
+  background: rgba(69, 139, 197, 0.70);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 10px;
+  box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+  transform: translateX(-50%) translateY(-50%);
+}
+#textex{
+	margin-top: 20px;
+	margin-right: 10px; 
+}
+#btnbtn
+{
+	margin-top: 10px;
+	margin-bottom: 15px;
+}
 
 .modal_title h2 {
 
@@ -59553,6 +59576,11 @@ ol {
 }
 
 .shoping__cart__table table tbody tr td.shoping__cart__item__close span {
+	font-size: 24px;
+	color: #b2b2b2;
+	cursor: pointer;
+}
+.shoping__cart__item__close span {
 	font-size: 24px;
 	color: #b2b2b2;
 	cursor: pointer;

@@ -10,12 +10,49 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 </head>
 
-	<body>
-    <div th:replace="~{fragments/header}"></div>
+<body>
+<th:block layout:fragment="content">
+    <!-- Hero Section Begin -->
+    <section class="hero">
+        <div class="container">
+            <div class="categories">
+                <div class="col-lg-12">
+                    <div class="hero__item set-bg" data-setbg="img/spaghetti-g9dd6fe2c0_1920.jpg" style="margin: 0 0 0 40px">
+                        <div class="hero__text">
+                            <span>FRUIT FRESH</span>
+                            <h2>AlgoMoko <br/>Diet Site</h2>
+                            <p style="color:#a0aec0">당신의 건강을 책임집니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <div th:replace="~{contents/home}"></div>
-
-    <div th:replace="~{fragments/footer}"></div>
-    </body>
+    <!-- Categories Section Begin -->
+    <section class="categories">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <a href=""><img src="img/menu_note.png"
+                                    style="height: 200px; width: 200px; margin : 0 0 50px 60px;"></a>
+                </div>
+                <div class="col-lg-3">
+                    <a href=""><img src="img/recipe-book.png"
+                                    style="height: 200px; width: 200px;  margin : 0 0 50px 0;"></a>
+                </div>
+                <div class="col-lg-3">
+                    <a href=""><img src="img/team.png" style="height: 200px; width: 200px;  margin : 0 0 50px 20px;"></a>
+                </div>
+                <div class="col-lg-3">
+                    <a href=""><img src="img/customer-support.png"
+                                    style="height: 200px; width: 200px;  margin : 0 0 50px 10px;"></a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Categories Section End -->
+</th:block>
+</body>
 
 </html>

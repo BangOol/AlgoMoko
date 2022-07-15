@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.co.algomoko.support.mapper.FaqMapper">
+    <resultMap id="FaqType" type="com.co.algomoko.support.domain.FaqVO">
+        <result property="faqNo" column="FAQNO"/>
+        <result property="faqTitle" column="FAQTITLE"/>
+        <result property="faqCon" column="FAQCON"/>
+        <result property="faqFile" column="FAQFILE"/>
+        <result property="Q0" column="Q0"/>
+    </resultMap>
+    <select id="FAQList" resultMap="FaqType" resultType="com.co.algomoko.support.domain.FaqVO">
+        SELECT FAQNO, FAQTITLE, FAQCON
+        FROM FAQ
+        WHERE Q0 = #{Q0}
+    </select>
+</mapper>

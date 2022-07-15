@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html  lang="ko" xmlns:th="http://www.thymeleaf.org"
-       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-       layout:decorate="~{layouts/layout}">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
 
 <head>
     <meta charset="UTF-8">
@@ -13,142 +13,128 @@
 </head>
 
 <body>
-    <th:block layout:fragment="content">
-    <!-- Page Preloder -->
-    <div id="preloder">
-        <div class="loader"></div>
-    </div>
+<th:block layout:fragment="content">
+
     <!-- Breadcrumb Section Begin -->
     <section class="breadcrumb-section set-bg" data-setbg="img/breadcrumb.jpg">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <div class="breadcrumb__text">
-                        <h2>Algomokgo 고객센터</h2>
-                        <div class="breadcrumb__option">
-                            <a href="./index.html">Home</a>
-                            <span>Algomokgo</span>
-                        </div>
-                        <br>
-                        <!-- <div class="form-group" style="text-align: center">
-                            <input type="text"  placeholder="검색어입력" aria-label="Recipient's username" aria-describedby="button-addon2" style="width: auto;" >
-                            <button class="btn btn-success" type="button" id="button-addon2">검색</button>
-                        </div> -->
-                        <div class="blog__sidebar__search">
-                            <form action="#">
-                                <input type="text" placeholder="Search...">
-                                <button type="submit"><span class="icon_search"></span></button>
-                            </form>
-                        </div>
+                        <a href="/FAQ"><h2>Algomokgo FAQ</h2>
+                            <div class="breadcrumb__option">
+                                Home
+                                <span>Algomokgo</span>
+                            </div>
+                        </a>
                     </div>
+
+<!--                    <div class="blog__sidebar__search">-->
+<!--                        <form action="SearchFAQ">-->
+<!--                            <input type="text" placeholder="Search...">-->
+<!--                            <button type="submit"><span class="icon_search"></span></button>-->
+<!--                        </form>-->
+<!--                    </div>-->
                 </div>
             </div>
         </div>
     </section>
     <!-- Breadcrumb Section End -->
     <div class="container" style="width: auto">
-            
+
         <div class="col-lg-5 col-md-5">
             <div class="contact__form__title">
-                <h2>FAQ</h2>
+                <h2 style="margin : 100px 0 0 490px">FAQ</h2>
             </div>
         </div>
     </div>
-    
-</div>
     <!-- Contact Section Begin -->
     <section class="contact spad">
+        <div>
+            <h2 style="margin: 0 0 0 430px;">자주 나오는 질문들</h2>
+        </div>
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-md-3 col-sm-6 text-center">
-                    <div class="contact__widget">
-                        <span class="icon_phone"></span>
+                    <div class="contact__widget" style="border: 1px solid #a0aec0 ;margin:20px 0; width: 280px; padding : 20px 10px; border-radius: 15px">
                         <h4>01</h4>
-                        <p>특정한 화면이 나오지 않아요</p>
+                        <a href=""><p>등록된 음식이 나오지 않아요.</p></a>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-6 text-center">
-                    <div class="contact__widget">
-                        <span class="icon_pin_alt"></span>
+                    <div class="contact__widget" style="border: 1px solid #a0aec0;margin:20px 0; width: 280px;  padding : 20px 10px; border-radius: 15px">
                         <h4>02</h4>
-                        <p>레시피 등록을 했는데 나오지 않아요</p>
+                        <a href=""><p>제한된 계정이라고 나와요.</p></a>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-6 text-center">
-                    <div class="contact__widget">
-                        <span class="icon_clock_alt"></span>
+                    <div class="contact__widget" style="border: 1px solid #a0aec0;margin:20px 0; width: 280px;  padding : 20px 10px; border-radius: 15px">
                         <h4>03</h4>
-                        <p>식단일지를 등록 했는데 저장 되지않아요</p>
+                        <a href=""><p>비밀번호를 잊었어요.</p></a>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-6 text-center">
-                    <div class="contact__widget">
-                        <span class="icon_mail_alt"></span>
+                    <div class="contact__widget" style="border: 1px solid #a0aec0;margin:20px 0; width: 280px;  padding : 20px 10px; border-radius: 15px">
                         <h4>04</h4>
-                        <p>css가 힘든데 억덕게하죠</p>
+                        <a href=""><p>식단일지 작성이 안돼요.</p></a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
     <!-- Contact Section End -->
-    <div  class="container" style="text-align: right">
-        <button type="button" class="btn btn-success" style="text-align: right">목록</button>
-    </div>
-    <!-- Map Begin -->
-    <br>
-    <!-- Map End -->
-
-    <!-- Contact Form Begin -->
     <div class="container">
-
-        <table class="table table-hover" style="text-align: center">
+        <table class="table table-hover" style="text-align: center; margin: 100px 0 300px 0">
+            <div class="d-flex flex-row-reverse col-lg-12 ">
+                <!-- 질문 유형별 버튼. 클릭 시 해당하는 내용의 값이 밑의 표에 출력. -->
+                <form action="/FAQList" name="FAQ-form" >
+                    <div class="p-2 border"><input type="button" onclick="FAQList('q0')" value="챌린지 문의" id="chbtn" style=" background-color: #ffffff"></div>
+                    <div class="p-2 border"><input type="button" onclick="FAQList('q1')" value="일지 문의" id="dibtn" style=" background-color: #ffffff"></div>
+                    <div class="p-2 border"><input type="button" onclick="FAQList('q2')" value="음식검색 문의" id="sebtn"style=" background-color: #ffffff"></div>
+                    <div class="p-2 border"><input type="button" onclick="FAQList('q3')" value="신고 문의" id="rebtn"style="background-color: #ffffff"></div>
+                    <div class="p-2 border"><input type="button" onclick="FAQList('q4')" value="일반 문의" id="etbtn"style=" background-color: #ffffff"></div>
+                </form>
+            </div>
             <thead>
-                <tr>
-                    <th scope="col">글번호</th>
-            <th scope="col"  style="margin:20px 0">제목</th>
-            <th scope="col">닉네임</th>
-            <th scope="col">날짜</th>
-            <th scope="col">조회수</th>
-        </tr>
-    </thead>
-    <tbody>
-        
-        <tr>
-            <th scope="row">Default</th>
-            <td>Column content</td>
-            <td>Column content</td>
-            <td>Column content</td>
-            <td>Column content</td>
-        </tr>
-        <tr>
-            <th scope="row">Default</th>
-            <td>Column content</td>
-            <td>Column content</td>
-            <td>Column content</td>
-            <td>Column content</td>
-        </tr>
-        <tr>
-            <th scope="row">Default</th>
-            <td>Column content</td>
-            <td>Column content</td>
-            <td>Column content</td>
-            <td>Column content</td>
-        </tr>
-    </tbody>
+            <tr>
+                <th scope="col">글번호</th>
+                <th scope="col" style="margin:20px 0">제목</th>
+                <th scope="col">내용</th>
+            </tr>
+            </thead>
+            <tbody id = 'FAQTable'>
+            </tbody>
         </table>
     </div>
-    <!-- Contact Form End -->
-    <div  class="container" style="text-align: right">
-        <div class="product__pagination" style="text-align: center">
-            <a href="#">1</a>
-            <a href="#">2</a>
-            <a href="#">3</a>
-            <a href="#"><i class="fa fa-long-arrow-right"></i></a>
-        </div>
-   <button type="button" class="btn btn-success" style="text-align: right">글쓰기</button>
-    </div>
-    </th:block>
+    <script>
+        function FAQList(q0){
+            $.ajax({
+                type: 'GET',
+                url : "/FAQList",
+                data :{q0},
+                success : function(result){
+                    //테이블 초기화
+                    $('#FAQTable').empty();
+                    if(result.length>=1){
+                        result.forEach(function(lists){
+                            str='<tr>'
+                            str += "<td>"+lists.faqNo +"</td>";
+                            str+="<td>" +lists.faqTitle +"</td>";
+                            str+="<td>"+lists.faqCon +"</td>";
+                            str+="</tr>"
+                            $('#FAQTable').append(str);
+                        })
+                    }
+                }
+            })
+            // fetch("/FAQList",{
+            //     method : "GET"
+            // }).then(response =>{
+            //
+            // })
+        }
+    </script>
+</th:block>
 </body>
 
 </html>
