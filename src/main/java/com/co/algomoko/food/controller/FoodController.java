@@ -1,15 +1,20 @@
 package com.co.algomoko.food.controller;
 
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.support.RequestContextUtils;
 
 import com.co.algomoko.food.domain.FoodVO;
+
 import com.co.algomoko.food.mapper.FoodMapper;
 
 @Controller
@@ -18,7 +23,7 @@ public class FoodController {
 	FoodMapper dao;
 
 	@GetMapping("food")
-	public String food(@RequestParam(value = "ing", required = false) String ing, Model model) {
+	public String food(@RequestParam(value = "ing", required = false) String ing, Model model) {		
 		if (ing != null) {
 			// 검색어가 있으면 검색해서 띄우기
 			FoodVO foodVO = new FoodVO();
@@ -60,14 +65,4 @@ public class FoodController {
 		model.addAttribute("pList", result3);
 		return "contents/food/foodContents";
 	}
-
-	/*
-	 * @GetMapping("getSearchList")
-	 * 
-	 * @ResponseBody public List<FoodVO> getSearchList(Model model, FoodVO foodVO) {
-	 * return dao.fList(foodVO); }
-	 */
 }
-// 인기검색어 구상
-// ing 검색수 +1 조회수 하듯이
-// order by 조회수 내림차순 불러오면 인기순임

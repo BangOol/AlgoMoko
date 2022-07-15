@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="zxx" xmlns:th="http://www.thymeleaf.org"
-	             layout:decorate="~{layouts/layout}">
+	layout:decorate="~{layouts/layout}">
 
 <head>
 <meta charset="UTF-8">
@@ -10,158 +10,137 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>food</title>
 </head>
-
 <body>
-<th:block layout:fragment="content">
-	<!-- Page Preloder -->
-	<div id="preloder">
-		<div class="loader"></div>
-	</div>	
+	<th:block layout:fragment="content">
 
-	<!-- Breadcrumb Section Begin -->
-	<section class="breadcrumb-section set-bg"
-		data-setbg="img/breadcrumb.jpg">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12 text-center">
-					<div class="breadcrumb__text">
-						<h2>음식정보</h2>
-						<div class="breadcrumb__option">
-							<span>Food-Information</span>
+		<!-- Breadcrumb Section Begin -->
+		<section class="breadcrumb-section set-bg"
+			data-setbg="img/breadcrumb.jpg">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12 text-center">
+						<div class="breadcrumb__text">
+							<h2>음식정보</h2>
+							<div class="breadcrumb__option">
+								<span>Food-Information</span>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-	</section>
-	<!-- Breadcrumb Section End -->
+		</section>
+		<!-- Breadcrumb Section End -->
 
-	<!-- Blog Section Begin -->
-	<section class="blog spad" style="padding-bottom: 20px;">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-8 col-md-7">
-					<div class="blog__sidebar__search" style="margin-bottom: 30px;">
-						<form name="search-form" action="/food?ing=" method="get">
-							<input name="ing" type="text" placeholder="검색어 입력">
-							<button type="submit" value="검색">
-								<span class="icon_search"></span>
-							</button>
-						</form>
-					</div>
-					<div class="blog__sidebar__item">
-						<section class="shoping-cart spad" style="padding-top: 10px;">
-							<div class="container">
-								<div class="row">
-									<div class="col-lg-12">
-										<div class="shoping__cart__table">
-											<h4 style="text-align: center;">검색결과</h4>
-											</br>
-											<table id="foodTable">
-												<thead>
-													<tr>
-														<th>음식명</th>
-														<th></th>
-														<th>칼로리</th>
-														<th>단위</th>
-													</tr>
-												</thead>
-												<tbody th:each="food:${fList}">
-													<tr>													
-														<td class="shoping__cart__total"><a th:href="@{/foodContents(ing=${food.ing})}" th:text="${food.ing}"></a></td>
-														<td class="shoping__cart__price"></td>
-														<td th:text="${food.cal}+kcal" class="shoping__cart__total"></td>
-														<td th:text="${food.amount}+${food.f0}" class="shoping__cart__total"></td>
-													</tr>
-												</tbody>
-											</table>
+		<!-- Blog Section Begin -->
+		<section class="blog spad" style="padding-bottom: 20px;">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-8 col-md-7">
+						<div class="blog__sidebar__search" style="margin-bottom: 30px;">
+							<form name="search-form" action="/food?ing=" method="get">
+								<input name="ing" type="text" placeholder="검색어 입력">
+								<button type="submit" value="검색">
+									<span class="icon_search"></span>
+								</button>
+							</form>
+						</div>
+						<div class="blog__sidebar__item">
+							<section class="shoping-cart spad" style="padding-top: 10px;">
+								<div class="container">
+									<div class="row">
+										<div class="col-lg-12">
+											<div class="shoping__cart__table">
+												<h4 style="text-align: center;">검색결과</h4>
+												</br>
+												<table id="foodTable">
+													<thead>
+														<tr>
+															<th>음식명</th>
+															<th></th>
+															<th>칼로리</th>
+															<th>단위</th>
+														</tr>
+													</thead>
+													<tbody th:each="food:${fList}">
+														<tr>
+															<td class="shoping__cart__total"><a
+																th:href="@{/foodContents(ing=${food.ing})}"
+																th:text="${food.ing}"></a></td>
+															<td class="shoping__cart__price"></td>
+															<td th:text="${food.cal}+kcal"
+																class="shoping__cart__total"></td>
+															<td th:text="${food.amount}+${food.f0}"
+																class="shoping__cart__total"></td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
 										</div>
 									</div>
+								</div>								
+							</section>
+						</div>
+					</div>
+					<div class="col-lg-4 col-md-5" style="float: right;">
+						<div class="blog__sidebar"
+							style="padding: 0px; margin-left: 30px;">
+							<div class="blog__sidebar__item">
+								<h4>최근 음식 소식</h4>
+								<div class="blog__sidebar__recent">
+									<a
+										href="https://m.health.chosun.com/svc/news_view.html?contid=2022071101599"
+										class="blog__sidebar__recent__item">
+										<div class="blog__sidebar__recent__item__pic">
+											<img src="img/blog/sidebar/sr-1.jpg" alt="">
+										</div>
+										<div class="blog__sidebar__recent__item__text">
+											<h6>
+												이 음식' 많이 먹으면,</br>수명 줄어든다
+											</h6>
+											<span>2022.07.11</span>
+										</div>
+									</a> <a
+										href="https://health.chosun.com/site/data/html_dir/2022/06/15/2022061502079.html"
+										class="blog__sidebar__recent__item">
+										<div class="blog__sidebar__recent__item__pic">
+											<img src="img/blog/sidebar/sr-2.jpg" alt="">
+										</div>
+										<div class="blog__sidebar__recent__item__text">
+											<h6>
+												배달음식 영양정보는 '알권리' <br /> 배달앱서 보기 어려운 이유
+											</h6>
+											<span>2022.06.15</span>
+										</div>
+									</a> <a
+										href="https://www.hankyung.com/opinion/article/2022071365071"
+										class="blog__sidebar__recent__item">
+										<div class="blog__sidebar__recent__item__pic">
+											<img src="img/blog/sidebar/sr-3.jpg" alt="">
+										</div>
+										<div class="blog__sidebar__recent__item__text">
+											<h6>
+												스포츠 스타들의 식단</br>
+											</h6>
+											<span>2022.07.13</span>
+										</div>
+									</a>
 								</div>
-							</div>           
-						</section>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-5" style="float: right;">
-					<div class="blog__sidebar" style="padding: 0px; margin-left: 30px;">
-						<div class="blog__sidebar__item">
-							<h4>최근 음식 소식</h4>
-							<div class="blog__sidebar__recent">
-								<a href="https://m.health.chosun.com/svc/news_view.html?contid=2022071101599"
-									class="blog__sidebar__recent__item">
-									<div class="blog__sidebar__recent__item__pic">
-										<img src="img/blog/sidebar/sr-1.jpg" alt="">
-									</div>
-									<div class="blog__sidebar__recent__item__text">
-										<h6>이 음식' 많이 먹으면,</br>수명 줄어든다</h6>
-										<span>2022.07.11</span>
-									</div>
-								</a> <a href="https://health.chosun.com/site/data/html_dir/2022/06/15/2022061502079.html" 
-										class="blog__sidebar__recent__item">
-									<div class="blog__sidebar__recent__item__pic">
-										<img src="img/blog/sidebar/sr-2.jpg" alt="">
-									</div>
-									<div class="blog__sidebar__recent__item__text">
-										<h6>배달음식 영양정보는 '알권리' <br /> 배달앱서 보기 어려운 이유</h6>
-										<span>2022.06.15</span>
-									</div>
-								</a> <a href="https://www.hankyung.com/opinion/article/2022071365071" 
-										class="blog__sidebar__recent__item">
-									<div class="blog__sidebar__recent__item__pic">
-										<img src="img/blog/sidebar/sr-3.jpg" alt="">
-									</div>
-									<div class="blog__sidebar__recent__item__text">
-										<h6>
-											스포츠 스타들의 식단</br>
-										</h6>
-										<span>2022.07.13</span>
-									</div>
-								</a>
 							</div>
-						</div>
-						<div class="blog__sidebar__item">
-							<h4>인기 검색어</h4>
-							<div class="blog__sidebar__item__tags">
-								<a th:each="food:${pList}" th:text="${food.ing}" th:href="@{/foodContents(ing=${food.ing})}"></a> 
+							<div class="blog__sidebar__item">
+								<h4>인기 검색어</h4>
+								<div class="blog__sidebar__item__tags">
+									<a th:each="food:${pList}" th:text="${food.ing}"
+										th:href="@{/foodContents(ing=${food.ing})}"></a>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
 
+				</div>
 			</div>
-		</div>
-	</section>
-</th:block>
+		</section>
+	</th:block>
 	<!-- Blog Section End -->
-
-	<!-- <script>
-		function getSearchList() {
-
-			$.ajax({
-				type : 'get',
-				url : "/getSearchList",
-				data : $("form[name=search-form]").serialize(),
-				success : function(result) {
-					//테이블 초기화
-					$('#foodTable > tbody').empty();
-					if (result.length >= 1) {
-						result.forEach(function(food) {
-							sts = '<tr>'
-							sts += "<td><a href='/foodContents?ing=" + food.ing
-									+ "'>" + food.ing + "</a></td>";
-							sts += "<td></td>";
-							sts += "<td>" + food.cal + "kcal" + "</td>";
-							sts += "<td>" + food.amount + food.f0 + "</td>";
-							sts += "</tr>"
-							$('#foodTable').append(sts);
-						})
-					}
-				}
-			})
-		}
-	</script>
- -->
-
 </body>
 
 </html>

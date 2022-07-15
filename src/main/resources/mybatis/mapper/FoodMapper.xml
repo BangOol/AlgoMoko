@@ -2,15 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.co.algomoko.food.mapper.FoodMapper">
-
 	<!-- 음식 검색 결과 리스트 -->
 	<select id="fList"
 		resultType="com.co.algomoko.food.domain.FoodVO">
-		select ing, cal, amount, F0
-		from food
-		where ing like '%' ||
-		#{ing} || '%'
-		order by ing
+		<![CDATA[select ing, cal, amount, F0
+				 from (select ing, cal, amount, F0
+					   from food
+		 			   where ing like '%' || #{ing} || '%'	order by ing)
+				 where rownum <=4]]>
 	</select>
 	<!-- 음식 검색 결과 단건 조회 -->
 	<select id="fListOne"
@@ -30,7 +29,7 @@
 	<select id="pList"
 		resultType="com.co.algomoko.food.domain.FoodVO">
 		<![CDATA[select ing
-		from (select * from food order by fview desc)
-		where rownum <= 6]]>
-	</select>
+				 from (select * from food order by fview desc)
+				 where rownum <= 6]]>
+	</select>		
 </mapper>

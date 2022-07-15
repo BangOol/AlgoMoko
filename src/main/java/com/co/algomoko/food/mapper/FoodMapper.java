@@ -13,4 +13,9 @@ public interface FoodMapper {
 	public int plusView(String ing);
 	// 인기 검색어 리스트 6등까지
 	public List<FoodVO> pList(FoodVO foodVO);
+	//
+	List<FoodVO> getList(FoodVO searchVO);
+	//
+	int getListCnt(FoodVO searchVO);
+	
 }
