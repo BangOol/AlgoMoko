@@ -43,4 +43,10 @@ public class DiaryServiceImpl implements DiaryService {
 		return diaryMapper.con(diaryVO);
 	}
 
+	@Override
+	public List<DiaryVO> jukcal(DiaryVO diaryVO) {
+		
+		return diaryMapper.jukcal(diaryVO);
+	}
+
 }
