@@ -15,6 +15,6 @@ public class BTest {
 	
 	@Test
 	void list() {
-		mapper.getBoardList(null);
+		mapper.getBoardList();
 	}
 }

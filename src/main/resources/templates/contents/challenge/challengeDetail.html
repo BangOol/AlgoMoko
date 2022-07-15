@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="zxx">
+<html lang="zxx"
+layout:decorate="~{layouts/layout}">
 
 <head>
     <meta charset="UTF-8">
@@ -39,15 +40,8 @@
         }
     </style>
 </head>
-
 <body>
-    <!-- Page Preloder -->
-    <div id="preloder">
-        <div class="loader"></div>
-    </div>
-    
- <div th:replace="~{fragments/header}"></div>
-
+<th:block layout:fragment="content">
     <!-- Breadcrumb Section Begin -->
     <section class="breadcrumb-section set-bg" data-setbg="img/chl/b.jpg">
         <div class="container">
@@ -177,22 +171,6 @@
         </div>
     </section>
     <!-- Blog Section End -->
-    
-     <div th:replace="~{fragments/footer}"></div>
-
-
-    <!-- Js Plugins -->
-    <script src="js/jquery-3.3.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.nice-select.min.js"></script>
-    <script src="js/jquery-ui.min.js"></script>
-    <script src="js/jquery.slicknav.js"></script>
-    <script src="js/mixitup.min.js"></script>
-    <script src="js/owl.carousel.min.js"></script>
-    <script src="js/main.js"></script>
-
-
-
 </body>
 
 </html>

@@ -8,7 +8,8 @@ import com.co.algomoko.food.domain.FoodVO;
 import com.co.algomoko.food.mapper.FoodMapper;
 import com.co.algomoko.food.service.FoodService;
 
-public class FoodServiceImpl implements FoodService {
+
+public class FoodServiceImpl implements FoodService {	
 	@Autowired
 	FoodMapper mapper;
 
@@ -30,5 +31,17 @@ public class FoodServiceImpl implements FoodService {
 	@Override
 	public List<FoodVO> pList(FoodVO foodVO) {
 		return mapper.pList(foodVO);
-	}	
+	}
+
+	@Override
+	public List<FoodVO> getList(FoodVO searchVO) {
+		return mapper.getList(searchVO);
+	}
+
+	@Override
+	public int getListCnt(FoodVO searchVO) {
+		return mapper.getListCnt(searchVO);
+	}
+
+
 }
