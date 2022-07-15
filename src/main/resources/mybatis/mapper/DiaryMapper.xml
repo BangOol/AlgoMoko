@@ -8,9 +8,9 @@
 <mapper namespace="com.co.algomoko.diary.mapper.DiaryMapper">
 <!-- 해당날짜 식단 조회 --> 
 <select id="findDay" resultType="DiaryVO">
-select ddname,amount, f0, cal, carb, prot, fat, dddo, trunc(ddate) as ddate
-from diary_detail
-where trunc(ddate)=trunc(#{ddate}) and mid = #{mid}
+select b.mid, a.ddname,a.dddo,a.amount, a.cal, a.carb, a.prot, a.fat, trunc(a.ddate) as ddate, to_char(a.ddate, 'day') as dday, b.ucon
+from diary_detail a, diary b
+where TO_CHAR(a.ddate,'iw')  =TO_CHAr(to_date(sysdate,'yy-MM-dd'),'iw') and a.dddo=b.dddo and a.mid = b.mid and TRUNC(a.ddate) = trunc(b.ddate) and b.mid = #{mid}
 
 </select>
 <select id="sicDay" resultType="DiaryVO">
@@ -38,11 +38,15 @@ order by b.ucon
 <select id="con" resultType="DiaryVO">
 select ucon
 from diary
-where mid=#{mid} and ddate= #{ddate} and dddo=#{dddo}
+where mid= #{mid} and TRUNC(ddate) = trunc(sysdate) and dddo=#{dddo}
 </select>
-
-
-
+<!-- 주간칼로리 -->
+<select id="jukcal" resultType="DiaryVO">
+select trunc(a.ddate) as ddate, a.mid, sum(b.cal) as sumcal, to_char(a.ddate, 'day') as dday
+from diary a,diary_detail b
+where TO_CHAR(a.ddate,'iw')  =TO_CHAr(to_date(sysdate,'yy-MM-dd'),'iw') and a.dddo=b.dddo and a.mid = b.mid and TRUNC(a.ddate) = trunc(b.ddate) and b.mid = #{mid}
+   GROUP BY a.ddate, a.mid
+</select>
 
 
 </mapper>

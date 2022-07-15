@@ -17,5 +17,6 @@ public interface DiaryService {
     public List<DiaryVO> resultCal(DiaryVO diaryVO);
     public List<DiaryVO> detail(DiaryVO diaryVO);
     public List<DiaryVO> con(DiaryVO diaryVO);
+    public List<DiaryVO> jukcal(DiaryVO diaryVO);
 }
 
