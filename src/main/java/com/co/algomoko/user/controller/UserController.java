@@ -1,12 +1,18 @@
 package com.co.algomoko.user.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.co.algomoko.user.domain.UserVO;
 import com.co.algomoko.user.service.UserService;
+
+import groovyjarjarantlr4.v4.runtime.misc.NotNull;
 
 @Controller
 public class UserController {
@@ -15,6 +21,11 @@ public class UserController {
 	//메인페이지
 	@GetMapping("main")
 	public String mainPage() {
+		return "contents/index";
+	}
+	//로그아웃시 페이지 이동
+	@GetMapping("logout")
+	public String mainPage2() {
 		return "contents/index";
 	}
 	//로그인페이지이동
@@ -60,7 +71,22 @@ public class UserController {
     public String signupPage(UserVO vo) {
     	return "contents/login/signup";
     }
-    //회원가입 처리
+    
+    //회원가입 중 아이디 중복 확인 처리
+    @GetMapping("/registerIdForm2/id_check")
+    
+    public ResponseEntity<Boolean> idCheck(@NotNull String mid) {
+        if (userService.idCheck(mid)==false)
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(false);
+        return ResponseEntity.status(HttpStatus.OK).body(true);
+        // return ResponseEntity.ok(true); -> 바로 윗 줄은 이렇게도 작성 가능하다.
+    }
+    
+    
+    
+    
+    
+    //회원가입 최종 처리
     @PostMapping("/signup")
     public String signup(UserVO vo) {
     	
@@ -72,7 +98,7 @@ public class UserController {
     		return "contents/login/signup";
     	}
     }
-
+    
 
 
 }

@@ -27,10 +27,9 @@
         <div class="row">
             <div class="col-lg-12 text-center">
                 <div class="breadcrumb__text">
-                    <h2 style="font-family: 'Jua'; font-weight: 300;">회원 목록</h2>
-                    <div class="breadcrumb__option">
-                        <a href="./index.html" style="font-family: 'Jua'; font-weight: 300;">마이페이지</a>
-                        <span>자신의 정보를 확인 가능합니다.</span>
+                    <h2 style="font-family: 'Jua'; font-weight: 300;">회원 가입</h2>
+                    <div class="breadcrumb__option">  
+                        <span style="font-family: 'Jua';">회원 가입을 진행합니다.</span>
                     </div>
                 </div>
             </div>
@@ -152,6 +151,45 @@
     
 </section>
 <script type="text/javascript">
+	  $(document).ready(function() {
+            // 1. 아이디 입력 오류 처리 -> usernameCheck 후 성공하면 ajax
+            $('#username').focusout(function() {
+                // 아이디를 입력하지 않았거나, 패턴을 통과하지 못했다면 작업 중단
+                if (usernameCheck() == false)
+                    return false;
+                // 서버로 ajax 전송, GET 방식일 때는 파라미터를 포함한 주소만 적어도 된다.
+                $.ajax("/member/id_check?username=" + $("#username").val())
+                .done(()=>$("#username_msg").text("좋은 아이디네요!").attr("class", "success"))
+                .fail(()=>$("#username_msg").text("사용 중인 아이디입니다.").attr("class", "fail"));
+            });
+
+            // 4. 비밀번호, 이름, 이메일, 생일은 입력이 잘못된 경우 오류 메시지만 출력하면 된다.
+            // passwordCheck() 이렇게 쓰지 말 것! 그럼 페이지 연 순간 함수 바로 시작됨!
+            $('#password').focusout(passwordCheck);
+            $('#password2').focusout(password2Check);
+            $('#irum').focusout(irumCheck);
+            $('#email').focusout(emailCheck);
+            $('#birthday').focusout(birthdayCheck);
+
+            // 5. 회원 가입 버튼을 클릭하면 usernameCheck()부터 birthdayCheck()까지 실행한다.
+            $('#join').click(function() {
+                // &&, || 연산은 결과(참거짓)가 판별되면 연산을 중단한다. usenameCheck에서 실패한 경우 if문은 실행을 바로 중단한다.
+                if ((usernameCheck() && passwordCheck() && password2Check() && irumCheck() && emailCheck() && birthdayCheck()) == false)
+                    return false;
+
+                // 아이디 사용 가능한지 확인한 다음 사용 가능하면 회원 가입 처리
+                $.ajax("/member/id_check?username=" + $('#username').val())
+                    .done(() => {
+                        $('#join_form').submit();
+                    })
+                    .fail(() => $('#username_msg').text("사용 중인 아이디입니다.").attr('class', fail));
+            })
+        })
+
+
+
+
+	//모달(이메일인증)관련
 	const body = document.querySelector('body');
     const modal = document.querySelector('.modal');
 
@@ -178,11 +216,12 @@
     		method:"post",
     		data:{code:result}
     	}).done(function(result){
-    		if(result == true){
-    			alert :"인증 완료"
-    			
-    		}else if(result == false){
-    			alert :"인증 실패"
+    		if(result == 1){
+    			alert ("인증 완료")
+    			modal.style.display = "none"
+        		body.style.overflow = 'auto';
+    		}else if(result == 0){
+    			alert ("인증 실패")
     		}
     	})
     	
@@ -193,26 +232,32 @@
         modal.style.display = "none"
         body.style.overflow = 'auto';
     })
-
+	//모달 기능 끝
 	
-
+	
+	
+	//임시(생년월일->나이 계산)
+	function calcAge(birth) {
+    var date = new Date();
+    var year = date.getFullYear();
+    var month = (date.getMonth() + 1);
+    var day = date.getDate();
+    if (month < 10) month = '0' + month;
+    if (day < 10) day = '0' + day;
+    var monthDay = month + day;
+    birth = birth.replace('-', '').replace('-', '');
+    var birthdayy = birth.substr(0, 4);
+    var birthdaymd = birth.substr(4, 4);
+    var age = monthDay < birthdaymd ? year - birthdayy - 1 : year - birthdayy;
+    return age;
+	}
+	//나이계산 기능 끝
  	
       
  	
-    function pwcheck() {
-      var p1 = document.getElementById('pw1').value;
-      var p2 = document.getElementById('pw2').value;
-      if( p1 != p2 ) {
-        alert("비밀번호가 일치 하지 않습니다");
-        return false;
-      } else{
-        alert("비밀번호가 일치합니다");
-        return true;
-      }
-
-    }
     
     
+    //bmr 계산
     function bmrCheck(){
     var h = document.getElementById('height').value;
     var w = document.getElementById('weight').value;
@@ -227,7 +272,10 @@
     }
    
     }
+    //bmr 계산 기능 끝
     
+    
+    // bmi 계산
     function bmiCheck(){
     var h = document.getElementById('height').value;
     var w = document.getElementById('weight').value;

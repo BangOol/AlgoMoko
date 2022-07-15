@@ -17,7 +17,42 @@
     </insert>
     
     <select id="search">
-    	SELECT COUNT(*) FROM MEMBERS WHERE MID = ${mid}
+    	SELECT COUNT(*) FROM MEMBERS WHERE MID = #{mid}
     </select>
- 
+ 	
+ 	<!-- 아이디중복체크 -->
+ 	<select id="existByMid" resultType="boolean">
+ 		SELECT COUNT(*) FROM MEMBER WHERE MID = #{mid} AND ROWNUM=1
+ 	</select>
+ 	
+ 	
+ 	<delete id="delete">
+ 		DELETE FROM MEMBERS WHERE MID = #{mid}
+ 	</delete>
+ 	
+ 	<!--  <update id="update">
+        update member
+        <trim suffixOverrides="," prefix="set">
+            <if test="password!=null">password=#{password},</if>
+            <if test="email!=null">email=#{email},</if>
+            <if test="enabled!=null">enabled=#{enabled},</if>
+            <if test="authority!=null">authority=#{authority},</if>
+            <if test="checkcode!=null">checkcode=#{checkcode},</if>
+            <if test="count!=null">count=#{count},</if>
+            <if test="levels!=null">levels=#{levels},</if>
+        </trim>
+        where username=#{username}
+    </update>
+    
+    		suffix=""
+		<trim> 문 안에서, "" 안의 내용을 가장 뒤에 붙여 준다.
+		
+		suffixOverrides=""
+		<trim> 문 안에서, 가장 뒤에 "" 안의 글자가 있으면 자동으로 지워 준다.
+		
+		prefix=""
+		<trim> 문 안에서, "" 안의 내용을 가장 앞에 붙여 준다.
+		
+		prefixOverrides=""
+		<trim> 문 안에서, 가장 앞에 "" 안의 글자가 있으면 자동으로 지워 준다.-->
 </mapper>
