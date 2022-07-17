@@ -37,4 +37,10 @@
         WHERE MID = #{uid}
     </select>
 
+    <insert id="insertRestrict" >
+        INSERT INTO MEMBERS(B0)
+        VALUES (GET_NAME(#{type}))
+        WHERE MID = #{uid}
+    </insert>
+
 </mapper>

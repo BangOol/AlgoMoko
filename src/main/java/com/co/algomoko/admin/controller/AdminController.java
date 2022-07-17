@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -63,5 +64,23 @@ public class AdminController {
         adminVO.setUid(uid);
         model.addAttribute("detailList", adminMapper.findDetailUser(adminVO));
         return "contents/admin/userFormRestrict";
+    }
+
+    @PostMapping("/insertRestrict")
+    public String alertUserRestrict(@RequestParam("type") String type, @RequestParam("uid") String uid, Model model){
+        AdminVO adminVO = new AdminVO();
+        if(type.equals("normal")){
+            type = "정상";
+        }else if(type.equals("1res")){
+            type = "3일 제한";
+        }else if(type.equals("3res")){
+            type = "7일 제한";
+        }else if(type.equals("forres")){
+            type = "영구 제한";
+        }
+        adminVO.setType(type);
+        adminVO.setUid(uid);
+        adminMapper.insertRestrict(adminVO);
+        return "contents/admin/userFormUserlist";
     }
 }
