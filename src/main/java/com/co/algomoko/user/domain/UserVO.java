@@ -5,9 +5,9 @@ import lombok.Data;
 import java.sql.Date;
 import java.util.Collection;
 
-import org.springframework.security.core.GrantedAuthority;
+/*import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
+*/
 @Data
 public class UserVO {
 	//implements UserDetail;
