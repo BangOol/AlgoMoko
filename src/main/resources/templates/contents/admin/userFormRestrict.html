@@ -18,31 +18,24 @@
 
 
 <th:block layout:fragment="content">
-  <!-- Page Preloder -->
-  <div id="preloder">
-    <div class="loader"></div>
-  </div>
 
-<!--회원 목록 body-->
-<!-- Breadcrumb Section Begin -->
-<section class="breadcrumb-section set-bg" data-setbg="img/breadcrumb.jpg">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-12 text-center">
-        <div class="breadcrumb__text" style="font-family: 'Jua'">
-          <h2 style="font-family: 'Jua'">회원 목록</h2>
-          <div class="breadcrumb__option">
-            <a href="./index.html">마이페이지</a>
-            <span>자신의 정보를 확인 가능합니다.</span>
+<!-- 회원 정보 Begin -->
+  <!-- Breadcrumb Section Begin -->
+  <section class="breadcrumb-section set-bg"
+           data-setbg="img/breadcrumb.jpg">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          <div class="breadcrumb__text">
+            <h2>유저 관리</h2>
+            <div class="breadcrumb__option">
+              <span>유저 관리를 하는 페이지입니다.</span>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- 회원 정보 Begin -->
-
+  </section>
 <section class="product spad" style="font-family: 'Jua';">
   <div class="container">
     <div class="row">
@@ -67,103 +60,57 @@
       <div class="col-lg-9 col-md-7">
         <div class="product__discount">
           <div class="section-title product__discount__title"  style="border-bottom: 2px solid; padding-bottom:10px ;">
-            <h3 style="font-family: 'Jua';">내 정보</h3>
+            <h3 style="font-family: 'Jua';">유저 정보</h3>
           </div>
           회원 정보
-          <table th:text="${}">
+          <table th:each="dt:${detailList}">
             <tr style="border-top: 1px solid;">
-              <th style="padding:  15px 300px 15px 0; ">아이디</th><td style="padding:  0 300px 0 0;">test@gmail.com</td>
+              <th style="padding:  15px 300px 15px 0; ">아이디</th><td style="padding:  0 300px 0 0;" th:text="${dt.uid}">test@gmail.com</td>
             </tr >
             <tr style="border-top: 1px solid;">
-              <th style="padding:  15px 300px 15px 0; ">닉네임</th><td style="padding:  0 300px 0 0;">testUser</td>
+              <th style="padding:  15px 300px 15px 0; ">닉네임</th><td style="padding:  0 300px 0 0;" th:text="${dt.nick}">testUser</td>
             </tr>
             <tr style="border-top: 1px solid; border-bottom: 1px solid;">
-              <th style="padding:  15px 300px 15px 0; ">생년월일</th><td style="padding:  0 300px 0 0;">2000.01.01</td>
+              <th style="padding:  15px 300px 15px 0; ">생년월일</th><td style="padding:  0 300px 0 0;" th:text="${dt.birth}">2000.01.01</td>
             </tr>
           </table>
           <br><br><br><br>
           체중 정보
-          <table>
+          <table th:each = "dt:${detailList}">
             <tr style="border-top: 1px solid;">
-              <th style="padding:  15px 300px 15px 0; ">키</th><td style="padding:  0 330px 0 0;">180cm</td>
+              <th style="padding:  15px 300px 15px 0; ">키</th><td style="padding:  0 330px 0 0;"  th:text="${dt.height}">180cm</td>
             </tr>
             <tr style="border-top: 1px solid;">
-              <th style="padding:  15px 300px 15px 0; ">몸무게</th><td style="padding:  0 330px 0 0;">90kg</td>
+              <th style="padding:  15px 300px 15px 0; ">몸무게</th><td style="padding:  0 330px 0 0;" th:text="${dt.weight}">90kg</td>
             </tr>
             <tr style="border-top: 1px solid;">
-              <th style="padding:  15px 300px 15px 0; ">목표체중</th><td style="padding:  0 330px 0 0;">80kg</td>
+              <th style="padding:  15px 300px 15px 0; ">목표체중</th><td style="padding:  0 330px 0 0;" th:text="${dt.tweight}">80kg</td>
             </tr>
             <tr style="border-top: 1px solid; border-bottom: 1px solid;">
-              <th style="padding:  15px 300px 15px 0; ">기초 대사량</th><td style="padding:  0 330px 0 0;">1820kcal</td>
+              <th style="padding:  15px 300px 15px 0; ">기초 대사량</th><td style="padding:  0 330px 0 0;" th:text="${dt.tcal}">1820kcal</td>
             </tr>
           </table>
         </div>
-        <input type = "button" value = "수정하기" style="margin-left:770px; width: 80px; height: 30px;">
+        <select id = "selectOption" name = "restrictType" >
+          <option value="normal">정상</option>
+          <option value="1res">1일 제한</option>
+          <option value="3res">3일 제한</option>
+          <option value="forres">영구 제한</option>
+        </select>
+        <input type = "button" value = "수정하기" style="margin-left:770px; width: 80px; height: 30px;" onclick="modifyUserinfo()">
       </div>
     </div>
   </div>
 </section>
-<!-- Product Section End -->
+<script>
+  function modifyUserInfo(){
+    fetch('/userRestrict',{
+      method : 'PUT'
+    }).then(response=>{
 
-<!-- Footer Section Begin -->
-<footer class="footer spad">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-3 col-md-6 col-sm-6">
-        <div class="footer__about">
-          <div class="footer__about__logo">
-            <a href="./index.html"><img src="img/로고.PNG" alt=""></a>
-          </div>
-          <ul>
-            <li style="font-size: 16px">Address: 대구광역시 중구 남일동 중앙대로 403 </li>
-            <li>Phone: +65 11.188.888</li>
-            <li>Email: hello@colorlib.com</li>
-          </ul>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-6 col-sm-6 offset-lg-1">
-        <div class="footer__widget">
-          <h6>Useful Links</h6>
-          <ul>
-            <li><a href="#" style="font-weight: 650;">About Us</a></li>
-            <li><a href="#">식단일지</a></li>
-            <li><a href="#">음식검색</a></li>
-          </ul>
-          <ul>
-            <li><a href="#">챌린지</a></li>
-            <li><a href="#">게시판</a></li>
-            <li><a href="#">고객센터</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-12">
-        <div class="footer__widget">
-          <h6>Join Our Newsletter Now</h6>
-          <p>Get E-mail updates about our latest shop and special offers.</p>
-          <form action="#">
-            <input type="text" placeholder="Enter your mail">
-            <button type="submit" class="site-btn">Subscribe</button>
-          </form>
-          <div class="footer__widget__social">
-            <a href="#"><i class="fa fa-facebook"></i></a>
-            <a href="#"><i class="fa fa-instagram"></i></a>
-            <a href="#"><i class="fa fa-twitter"></i></a>
-            <a href="#"><i class="fa fa-pinterest"></i></a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="footer__copyright">
-          <div class="footer__copyright__text"><p style="margin-left:440px"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-            Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved</a>
-            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</footer>
+    })
+  }
+</script>
 </th:block>
 </body>
 
