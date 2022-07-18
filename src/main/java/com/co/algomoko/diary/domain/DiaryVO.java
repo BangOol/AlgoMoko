@@ -22,5 +22,6 @@ public class DiaryVO {
     private int prot;
     private int fat;
     private int sumcal;
+	
     
 }

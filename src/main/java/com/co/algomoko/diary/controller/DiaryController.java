@@ -1,16 +1,26 @@
 package com.co.algomoko.diary.controller;
 
+import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -37,7 +47,7 @@ public class DiaryController {
 		calendar.set(Calendar.SECOND, 0);
 		calendar.set(Calendar.MILLISECOND, 0);
 		diaryVO.setDdate(calendar.getTime());
-		diaryVO.setMid("user3");
+		diaryVO.setMid("user11");
 		System.out.println(diaryVO);
 		model.addAttribute("todaysic",dao.findDay(diaryVO));
 		model.addAttribute("resultCal",dao.jukcal(diaryVO));
@@ -65,13 +75,30 @@ public class DiaryController {
 		calendar.set(Calendar.SECOND, 0);
 		calendar.set(Calendar.MILLISECOND, 0);
 		diaryVO.setDdate(calendar.getTime());
-		diaryVO.setMid("user3");
+		diaryVO.setMid("user11");
 		
 		
 		
 		model.addAttribute("todaysic",dao.sicDay(diaryVO));
 		model.addAttribute("resultCal",dao.resultCal(diaryVO));
 		model.addAttribute("ddd",calendar.getTime());
+		return "contents/diary/todaysic";
+    }
+	
+	@ResponseBody
+	@RequestMapping(value="daysic") 
+    public String daysic(@RequestParam("date") String date, Model model, DiaryVO diaryVO, HttpServletResponse response)
+    	throws IOException, ParseException{
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String strDate = date;
+		
+		Date date1 = new Date(sdf.parse(strDate).getTime());
+		
+		diaryVO.setMid("user11");
+		diaryVO.setDdate(date1);
+		model.addAttribute("todaysic",dao.custom(diaryVO));
+		
+		
 		return "contents/diary/todaysic";
     }
 	@RequestMapping("weeklybest")
@@ -94,7 +121,7 @@ public class DiaryController {
 		calendar.set(Calendar.SECOND, 0);
 		calendar.set(Calendar.MILLISECOND, 0);
 		diaryVO.setDdate(calendar.getTime());
-		diaryVO.setMid("user3");
+		diaryVO.setMid("user11");
 			
 		
 		diaryVO.setDddo(dddo);
@@ -109,18 +136,48 @@ public class DiaryController {
     public String weekwrite(){
         return "contents/diary/weekwrite";
     }
-	@RequestMapping("weekwrite2")
-    public String weekwrite2(){
-        return "contents/diary/weekwrite2";
-    }
+	
+	@RequestMapping(value="insert") 
+	@ResponseBody
+	public void insert(@RequestParam("check") String check
+			,@RequestParam("amo") String amo
+			,@RequestParam("date") String date
+			,@RequestParam("jae") String jae
+			,@RequestParam(value="con" , required=false) String con)throws IOException, ParseException { 
+		DiaryVO diaryVO = new DiaryVO();
+		FoodVO foodvo = new FoodVO();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String strDate = date;
+        Date date1 = new Date(sdf.parse(strDate).getTime());
+        int amount = Integer.parseInt(amo);
+        System.out.println(amount);
+        diaryVO.setMid("user12");
+        diaryVO.setDddo(check);
+        diaryVO.setDdate(date1);
+        diaryVO.setUcon(con);
+        diaryVO.setAmount(amount);
+        diaryVO.setDdname(jae);
+        foodvo.setIng(jae);
+        dao1.fListOne(foodvo);
+        diaryVO.setCal(dao1.fListOne(foodvo).getCal());
+        diaryVO.setCarb(dao1.fListOne(foodvo).getCarb());
+        diaryVO.setProt(dao1.fListOne(foodvo).getProt());
+        diaryVO.setFat(dao1.fListOne(foodvo).getFat());
+        dao.insert(diaryVO);
+        dao.insertdetail(diaryVO);
+        
+	}
+   
 	
 	@RequestMapping("/flist")
 	@ResponseBody
 	public List<FoodVO> flist(@RequestParam("btnbtn") String btnbtn, Model model){
-		System.out.println(btnbtn);
+		
 		FoodVO foodvo = new FoodVO();
 		foodvo.setIng(btnbtn);
+		
 		return dao1.fList(foodvo);
+		
     }
 	
 	
