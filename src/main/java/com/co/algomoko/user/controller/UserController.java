@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.co.algomoko.user.domain.UserVO;
@@ -60,6 +62,7 @@ public class UserController {
 	//로그인 처리
     @PostMapping("/login")
     public String login(UserVO vo) {
+    	System.out.println(vo);
     	UserVO user = userService.login(vo);
     	if(user == null) {
     		return "contents/login/login";
@@ -88,9 +91,9 @@ public class UserController {
     
     //회원가입 최종 처리
     @PostMapping("/signup")
-    public String signup(UserVO vo) {
-    	
-    	int num = userService.signup(vo);
+    public String signup(@RequestParam("sex") String sex, @RequestParam("tweight") String tweight ,@RequestParam("B0") String B0, @RequestParam("U0") String U0, UserVO vo) {
+    	System.out.println(vo);
+    	int num = userService.signup(vo);	
     	if(num == 1) {
 		return "redirect:registerIdForm3";
     	} else {

@@ -34,11 +34,13 @@ public class UserServiceImpl implements UserService{
     		return null;
     	}
     }
+    //회원가입
 	public int signup(UserVO uservo){
 		//로그인이니 회원정보 단건조회...
 		return mapper.insert(uservo);
 	}
-	//아이디중복체크
+	
+	//회원가입 -> 아이디중복체크
 	@Override
 	public boolean idCheck(String mid) {
 		

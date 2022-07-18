@@ -21,7 +21,7 @@ public class UserVO {
     private int weight;
     private int bmi;
     private int tcal;
-    private int tweight;
+    private Integer tweight;
     private String U0;
     private String B0;
     private UserGrade grade;

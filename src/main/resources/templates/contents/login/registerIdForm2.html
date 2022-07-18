@@ -47,11 +47,11 @@
 				<h2>이메일인증</h2>
 			</div>
 			<div class="modal_content">
-				<input id="mdData" class="mdmd" type = "text" >
+				<input id="mdData" class="mdmd" type = "text" placeholder="입력하신 이메일로 전송된 코드를 입력해주세요" >
 				<input id="code" class="code" type = "button" value ="코드인증">
 			</div>
 			<div class="modal_btn">
-				<button class="modal_v">인증</button></a>
+				
 				<button class="modal_c">취소</button>
 			</div>
 		</div>
@@ -81,108 +81,155 @@
         <div class="col-lg-9 col-md-7" style="font-family: 'Jua';">
             <div >
                 <h3 style="font-family: 'Jua';">step 2. 회원 가입</h3>
-                <form method="post" action="/signup">
+                <form id="signup_form" method="post" action="/signup">
                 <div class = "res_id_form">
                     <table>
                         <tr>
-                        	
-                            <th>아이디 :</th>
-                            <td><input id="mid" name="mid" type = "text" style = "width: 400px; border-radius: 10px;" placeholder="이메일 형식으로 입력하세요"> <input id="checkId" type = "button" value ="이메일인증"></td>
-                            
-                        	
-                       
+                            <th>*아이디 : </th>
+	                            <td>
+		                            <input id="mid" name="mid" type = "text" style = "width: 400px; border-radius: 10px;" placeholder="이메일 형식으로 입력하세요"> 
+		                            <input id="checkId" type = "button" value ="이메일인증">                           
+		                            <span id="mid_msg"></span>
+	                            </td>
                         </tr>
                        
                         <tr>
-                            <th>비밀번호 :</th>
-                            <td><input id="pw1" name="mpw"type = "password" style = "width: 400px; border-radius: 10px;" placeholder="8자 이상의 문자, 숫자, 특수문자를 입력하세요"></td>
+                            <th>*비밀번호 : </th>
+	                            <td>
+		                            <input id="mpw" name="mpw"type = "password" style = "width: 400px; border-radius: 10px;" placeholder="8자 이상의 문자, 숫자, 특수문자를 입력하세요">                            
+		                            <span id="mpw_msg"></span>
+	                            </td>
                         </tr>
                         <tr>
-                            <th>비밀번호 확인:</th>
-                            <td><input id="pw2" name="mpw2" type = "password" style = "width: 400px; border-radius: 10px;" placeholder="8자 이상의 문자, 숫자, 특수문자를 입력하세요"><input onclick="pwcheck()" type = "button" value ="비밀번호 확인"></td>
-                            
+                            <th>*비밀번호 확인 : </th>
+	                            <td>
+		                            <input id="mpw2" name="mpw2" type = "password" style = "width: 400px; border-radius: 10px;" placeholder="8자 이상의 문자, 숫자, 특수문자를 입력하세요">                         
+		                            <span id="mpw2_msg"></span>                           
+	                            </td>
                         </tr>
                         <tr>
-                            <th>이름 :</th>
-                            <td><input id="" name="uname" type = "text" style = "width: 200px; border-radius: 10px;" ></td>
+                            <th>*이름 : </th>
+	                            <td>
+	                            	<input id="uname" name="uname" type = "text" style = "width: 200px; border-radius: 10px;" >
+	                            	<span id="uname_msg"></span>
+	                            </td>
                         </tr>
                         <tr>
-                            <th>생년 월일 :</th>
-                            <td><input id="birth" name="birth" type = "date" style = "width: 200px; border-radius: 10px;" ></td>
+                            <th>*생년 월일 : </th>
+	                            <td>
+	                            	<input id="birth" name="birth" type = "date" style = "width: 200px; border-radius: 10px;" >
+	                           		<span id="birth_msg"></span>
+	                            </td>
                         </tr>
                         <tr>
-                            <th>닉네임 :</th>
-                            <td><input id="nick" name="nick" type = "text" style = "width: 200px; border-radius: 10px;" ></td>
+                            <th>*닉네임 : </th>
+	                            <td>
+		                            <input id="nick" name="nick" type = "text" style = "width: 200px; border-radius: 10px;" >
+		                            <span id="nick_msg"></span>
+	                            </td>
                         </tr>
                         <tr>
-                            <th>성별 :</th>
-                            <td><input id="nick" name="sex" type = "text" style = "width: 200px; border-radius: 10px;" ></td>
+                            <th>*성별 : </th>
+	                            <td>
+	                            	<select id="sex" name="sex">
+	                            		<option value="" selected>선택</option>
+	                            		<option value="male">남자</option>
+	                            		<option value="female">여자</option>
+	                            	</select>
+	                           	 	<span id="sex_msg"></span>
+	                            </td>
                         </tr>
                         <tr>
-                            <th>키 :</th>
-                            <td><input id="height" name="height" type = "text" style = "width: 200px; border-radius: 10px;" ></td>
+                            <th>*키 : </th>
+	                            <td>
+		                            <input id="height" name="height" type = "text" style = "width: 200px; border-radius: 10px;" >
+		                            <span id="height_msg"></span>
+	                            </td>
                         </tr>
                         <tr>
-                            <th>체중 :</th>
-                            <td><input id="weight" name="weight" type = "text" style = "width: 200px; border-radius: 10px;" > <input onlick="bmiCheck()" type = "button" value ="계산"></td>
+                            <th>*체중 : </th>
+	                            <td><input id="weight" name="weight" type = "text" style = "width: 200px; border-radius: 10px;" >
+	                             <input id="checkHealth" type = "button" value ="계산">
+	                           	 <span id="weight_msg"></span>
+	                            </td>
                         </tr>
                         <tr>
                             <th>목표체중 :</th>
-                            <td><input id="tweight" name="tweight" type = "text" style = "width: 200px; border-radius: 10px;" ></td>
+	                            <td>
+	                            	<input id="tweight" name="tweight" type = "text" style = "width: 200px; border-radius: 10px;" >
+	                            </td>
                         </tr>
                         <tr>
-                            <th>기초대사량 :</th>
-                            <td><input id="tcal" name="tcal" type = "text" style = "width: 200px; border-radius: 10px;" ></td>
+                            <th>기초대사량 : </th>
+	                            <td>
+	                            	<input id="tcal" name="tcal" type = "text" style = "width: 200px; border-radius: 10px;" >
+	                            	<span id="tcal_msg"></span>
+	                            </td>
                         </tr>
                         <tr>
-                            <th>BMI 지수 :</th>
-                            <td><input id="bmi" name="bmi" type = "text" style = "width: 200px; border-radius: 10px;" value=""></td>
+                            <th>BMI 지수 : </th>
+	                            <td>
+	                            	<input id="bmi" name="bmi" type = "text" style = "width: 200px; border-radius: 10px;" >
+	                            	<span id="bmi_msg"></span>
+	                            </td>
                         </tr>
                         
                     </table>
-                    
-                    <input id="nextBtn" type = "submit" value = "다음" style = "margin: 60px 0 0 0px; width : 80px; float: right;" onclick =>
+                    <input name="U0" type ="hidden" value="U1">
+                    <input name="B0" type ="hidden" value="B0">
+                    <input id="nextBtn" type = "button" value = "다음" style = "margin: 60px 0 0 0px; width : 80px; float: right;" >
                     <input type = "button" value = "이전" style = "margin: 60px 0 0 650px; width : 80px; float : left " onclick = "location.href='registerIdForm1'">
                 </div>
-                </form>
             </div>
+           </form>
         </div>
     </div>
     
 </section>
 <script type="text/javascript">
+
+
 	  $(document).ready(function() {
-            // 1. 아이디 입력 오류 처리 -> usernameCheck 후 성공하면 ajax
-            $('#username').focusout(function() {
+            // 1. 아이디 입력 오류 처리 -> checkId 후 성공하면 ajax
+            $('#mid').focusout(function() {
                 // 아이디를 입력하지 않았거나, 패턴을 통과하지 못했다면 작업 중단
-                if (usernameCheck() == false)
+                if (midCheck() == false)
                     return false;
                 // 서버로 ajax 전송, GET 방식일 때는 파라미터를 포함한 주소만 적어도 된다.
-                $.ajax("/member/id_check?username=" + $("#username").val())
-                .done(()=>$("#username_msg").text("좋은 아이디네요!").attr("class", "success"))
-                .fail(()=>$("#username_msg").text("사용 중인 아이디입니다.").attr("class", "fail"));
+                $.ajax("/registerIdForm2/id_check?mid=" + $("#mid").val())
+                .done(()=>$("#mid_msg").text("사용 가능한 아이디입니다").attr("class", "success"))
+                .fail(()=>$("#mid_msg").text("사용 중인 아이디입니다.").attr("class", "fail"));
             });
 
             // 4. 비밀번호, 이름, 이메일, 생일은 입력이 잘못된 경우 오류 메시지만 출력하면 된다.
             // passwordCheck() 이렇게 쓰지 말 것! 그럼 페이지 연 순간 함수 바로 시작됨!
-            $('#password').focusout(passwordCheck);
-            $('#password2').focusout(password2Check);
-            $('#irum').focusout(irumCheck);
-            $('#email').focusout(emailCheck);
-            $('#birthday').focusout(birthdayCheck);
+            $('#mid').focusout(midCheck);
+            $('#mpw').focusout(mpwCheck);
+            $('#mpw2').focusout(mpw2Check);
+            $('#uname').focusout(unameCheck);
+            $('#birth').focusout(birthCheck);
+            $('#sex').focusout(sexCheck);
+            $('#height').focusout(heightCheck);
+            $('#weight').focusout(weightCheck);
+            
 
-            // 5. 회원 가입 버튼을 클릭하면 usernameCheck()부터 birthdayCheck()까지 실행한다.
-            $('#join').click(function() {
+            // 5. 회원 가입 버튼을 클릭하면 unameCheck()부터 weightCheck()까지 실행한다.
+            $('#nextBtn').click(function() {
                 // &&, || 연산은 결과(참거짓)가 판별되면 연산을 중단한다. usenameCheck에서 실패한 경우 if문은 실행을 바로 중단한다.
-                if ((usernameCheck() && passwordCheck() && password2Check() && irumCheck() && emailCheck() && birthdayCheck()) == false)
+                if ((midCheck() && unameCheck() && mpwCheck() && mpw2Check() && sexCheck() 
+                	 && birthCheck() && heightCheck() && weightCheck()) == false)
                     return false;
 
                 // 아이디 사용 가능한지 확인한 다음 사용 가능하면 회원 가입 처리
-                $.ajax("/member/id_check?username=" + $('#username').val())
+                $.ajax("/registerIdForm2/id_check?mid=" + $('#mid').val())
                     .done(() => {
-                        $('#join_form').submit();
+                    if("#checkId" == false){
+                    	alert ("이메일 인증은 필수입니다")
+                    } else{
+                        $('#signup_form').submit();
+                    }
                     })
-                    .fail(() => $('#username_msg').text("사용 중인 아이디입니다.").attr('class', fail));
+                    .fail(() => $('#mid_msg').text("사용 중인 아이디입니다.").attr('class', fail));
             })
         })
 
@@ -234,52 +281,84 @@
     })
 	//모달 기능 끝
 	
+	$('#checkHealth').click(function(){
+	    bmrCheck();
+	    bmiCheck();
+	})
 	
-	
-	//임시(생년월일->나이 계산)
-	function calcAge(birth) {
-    var date = new Date();
-    var year = date.getFullYear();
-    var month = (date.getMonth() + 1);
-    var day = date.getDate();
-    if (month < 10) month = '0' + month;
-    if (day < 10) day = '0' + day;
-    var monthDay = month + day;
-    birth = birth.replace('-', '').replace('-', '');
-    var birthdayy = birth.substr(0, 4);
-    var birthdaymd = birth.substr(4, 4);
-    var age = monthDay < birthdaymd ? year - birthdayy - 1 : year - birthdayy;
-    return age;
-	}
-	//나이계산 기능 끝
- 	
-      
- 	
-    
-    
-    //bmr 계산
+	//bmr 계산
     function bmrCheck(){
-    var h = document.getElementById('height').value;
-    var w = document.getElementById('weight').value;
-    var b = document.getElementById('birth').value;
-    //생년월일 --> 나이(숫자)변환
-    var s = document.getElementById('sex').value;
-    if(s=='female'){
-    	var r1 =655.1 + (9.56 * w ) + (1.85 * h) - (4.68 * b)
-   	//결과 뿌려주기
-    }else{
-    	var r2 = 66.47 + (13.75 * w) + (5 * h) - (6.76 * b)
-    }
-   
+	    var h = document.getElementById('height').value;
+	    var w = document.getElementById('weight').value;
+	    var b = document.getElementById('birth').value;
+	    
+    	var age = calcAge(b);
+	    var s = document.getElementById('sex').value;
+	    if(s=='female'){
+	    	var r1 =655.1 + (9.56 * w ) + (1.85 * h) - (4.68 * age)
+	    	var bmr1 = Math.round(r1);
+	    	return $('#tcal').val(bmr1)	    	
+	   	//결과 뿌려주기
+	    }else{
+	    	var r2 = 66.47 + (13.75 * w) + (5 * h) - (6.76 * age)
+	    	Math.round(r2);
+	    	var bmr2 = Math.round(r2)
+	    	return $('#tcal').val(bmr2)
+	    }
     }
     //bmr 계산 기능 끝
     
-    
+    //생년월일 --> 나이(숫자)변환
+    function calcAge(b) {
+	    console.log(b)
+	    var date = new Date();
+	    var year = date.getFullYear();
+	    var month = (date.getMonth() + 1);
+	    var day = date.getDate();
+	    if (month < 10) month = '0' + month;
+	    if (day < 10) day = '0' + day;
+	    var monthDay = month + day;
+	    b = b.replace('-', '').replace('-', '');
+	    var birthdayy = b.substr(0, 4);
+	    var birthdaymd = b.substr(4, 4);
+	    var age = monthDay < birthdaymd ? year - birthdayy - 1 : year - birthdayy;
+	    
+	    return age;
+	}	
+	
     // bmi 계산
     function bmiCheck(){
-    var h = document.getElementById('height').value;
-    var w = document.getElementById('weight').value;
-    }
+	    var h = document.getElementById('height').value;
+	    var w = document.getElementById('weight').value;
+	    var r = w / ((h / 100) * (h / 100)) ;
+	   
+	    if (r>30){	    	
+	    	var bmi1 = Math.round(r);
+	    	$("#bmi").val(bmi1);
+	    	return $("#bmi_msg").text("당신의 현재 BMI는 비만입니다");
+	    }else if ((r>25.0)&&(r<=29.9)){
+	  		 var bmi1 = Math.round(r);
+	    	$("#bmi").val(bmi1);
+	    	return $("#bmi_msg").text("당신의 현재 BMI는 과제중입니다");
+	    }else if ((r>18.5)&&(r<=24.9)){
+	 		 var bmi1 = Math.round(r);
+	    	$("#bmi").val(bmi1);
+	    	return $("#bmi_msg").text("당신의 현재 BMI는 정상입니다");
+	    }else if (r<=18.5){
+			 var bmi1 = Math.round(r);   
+	    	$("#bmi").val(bmi1);
+	    	return $("#bmi_msg").text("당신의 현재 BMI는 저체중입니다");
+	    }
+	 }
+        
+
+	
+	
+		      	
+    
+    
+   
+    
   </script>
 </th:block>
 </body>
