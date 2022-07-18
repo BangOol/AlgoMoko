@@ -15,17 +15,7 @@ import com.co.algomoko.challenge.mapper.ChallengeMapper;
 @RequestMapping("/challenge") // 기본 url 머리셋팅
 @Controller
 public class ChallengeController {
-	/*
-	 * - 챌린지 메인 : /challenge
-	 * 
-	 * - 등록하기 : /challenge/new (POST) - 수정하기 : /challenge/update (PUT) - 삭제하기 :
-	 * /challenge/delete (DELETE)
-	 * 
-	 * - 진행중챌린지 불러오기 : /challenge/challenging - 진행중인챌린지인증하기 :
-	 * /challenge/challenging/detail
-	 * 
-	 * - 완료된챌린지 불러오기 : /challenge/endchallenge
-	 */
+	
 	@Autowired ChallengeMapper dao;
 	
 	// 챌린지 목록
@@ -42,8 +32,7 @@ public class ChallengeController {
 	}
 	// 챌린지 작성
 	@PostMapping("cWrite")
-	public String Cinsert(ChallengeVO cVO) {
-		System.out.println("new 호출.");
+	public String cInsert(ChallengeVO cVO) {
 		dao.cInsert(cVO);
 		return "redirect:/challenge";
 	}

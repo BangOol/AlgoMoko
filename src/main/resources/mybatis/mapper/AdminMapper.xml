@@ -38,9 +38,47 @@
     </select>
 
     <insert id="insertRestrict" >
-        INSERT INTO MEMBERS(B0)
-        VALUES (GET_NAME(#{type}))
-        WHERE MID = #{uid}
+        UPDATE MEMBERS
+            SET B0 = GET_NAME(#{type})
+            WHERE MID = #{uid}
     </insert>
 
+    <select id="findBlackList" resultMap="members" resultType="com.co.algomoko.admin.domain.AdminVO">
+        SELECT MID, SEX, NICK,GET_CODE(B0) AS B0
+        FROM MEMBERS
+        WHERE B0 = 'b3'
+    </select>
+
+    <select id="findRestrictList" resultMap="members" resultType="com.co.algomoko.admin.domain.AdminVO">
+        SELECT MID, SEX, NICK,GET_CODE(B0) AS B0
+        FROM MEMBERS
+        WHERE B0 = 'b1' or B0 = 'b2'
+    </select>
+    <select id="genderRate" resultType="com.co.algomoko.admin.domain.StatisticVO">
+        SELECT COUNT(MID) as totalRate,
+               COUNT(CASE WHEN sex='female' THEN MID ELSE NULL END) femaleRate,
+               COUNT(CASE WHEN sex='male' THEN MID ELSE NULL END) as maleRate
+        FROM MEMBERS
+    </select>
+    <select id="RestrictedRate" resultType="com.co.algomoko.admin.domain.StatisticVO">
+        SELECT COUNT(CASE WHEN B0='b0' THEN MID ELSE NULL END) AS b0,
+               COUNT(CASE WHEN B0='b1' THEN MID ELSE NULL END) AS b1,
+               COUNT(CASE WHEN B0='b2' THEN MID ELSE NULL END) AS b2,
+               COUNT(CASE WHEN B0='b3' THEN MID ELSE NULL END) AS b3
+        FROM MEMBERS
+    </select>
+    <select id="heightRate" resultType="com.co.algomoko.admin.domain.StatisticVO">
+
+        SELECT COUNT(CASE WHEN HEIGHT BETWEEN 120 AND 129.9 THEN MID ELSE NULL END) AS range12,
+               COUNT(CASE WHEN HEIGHT BETWEEN 130 AND 139.9 THEN MID ELSE NULL END) AS range13,
+               COUNT(CASE WHEN HEIGHT BETWEEN 140 AND 149.9 THEN MID ELSE NULL END) AS range14,
+               COUNT(CASE WHEN HEIGHT BETWEEN 150 AND 159.9 THEN MID ELSE NULL END) AS range15,
+               COUNT(CASE WHEN HEIGHT BETWEEN 160 AND 169.9 THEN MID ELSE NULL END) AS range16,
+               COUNT(CASE WHEN HEIGHT BETWEEN 170 AND 179.9 THEN MID ELSE NULL END) AS range17,
+               COUNT(CASE WHEN HEIGHT BETWEEN 180 AND 189.9 THEN MID ELSE NULL END) AS range18,
+               COUNT(CASE WHEN HEIGHT BETWEEN 190 AND 199.9 THEN MID ELSE NULL END) AS range19,
+               COUNT(CASE WHEN HEIGHT BETWEEN 200 AND 209.9 THEN MID ELSE NULL END) AS range20,
+               COUNT(CASE WHEN HEIGHT BETWEEN 210 AND 219.9 THEN MID ELSE NULL END) AS range21
+        FROM MEMBERS
+    </select>
 </mapper>
