@@ -2,14 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper
 	namespace="com.co.algomoko.challenge.mapper.ChallengeMapper">
-	<!-- 챌린지 개수 -->
-	<select id="cCount" resultType="int">
-	select count(*)
+	<!-- 챌린지 조회 -->
+	<select id="getPage" resultType="com.co.algomoko.challenge.domain.ChallengeVO">
+	select *
 	from challenge
+	where cno = #{cno}
 	</select>
 	<!-- 챌린지 목록 -->
 	<select id="cList" resultType="com.co.algomoko.challenge.domain.ChallengeVO">
-	select ctitle, cdday, cimg
+	select *
 	from challenge
 	order by cno
 	</select>
