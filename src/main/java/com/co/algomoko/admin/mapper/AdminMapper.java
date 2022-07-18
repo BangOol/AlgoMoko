@@ -13,4 +13,6 @@ public interface AdminMapper {
     public List<AdminVO> findUserList(AdminVO adminVO);
 
     public List<AdminVO> findDetailUser(AdminVO adminVO);
+
+    public String insertRestrict(AdminVO adminVO);
 }

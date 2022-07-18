@@ -32,9 +32,15 @@
     </select>
 
     <select id="findDetailUser" resultMap="members" resultType="com.co.algomoko.admin.domain.AdminVO">
-        SELECT MID, NICK, BIRTH, HEIGHT, WEIGHT, TWEIGHT, TCAL
+        SELECT MID, NICK, BIRTH, HEIGHT, WEIGHT, TWEIGHT, TCAL, B0
         FROM MEMBERS
         WHERE MID = #{uid}
     </select>
+
+    <insert id="insertRestrict" >
+        INSERT INTO MEMBERS(B0)
+        VALUES (GET_NAME(#{type}))
+        WHERE MID = #{uid}
+    </insert>
 
 </mapper>

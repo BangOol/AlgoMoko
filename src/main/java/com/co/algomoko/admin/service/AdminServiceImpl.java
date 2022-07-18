@@ -30,4 +30,9 @@ public class AdminServiceImpl implements AdminService {
         return adminMapper.findDetailUser(adminVO);
     }
 
+    @Override
+    public String insertRestrict(AdminVO adminVO) {
+        return adminMapper.insertRestrict(adminVO);
+    }
+
 }
