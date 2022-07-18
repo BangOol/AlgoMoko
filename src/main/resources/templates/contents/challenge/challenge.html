@@ -103,10 +103,9 @@
 						<div th:each="chl:${cList}" class="col-lg-6 col-md-6 col-sm-6">
 							<div class="blog__item">
 								<div class="blog__item__cpic">
-									<img src="img/chl/cola.png" alt="">
+									<img src="../img/chl/cola.png" alt="">
 								</div>
 								<div class="blog__item__text">
-								<input type="hidden" name=cno id=cno>
 									<ul>
 										<li><i th:text="' '+'D-'+${chl.cdday}"
 											class="fa fa-calendar-o"></i></li>
@@ -116,7 +115,7 @@
 									</h5>
 									<p th:text="${chl.cdday}+'일 동안 '+${chl.ctitle}+'에 도전하세요!'"></p>
 									<a href="#" class="blog__btn">도전하기<span class="arrow_right"></span></a>
-									<a th:href="@{'challenge/cUpdate/'+${chl.cno}}">수정</a>
+									<a th:href="@{../challenge/cUpdate(cno=${chl.cno})}">수정</a>	
 									<!-- <button class="site-btn" type="button"><a th:href="@{/challenge/delete/(cno=${chl.cno})}">삭제</a></button> -->
 									 <!-- th:onClick="'location.href=\''+@{/challenge/delete/(cno=${chl.cno})}+'\''" -->
 								</div>

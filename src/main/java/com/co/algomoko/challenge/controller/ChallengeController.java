@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -34,6 +35,18 @@ public class ChallengeController {
 	@PostMapping("cWrite")
 	public String cInsert(ChallengeVO cVO) {
 		dao.cInsert(cVO);
+		return "redirect:/challenge";
+	}
+	// 챌린지 수정페이지로 이동
+	@GetMapping("cUpdate")
+	public String getPage(int cno, Model model) {
+		model.addAttribute("getPage", dao.getPage(cno));
+		return "contents/challenge/cUpdate";
+	}
+	// 챌린지 수정
+	@PostMapping("cUpdate")
+	public String cUpdate(ChallengeVO cVO) {
+		dao.cUpdate(cVO);
 		return "redirect:/challenge";
 	}
 	

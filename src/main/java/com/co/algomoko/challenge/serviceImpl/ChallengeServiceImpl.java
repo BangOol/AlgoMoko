@@ -16,20 +16,20 @@ public class ChallengeServiceImpl implements ChallengeService{
 		return mapper.cList();
 	}
 	@Override
-	public int cCount() {
-		return 0;
-	}
-	@Override
 	public void cInsert(ChallengeVO cVO) {
 		mapper.cInsert(cVO);
 	}
 	@Override
-	public void cUpdate(int cno) {
-		mapper.cUpdate(cno);
+	public int cUpdate(ChallengeVO cVO) {
+		return mapper.cUpdate(cVO);
 	}
 	@Override
 	public void cDelete(Integer cno) {
 		mapper.cDelete(cno);
+	}
+	@Override
+	public ChallengeVO getPage(int cno) {
+		return mapper.getPage(cno);
 	}
 
 }
