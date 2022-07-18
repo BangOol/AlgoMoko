@@ -29,6 +29,33 @@
 /*----------------------------------------*/
 /* Template default CSS
 /*----------------------------------------*/
+/* 챌린지등록 */
+.c_insert {
+	color: #1c1c1c;
+	font-weight: 700;
+	border-bottom: 1px solid #e1e1e1;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.c_btn {
+	margin-top: 15px;
+	font-size: 14px;
+	color: #ffffff;
+	font-weight: 800;	
+	padding: 13px 30px 12px;
+	background: #7fad39;
+	border: none;	
+	margin-right:5px;
+}
+
+.c_insert_box {
+	font-size: 18px;
+	color: #1c1c1c;
+	font-weight: 700;
+}
+/* 챌린지등록 끝 */
+
 /* 챌린지 모달창 시작 */
 .modal {
   position: absolute;
