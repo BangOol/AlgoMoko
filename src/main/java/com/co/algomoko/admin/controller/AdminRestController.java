@@ -21,8 +21,7 @@ public class AdminRestController {
 
 
     // 유저 리스트 - 검색
-    @PostMapping("/findUserList")
-    @ResponseBody
+    @GetMapping("/findUserList")
     public List<AdminVO> findUserList(@RequestParam("type") String type, @RequestParam("keyword") String keyword, Model model) throws  Exception{
         AdminVO adminVO = new AdminVO();
         adminVO.setType(type);
@@ -33,9 +32,20 @@ public class AdminRestController {
             return adminMapper.findUserList(adminVO);
         }
     }
-
-
-
-
+    // 블랙리스트 조회
+    @PostMapping("/findBlackList")
+    public List<AdminVO> findBlackList(){
+        return  adminMapper.findBlackList();
+    }
+    // 제한 조치 유저 조회
+    @PostMapping("/findRestrictList")
+    public List<AdminVO> findRestrictList(){
+        return adminMapper.findRestrictList();
+    }
+    // 전체 유저 조회
+    @PostMapping("/findAllList")
+    public List<AdminVO> findAllList() {
+        return adminMapper.makeList();
+    }
 
 }
