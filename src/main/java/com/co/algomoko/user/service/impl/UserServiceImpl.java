@@ -3,8 +3,8 @@ package com.co.algomoko.user.service.impl;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+/*import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;*/
 import org.springframework.stereotype.Service;
 
 import com.co.algomoko.user.domain.UserVO;
@@ -34,11 +34,13 @@ public class UserServiceImpl implements UserService{
     		return null;
     	}
     }
+    //회원가입
 	public int signup(UserVO uservo){
 		//로그인이니 회원정보 단건조회...
 		return mapper.insert(uservo);
 	}
-	//아이디중복체크
+	
+	//회원가입 -> 아이디중복체크
 	@Override
 	public boolean idCheck(String mid) {
 		

@@ -5,9 +5,9 @@ import lombok.Data;
 import java.sql.Date;
 import java.util.Collection;
 
-import org.springframework.security.core.GrantedAuthority;
+/*import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
+*/
 @Data
 public class UserVO {
 	//implements UserDetail;
@@ -21,7 +21,7 @@ public class UserVO {
     private int weight;
     private int bmi;
     private int tcal;
-    private int tweight;
+    private Integer tweight;
     private String U0;
     private String B0;
     private UserGrade grade;

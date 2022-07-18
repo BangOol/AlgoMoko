@@ -23,9 +23,9 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <div class="breadcrumb__text">
-                        <h2>음식</h2>
+                        <h2>유저 관리</h2>
                         <div class="breadcrumb__option">
-                            <span>Food-Search</span>
+                            <span>유저 관리를 하는 페이지입니다.</span>
                         </div>
                     </div>
                 </div>
@@ -62,8 +62,9 @@
                     <table class="table table-hover" style="text-align: center">
                         <h4>회원관리</h4>
                         <div class="d-flex flex-row-reverse col-lg-12 ">
-                            <div class="p-2 border">정지리스트</div>
-                            <div class="p-2 border">블랙리스트</div>
+                            <div class="p-2 border" onclick="findAllList()">전체리스트</div>
+                            <div class="p-2 border" onclick="findRestrictList()">제한리스트</div>
+                            <div class="p-2 border" onclick="findBlackList()">블랙리스트</div>
                         </div>
                         <thead>
                         <tr>
@@ -80,7 +81,7 @@
                                 <td th:text="${lists.nick}"></td>
                                 <td th:text="${lists.b0}"></td>
                                 <td>
-                                    <a th:href="@{/userRestrict(uid=${lists.uid})}">변경</a>
+                                    <a th:href="@{/userRestrict(uid=${lists?.uid})}">변경</a>
                                 </td>
                             </tr>
                         </tbody>
@@ -103,6 +104,8 @@
     </div>
 </section>
     <script>
+        let cont = '변경';
+
         function findUserList(){
             $.ajax({
                 type: 'GET',
@@ -126,6 +129,83 @@
             })
         }
 
+        // function findBlackList(){
+        //     let boardtable = document.getElementById("boardtable");
+        //     fetch("/findBlackList",{
+        //         method : 'GET'
+        //     }).then((Response)=>{
+        //         console.log(Response);
+        //         // boardtable.remove();
+        //         console.log(Response.body);
+        //     })
+        // }
+        function findBlackList(){
+            $.ajax({
+                type: 'POST',
+                url : "/findBlackList",
+                success : function(result){
+                    //테이블 초기화
+                    $('#boardtable').empty();
+                    if(result.length>=1){
+                        result.forEach(function(lists){
+                            str='<tr>'
+                            str += "<td>"+lists.uid +"</td>";
+                            str+="<td>" +lists.sex +"</td>";
+                            str+="<td>"+lists.nick +"</td>";
+                            str+="<td>"+lists.b0 +"</td>";
+                            str+="<td>"+ "<a href='/userRestrict?uid='+lists?.uid>"+cont+"</a>" +"</td>"
+                            str+="</tr>"
+                            $('#boardtable').append(str);
+                        })
+                    }
+                }
+            })
+        }
+        function findRestrictList(){
+            $.ajax({
+                type: 'POST',
+                url : "/findRestrictList",
+                success : function(result){
+                    //테이블 초기화
+                    $('#boardtable').empty();
+                    if(result.length>=1){
+                        result.forEach(function(lists){
+                            str='<tr>'
+                            str += "<td>"+lists.uid +"</td>";
+                            str+="<td>" +lists.sex +"</td>";
+                            str+="<td>"+lists.nick +"</td>";
+                            str+="<td>"+lists.b0 +"</td>";
+                            str+="<td>"+ "<a href='/userRestrict?uid='+lists?.uid>"+cont+"</a>" +"</td>"
+                            str+="</tr>"
+                            $('#boardtable').append(str);
+                        })
+                    }
+                }
+            })
+        }
+        function findAllList(){
+            $.ajax({
+                type: 'POST',
+                url : "/findAllList",
+                success : function(result){
+                    //테이블 초기화
+                    $('#boardtable').empty();
+                    if(result.length>=1){
+                        result.forEach(function(lists){
+                            str='<tr>'
+                            str += "<td>"+lists.uid +"</td>";
+                            str+="<td>" +lists.sex +"</td>";
+                            str+="<td>"+lists.nick +"</td>";
+                            str+="<td>"+lists.b0 +"</td>";
+                            str+="<td>"+ "<a href='/userRestrict?uid='"+ lists?.uid+">"+cont+"</a>" +"</td>"
+                            str+="</tr>"
+                            $('#boardtable').append(str);
+                        })
+                    }
+                }
+            })
+        }
+
         function moveUserRestrict() {
             fetch({
                 url : '/userRestrict',
@@ -133,8 +213,8 @@
             }).then()
         }
 
-        let findUserPress = document.getElementById('findUserPress');
-        findUserPress.addEventListener("keypress", findUserList);
+        // let findUserPress = document.getElementById('findUserPress');
+        // findUserPress.addEventListener("keypress", findUserList);
 
     </script>
 <!-- Product Section End -->

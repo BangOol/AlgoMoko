@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.co.algomoko.challenge.mapper.ChallengeMapper">
+	<!-- 챌린지 개수 -->
+	<select id="cCount" resultType="int">
+	select count(*)
+	from challenge
+	</select>
+	<!-- 챌린지 목록 -->
+	<select id="cList" resultType="com.co.algomoko.challenge.domain.ChallengeVO">
+	select ctitle, cdday, cimg
+	from challenge
+	order by cno
+	</select>
+	<!-- 챌린지 작성 -->
+	<insert id="cInsert" parameterType="com.co.algomoko.challenge.domain.ChallengeVO">
+	insert into challenge (cno, ctitle, ccon, cdday)
+	values(CNO.nextval, #{ctitle}, #{ccon}, #{cdday})
+	</insert>
+	<!-- 챌린지 수정 -->
+	<update id="cUpdate" parameterType="com.co.algomoko.challenge.domain.ChallengeVO">
+	update challenge
+	set ctitle = #{ctitle}, ccon = #{ccon}, cdday = #{cdday}
+	where cno = #{cno}
+	</update>
+	<!-- 챌린지 삭제 -->
+	<delete id="cDelete" parameterType="Integer">
+	delete
+	from challenge
+	where cno = #{cno,jdbcType=VARCHAR}
+	</delete>
+</mapper>

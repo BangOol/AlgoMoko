@@ -27,7 +27,7 @@
                             <a href="loginForm" style="float: right; margin : 0 0 0 10px"><i class="fa fa-user" ></i>Login</a>
                             <a href="#" style="float: right; margin : 0 10px">아이디 찾기</a>
                             <a href="#" style="float: right; margin : 0 10px">비밀번호 찾기</a>
-                            <a href="#" style="float: right; margin : 0 10px">회원 가입</a>
+                            <a href="registerIdForm1" style="float: right; margin : 0 10px">회원 가입</a>
                         </div>
                     </div>
                     <div sec:authorize="isAuthenticated()" class="header__top__right" id="menu_authenticated">
@@ -46,7 +46,7 @@
         <div class="row">
             <div class="col-lg-3">
                 <div class="header__logo">
-                    <a href="main"><img src="img/로고.PNG" alt=""></a>
+                    <a href="/main"><img src="../img/로고.PNG" alt=""></a>
                 </div>
             </div>
             <div class="col-lg-9">
@@ -54,21 +54,21 @@
                     <div class = "text-right">
                         <ul style="font-family: 'Jua'; margin: 80px 0 0 0;">
                             <!-- <li class="active"><a href="./index.html">식단일지</a></li> -->
-                             <li><a href="./sicmain">식단일지</a>
+                             <li><a href="/sicmain">식단일지</a>
                              <ul class="header__menu__dropdown">
-                                    <li><a href="./todaysic">오늘의 식단</a></li>
-                                    <li><a href="./weekwrite">식단일지 작성</a></li>
-                                    <li><a href="./myre">나만의 레시피</a></li>
-                                    <li><a href="./weeklybest">이주의 음식</a></li>
+                                    <li><a href="/todaysic">오늘의 식단</a></li>
+                                    <li><a href="/weekwrite">식단일지 작성</a></li>
+                                    <li><a href="/myre">나만의 레시피</a></li>
+                                    <li><a href="/weeklybest">이주의 음식</a></li>
                                 </ul>
-                            <li><a href="challenge">챌린지</a>
+                            <li><a href="/challenge">챌린지</a>
                                 <ul class="header__menu__dropdown">
-                                    <li><a href="challenge">챌린지 목록</a></li>
-                                    <li><a href="challenging">진행중인 챌린지</a></li>
-                                    <li><a href="challengeEnd">완료한 챌린지</a></li>
+                                    <li><a href="/challenge">챌린지 목록</a></li>
+                                    <li><a href="/challenging">진행중인 챌린지</a></li>
+                                    <li><a href="/challengeEnd">완료한 챌린지</a></li>
                                 </ul>
                             </li>
-                            <li><a href="food">음식정보</a></li>
+                            <li><a href="/food">음식정보</a></li>
                             <li><a href="./blog.html">커뮤니티</a></li>
                             <li>
                                 <a href="/FAQ">고객센터</a>

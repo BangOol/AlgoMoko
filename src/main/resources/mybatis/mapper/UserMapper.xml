@@ -10,10 +10,11 @@
     	INSERT INTO MEMBERS
     	(MID,MPW,UNAME,NICK,BIRTH,
     		   SEX,HEIGHT,WEIGHT,BMI,TCAL,
-    		   TWEIGHT)
+    		   TWEIGHT,U0,B0)
     	VALUES(#{mid},#{mpw},#{uname},#{nick},#{birth},
-    		   #{sex},#{height},#{weight},#{bmi},#{tcal},
-    		   #{tweight})
+    		   #{sex},#{height},#{weight},
+    		   #{bmi},#{tcal},
+    		   #{tweight, jdbcType=INTEGER},#{u0},#{b0})
     </insert>
     
     <select id="search">
@@ -22,7 +23,7 @@
  	
  	<!-- 아이디중복체크 -->
  	<select id="existByMid" resultType="boolean">
- 		SELECT COUNT(*) FROM MEMBER WHERE MID = #{mid} AND ROWNUM=1
+ 		SELECT COUNT(*) FROM MEMBERS WHERE MID = #{mid} AND ROWNUM=1
  	</select>
  	
  	
