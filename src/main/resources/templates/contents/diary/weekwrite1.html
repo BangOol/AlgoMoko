@@ -18,8 +18,8 @@
         <link href="img/favicon.ico" rel="icon">
 
 <link
-	href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap"
-	rel="stylesheet">
+   href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap"
+   rel="stylesheet">
 
 <!-- Css Styles -->
 <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
@@ -128,40 +128,41 @@ span {
 <body>
    <div th:replace="~{fragments/header}"></div>
 <div th:replace="~{fragments/aside}"></div>
-        
+      
+         
     
 <!-- Table End -->
     </section>
     <!-- Blog Section End -->
     <input type="text" readonly placeholder="재료 입력" style ="outline:1px solid #c3bfbf";>
-    <button type="button" id="btnmod" class="btn btn-primary blog__btn">검색</button>
+    <button type="button" id="btnmod dialog" class="btn btn-primary blog__btn">검색</button>
     <div id="dialog" title="재료 검색"></div>
     <!-- 모달창 시작 -->
-	<div class="modal">
-		<div class="modal1_body">
-			<div class="modal_title">
-				<input type="text" id = "textex"><button id="btnbtn" name="btnbtn" class="btn btn-primary">검색</button>
-			<div class="modal_content">
-			
-			</div>
-			</div>
-				 <!-- 제품모달 그리드 -->
+   <div class="modal">
+      <div class="modal1_body">
+         <div class="modal_title">
+            <input type="text" id = "textex"><button id="btnbtn" name="btnbtn" class="btn btn-primary">검색</button>
+         <div class="modal_content">
+         
+         </div>
+         </div>
+             <!-- 제품모달 그리드 -->
             <div class="container-fluid px-4">
 
                   <div id="gridpro"></div>
                <div class="modal_btn">
-				<button class="modal_s">등록</button>
-				<button class="modal_c">취소</button>
-			</div>
+            <button id="modalbtn" class="modal_s">등록</button>
+            <button class="modal_c">취소</button>
+         </div>
             </div>
          </div>
       </div>
-	</div>
-	</div>
-				
-				
-			
-	<!-- 모달창 종료 -->
+   </div>
+   </div>
+            
+            
+         
+   <!-- 모달창 종료 -->
     
     
     
@@ -210,16 +211,8 @@ span {
                   <th scope="col">칼로리</th>
               </tr>
           </thead>
-          <tbody>
-              <tr>
-                  <th scope="row"></th>
-                  <td>John</td>
-                  <td>Doe</td>
-                  <td>jhon@email.com</td>
-                  <td class="shoping__cart__item__close">
-                                        <span class="icon_close"></span>
-                                    </td>
-              </tr>
+          <tbody id ="tbody1">
+              
               
 
           </tbody>
@@ -270,7 +263,7 @@ span {
   </div>
   
 </div>
-<button type="button" class="btn btn-primary" onclick="location.href='writema.html'" >등록</button>
+<button type="button" class="btn btn-primary" id="insertbtn" >등록</button>
 <button type="button" class="btn btn-primary " onclick="location.href='todaysic.html'">취소</button>
     
 
@@ -287,10 +280,13 @@ span {
     <script src="js/main.js"></script>
 
 <script>
+   var gin;
+   var gic;
+   var gia;
     const body = document.querySelector('body');
     const modal = document.querySelector('.modal');
 
-	/*제품정보 그리드*/
+   /*제품정보 그리드*/
             const giupData = [];
 
 
@@ -321,7 +317,7 @@ span {
             });
 
     $('.blog__btn').click((e) =>{
-   		 jepoom.refreshLayout();
+          jepoom.refreshLayout();
         modal.style.display = "flex";
         body.style.overflow = 'hidden';
     })
@@ -335,41 +331,80 @@ span {
     
     
       
-           /*음식조회*/
+            /*음식조회*/
             $("#btnbtn").on("click", function() {
                var btnbtn = $('#textex').val();
                console.log(btnbtn);
                 $.ajax({ 
-			    url: '/flist',  
-			    type: 'GET',  // == method
-			    data: {btnbtn},
-			     
-			 }).done( function(response) {
-			 	jepoom.refreshLayout();
-			   jepoom.resetData(response)
-			 jepoom.on('click', e => {
+             url: '/flist',  
+             type: 'GET',  // == method
+             data: {btnbtn},
+              
+          }).done( function(response) {
+             jepoom.refreshLayout();
+            jepoom.resetData(response)
+          jepoom.on('click', e => {
                         var rok = e.rowKey
                         gin = jepoom.getRow(rok).ing
                         gic = jepoom.getRow(rok).cal
                         gia = jepoom.getRow(rok).amount
-                        console.log(gin);
-                        console.log(gic);
-                        console.log(gia);
+                        
                      })
                   })
                $("#modalbtn").on("click", function(){
-               		$('#td1').html(gin)
-               		$('#td2').html(gic)
-               		$('#td3').html(gia)
-              
-               		
-               		
-               		
-               		
-               		
+                  var tbody = $('#tbody1');
+                   
+                var tr =  $('<tr>');
+               var th = $('<th>').attr('scope','row').addClass('ssuumm');
+                 var td1 = $('<td>').html(gin);
+                 var td2 = $('<td>').html(gic);
+                 var td3 = $('<td>').html(gia);
+                 var td4 = $('<td>').addClass('shoping__cart__item__close');
+                 var span = $('<button>').addClass('icon_close').attr('id','clo');
+                 var td5 = $(td4).append(span);
+            var a = $(tr).append(th);
+            var b = $(tr).append(td1,td2,td3,td5);
+            var c = $(tbody).append(a);
+            var d = $(tbody).append(b);
+                     
+                  
+            /* <tr id="tr1">
+                 <th scope="row" id="th1"></th>
+                     <td id="td1">1</td>
+                     <td id="td2">2</td>
+                     <td id="td3">3</td>
+                     <td class="shoping__cart__item__close">
+                                           <span class="icon_close"></span>
+                                       </td>
+                 </tr> */
+                     
               
                })
-               })
+               
+           
+           
+           
+           
+           
+          
+            
+          
+               
+            })
+            
+            $("#clo").on("click", function(){
+               $('#clo').parent().parent().remove();
+               console.log("삭제");
+                     
+              
+               });
+          $("#insertbtn").on("click", function(){
+             
+             var aa= $('#tbody1').children().children().text();
+             console.log(aa);
+             
+      
+                                  });
     
 </script> 
     

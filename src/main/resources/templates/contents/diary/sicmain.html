@@ -121,7 +121,7 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
 
 
         <div class="card-category-1 row">
-        
+        	<div class="daysic" >
             <div class="basic-card basic-card-light m-10">
                 
                 <div id="ssuunn" class="card-content">
@@ -144,7 +144,7 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
                               
                               
                               <tr th:if= "${today.dddo == 'aa'} and ${today.dday}=='월요일'">
-                              		  <td th:text="${today.ddname}" class="shoping__cart__item" onclick="location.href='write'">
+                              		  <td th:text="${today.ddname}" class="shoping__cart__item" >
                                           <img src="img/cart/cart-1.jpg" alt="">
                                           <br><br>
                                       </td>
@@ -225,9 +225,10 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
                     
                 </div>
             </div>
+            </div>
     
     
-            
+            <div class="daysic">
             <div class="basic-card basic-card-light">
                 <div id="ssuunn" class="card-content">
                     <span id="ssuunn" class="card-title">날짜</span>
@@ -322,6 +323,8 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
                           </table>
                 </div>
             </div>
+            </div>
+            <div class="daysic">
             <div class="basic-card basic-card-light">
                 <div id="ssuunn" class="card-content">
                     <span id="ssuunn" class="card-title">날짜</span>
@@ -416,6 +419,9 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
                           </table>
                 </div>
             </div>
+            </div>
+            
+            <div class="daysic">
             <div class="basic-card basic-card-light">
                 <div id="ssuunn" class="card-content">
                     <span id="ssuunn" class="card-title">날짜</span>
@@ -513,6 +519,8 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
                           </table>
                 </div>
             </div>
+            </div>
+            <div class="daysic">
             <div class="basic-card basic-card-light">
                 <div id="ssuunn" class="card-content">
                     <span id="ssuunn" class="card-title">날짜</span>
@@ -607,6 +615,8 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
                           </table>
                 </div>
             </div>
+            </div>
+            <div class="daysic">
             <div class="basic-card basic-card-light">
                 <div id="ssuunn" class="card-content">
                     <span id="ssuunn" class="card-title">날짜</span>
@@ -701,6 +711,8 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
                           </table>
                 </div>
             </div>
+            </div>
+            <div class="daysic">
             <div class="basic-card basic-card-light">
                 <div id="ssuunn" class="card-content">
                     <span id="ssuunn" class="card-title">날짜</span>
@@ -799,6 +811,7 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
     
             
         </div>
+        </div>
     </section>
     <!-- Blog Section End -->
     
@@ -824,7 +837,27 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
 
 
     // 결과
-</script>
+    <script>
+
+$(".daysic").on("click",function(){
+   		var date = $(this).children().children().children().html();
+  		   		 
+  		 
+  		 $.ajax({
+   			url: 'daysic',
+   			data:{date}
+   				
+             	
+
+				   
+   })
+  		 
+  		 
+  		 
+   
+   })
+    </script>
+
 
 
 </body>

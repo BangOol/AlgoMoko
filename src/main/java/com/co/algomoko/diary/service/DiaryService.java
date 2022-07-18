@@ -18,5 +18,8 @@ public interface DiaryService {
     public List<DiaryVO> detail(DiaryVO diaryVO);
     public List<DiaryVO> con(DiaryVO diaryVO);
     public List<DiaryVO> jukcal(DiaryVO diaryVO);
+    public String insert(DiaryVO diaryVO); //등록
+    public String insertdetail(DiaryVO diaryVO);
+    public List<DiaryVO> custom(DiaryVO diaryVO);
 }
 

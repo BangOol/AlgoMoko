@@ -48,5 +48,23 @@ where TO_CHAR(a.ddate,'iw')  =TO_CHAr(to_date(sysdate,'yy-MM-dd'),'iw') and a.dd
    GROUP BY a.ddate, a.mid
 </select>
 
+<select id="insertdetail">
+insert into diary_detail 
+values(DIARY_DETAIL_SEQ.nextval,TRUNC(#{ddate}),#{mid},#{dddo},null,#{ddname},#{amount},null,#{cal},#{carb},#{prot},#{fat})
+
+</select>
+
+<select id="insert">
+insert into diary
+ values(DIARY_SEQ.nextval,#{ucon},null,TRUNC(#{ddate}),#{mid},#{dddo})
+</select>
+
+<select id="custom" resultType="DiaryVO">
+select b.mid, a.ddname,a.dddo,a.amount, a.cal, a.carb, a.prot, a.fat, trunc(a.ddate) as ddate, to_char(a.ddate, 'day') as dday, b.ucon
+from diary_detail a, diary b
+where TO_CHAR(a.ddate,'iw')  =TO_CHAr(to_date(sysdate,'yy-MM-dd'),'iw') and a.dddo=b.dddo and a.mid = b.mid and TRUNC(a.ddate) = trunc(b.ddate) and trunc(#{ddate})=TRUNC(a.ddate) and b.mid =#{mid}
+order by b.ucon
+</select>
+
 
 </mapper>
