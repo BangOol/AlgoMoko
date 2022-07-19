@@ -35,7 +35,7 @@
 			<div class="container">
 				<div th:each="chl:${getPage}" class="checkout__form">
 					<h4 style="text-align: center;">챌린지 수정</h4>
-					<form th:action="@{../challenge/cUpdate(cno=${chl.cno})}"
+					<form th:action="@{../challenge/cUpdate(cno=${chl.cno})}" enctype="multipart/form-data"
 						method="post">
 						<div class="col-lg-12 col-md-6">
 							<div>
@@ -57,7 +57,7 @@
 									<div class="col-lg-4">
 										<div class="checkout__input">
 											<label for="cimg">파일첨부<span>*</span></label> <input
-												type="file" class="form-control" id="cimg" name="cimg">
+												type="file" class="form-control" id="cimg" name="filename2">
 										</div>
 									</div>
 								</div>

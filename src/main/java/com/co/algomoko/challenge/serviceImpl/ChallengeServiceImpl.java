@@ -24,14 +24,15 @@ public class ChallengeServiceImpl implements ChallengeService {
 	// 챌린지 작성
 	@Override
 	public void cInsert(ChallengeVO cVO, MultipartFile file) throws Exception {
-		String projectpath = System.getProperty("user.dir")+"/src/main/resources/static/img/chl";
-		UUID uuid = UUID.randomUUID();
-		String filename = uuid+"_"+file.getOriginalFilename();
-		File saveFile = new File(projectpath,filename);
-		file.transferTo(saveFile);
-		cVO.setFilename(filename);
-		cVO.setFilepath("/img/"+filename);
-		mapper.cInsert(cVO);
+//		System.out.println("IMPL");
+////		String projectpath = System.getProperty("user.dir")+"/src/main/resources/static/img/chl";
+////		UUID uuid = UUID.randomUUID();
+////		String filename = uuid+"_"+file.getOriginalFilename();
+////		File saveFile = new File(projectpath,filename);
+////		file.transferTo(saveFile);
+////		cVO.setFilename(filename);
+////		cVO.setFilepath("/img/"+filename);
+//		mapper.cInsert(cVO, file);
 	}
 
 	// 챌린지 수정 페이지

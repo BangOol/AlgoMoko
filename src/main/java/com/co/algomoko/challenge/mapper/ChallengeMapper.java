@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.co.algomoko.challenge.domain.ChallengeVO;
+import com.co.algomoko.challenge.domain.MyChallengeVO;
 @Repository
 public interface ChallengeMapper {
 	// 챌린지 조회
@@ -22,5 +23,8 @@ public interface ChallengeMapper {
 
 	// 챌린지 삭제(관리자만)
 	public void cDelete(int cno);
+	
+	// 도전하기누르면 추가
+	public void mcInsert(int cno);
 	
 }
