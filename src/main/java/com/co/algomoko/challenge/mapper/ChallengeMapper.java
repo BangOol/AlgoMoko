@@ -3,6 +3,7 @@ package com.co.algomoko.challenge.mapper;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.co.algomoko.challenge.domain.ChallengeVO;
 @Repository
@@ -14,12 +15,12 @@ public interface ChallengeMapper {
 	public List<ChallengeVO> cList();
 
 	// 챌린지 작성(관리자만)
-	void cInsert(ChallengeVO cVO);
+	public void cInsert(ChallengeVO cVO);
 
 	// 챌린지 수정(관리자만)
 	public int cUpdate(ChallengeVO cVO);
 
 	// 챌린지 삭제(관리자만)
-	void cDelete(Integer cno);
+	public void cDelete(int cno);
 	
 }

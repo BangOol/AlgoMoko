@@ -1,7 +1,5 @@
 package com.co.algomoko.challenge.domain;
 
-import java.sql.Clob;
-
 import lombok.Data;
 
 @Data
@@ -10,5 +8,6 @@ public class ChallengeVO {
 	private String ctitle;
 	private String ccon;
 	private int cdday;
-	private Clob cimg;
+	private String filepath;
+	private String filename;
 }

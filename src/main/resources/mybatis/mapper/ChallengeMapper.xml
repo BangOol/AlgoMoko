@@ -16,8 +16,8 @@
 	</select>
 	<!-- 챌린지 작성 -->
 	<insert id="cInsert" parameterType="com.co.algomoko.challenge.domain.ChallengeVO">
-	insert into challenge (cno, ctitle, ccon, cdday)
-	values(CNO.nextval, #{ctitle}, #{ccon}, #{cdday})
+	insert into challenge (cno, ctitle, ccon, cdday, filename)
+	values(CNO.nextval, #{ctitle}, #{ccon}, #{cdday}, #{filename}) <!-- , jdbcType=VARCHAR -->
 	</insert>
 	<!-- 챌린지 수정 -->
 	<update id="cUpdate" parameterType="com.co.algomoko.challenge.domain.ChallengeVO">
@@ -26,9 +26,9 @@
 	where cno = #{cno}
 	</update>
 	<!-- 챌린지 삭제 -->
-	<delete id="cDelete" parameterType="Integer">
+	<delete id="cDelete" parameterType="int">
 	delete
 	from challenge
-	where cno = #{cno,jdbcType=VARCHAR}
+	where cno = #{cno}
 	</delete>
 </mapper>
