@@ -23,7 +23,7 @@ order by b.ucon
 <select id="resultCal" resultType="DiaryVO">
 select trunc(a.ddate) as ddate, a.mid, sum(b.cal) as sumcal, to_char(a.ddate, 'day') as dday
 from diary a,diary_detail b
-where TO_CHAR(a.ddate,'iw')  =TO_CHAr(to_date(sysdate,'yy-MM-dd'),'iw') and a.dddo=b.dddo and a.mid = b.mid and TRUNC(a.ddate) = trunc(b.ddate) and trunc(sysdate)=TRUNC(a.ddate) and b.mid = #{mid}
+where TO_CHAR(a.ddate,'iw')  =TO_CHAr(to_date(sysdate,'yy-MM-dd'),'iw') and a.dddo=b.dddo and a.mid = b.mid and TRUNC(a.ddate) = trunc(b.ddate) and trunc(#{ddate})=TRUNC(a.ddate) and b.mid = #{mid}
    GROUP BY a.ddate, a.mid
 </select>
 
@@ -56,7 +56,8 @@ values(DIARY_DETAIL_SEQ.nextval,TRUNC(#{ddate}),#{mid},#{dddo},null,#{ddname},#{
 
 <select id="insert">
 insert into diary
- values(DIARY_SEQ.nextval,#{ucon},null,TRUNC(#{ddate}),#{mid},#{dddo})
+ values(DIARY_SEQ.nextval,#{ucon},null,TRUNC(#{ddate}),#{mid},#{dddo}
+ )
 </select>
 
 <select id="custom" resultType="DiaryVO">
@@ -64,6 +65,10 @@ select b.mid, a.ddname,a.dddo,a.amount, a.cal, a.carb, a.prot, a.fat, trunc(a.dd
 from diary_detail a, diary b
 where TO_CHAR(a.ddate,'iw')  =TO_CHAr(to_date(sysdate,'yy-MM-dd'),'iw') and a.dddo=b.dddo and a.mid = b.mid and TRUNC(a.ddate) = trunc(b.ddate) and trunc(#{ddate})=TRUNC(a.ddate) and b.mid =#{mid}
 order by b.ucon
+</select>
+
+<select id="rerank" resultType="recipeVO">
+select*from recipe order by hit desc
 </select>
 
 

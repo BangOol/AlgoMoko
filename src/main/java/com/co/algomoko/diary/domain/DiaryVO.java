@@ -4,10 +4,13 @@ import lombok.Data;
 
 import java.util.*;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Data
 public class DiaryVO {
 	private int ddno;
 	private String mid;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date ddate;
     private String ucon;
     private String dddo;
@@ -15,7 +18,7 @@ public class DiaryVO {
     private String ddname;
     private String f0;
     private String dday;
-    
+    private List<DiaryVO> diarys;
     private int amount;
     private int cal;
     private int carb;

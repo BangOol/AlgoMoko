@@ -1,6 +1,7 @@
 package com.co.algomoko.diary.service;
 
 import com.co.algomoko.diary.domain.DiaryVO;
+import com.co.algomoko.diary.domain.RecipeVO;
 import com.co.algomoko.user.domain.UserVO;
 import com.co.algomoko.user.mapper.UserMapper;
 
@@ -21,5 +22,6 @@ public interface DiaryService {
     public String insert(DiaryVO diaryVO); //등록
     public String insertdetail(DiaryVO diaryVO);
     public List<DiaryVO> custom(DiaryVO diaryVO);
+    public List<RecipeVO> rerank(RecipeVO recpvo);
 }
 

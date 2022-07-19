@@ -182,12 +182,15 @@
                                           <h5></h5>
                                       </td>
                                       
+                                      
                                   </tr>
+                                   
                              </th:block>
-                                                          
+                                                         
                                   
                                
                           </table>
+                          <button class="btn btn-primary blog__btn">수정</button>
                       </div>
                   </div>
               </div>
@@ -204,7 +207,25 @@
 
 <div th:replace="~{fragments/footer}"></div>
      
+<script>
+        $(function () {
+            
+            
+			
+			$("tbody").click(function(){
+			
+			var no = $(this).attr('data-dddo')
+                location.href='/modify?dddo='+no;
+                    
+                
+               
 
+
+            })
+			})
+        	
+        
+    </script>
     <!-- Js Plugins -->
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>

@@ -121,8 +121,8 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
 
 
         <div class="card-category-1 row">
-        	<div class="daysic" >
-            <div class="basic-card basic-card-light m-10">
+        	
+            <div class="basic-card basic-card-light m-10" >
                 
                 <div id="ssuunn" class="card-content">
                     <span id="ssuunn"  class="card-title"></span>
@@ -225,10 +225,7 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
                     
                 </div>
             </div>
-            </div>
-    
-    
-            <div class="daysic">
+            
             <div class="basic-card basic-card-light">
                 <div id="ssuunn" class="card-content">
                     <span id="ssuunn" class="card-title">날짜</span>
@@ -323,8 +320,7 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
                           </table>
                 </div>
             </div>
-            </div>
-            <div class="daysic">
+            
             <div class="basic-card basic-card-light">
                 <div id="ssuunn" class="card-content">
                     <span id="ssuunn" class="card-title">날짜</span>
@@ -419,9 +415,7 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
                           </table>
                 </div>
             </div>
-            </div>
-            
-            <div class="daysic">
+           
             <div class="basic-card basic-card-light">
                 <div id="ssuunn" class="card-content">
                     <span id="ssuunn" class="card-title">날짜</span>
@@ -519,8 +513,7 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
                           </table>
                 </div>
             </div>
-            </div>
-            <div class="daysic">
+        
             <div class="basic-card basic-card-light">
                 <div id="ssuunn" class="card-content">
                     <span id="ssuunn" class="card-title">날짜</span>
@@ -615,8 +608,7 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
                           </table>
                 </div>
             </div>
-            </div>
-            <div class="daysic">
+         
             <div class="basic-card basic-card-light">
                 <div id="ssuunn" class="card-content">
                     <span id="ssuunn" class="card-title">날짜</span>
@@ -711,8 +703,7 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
                           </table>
                 </div>
             </div>
-            </div>
-            <div class="daysic">
+         
             <div class="basic-card basic-card-light">
                 <div id="ssuunn" class="card-content">
                     <span id="ssuunn" class="card-title">날짜</span>
@@ -839,22 +830,16 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
     // 결과
     <script>
 
-$(".daysic").on("click",function(){
-   		var date = $(this).children().children().children().html();
-  		   		 
+$(".basic-card").on("click",function(){
+   		var date = $(this).children().children().html();
+  		   		 console.log(date)
   		 
-  		 $.ajax({
-   			url: 'daysic',
-   			data:{date}
+  		 location.href='daysic?date='+date;
+   			
    				
              	
 
 				   
-   })
-  		 
-  		 
-  		 
-   
    })
     </script>
 
