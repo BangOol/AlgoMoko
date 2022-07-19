@@ -266,8 +266,8 @@ span {
   </div>
   
 </div>
-<button type="button" class="btn btn-primary" onclick="/insert" >등록</button>
-<button type="button" class="btn btn-primary " onclick="location.href='todaysic.html'">취소</button>
+<button type="button" class="btn btn-primary" id="insert" onclick="location.href='sicmain'">등록</button>
+<button type="button" class="btn btn-primary " onclick="location.href='todaysic'">취소</button>
     
 
       <div th:replace="~{fragments/footer}"></div>
@@ -413,19 +413,14 @@ $(function(){
    
 
    
-   $("#che").on("click",function(){
+      $("#insert").on("click",function(){
    		var check = $("input[name='membershipRadios']:checked").val();
   		 var date = $("#html5-date-input").val();
   		 var jae = $(".foodname").text();
   		 var amo = $(".amount").text();
   		 var con = $("#con").val();
   		   		 
-  		 console.log(amo);
-  		 $.ajax({
-   		
-   				url: 'insert',  
-             	
-             	data:{check,jae,con,date,amo},
+  		 location.href='insert?check='+check+'&date='+date+'&jae='+jae+'&amo='+amo+'&con='+con;
              	
 
 				   
@@ -434,7 +429,7 @@ $(function(){
   		 
   		 
    
-   })
+ 
    		
 		
   		 

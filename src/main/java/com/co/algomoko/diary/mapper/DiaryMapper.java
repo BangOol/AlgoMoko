@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 import com.co.algomoko.diary.domain.DiaryVO;
+import com.co.algomoko.diary.domain.RecipeVO;
 
 public interface DiaryMapper {
 	public List<DiaryVO> findDay(DiaryVO diaryVO);
@@ -17,4 +18,5 @@ public interface DiaryMapper {
 	 public String insertdetail(DiaryVO diaryVO); // 상세 등록
 	 public String insert(DiaryVO diaryVO); // 등록
 	 public List<DiaryVO> custom(DiaryVO diaryVO);
+	 public List<RecipeVO> rerank(RecipeVO recpvo);
 }

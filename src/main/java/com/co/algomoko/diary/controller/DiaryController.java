@@ -1,6 +1,7 @@
 package com.co.algomoko.diary.controller;
 
 import java.io.IOException;
+import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.freemarker.FreeMarkerAutoConfiguration;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +28,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.co.algomoko.admin.domain.AdminVO;
 import com.co.algomoko.diary.domain.DiaryVO;
+import com.co.algomoko.diary.domain.RecipeVO;
+import com.co.algomoko.diary.domain.ReqVO;
 import com.co.algomoko.diary.mapper.DiaryMapper;
 import com.co.algomoko.food.domain.FoodVO;
 import com.co.algomoko.food.mapper.FoodMapper;
@@ -47,7 +51,7 @@ public class DiaryController {
 		calendar.set(Calendar.SECOND, 0);
 		calendar.set(Calendar.MILLISECOND, 0);
 		diaryVO.setDdate(calendar.getTime());
-		diaryVO.setMid("user11");
+		diaryVO.setMid("user12");
 		System.out.println(diaryVO);
 		model.addAttribute("todaysic",dao.findDay(diaryVO));
 		model.addAttribute("resultCal",dao.jukcal(diaryVO));
@@ -63,9 +67,10 @@ public class DiaryController {
     public String myre(){
         return "contents/diary/myre";
     }
-	@RequestMapping("resu")
-    public String resu(){
-        return "contents/diary/resu";
+	@RequestMapping("/succ")
+    public String succ(){
+		
+        return "contents/diary/succ";
     }
 	@RequestMapping("/todaysic")
     public String todaysic(Model model, DiaryVO diaryVO){
@@ -75,7 +80,7 @@ public class DiaryController {
 		calendar.set(Calendar.SECOND, 0);
 		calendar.set(Calendar.MILLISECOND, 0);
 		diaryVO.setDdate(calendar.getTime());
-		diaryVO.setMid("user11");
+		diaryVO.setMid("user12");
 		
 		
 		
@@ -85,7 +90,7 @@ public class DiaryController {
 		return "contents/diary/todaysic";
     }
 	
-	@ResponseBody
+	
 	@RequestMapping(value="daysic") 
     public String daysic(@RequestParam("date") String date, Model model, DiaryVO diaryVO, HttpServletResponse response)
     	throws IOException, ParseException{
@@ -94,15 +99,22 @@ public class DiaryController {
 		
 		Date date1 = new Date(sdf.parse(strDate).getTime());
 		
-		diaryVO.setMid("user11");
+		diaryVO.setMid("user12");
 		diaryVO.setDdate(date1);
+		System.out.println(dao.custom(diaryVO));
+		
 		model.addAttribute("todaysic",dao.custom(diaryVO));
+		model.addAttribute("resultCal",dao.resultCal(diaryVO));
 		
 		
-		return "contents/diary/todaysic";
+		return "contents/diary/daysic";
     }
 	@RequestMapping("weeklybest")
-    public String weeklybest(){
+    public String weeklybest(Model model,RecipeVO recpvo){
+		
+		model.addAttribute("rank",dao.rerank(recpvo));
+		
+		
         return "contents/diary/weeklybest";
     }
 	@RequestMapping("write")
@@ -121,7 +133,7 @@ public class DiaryController {
 		calendar.set(Calendar.SECOND, 0);
 		calendar.set(Calendar.MILLISECOND, 0);
 		diaryVO.setDdate(calendar.getTime());
-		diaryVO.setMid("user11");
+		diaryVO.setMid("user12");
 			
 		
 		diaryVO.setDddo(dddo);
@@ -137,34 +149,18 @@ public class DiaryController {
         return "contents/diary/weekwrite";
     }
 	
-	@RequestMapping(value="insert") 
-	@ResponseBody
-	public void insert(@RequestParam("check") String check
-			,@RequestParam("amo") String amo
-			,@RequestParam("date") String date
-			,@RequestParam("jae") String jae
-			,@RequestParam(value="con" , required=false) String con)throws IOException, ParseException { 
-		DiaryVO diaryVO = new DiaryVO();
-		FoodVO foodvo = new FoodVO();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        String strDate = date;
-        Date date1 = new Date(sdf.parse(strDate).getTime());
-        int amount = Integer.parseInt(amo);
-        System.out.println(amount);
-        diaryVO.setMid("user12");
-        diaryVO.setDddo(check);
-        diaryVO.setDdate(date1);
-        diaryVO.setUcon(con);
-        diaryVO.setAmount(amount);
-        diaryVO.setDdname(jae);
-        foodvo.setIng(jae);
-        dao1.fListOne(foodvo);
-        diaryVO.setCal(dao1.fListOne(foodvo).getCal());
-        diaryVO.setCarb(dao1.fListOne(foodvo).getCarb());
-        diaryVO.setProt(dao1.fListOne(foodvo).getProt());
-        diaryVO.setFat(dao1.fListOne(foodvo).getFat());
-        dao.insert(diaryVO);
-        dao.insertdetail(diaryVO);
+	@RequestMapping("insert") 
+	public String insert(DiaryVO frm)throws IOException, ParseException { 
+		frm.setMid("user12");
+		
+		System.out.println(frm.getAmount());
+		System.out.println(frm.getDdname());
+		System.out.println(frm.getCal());
+		
+		
+                return "contents/diary/succ"; 
+		
+        
         
 	}
    
