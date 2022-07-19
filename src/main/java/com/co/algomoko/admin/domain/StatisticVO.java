@@ -27,5 +27,23 @@ public class StatisticVO {
     int range20;
     int range21;
 
+    // 회원 나이 비율
+    int age10;
+    int age20;
+    int age30;
+    int age40;
+    int age50;
+    int age60;
+    int age70;
+    int age80;
+
+    // 회원 BMI 비율
+    int bmi1; // BMI : 5 ~ 10
+    int bmi2;
+    int bmi3;
+    int bmi4;
+    int bmi5;
+    int bmi6;
+    int bmi7;
 
 }

@@ -9,11 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @Controller
 public class AdminController {
-    // 경로 이동
-    @Autowired
-    AdminService adminService;
 
     @Autowired
     AdminMapper adminMapper;
@@ -24,11 +23,7 @@ public class AdminController {
         return "contents/admin/userFormMain";
     }
 
-    // 신고 유저 창 이동
-    @GetMapping("/ReportUser")
-    public String moveUserReport() throws Exception{
-        return "contents/admin/userFormReportUser";
-    }
+
 
     // 신고 유저 상세창 이동
     @GetMapping("/ReportUserDetail")
@@ -36,21 +31,23 @@ public class AdminController {
         return "contents/admin/userFormReportUserDatail";
     }
 
-    // 통계 창 이동
+    // 통계 메인 창 이동
     @GetMapping("/Statistics")
+    public String mainUserStatistics(Model model) throws Exception{
+        return "contents/admin/userFormStatistics";
+    }
+    // 통계 유저 통계 창 이동
+    @GetMapping("/UserStatistics")
     public String moveUserStatistics(Model model) throws Exception{
         model.addAttribute("genderRate", adminMapper.genderRate()); // 성별 비율
         model.addAttribute("RestrictedRate", adminMapper.RestrictedRate()); // 현재 제한 비율
         model.addAttribute("heightRate", adminMapper.heightRate()); // 회원 별 키 비율
-        return "contents/admin/userFormStatistics";
+        model.addAttribute("ageRate", adminMapper.ageRate()); // 회원 나이 비율
+        model.addAttribute("bmiRate", adminMapper.bmiRate()); // 회원 BMI 비율
+        return "contents/admin/UserStatistics";
     }
 
-    // 유저리스트 창 이동(블랙리스트, 제한리스트 포함)
-    @GetMapping("/UserList")
-    public String moveUserList(Model model) throws Exception{
-        model.addAttribute("list", adminService.makeList());
-        return "contents/admin/userFormUserlist";
-    }
+
     // 관리자 - 1:1 문의 창 이동
     @GetMapping("/moveInquiry")
     public String moveInquiry() throws Exception{

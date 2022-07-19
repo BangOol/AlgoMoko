@@ -15,7 +15,6 @@ public class AdminRestController {
     // 경로 이동
     @Autowired
     AdminService adminService;
-
     @Autowired
     AdminMapper adminMapper;
 
@@ -47,5 +46,13 @@ public class AdminRestController {
     public List<AdminVO> findAllList() {
         return adminMapper.makeList();
     }
+
+    // 유저리스트 창 이동(블랙리스트, 제한리스트 포함)
+//    @GetMapping("/UserList")
+//    public String moveUserList(Model model) throws Exception{
+//        model.addAttribute("list", adminService.makeList());
+//        return "contents/admin/userFormUserlist";
+//    }
+    // 유저리스트 창 이동(블랙리스트, 제한리스트 포함)
 
 }

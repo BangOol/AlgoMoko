@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layouts/layout}">
+      layout:decorate="~{layouts/layout}" xmlns:javascript="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="UTF-8">
@@ -41,16 +41,17 @@
             <div class="col-lg-3 col-md-5">
                 <!-- menu bar Begin -->
                 <div class="sidebar">
-                    <div class="sidebar__item">
+                    <div class="sidebar__item" style="font-family: 'Cairo', 'Jua', sans-serif">
                         <h4>my Page</h4>
                         <ul>
                             <li><a href="/UserList">회원 관리</a></li>
-                            <li><a href="/UserList">- 회원리스트</a></li>
-                            <li><a href="/ReportUser">- 신고유저관리</a></li>
                             <li><a href="/Statistics">통계</a></li>
+                            <li><a href="/UserStatistics">- 회원 통계</a></li>
+                            <li><a href="/Statistics">- 식단 통계</a></li>
+                            <li><a href="/Statistics">- 챌린지 통계</a></li>
                             <li><a href="/moveInquiry">1:1문의 내역 확인</a></li>
-                            <li><a href="/moveFAQ">FAQ이동</a></li>
-                            <li><a href="#">레시피관리</a></li>
+                            <li><a href="/moveFAQ">FAQ 이동</a></li>
+                            <li><a href="#">레시피 관리</a></li>
                         </ul>
                     </div>
                 </div>
@@ -74,17 +75,21 @@
                             <th scope="col">상태</th>
                         </tr>
                         </thead>
-                        <tbody id ='boardtable'>
-                            <tr th:each="lists:${list}">
-                                <td th:text="${lists.uid}"></td>
-                                <td th:text="${lists.sex}"></td>
-                                <td th:text="${lists.nick}"></td>
-                                <td th:text="${lists.b0}"></td>
-                                <td>
-                                    <a th:href="@{/userRestrict(uid=${lists?.uid})}">변경</a>
-                                </td>
-                            </tr>
-                        </tbody>
+<!--                        <tbody id ='boardtable'>-->
+<!--&lt;!&ndash;                            <div th:if=""&ndash;&gt;-->
+<!--                            <div th:if="${#lists.size(Alllist) > 0}">-->
+<!--                                <div th:each="Alllist:${Alllist}">-->
+<!--                                    <tr>-->
+<!--                                        <td>${Alllist.MID}</td>-->
+<!--                                        <td>${Alllist.SEX}</td>-->
+<!--                                        <td>${Alllist.NICK}</td>-->
+<!--                                        <td>${Alllist.B0}</td>-->
+<!--                                    </tr>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                                <td colspan="4">조회된 결과가 없습니다.</td>-->
+<!--                            </div>-->
+<!--                        </tbody>-->
                     </table>
                 </div>
                 <div class="form-group" style="text-align: center; margin: 100px 0 0 0">
@@ -97,6 +102,16 @@
                             </select>
                             <button class="btn btn-success" onclick="findUserList()" type="button" id="button-addon2">검색</button>
                         </form>
+                    </div>
+                </div>
+
+                <div class="bottom">
+                    <div class="bottom-left">
+                        <select id="cntSelectBox" name="cntSelectBox" class="form-control" style="width: 100px;">
+                            <option th:if test="${paginationUser.cntPerPage == '10'}" value="10">10개씩</option>
+                            <option th:if test="${paginationUser.cntPerPage == '20'}" value="20">20개씩</option>
+                            <option th:if test="${paginationUser.cntPerPage == '30'}" value="30">30개씩</option>
+                        </select>
                     </div>
                 </div>
             </div>
