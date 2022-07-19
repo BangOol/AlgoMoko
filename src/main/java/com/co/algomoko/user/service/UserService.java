@@ -3,8 +3,6 @@ package com.co.algomoko.user.service;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.security.crypto.password.PasswordEncoder;
-
 import com.co.algomoko.user.domain.UserVO;
 
 public interface UserService {
@@ -14,7 +12,7 @@ public interface UserService {
 	
 	
 	public boolean idCheck(String mid);
-	public UserVO findId(String mid);
 	
-	public PasswordEncoder passwordEncoder();
+	
+
 }
