@@ -60,6 +60,15 @@ public class AdminServiceImpl implements AdminService {
     public List<StatisticVO> heightRate() {
         return adminMapper.heightRate();
     }
+    @Override
+    public List<StatisticVO> ageRate(){
+        return adminMapper.ageRate();
+    }
+
+    @Override
+    public List<StatisticVO> bmiRate() {
+        return adminMapper.bmiRate();
+    }
 
 
 }

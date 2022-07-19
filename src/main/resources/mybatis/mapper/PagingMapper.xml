@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 위 코드가 mapper 설정을 하는 코드 -->
+
+<!-- Mapper를 사용하는 Repository의 전체 경로를 적어줘야함. -->
+<mapper namespace="com.co.algomoko.admin.mapper.AdminMapper">
+    <select id="SelectAllList" resultType="hashmap">
+        SELECT *
+        FROM (
+        SELECT ROW_NUMBER() OVER(ORDER by MID DESC) AS
+        ROW_NUM
+        ,MID
+        ,SEX
+        ,NICK
+        ,GET_CODE(B0) AS B0
+        FROM MEMBERS
+        )
+        <if test="firstRecordIndex !=null and lastRecordIndex != null">
+            WHERE ROW_NUM BETWEEN #{firstRecordIndex} AND
+            #{lastRecordIndex}
+        </if>
+    </select>
+
+    <select id="TableCount" resultType="int">
+        SELECT count(*) FROM
+            MEMBERS
+    </select>
+</mapper>
