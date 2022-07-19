@@ -24,12 +24,12 @@ public class ChallengeServiceImpl implements ChallengeService{
 		mapper.cInsert(cVO);
 	}
 	@Override
-	public int cUpdate(ChallengeVO cVO) {
-		return 0;
+	public void cUpdate(int cno) {
+		mapper.cUpdate(cno);
 	}
 	@Override
-	public int cDelete(ChallengeVO cVO) {
-		return 0;
+	public void cDelete(Integer cno) {
+		mapper.cDelete(cno);
 	}
 
 }

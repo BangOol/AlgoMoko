@@ -15,8 +15,8 @@ public interface ChallengeService {
 	void cInsert(ChallengeVO cVO);
 
 	// 챌린지 수정(관리자만)
-	public int cUpdate(ChallengeVO cVO);
+	public void cUpdate(int cno);
 
 	// 챌린지 삭제(관리자만)
-	public int cDelete(ChallengeVO cVO);
+	void cDelete(Integer cno);
 }
