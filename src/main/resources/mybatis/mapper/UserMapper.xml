@@ -23,13 +23,18 @@
  	
  	<!-- 아이디중복체크 -->
  	<select id="existByMid" resultType="boolean">
- 		SELECT COUNT(*) FROM MEMBERS WHERE MID = #{mid} AND ROWNUM=1
+ 		SELECT COUNT(*) FROM MEMBERS WHERE MID = #{mid}
  	</select>
+ 	
  	
  	
  	<delete id="delete">
  		DELETE FROM MEMBERS WHERE MID = #{mid}
  	</delete>
+ 	
+ 	<select id="findId" resultType="UserVO">
+ 		SELECT * FROM MEMBERS WHERE MID=#{mid}
+ 	</select>
  	
  	<!--  <update id="update">
         update member

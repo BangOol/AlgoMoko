@@ -14,4 +14,6 @@ public interface UserMapper {
 	public List<UserVO> userlist(UserVO uservo);
 	
 	public boolean existByMid(String mid);
+	public UserVO findId(String mid);
+	
 }
