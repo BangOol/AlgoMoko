@@ -16,13 +16,13 @@
 	</select>
 	<!-- 챌린지 작성 -->
 	<insert id="cInsert" parameterType="com.co.algomoko.challenge.domain.ChallengeVO">
-	insert into challenge (cno, ctitle, ccon, cdday, filename)
-	values(CNO.nextval, #{ctitle}, #{ccon}, #{cdday}, #{filename}) <!-- , jdbcType=VARCHAR -->
+	insert into challenge (cno, ctitle, ccon, cdday, filepath, filename)
+	values(CNO.nextval, #{ctitle}, #{ccon}, #{cdday}, #{filepath}, #{filename}) <!-- , jdbcType=VARCHAR -->
 	</insert>
 	<!-- 챌린지 수정 -->
 	<update id="cUpdate" parameterType="com.co.algomoko.challenge.domain.ChallengeVO">
 	update challenge
-	set ctitle = #{ctitle}, ccon = #{ccon}, cdday = #{cdday}
+	set ctitle = #{ctitle}, ccon = #{ccon}, cdday = #{cdday}, filepath = #{filepath}, filename = #{filename}
 	where cno = #{cno}
 	</update>
 	<!-- 챌린지 삭제 -->
@@ -31,4 +31,9 @@
 	from challenge
 	where cno = #{cno}
 	</delete>
+	<!-- 진행중인 챌린지 추가 -->
+	<insert id="mcInsert" parameterType="int">
+	insert into my_challenge 
+	values(mycno.nextval, #{cno}, '진휘용', 0, to_char(sysdate, 'YYYYMMDD'), to_char(sysdate+30, 'YYYYMMDD'))
+	</insert>
 </mapper>
