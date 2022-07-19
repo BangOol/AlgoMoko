@@ -1,37 +1,67 @@
-//
 //package com.co.algomoko.security;
 //
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.context.annotation.Bean;
 //import org.springframework.context.annotation.Configuration;
-//import org.springframework.security.authentication.dao.DaoAuthenticationProvider;org.springframework.security.config.annotation.web.builders.HttpSecurity;
+//import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+//import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+//import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+//import org.springframework.security.config.annotation.web.builders.WebSecurity;
 //import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+//import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 //import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-//import org.springframework.security.web.SecurityFilterChain;
+//import org.springframework.security.crypto.password.PasswordEncoder;
+//
+//import com.co.algomoko.user.service.UserService;
 //
 //@Configuration
-//
+//  
 //@EnableWebSecurity
-//public class SecurityConfig {
-//
+//@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
+//public class SecurityConfig extends WebSecurityConfigurerAdapter{
+//	
 //	@Autowired
-//  
-//  @Bean //회원가입시 비번 암호화에 필요한 bean 등록 public BCryptPasswordEncoder
-//  passwordEncoder() { return new BCryptPasswordEncoder(); }
-//
-//	// @Bean //실제 인증을 한 이후에 인증이 완료되면 Authentication객체를 반환을 위한 bean등록 // public
-//  DaoAuthenticationProvider authenticationProvider(아직안만듬 homeService) { //
-//  DaoAuthenticationProvider authenticationProvider = new
-//  DaoAuthenticationProvider(); //
-//  authenticationProvider.setUserDetailsService(homeService); //
-//  authenticationProvider.setPasswordEncoder(passwordEncoder()); // return
-//  authenticationProvider; // }
-//  
-//  //현재설정, 모든 접근 허가
-//
+//	private UserService userService;
+//	
 //	@Bean
-//	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-//		http.authorizeRequests().antMatchers("/**").permitAll();
-//		return http.build();
+//    public PasswordEncoder passwordEncoder() {
+//        return new BCryptPasswordEncoder();
+//    }
+//	@Override
+//	  public void configure(WebSecurity web) { 
+//	    web.ignoring().antMatchers("/css/**", "/js/**", "/img/**","/favicon.ico", "/resources/**", "/error");
+//	  }
+//	
+//	@Override
+//	protected void configure(HttpSecurity http) throws Exception{
+//		http
+//		.authorizeRequests()
+//		.antMatchers("/contents").permitAll()
+//		.antMatchers("/loginForm").permitAll()
+//		.antMatchers("/login").permitAll()
+//		.and()
+//		
+//		.formLogin()
+//			.loginPage("/loginForm").loginProcessingUrl("/login")
+//			.usernameParameter("mid").passwordParameter("mpw")
+//			.defaultSuccessUrl("/main").failureUrl("/error")
+//			//권한 관련 오류처리
+//		.and()
+//			.exceptionHandling().accessDeniedPage("/error")
+//		//로그아웃 설정, 로그 아웃 후 세션 제거
+//		.and()
+//			.logout().logoutUrl("/logout").logoutSuccessUrl("/main")
+//			.invalidateHttpSession(true)
+//		.and()
+//			.csrf().disable();	
+//		
 //	}
-//}
+//	
+//	@Override
+//    public void configure(AuthenticationManagerBuilder auth) throws Exception {
+////        auth.userDetailsService(userService)
+////        	.passwordEncoder(userService.passwordEncoder());
+//    }
+//	
+// }
+ 
