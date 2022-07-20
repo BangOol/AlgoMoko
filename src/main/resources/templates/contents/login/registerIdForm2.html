@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Ogani | Template</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    
  
 
 
@@ -176,12 +176,12 @@
                         
                     </table>
                     <input name="U0" type ="hidden" value="U1">
-                    <input name="B0" type ="hidden" value="B0">
+                    <input name="B0" type ="hidden" value="B0">    
                     <input id="nextBtn" type = "button" value = "다음" style = "margin: 60px 0 0 0px; width : 80px; float: right;" >
                     <input type = "button" value = "이전" style = "margin: 60px 0 0 650px; width : 80px; float : left " onclick = "location.href='registerIdForm1'">
                 </div>
-            </div>
            </form>
+            </div>
         </div>
     </div>
     
@@ -234,6 +234,7 @@
         })
 
 
+	
 
 
 	//모달(이메일인증)관련
@@ -241,15 +242,17 @@
     const modal = document.querySelector('.modal');
 
     $('#checkId').click((e) =>{
-        modal.style.display = "flex"
+    //e.preventDefault();
+        modal.style.display = "flex";
         body.style.overflow = 'hidden';
         
         var a = $('#mid').val()
-      
+      	console.log('email: ' +a)
         $.ajax({
 			url:"email",
-			method:"post",
-			data:{mid:a}
+			type:'post',
+			data: {mid: a}
+			
 		})
 
         
@@ -260,7 +263,7 @@
     	console.log(result)
     	$.ajax({
     		url:"verify",
-    		method:"post",
+    		type:"POST",
     		data:{code:result}
     	}).done(function(result){
     		if(result == 1){
@@ -280,6 +283,8 @@
         body.style.overflow = 'auto';
     })
 	//모달 기능 끝
+	
+	
 	
 	$('#checkHealth').click(function(){
 	    bmrCheck();
