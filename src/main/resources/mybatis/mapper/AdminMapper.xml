@@ -13,9 +13,21 @@
             <result property="nick" column="NICK"/>
         </resultMap>
     <!-- 관리자 유저 목록 조희 -->
-    <select id="makeList" resultMap="members" resultType="com.co.algomoko.admin.domain.AdminVO">
-        SELECT MID, SEX, NICK, GET_CODE(B0) AS B0
+    <select id="SelectAllList" resultType="hashmap" resultMap="members">
+        SELECT *
+        FROM (
+        SELECT ROW_NUMBER() OVER(ORDER BY MID DESC) AS
+        ROW_NUM
+        ,MID
+        ,SEX
+        ,NICK
+        ,GET_CODE(B0) AS B0
         FROM MEMBERS
+        )
+        <if test="firstRecordIndex !=null and lastRecordIndex != null">
+            WHERE ROW_NUM BETWEEN #{firstRecordIndex} AND
+            #{lastRecordIndex}
+        </if>
     </select>
     <select id="findUserList" resultMap="members" resultType="com.co.algomoko.admin.domain.AdminVO">
         SELECT MID, SEX, NICK,GET_CODE(B0) AS B0
@@ -101,5 +113,11 @@
                COUNT(CASE WHEN BMI BETWEEN 30 AND 35 THEN MID ELSE NULL END) AS bmi6,
                COUNT(CASE WHEN BMI BETWEEN 35 AND 40 THEN MID ELSE NULL END) AS bmi7
         FROM MEMBERS
+    </select>
+
+
+    <select id="TableCount" resultType="int">
+        SELECT count(*) FROM
+            MEMBERS
     </select>
 </mapper>

@@ -4,6 +4,7 @@ import com.co.algomoko.support.domain.FaqVO;
 import com.co.algomoko.support.mapper.FaqMapper;
 import com.co.algomoko.support.mapper.InquiryMapper;
 import com.co.algomoko.support.mapper.NoticeMapper;
+import com.co.algomoko.support.service.FaqService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,12 +17,11 @@ import java.util.List;
 @Controller
 public class SupportController {
 
-    @Autowired
-    FaqMapper faqMapper;
-    @Autowired
-    NoticeMapper noticeMapper;
-    @Autowired
-    InquiryMapper inquiryMapper;
+    private final FaqService faqService;
+   @Autowired
+   public SupportController(FaqService faqService){
+       this.faqService = faqService;
+   }
 
     @GetMapping("/Inquiry")
     public String moveInquiry(){
@@ -47,7 +47,7 @@ public class SupportController {
     @GetMapping("/FAQList")
     @ResponseBody
     public List<FaqVO> FAQList(FaqVO faqVO, Model model){
-        return faqMapper.FAQList(faqVO);
+        return faqService.FAQList(faqVO);
     }
 
 }
