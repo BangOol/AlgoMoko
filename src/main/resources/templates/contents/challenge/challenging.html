@@ -8,7 +8,7 @@
 <meta name="keywords" content="Ogani, unica, creative, html">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>Ogani | Template</title>
+<title>challenging</title>
 
 </head>
 
@@ -58,22 +58,20 @@
 					</div>
 					<div class="col-lg-8 col-md-7">
 						<div class="row">
-							<div th:each="chl:${cList}" class="col-lg-6 col-md-6 col-sm-6">
+							<div th:each="mc:${mcList}" class="col-lg-6 col-md-6 col-sm-6">
 								<div class="blog__item">
 									<div class="blog__item__cpic">
 										<img src="../img/chl/cola.png" alt="">
 									</div>
 									<div class="blog__item__text">
 										<ul>
-											<li><i th:text="' '+'D-'+${chl.cdday}"
-												class="fa fa-calendar-o"></i></li>
-											<!-- <li><i class="fa fa-calendar-o"></i>시작날짜: 7월5일</li>
-											<li><i class="fa fa-calendar-o"></i>종료날짜: 8월3일</li> -->
+											<!-- <li><i th:text="' '+'D-'+${chl.cdday}"
+												class="fa fa-calendar-o"></i></li> -->
+											<li th:text="${mc.sdate}"><i class="fa fa-calendar-o"></i>시작날짜: 7월5일</li>
+											<li th:text="${mc.edate}"><i class="fa fa-calendar-o"></i>종료날짜: 8월3일</li>
 										</ul>
-										<h5>
-											<a>탄산 끊기</a>
-										</h5>
-										<p>30일 동안 탄산 끊기 도전중!</p>
+										<h5 th:text="${mc.ctitle}"><a>탄산 끊기</a></h5>
+										<p th:text="${mc.cdday}+'일 동안 '+${mc.ctitle}+' 도전중!'">30일 동안 탄산 끊기 도전중!</p>
 										<p>이행률 : 70%</p>
 										<a href="#" class="blog__btn">인증하기 <span
 											class="arrow_right"></span></a>

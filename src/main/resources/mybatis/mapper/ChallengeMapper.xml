@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper
-	namespace="com.co.algomoko.challenge.mapper.ChallengeMapper">
+<mapper	namespace="com.co.algomoko.challenge.mapper.ChallengeMapper">
 	<!-- 챌린지 조회 -->
 	<select id="getPage" resultType="com.co.algomoko.challenge.domain.ChallengeVO">
 	select *
 	from challenge
 	where cno = #{cno}
+	</select>
+	<!-- 챌린지 검색 -->
+	<select id="cSearch" resultType="com.co.algomoko.challenge.domain.ChallengeVO">
+	select cno, ctitle, cdday, filepath
+	from challenge
+	where ctitle like '%' || #{ctitle} || '%' 
 	</select>
 	<!-- 챌린지 목록 -->
 	<select id="cList" resultType="com.co.algomoko.challenge.domain.ChallengeVO">
@@ -14,10 +19,15 @@
 	from challenge
 	order by cno
 	</select>
+	<!-- 진행중인 챌린지 목록 -->
+	<!-- <select id="mcList" resultType="com.co.algomoko.challenge.domain.MyChallengeVO">
+	select *
+	from my_challenge
+	</select> -->
 	<!-- 챌린지 작성 -->
 	<insert id="cInsert" parameterType="com.co.algomoko.challenge.domain.ChallengeVO">
 	insert into challenge (cno, ctitle, ccon, cdday, filepath, filename)
-	values(CNO.nextval, #{ctitle}, #{ccon}, #{cdday}, #{filepath}, #{filename}) <!-- , jdbcType=VARCHAR -->
+	values(CNO.nextval, #{ctitle}, #{ccon}, #{cdday}, #{filepath}, #{filename})
 	</insert>
 	<!-- 챌린지 수정 -->
 	<update id="cUpdate" parameterType="com.co.algomoko.challenge.domain.ChallengeVO">
@@ -34,6 +44,6 @@
 	<!-- 진행중인 챌린지 추가 -->
 	<insert id="mcInsert" parameterType="int">
 	insert into my_challenge 
-	values(mycno.nextval, #{cno}, '진휘용', 0, to_char(sysdate, 'YYYYMMDD'), to_char(sysdate+30, 'YYYYMMDD'))
+	values(mycno.nextval, #{cno}, '진휘용', 0, to_char(sysdate, 'MMDD'), to_char(sysdate+30, 'MMDD'))
 	</insert>
 </mapper>
