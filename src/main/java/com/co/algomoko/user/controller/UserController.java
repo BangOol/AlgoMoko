@@ -36,7 +36,11 @@ public class UserController {
 	public String mainPage3() {
 		return "contents/index";
 	}
-	
+	//로그인페이지이동
+	@GetMapping("loginForm")
+	public String login() {
+		return "contents/login/loginForm";
+	}
 	
 	
 	//회원가입 과정 페이지들
@@ -56,25 +60,22 @@ public class UserController {
 	}
 	
 	
-	
 	//로그인 페이지 이동
-	@GetMapping("/loginForm")
+	@GetMapping("/login")
     public String loginPage(UserVO vo) {
 		return "contents/login/loginForm";
 	}
 	
 	//로그인 처리
-//    @PostMapping("/login")
-//    public String login(UserVO vo) {
-//    	System.out.println(vo);
-//    	UserVO user = userService.login(vo);
-//    	if(user == null) {
-//    		return "contents/login/login";
-//    	}
-//		return "redirect:main";
-//    }
-   
-    
+    @PostMapping("/login")
+    public String login(UserVO vo) {
+    	System.out.println(vo);
+    	UserVO user = userService.login(vo);
+    	if(user == null) {
+    		return "contents/login/login";
+    	}
+		return "redirect:main";
+    }
     //회원 가입 페이지 이동
     @GetMapping("/signup")
     public String signupPage(UserVO vo) {

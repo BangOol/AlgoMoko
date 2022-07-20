@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="Ogani Template">
+  <meta name="keywords" content="Ogani, unica, creative, html">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Ogani | Template</title>
+
+<body>
+<th:block layout:fragment="content">
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script th:inline="javascript">
+    <!-- 성별 통계 -->
+    document.addEventListener('DOMContentLoaded', function(){
+      google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChart1);
+      function drawChart1() {
+        var data = google.visualization.arrayToDataTable([
+          ['Task', 'Hours per Day'],
+          ['남성',   [[${genderRate[0].maleRate}]]],
+          ['여성',   [[${genderRate[0].femaleRate}]]]
+        ]);
+        var options = {
+          title: '회원 남녀 비율',
+          pieHole: 0.4,
+        };
+        var chart = new google.visualization.PieChart(document.getElementById('donutchart1'));
+        chart.draw(data, options);
+      }
+    })
+  </script>
+  <!-- 회원 제한 통계 -->
+  <script type="text/javascript">
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawChart2);
+
+    function drawChart2() {
+
+      var data = google.visualization.arrayToDataTable([
+        ['Task', 'Hours per Day'],
+        ['정상',     [[${RestrictedRate[0].b0}]]],
+        ['3일',     [[${RestrictedRate[0].b1}]]],
+        ['7일',     [[${RestrictedRate[0].b2}]]],
+        ['영구',     [[${RestrictedRate[0].b3}]]]
+      ]);
+
+      var options = {
+        title: '회원 제한 비율'
+      };
+
+      var chart = new google.visualization.PieChart(document.getElementById('piechart2'));
+
+      chart.draw(data, options);
+    }
+  </script>
+  <script type="text/javascript">
+    google.charts.load("current", {packages:["corechart"]});
+    google.charts.setOnLoadCallback(drawChart3);
+    function drawChart3() {
+      var data = google.visualization.arrayToDataTable([
+        ['Language', 'Speakers (in millions)'],
+        ['120cm', [[${heightRate[0].range12}]]], ['130cm', [[${heightRate[0].range13}]]], ['140cm', [[${heightRate[0].range14}]]],
+        ['150cm', [[${heightRate[0].range15}]]], ['160cm', [[${heightRate[0].range16}]]], ['170cm', [[${heightRate[0].range17}]]],
+        ['180cm', [[${heightRate[0].range18}]]], ['190cm', [[${heightRate[0].range19}]]], ['200cm', [[${heightRate[0].range20}]]],
+        ['210cm', [[${heightRate[0].range21}]]]
+      ]);
+
+      var options = {
+        title: '회원 키 비율',
+        legend: 'none',
+        pieSliceText: 'label',
+        slices: {  4: {offset: 0.2},
+          5: {offset: 0.2},
+          6: {offset: 0.3},
+          7: {offset: 0.3},
+          8: {offset: 0.1}
+        },
+      };
+
+      var chart = new google.visualization.PieChart(document.getElementById('piechart3'));
+      chart.draw(data, options);
+    }
+  </script>
+  <!-- 회원 나이 비율 -->
+  <script type="text/javascript">
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawChart4);
+
+    function drawChart4() {
+
+      var data = google.visualization.arrayToDataTable([
+        ['Task', 'Hours per Day'],
+        ['10대',     [[${ageRate[0].age10}]]],
+        ['20대',     [[${ageRate[0].age20}]]],
+        ['30대',     [[${ageRate[0].age30}]]],
+        ['40대',     [[${ageRate[0].age40}]]],
+        ['50대',     [[${ageRate[0].age50}]]],
+        ['60대',     [[${ageRate[0].age60}]]],
+        ['70대',     [[${ageRate[0].age70}]]],
+        ['80대',     [[${ageRate[0].age80}]]]
+      ]);
+
+      var options = {
+        title: '회원 나이 비율',
+        pieSliceText: 'label'
+      };
+
+      var chart = new google.visualization.PieChart(document.getElementById('piechart4'));
+      chart.draw(data, options);
+    }
+  </script>
+  <script th:inline="javascript">
+    <!-- 성별 통계 -->
+    document.addEventListener('DOMContentLoaded', function(){
+      google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChart5);
+      function drawChart5() {
+        var data = google.visualization.arrayToDataTable([
+          ['Task', 'Hours per Day'],
+          ['5-10',   [[${bmiRate[0].bmi1}]]],
+          ['10-15',   [[${bmiRate[0].bmi2}]]],
+          ['15-20',   [[${bmiRate[0].bmi3}]]],
+          ['20-25',   [[${bmiRate[0].bmi4}]]],
+          ['25-30',   [[${bmiRate[0].bmi5}]]],
+          ['30-35',   [[${bmiRate[0].bmi6}]]],
+          ['35-40',   [[${bmiRate[0].bmi7}]]]
+        ]);
+        var options = {
+          title: '회원 BMI 비율',
+          pieHole: 0.4,
+        };
+        var chart = new google.visualization.PieChart(document.getElementById('donutchart5'));
+        chart.draw(data, options);
+      }
+    })
+  </script>
+  <!--회원 목록 body-->
+  <!-- Breadcrumb Section Begin -->
+  <section class="breadcrumb-section set-bg" data-setbg="img/breadcrumb.jpg">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          <div class="breadcrumb__text">
+            <h2>관리자</h2>
+            <div class="breadcrumb__option">
+              <span>회원에 대한 다양한 통계를 확인할 수 있습니다.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 회원 정보 Begin -->
+
+  <section class="product spad">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-3 col-md-5">
+          <!-- menu bar Begin -->
+          <div class="sidebar">
+            <div class="sidebar__item" style="font-family: 'Cairo', 'Jua', sans-serif">
+              <h4>my Page</h4>
+              <ul>
+                <li><a href="UserList">회원 관리</a></li>
+                <li><a href="Statistics">통계</a></li>
+                <li><a href="UserStatistics">- 회원 통계</a></li>
+                <li><a href="Statistics">- 식단 통계</a></li>
+                <li><a href="Statistics">- 챌린지 통계</a></li>
+                <li><a href="Inquiry">1:1문의 내역 확인</a></li>
+                <li><a href="FAQ">FAQ 이동</a></li>
+                <li><a href="#">레시피 관리</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <!-- menu bar end -->
+        <div class="container-fluid col-lg-9">
+          <div class="row">
+            <h4 style="font-family:'Jua'">회원통계</h4>
+          </div>
+          <br>
+          <div class ="row">
+            <div id="donutchart1" class="col-lg-6" style="width: 600px; height: 400px;  float:left;"></div>
+            <div id="piechart2" class="col-lg-6" style="width: 600px; height: 400px; float:left;"></div>
+            <div id="piechart3" class="col-lg-6" style="width: 600px; height: 400px; float:left;"></div>
+            <div id="piechart4" class="col-lg-6" style="width: 600px; height: 400px;float:end;"></div>
+            <div id="donutchart5" class="col-lg-6" style="width: 600px; height: 400px;  float:end;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</th:block>
+</body>
+
+</html>

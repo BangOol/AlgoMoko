@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layouts/layout}">
+      layout:decorate="~{layouts/layout}" xmlns:javascript="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="UTF-8">
@@ -15,10 +15,10 @@
 
 <body>
 <th:block layout:fragment="content">
-<!--회원 목록 body-->
-<!-- Breadcrumb Section Begin -->
+    <!--회원 목록 body-->
+    <!-- Breadcrumb Section Begin -->
     <section class="breadcrumb-section set-bg"
-             data-setbg="img/breadcrumb.jpg">
+             data-setbg="/img/breadcrumb.jpg">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
@@ -33,183 +33,280 @@
         </div>
     </section>
 
-<!-- 회원 정보 Begin -->
+    <!-- 회원 정보 Begin -->
 
-<section class="product spad">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-3 col-md-5">
-                <!-- menu bar Begin -->
-                <div class="sidebar">
-                    <div class="sidebar__item">
-                        <h4>my Page</h4>
-                        <ul>
-                            <li><a href="/UserList">회원 관리</a></li>
-                            <li><a href="/UserList">- 회원리스트</a></li>
-                            <li><a href="/ReportUser">- 신고유저관리</a></li>
-                            <li><a href="/Statistics">통계</a></li>
-                            <li><a href="/moveInquiry">1:1문의 내역 확인</a></li>
-                            <li><a href="/moveFAQ">FAQ이동</a></li>
-                            <li><a href="#">레시피관리</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- menu bar end -->
-            </div>
-
-            <div class="container-fluid col-lg-9">
-                <div class="row">
-                    <table class="table table-hover" style="text-align: center">
-                        <h4>회원관리</h4>
-                        <div class="d-flex flex-row-reverse col-lg-12 ">
-                            <div class="p-2 border" onclick="findAllList()">전체리스트</div>
-                            <div class="p-2 border" onclick="findRestrictList()">제한리스트</div>
-                            <div class="p-2 border" onclick="findBlackList()">블랙리스트</div>
+    <section class="product spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-5">
+                    <!-- menu bar Begin -->
+                    <div class="sidebar">
+                        <div class="sidebar__item" style="font-family: 'Cairo', 'Jua', sans-serif">
+                            <h4>my Page</h4>
+                            <ul>
+                                <li><a href="UserList">회원 관리</a></li>
+                                <li><a href="Statistics">통계</a></li>
+                                <li><a href="UserStatistics">- 회원 통계</a></li>
+                                <li><a href="Statistics">- 식단 통계</a></li>
+                                <li><a href="Statistics">- 챌린지 통계</a></li>
+                                <li><a href="Inquiry">1:1문의 내역 확인</a></li>
+                                <li><a href="FAQ">FAQ 이동</a></li>
+                                <li><a href="#">레시피 관리</a></li>
+                            </ul>
                         </div>
-                        <thead>
-                        <tr>
-                            <th scope="col" style="margin:20px 0">아이디</th>
-                            <th scope="col">성별</th>
-                            <th scope="col">닉네임</th>
-                            <th scope="col">상태</th>
-                        </tr>
-                        </thead>
-                        <tbody id ='boardtable'>
-                            <tr th:each="lists:${list}">
-                                <td th:text="${lists.uid}"></td>
-                                <td th:text="${lists.sex}"></td>
-                                <td th:text="${lists.nick}"></td>
-                                <td th:text="${lists.b0}"></td>
-                                <td>
-                                    <a th:href="@{/userRestrict(uid=${lists?.uid})}">변경</a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    </div>
+                    <!-- menu bar end -->
                 </div>
-                <div class="form-group" style="text-align: center; margin: 100px 0 0 0">
-                    <div style="text-align: center; font-family: 'Cairo', 'Jua', sans-serif">
-                        <form name="search-form" autocomplete="off">
-                            <input type="text" placeholder="검색어 입력" style="border: 1px solid" name ="keyword" id="findUserPress">
-                            <select id = "selectOption" name = "type">
-                                <option value="email">이메일</option>
-                                <option value="nick">닉네임</option>
-                            </select>
-                            <button class="btn btn-success" onclick="findUserList()" type="button" id="button-addon2">검색</button>
-                        </form>
+
+                <div class="container-fluid col-lg-9">
+                    <div class="row">
+                        <table class="table table-hover" style="text-align: center">
+                            <h4>회원관리</h4>
+                            <div class="d-flex flex-row-reverse col-lg-12 ">
+                                <div class="p-2 border" onclick="findAllList()">전체리스트</div>
+                                <div class="p-2 border" onclick="findRestrictList()">제한리스트</div>
+                                <div class="p-2 border" onclick="findBlackList()">블랙리스트</div>
+                            </div>
+                            <thead>
+                            <tr>
+                                <th scope="col" style="margin:20px 0">아이디</th>
+                                <th scope="col">성별</th>
+                                <th scope="col">닉네임</th>
+                                <th scope="col">상태</th>
+                            </tr>
+                            </thead>
+                            <tbody id='boardtable'>
+                            <div th:if="${#lists.size(Alllist)>0}">
+                                <div th:each="Alllist:${Alllist}">
+                                    <tr>
+                                        <td>[[${Alllist.uid}]]</td>
+                                        <td>[[${Alllist.sex}]]</td>
+                                        <td>[[${Alllist.nick}]]</td>
+                                        <td>[[${Alllist.B0}]]</td>
+                                        <td th:value="${Alllist.uid}">이동</td>
+                                    </tr>
+                                </div>
+                            </div>
+                            <div th:unless="${#lists.size(Alllist) == null}">
+                                <td colspan="5">조회된 결과가 없습니다.</td>
+                            </div>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="form-group" style="text-align: center; margin: 100px 0 0 0">
+                        <div style="text-align: center; font-family: 'Cairo', 'Jua', sans-serif">
+                            <form name="search-form" autocomplete="off">
+                                <input type="text" placeholder="검색어 입력" style="border: 1px solid" name="keyword"
+                                       id="findUserPress">
+                                <label for="findUserPress">
+                                    <button class="btn btn-success" onclick="findUserList()" type="button"
+                                            id="button-addon2">검색
+                                    </button>
+                                </label>
+                                <select id="selectOption" name="type">
+                                    <option value="email">이메일</option>
+                                    <option value="nick">닉네임</option>
+                                </select>
+
+                            </form>
+                        </div>
+                    </div>
+                    <!--paginate -->
+                    <div class="paginate">
+                        <div class="paging">
+                            <div th:if="${pagination.hasPreviousPage == true}">
+                                <a class="direction prev" href="javascript:void(0);"
+                                   th:onclick="movePage(${1 + ',' +  pagination.cntPerPage + ',' + pagination.pageSize})">
+                                    &lt;&lt;
+                                </a>
+                                <a class="direction prev" href="javascript:void(0);"
+                                   th:onclick="movePage(${pagination.currentPage + '=' + 1 + ',' + pagination.cntPerPage + ',' + pagination.pageSize})">
+                                    &lt;
+                                </a>
+                            </div>
+
+                            <div th:each="idx:${#numbers.sequence(pagination.firstPage,pagination.lastPage)}">
+                                <div th:if="${pagination.currentPage == idx}">
+                                    <a style="color: #cc0000; font-weight:700; margin-bottom: 2px;"
+                                       href="javascript:void(0)"
+                                       th:onclick="movePage(${1 + ',' +  pagination.cntPerPage + ',' + pagination.pageSize})"
+                                       th:value="${idx}">
+                                    </a>
+                                </div>
+                            </div>
+                            <div th:if="${pagination.hasPreviousPage == false}">
+                                <a class="direction prev" href="javascript:void(0);"
+                                   th:onclick="movePage(${1 + ',' +  pagination.cntPerPage + ',' + pagination.pageSize})">
+                                    &lt;&lt; </a>
+                                <a class="direction prev" href="javascript:void(0);"
+                                   th:onclick="movePage(${pagination.currentPage + ',' + pagination.cntPerPage + ',' + pagination.pageSize})">
+                                    &lt;
+                                </a>
+                            </div>
+
+                            <div th:each="begin : ${pagination.firstPage}">
+
+                            </div>
+                        </div>
+                    </div>
+                <div th:if="${pagination.hasNextPage == true}">
+                    <a class="direction next" href="javascript:void(0);"
+                       th:onclick="movePage(${pagination.currentPage +'='+ 1 + ',' + pagination.cntPerPage + ',' + pagination.pageSize})">
+                        &gt;</a>
+                    <a class="direction next" href="javascript:void(0);"
+                       th:onclick="movePage(${pagination.totalRecordCount + ',' + pagination.cntPerPage + ',' + pagination.pageSize})">
+                        &gt;&gt;</a>
+                </div>
+                <div th:if="${pagination.hasNextPage == false}">
+                    <a class="direction next" href="javascript:void(0);"
+                       th:onclick="movePage(${pagination.currentPage + ',' + pagination.cntPerPage + ',' + pagination.pageSize})">
+                        &gt;</a>
+                    <a class="direction next" href="javascript:void(0);"
+                       th:onclick="movePage(${pagination.totalRecordCount + ',' + pagination.cntPerPage + ',' + pagination.pageSize})">
+                    </a>
+                </div>
+
+                <!-- /paginate -->
+                <div class="bottom">
+                    <div class="bottom-left">
+                        <select id="cntSelectBox" name="cntSelectBox"
+                                class="form-control" style="width: 100px; font-family: 'Cairo', 'Jua', sans-serif"
+                                th:onchange="changeSelectBox(${pagination.currentPage + ',' +pagination.cntPerPage + ',' +pagination.pageSize})">
+                            <option value="10">10개씩</option>
+                            <option value="20">20개씩</option>
+                            <option value="30">30개씩</option>
+                        </select>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+        </div>
+    </section>
     <script>
         let cont = '변경';
 
-        function findUserList(){
-            $.ajax({
-                type: 'GET',
-                url : "/findUserList",
-                data : $("form[name=search-form]").serialize(),
-                success : function(result){
-                    //테이블 초기화
-                    $('#boardtable').empty();
-                    if(result.length>=1){
-                        result.forEach(function(lists){
-                            str='<tr>'
-                            str += "<td>"+lists.uid +"</td>";
-                            str+="<td>" +lists.sex +"</td>";
-                            str+="<td>"+lists.nick +"</td>";
-                            str+="<td>"+lists.b0 +"</td>";
-                            str+="</tr>"
-                            $('#boardtable').append(str);
-                        })
-                    }
-                }
+        //10,20,30개씩 selectBox 클릭 이벤트
+        function changeSelectBox(currentPage, cntPerPage, pageSize) {
+            var selectValue = $("#cntSelectBox").children("option:selected").val();
+            movePage(currentPage, selectValue, pageSize);
+
+        }
+
+        //페이지 이동
+        function movePage(currentPage, cntPerPage, pageSize) {
+            var url =  + "Admin/UserList/list";
+            url = url + "?currentPage=" + currentPage;
+            url = url + "&cntPerPage=" + cntPerPage;
+            url = url + "&pageSize=" + pageSize;
+            location.href = url;
+        }
+
+
+        // function findUserList(){
+        //     $.ajax({
+        //         type: 'GET',
+        //         url : "/findUserList",
+        //         data : $("form[name=search-form]").serialize(),
+        //         success : function(result){
+        //             //테이블 초기화
+        //             $('#boardtable').empty();
+        //             if(result.length>=1){
+        //                 result.forEach(function(lists){
+        //                     str='<tr>'
+        //                     str += "<td>"+lists.uid +"</td>";
+        //                     str+="<td>" +lists.sex +"</td>";
+        //                     str+="<td>"+lists.nick +"</td>";
+        //                     str+="<td>"+lists.b0 +"</td>";
+        //                     str+="</tr>"
+        //                     $('#boardtable').append(str);
+        //                 })
+        //             }
+        //         }
+        //     })
+        // }
+
+        function findBlackList() {
+            let boardtable = document.getElementById("boardtable");
+            fetch("/findBlackList", {
+                method: 'GET'
+            }).then((Response) => {
+                console.log(Response);
+                // boardtable.remove();
+                console.log(Response.body);
             })
         }
 
         // function findBlackList(){
-        //     let boardtable = document.getElementById("boardtable");
-        //     fetch("/findBlackList",{
-        //         method : 'GET'
-        //     }).then((Response)=>{
-        //         console.log(Response);
-        //         // boardtable.remove();
-        //         console.log(Response.body);
+        //     $.ajax({
+        //         type: 'POST',
+        //         url : "/findBlackList",
+        //         success : function(result){
+        //             //테이블 초기화
+        //             $('#boardtable').empty();
+        //             if(result.length>=1){
+        //                 result.forEach(function(lists){
+        //                     str='<tr>'
+        //                     str += "<td>"+lists.uid +"</td>";
+        //                     str+="<td>" +lists.sex +"</td>";
+        //                     str+="<td>"+lists.nick +"</td>";
+        //                     str+="<td>"+lists.b0 +"</td>";
+        //                     str+="<td>"+ "<a href='/userRestrict?uid='+lists?.uid>"+cont+"</a>" +"</td>"
+        //                     str+="</tr>"
+        //                     $('#boardtable').append(str);
+        //                 })
+        //             }
+        //         }
         //     })
         // }
-        function findBlackList(){
-            $.ajax({
-                type: 'POST',
-                url : "/findBlackList",
-                success : function(result){
-                    //테이블 초기화
-                    $('#boardtable').empty();
-                    if(result.length>=1){
-                        result.forEach(function(lists){
-                            str='<tr>'
-                            str += "<td>"+lists.uid +"</td>";
-                            str+="<td>" +lists.sex +"</td>";
-                            str+="<td>"+lists.nick +"</td>";
-                            str+="<td>"+lists.b0 +"</td>";
-                            str+="<td>"+ "<a href='/userRestrict?uid='+lists?.uid>"+cont+"</a>" +"</td>"
-                            str+="</tr>"
-                            $('#boardtable').append(str);
-                        })
-                    }
-                }
-            })
-        }
-        function findRestrictList(){
-            $.ajax({
-                type: 'POST',
-                url : "/findRestrictList",
-                success : function(result){
-                    //테이블 초기화
-                    $('#boardtable').empty();
-                    if(result.length>=1){
-                        result.forEach(function(lists){
-                            str='<tr>'
-                            str += "<td>"+lists.uid +"</td>";
-                            str+="<td>" +lists.sex +"</td>";
-                            str+="<td>"+lists.nick +"</td>";
-                            str+="<td>"+lists.b0 +"</td>";
-                            str+="<td>"+ "<a href='/userRestrict?uid='+lists?.uid>"+cont+"</a>" +"</td>"
-                            str+="</tr>"
-                            $('#boardtable').append(str);
-                        })
-                    }
-                }
-            })
-        }
-        function findAllList(){
-            $.ajax({
-                type: 'POST',
-                url : "/findAllList",
-                success : function(result){
-                    //테이블 초기화
-                    $('#boardtable').empty();
-                    if(result.length>=1){
-                        result.forEach(function(lists){
-                            str='<tr>'
-                            str += "<td>"+lists.uid +"</td>";
-                            str+="<td>" +lists.sex +"</td>";
-                            str+="<td>"+lists.nick +"</td>";
-                            str+="<td>"+lists.b0 +"</td>";
-                            str+="<td>"+ "<a href='/userRestrict?uid='"+ lists?.uid+">"+cont+"</a>" +"</td>"
-                            str+="</tr>"
-                            $('#boardtable').append(str);
-                        })
-                    }
-                }
-            })
-        }
+        // function findRestrictList(){
+        //     $.ajax({
+        //         type: 'POST',
+        //         url : "/findRestrictList",
+        //         success : function(result){
+        //             //테이블 초기화
+        //             $('#boardtable').empty();
+        //             if(result.length>=1){
+        //                 result.forEach(function(lists){
+        //                     str='<tr>'
+        //                     str += "<td>"+lists.uid +"</td>";
+        //                     str+="<td>" +lists.sex +"</td>";
+        //                     str+="<td>"+lists.nick +"</td>";
+        //                     str+="<td>"+lists.b0 +"</td>";
+        //                     str+="<td>"+ "<a href='/userRestrict?uid='+lists?.uid>"+cont+"</a>" +"</td>"
+        //                     str+="</tr>"
+        //                     $('#boardtable').append(str);
+        //                 })
+        //             }
+        //         }
+        //     })
+        // }
+        // function findAllList(){
+        //     $.ajax({
+        //         type: 'POST',
+        //         url : "/findAllList",
+        //         success : function(result){
+        //             //테이블 초기화
+        //             $('#boardtable').empty();
+        //             if(result.length>=1){
+        //                 result.forEach(function(lists){
+        //                     str='<tr>'
+        //                     str += "<td>"+lists.uid +"</td>";
+        //                     str+="<td>" +lists.sex +"</td>";
+        //                     str+="<td>"+lists.nick +"</td>";
+        //                     str+="<td>"+lists.b0 +"</td>";
+        //                     str+="<td>"+ "<a href='/userRestrict?uid='"+ lists?.uid+">"+cont+"</a>" +"</td>"
+        //                     str+="</tr>"
+        //                     $('#boardtable').append(str);
+        //                 })
+        //             }
+        //         }
+        //     })
+        // }
 
         function moveUserRestrict() {
             fetch({
-                url : '/userRestrict',
-                method : 'GET'
+                url: '/userRestrict',
+                method: 'GET'
             }).then()
         }
 
@@ -217,7 +314,7 @@
         // findUserPress.addEventListener("keypress", findUserList);
 
     </script>
-<!-- Product Section End -->
+    <!-- Product Section End -->
 </th:block>
 </body>
 

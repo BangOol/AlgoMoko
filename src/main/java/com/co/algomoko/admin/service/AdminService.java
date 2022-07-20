@@ -7,16 +7,16 @@ import com.co.algomoko.user.domain.UserVO;
 import java.util.List;
 
 public interface AdminService {
-    public List<AdminVO> makeList();
     List<AdminVO> findUserList(AdminVO adminVO);
     List<AdminVO> findDetailUser(AdminVO adminVO);
     String insertRestrict(AdminVO adminVO);
-
-    List<AdminVO> findBlackList();
-    List<AdminVO> findRestrictList();
-
+//    List<AdminVO> findBlackList();
+//    List<AdminVO> findRestrictList();
     List<StatisticVO> genderRate();
     List<StatisticVO> RestrictedRate();
-
     List<StatisticVO> heightRate(); // 회원 별 키 비율
+
+    List<StatisticVO> ageRate(); // 회원 나이 비율
+
+    List<StatisticVO> bmiRate(); // 회원 BMI 비율
 }

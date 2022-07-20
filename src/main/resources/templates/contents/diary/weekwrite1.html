@@ -128,13 +128,14 @@ span {
 <body>
    <div th:replace="~{fragments/header}"></div>
 <div th:replace="~{fragments/aside}"></div>
-        
+      
+         
     
 <!-- Table End -->
     </section>
     <!-- Blog Section End -->
     <input type="text" readonly placeholder="재료 입력" style ="outline:1px solid #c3bfbf";>
-    <button type="button" id="btnmod" class="btn btn-primary blog__btn">검색</button>
+    <button type="button" id="btnmod dialog" class="btn btn-primary blog__btn">검색</button>
     <div id="dialog" title="재료 검색"></div>
     <!-- 모달창 시작 -->
 	<div class="modal">
@@ -150,7 +151,7 @@ span {
 
                   <div id="gridpro"></div>
                <div class="modal_btn">
-				<button class="modal_s">등록</button>
+				<button id="modalbtn" class="modal_s">등록</button>
 				<button class="modal_c">취소</button>
 			</div>
             </div>
@@ -167,23 +168,25 @@ span {
     
     
     <br><br>
+    <div class="checked">
+    <div class="form-check">
+    <label class="form-check-label">
+    <input type="radio" class="form-check-input" name="membershipRadios" value="aa">아침
     
+    <i class="input-helper">
+    </div>
     <div class="form-check">
     <label class="form-check-label">
-    <input type="radio" class="form-check-input" name="membershipRadios" id="membershipRadios1">아침
+    <input type="radio" class="form-check-input" name="membershipRadios" value="bb">점심
+    <i class="input-helper">
+    </div>
+    <div class="form-check">
+    <label class="form-check-label">
+    <input type="radio" class="form-check-input" name="membershipRadios" value="cc">저녁
+    <i class="input-helper">
+    </div>
+    <button id="che">찾기</button>
     
-    <i class="input-helper">
-    </div>
-    <div class="form-check">
-    <label class="form-check-label">
-    <input type="radio" class="form-check-input" name="membershipRadios" id="membershipRadios2">점심
-    <i class="input-helper">
-    </div>
-    <div class="form-check">
-    <label class="form-check-label">
-    <input type="radio" class="form-check-input" name="membershipRadios" id="membershipRadios3">저녁
-    <i class="input-helper">
-    </div>
     
     <div class="mb-2 row">
     <label for="html5-date-input" class="col-md-2 col-form-label"></label>
@@ -191,7 +194,8 @@ span {
     <input class="form-control" type="date" value="" id="html5-date-input">
     </div>
     </div>
-    
+    </div>
+  
    
     
     
@@ -206,20 +210,12 @@ span {
               <tr>
                   <th scope="col"></th>
                   <th scope="col">재료명</th>
-                  <th scope="col">수량</th>
                   <th scope="col">칼로리</th>
+                  <th scope="col">수량</th>
               </tr>
           </thead>
-          <tbody>
-              <tr>
-                  <th scope="row"></th>
-                  <td>John</td>
-                  <td>Doe</td>
-                  <td>jhon@email.com</td>
-                  <td class="shoping__cart__item__close">
-                                        <span class="icon_close"></span>
-                                    </td>
-              </tr>
+          <tbody id ="tbody1">
+            
               
 
           </tbody>
@@ -237,7 +233,7 @@ span {
                 <h3>내용</h3>
                 <br>
 
-               <textarea class="form-control" id= "exampleFormControlTextarea1" rows="5" ></textarea>
+               <textarea class="form-control" id="con" rows="5" ></textarea>
               </div>
         </div>
       </div>
@@ -270,7 +266,7 @@ span {
   </div>
   
 </div>
-<button type="button" class="btn btn-primary" onclick="location.href='writema.html'" >등록</button>
+<button type="button" class="btn btn-primary" onclick="/insert" >등록</button>
 <button type="button" class="btn btn-primary " onclick="location.href='todaysic.html'">취소</button>
     
 
@@ -287,6 +283,16 @@ span {
     <script src="js/main.js"></script>
 
 <script>
+
+	  
+          
+              
+  
+
+
+	var gin;
+	var gic;
+	var gia;
     const body = document.querySelector('body');
     const modal = document.querySelector('.modal');
 
@@ -320,6 +326,23 @@ span {
                } ]
             });
 
+$(function(){
+
+
+
+	
+  
+  
+    $("tr").on("click", ".icon_close" ,function(){
+          
+     	$(this).closest("tr").remove();
+     
+    })
+  
+
+
+
+
     $('.blog__btn').click((e) =>{
    		 jepoom.refreshLayout();
         modal.style.display = "flex";
@@ -335,41 +358,90 @@ span {
     
     
       
-           /*음식조회*/
+              /*음식조회*/
             $("#btnbtn").on("click", function() {
                var btnbtn = $('#textex').val();
                console.log(btnbtn);
                 $.ajax({ 
-			    url: '/flist',  
-			    type: 'GET',  // == method
-			    data: {btnbtn},
-			     
-			 }).done( function(response) {
-			 	jepoom.refreshLayout();
-			   jepoom.resetData(response)
-			 jepoom.on('click', e => {
+             url: '/flist',  
+             type: 'GET',  // == method
+             data: {btnbtn},
+              
+          }).done( function(response) {
+             jepoom.refreshLayout();
+            jepoom.resetData(response)
+          jepoom.on('click', e => {
                         var rok = e.rowKey
                         gin = jepoom.getRow(rok).ing
                         gic = jepoom.getRow(rok).cal
                         gia = jepoom.getRow(rok).amount
-                        console.log(gin);
-                        console.log(gic);
-                        console.log(gia);
+                        
                      })
                   })
                $("#modalbtn").on("click", function(){
-               		$('#td1').html(gin)
-               		$('#td2').html(gic)
-               		$('#td3').html(gia)
-              
-               		
-               		
-               		
-               		
-               		
+                  var tbody = $('#tbody1');
+                   
+                var tr =  $('<tr>');
+               var th = $('<th>').attr('scope','row').addClass('ssuumm');
+                 var td1 = $('<td>').html(gin).addClass('foodname');
+                 var td2 = $('<td>').html(gic);
+                 var td3 = $('<td>').html(gia).addClass('amount');
+                 var td4 = $('<td>').addClass('shoping__cart__item__close');
+                 var button = $('<button>').addClass('icon_close');
+                 button.on("click",function(){
+                 	console.log($(this));
+                   $(this).closest("tr").remove();
+                 })
+                 var td5 = $(td4).append(button);
+            var a = $(tr).append(th);
+            var b = $(tr).append(td1,td2,td3,td5);
+            var c = $(tbody).append(a);
+            var d = $(tbody).append(b);
+                     
+                  
+                                
               
                })
-               })
+                       
+
+               
+            })
+             
+            
+   }) 
+			
+   
+
+   
+   $("#che").on("click",function(){
+   		var check = $("input[name='membershipRadios']:checked").val();
+  		 var date = $("#html5-date-input").val();
+  		 var jae = $(".foodname").text();
+  		 var amo = $(".amount").text();
+  		 var con = $("#con").val();
+  		   		 
+  		 console.log(amo);
+  		 $.ajax({
+   		
+   				url: 'insert',  
+             	
+             	data:{check,jae,con,date,amo},
+             	
+
+				   
+   })
+  		 
+  		 
+  		 
+   
+   })
+   		
+		
+  		 
+   
+   
+            
+          
     
 </script> 
     

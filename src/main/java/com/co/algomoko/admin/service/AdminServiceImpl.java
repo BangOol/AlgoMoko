@@ -17,11 +17,6 @@ public class AdminServiceImpl implements AdminService {
     AdminMapper adminMapper;
 
     @Override
-    public List<AdminVO> makeList() {
-        return adminMapper.makeList();
-    }
-
-    @Override
     public List<AdminVO> findUserList(AdminVO adminVO){
         return adminMapper.findUserList(adminVO);
     }
@@ -36,15 +31,15 @@ public class AdminServiceImpl implements AdminService {
         return adminMapper.insertRestrict(adminVO);
     }
 
-    @Override
-    public List<AdminVO> findBlackList() {
-        return adminMapper.findBlackList();
-    }
-
-    @Override
-    public List<AdminVO> findRestrictList() {
-        return adminMapper.findRestrictList();
-    }
+//    @Override
+//    public List<AdminVO> findBlackList() {
+//        return adminMapper.findBlackList();
+//    }
+//
+//    @Override
+//    public List<AdminVO> findRestrictList() {
+//        return adminMapper.findRestrictList();
+//    }
 
     @Override
     public List<StatisticVO> genderRate() {
@@ -59,6 +54,15 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public List<StatisticVO> heightRate() {
         return adminMapper.heightRate();
+    }
+    @Override
+    public List<StatisticVO> ageRate(){
+        return adminMapper.ageRate();
+    }
+
+    @Override
+    public List<StatisticVO> bmiRate() {
+        return adminMapper.bmiRate();
     }
 
 
