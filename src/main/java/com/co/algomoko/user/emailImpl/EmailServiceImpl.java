@@ -45,7 +45,7 @@ public class EmailServiceImpl implements EmailService{
 	        msgg+= "</div>";
 	        message.setText(msgg, "utf-8", "html");//내용
 	        message.setFrom(new InternetAddress("dlwoqls20539@gmail.com"));//보내는 사람
-	        
+	 
 	        return message;
 	    }
 	 

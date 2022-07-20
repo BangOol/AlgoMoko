@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -29,14 +28,8 @@ public class UserController {
 	//로그아웃시 페이지 이동
 	@GetMapping("logout")
 	public String mainPage2() {
-		return "index";
-	}
-	//test
-	@GetMapping("index")
-	public String mainPage3() {
 		return "contents/index";
 	}
-	
 	
 	
 	//회원가입 과정 페이지들

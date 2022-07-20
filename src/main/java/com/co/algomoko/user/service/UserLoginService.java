@@ -23,7 +23,7 @@ import lombok.AllArgsConstructor;
 public class UserLoginService implements UserDetailsService{
 	@Autowired
 	private UserService ser;
-	
+	private UserServiceImpl ser2;
 	
 	
 	@Override
@@ -31,7 +31,6 @@ public class UserLoginService implements UserDetailsService{
 		UserVO vo = ser.findId(mid);
 		if(vo==null)
 			throw new InternalAuthenticationServiceException("사용자를 찾을 수 없습니다");
-	
 		Account ac = Account.builder().mid(mid).mpw(vo.getMpw()).enabled(vo.getEnabled()).build();
 		
 		 String authority = vo.getAuthority();

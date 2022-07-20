@@ -39,22 +39,22 @@
 
 <!-- login Begin -->
 			<section class = "login__form">
-			<form id="login_form" method="post" action="/login">
-			
+			<form method="post" action="/login">
+			<input type="hidden" name="_csrf" th:value="${_csrf.token}">
 			<div class="container">
 			
 			  <img src = "img/로고.PNG" class = "loginLogo">
 			  <div class = "login__form__detail">
-			  	<input id="mid" type = "email" name ="mid" placeholder="이메일을 입력하세요">
+			  	<input type = "email" name ="mid" placeholder="이메일을 입력하세요">
 			  	</div>
 			  
 			  <div class = "login__form__detail">
-			  	<input id ="mpw" type = "password" name ="mpw" placeholder="비밀번호를 입력하세요">
+			  	<input type = "password" name ="mpw" placeholder="비밀번호를 입력하세요">
 			  </div>
 			    
 			    
 			    <br>
-			    <button id="login" >로그인</button>
+			    <button value = "submit">로그인</button>
 			    <ul>
 			      <a href=""><li>아이디 찾기</li></a>
 			      <a href=""><li>비밀번호 찾기</li></a>
@@ -66,20 +66,7 @@
 			</form>
 			  
 			</section>
-<script>
-$(document).ready(function() {
-     
 
-    $('#login').click(function(e) {
-        // #login 버튼이 폼 내부에 있으면 submit으로 동작한다. 그걸 막기 위해 preventDefualt를 쓴다.
-        e.preventDefault();
-        const $mid = $('#mid').val();
-        $('#mid').val($mid);
-        $('#login_form').submit();
-    })
-    
-})
-</script>
 
   </th:block>
 
