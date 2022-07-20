@@ -13,7 +13,7 @@ public class ReqVO {
 	private List<DiaryVO> diarys;
 	private String dddo;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date date;
+	private Date ddate;
 	private String ucon;
 	
 	

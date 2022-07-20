@@ -229,7 +229,7 @@ span {
       
       
     </div>
-    <div class="col-sm-5 col-xl-6">
+    <div class="col-sm-2 col-xl-3" style="margin-left: 200px;">
       <div class="tab-content">
         
          
@@ -273,7 +273,7 @@ span {
 <button type="button" class="btn btn-primary" onclick="submit()" id="che">등록</button>
 <button type="button" class="btn btn-primary " onclick="location.href='todaysic.html'">취소</button>
     </form>
-<button id="qwer">찾기</button>
+<button id="qwer">qweqweqwe</button>
       <div th:replace="~{fragments/footer}"></div>
 
     <!-- Js Plugins -->
@@ -332,30 +332,7 @@ span {
 
 $(function(){
  
-$("#qwer").on("click", function(){
-            let rowNum = $("input[name='ddname']").length;
-             
-             let rrrr = [];
-    		for(i=0; i<rowNum; i++) {
-       		 let rr = new rr(
-	            $("input[name='ddname']").eq(i).val(),
-	            $("input[name='cal']").eq(i).val(),
-	            $("input[name='amount']").eq(i).val(),
-            
-        )
-        rrrr.push(rr);
-        	console.log(result);
-    }
-    			frm.submit();
-            
-            })
 
-
-	
-  
-  
-    
-  
 
 
 
@@ -433,23 +410,7 @@ $("#qwer").on("click", function(){
 
                
             })
-             $("#che").on("click", function(){
-            let rowNum = $("input[name='ddname']").length;
-             
-             let rrrr = [];
-    		for(i=0; i<500; i++) {
-       		 let rr = new rr(
-	            $(".thth1")[i].val(),
-	            $(".thth2")[i].val(),
-	            $(".thth3")[i].val(),
-            
-        )
-        rrrr.push(rr);
-        	console.log(rr);
-    }
-    			
-            
-            })
+
             
            
             

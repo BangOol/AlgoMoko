@@ -19,4 +19,5 @@ public interface DiaryMapper {
 	 public String insert(DiaryVO diaryVO); // 등록
 	 public List<DiaryVO> custom(DiaryVO diaryVO);
 	 public List<RecipeVO> rerank(RecipeVO recpvo);
+	 public DiaryVO fonlist(String ddnames);
 }

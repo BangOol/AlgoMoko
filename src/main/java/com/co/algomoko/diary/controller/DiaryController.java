@@ -51,8 +51,8 @@ public class DiaryController {
 		calendar.set(Calendar.SECOND, 0);
 		calendar.set(Calendar.MILLISECOND, 0);
 		diaryVO.setDdate(calendar.getTime());
-		diaryVO.setMid("user12");
-		System.out.println(diaryVO);
+		diaryVO.setMid("user13");
+		
 		model.addAttribute("todaysic",dao.findDay(diaryVO));
 		model.addAttribute("resultCal",dao.jukcal(diaryVO));
 		
@@ -80,7 +80,7 @@ public class DiaryController {
 		calendar.set(Calendar.SECOND, 0);
 		calendar.set(Calendar.MILLISECOND, 0);
 		diaryVO.setDdate(calendar.getTime());
-		diaryVO.setMid("user12");
+		diaryVO.setMid("user13");
 		
 		
 		
@@ -96,13 +96,13 @@ public class DiaryController {
     	throws IOException, ParseException{
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String strDate = date;
-		
+		String std = date;
 		Date date1 = new Date(sdf.parse(strDate).getTime());
 		
-		diaryVO.setMid("user12");
+		diaryVO.setMid("user13");
 		diaryVO.setDdate(date1);
-		System.out.println(dao.custom(diaryVO));
-		
+		System.out.println(std);
+		model.addAttribute("std",std);
 		model.addAttribute("todaysic",dao.custom(diaryVO));
 		model.addAttribute("resultCal",dao.resultCal(diaryVO));
 		
@@ -125,21 +125,23 @@ public class DiaryController {
     public String writema(){
         return "contents/diary/writema";
     }
-	@RequestMapping("modify")
-    public String modify(Model model, DiaryVO diaryVO, String dddo){
-		Calendar calendar= Calendar.getInstance();
-		calendar.set(Calendar.HOUR_OF_DAY, 0);
-		calendar.set(Calendar.MINUTE, 0);
-		calendar.set(Calendar.SECOND, 0);
-		calendar.set(Calendar.MILLISECOND, 0);
-		diaryVO.setDdate(calendar.getTime());
-		diaryVO.setMid("user12");
-			
+	@RequestMapping("/modify")
+    public String modify(Model model, DiaryVO diaryVO, 
+    		@RequestParam("dddo") String dddo,
+    		@RequestParam("date") String date) throws ParseException{
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String strDate = date;
 		
+		Date date1 = new Date(sdf.parse(strDate).getTime());
+		
+		diaryVO.setMid("user13");
+		diaryVO.setDdate(date1);
 		diaryVO.setDddo(dddo);
-		model.addAttribute("todaysic",dao.detail(diaryVO));
-		model.addAttribute("con",dao.con(diaryVO));
-		System.out.println(dddo);
+		 
+		System.out.println(dao.detail(diaryVO));
+		model.addAttribute("modify",dao.detail(diaryVO));
+		
+		model.addAttribute("dat",date);
 		return "contents/diary/modify";
         
     }
@@ -149,19 +151,33 @@ public class DiaryController {
         return "contents/diary/weekwrite";
     }
 	
-	@RequestMapping("insert") 
-	public String insert(DiaryVO frm)throws IOException, ParseException { 
-		frm.setMid("user12");
+	@RequestMapping(value="insert") 
+	public String insert(HttpServletResponse response,DiaryVO diaryVO)throws IOException, ParseException { 
 		
-		System.out.println(frm.getAmount());
-		System.out.println(frm.getDdname());
-		System.out.println(frm.getCal());
+		diaryVO.setMid("user13");
+		dao.insert(diaryVO);
 		
-		
+		String[] ddnames = diaryVO.getDdname().split(",");
+		List<String> ddnameList = new ArrayList<String>();	
+		DiaryVO res = new DiaryVO();
+		for(int i=0;i< ddnames.length;i++) {
+			
+			ddnameList.add(ddnames[i]);
+			
+			
+		}
+
+		  for(int i=0;i< ddnameList.size();i++) { 
+			  res = dao.fonlist(ddnames[i]);
+			  
+			  res.setMid("user13");
+			  res.setDdate(diaryVO.getDdate());
+			  res.setDddo(diaryVO.getDddo());
+			  dao.insertdetail(res);
+		  }
+
                 return "contents/diary/succ"; 
-		
-        
-        
+
 	}
    
 	

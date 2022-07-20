@@ -30,7 +30,7 @@ where TO_CHAR(a.ddate,'iw')  =TO_CHAr(to_date(sysdate,'yy-MM-dd'),'iw') and a.dd
 <select id="detail" resultType="DiaryVO">
 select b.mid, a.ddname,a.dddo,a.amount, a.cal, a.carb, a.prot, a.fat, trunc(a.ddate) as ddate, to_char(a.ddate, 'day') as dday, b.ucon
 from diary_detail a, diary b
-where TO_CHAR(a.ddate,'iw')  =TO_CHAr(to_date(sysdate,'yy-MM-dd'),'iw') and a.dddo=b.dddo and a.mid = b.mid and TRUNC(a.ddate) = trunc(b.ddate) and trunc(sysdate)=TRUNC(a.ddate) and b.mid = #{mid} and a.dddo=#{dddo}
+where TO_CHAR(a.ddate,'iw')  =TO_CHAr(to_date(sysdate,'yy-MM-dd'),'iw') and a.dddo=b.dddo and a.mid = b.mid and TRUNC(a.ddate) = trunc(b.ddate) and trunc(#{ddate})=TRUNC(a.ddate) and b.mid = #{mid} and a.dddo=#{dddo}
 order by b.ucon
 </select>
 
@@ -71,5 +71,12 @@ order by b.ucon
 select*from recipe order by hit desc
 </select>
 
+	<select id="fonlist"
+		resultType="DiaryVO">
+		select ddname, amount, cal, carb, prot, fat
+		from food
+		where
+		ddname = #{ddname}
+	</select>
 
 </mapper>
