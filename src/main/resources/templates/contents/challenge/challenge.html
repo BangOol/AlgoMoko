@@ -13,10 +13,10 @@
 
 <body>
    <th:block layout:fragment="content">
-<!-- [[${cList}]] -->
+<!-- [[${cList}]]  -->
       <!-- 모달창 시작 -->
       <div th:each="chl:${cList}" class="modal">
-         <div th:if="cno == ${chl.cno}" class="modal_body">
+         <div class="modal_body">
             <div class="modal_title">
                <h2 th:text="${chl.ctitle}">Challenge</h2>
             </div>
@@ -27,7 +27,7 @@
             </div>
             <div class="modal_btn">
                <a th:href="@{../challenge/start(cno=${chl.cno})}"></a>
-               <button data-target=".modal_s" class="modal_s" data-cno="${chl.cno}">도전</button>
+               <button  class="modal_s" onclick="cno">도전</button>
                <button class="modal_c">취소</button>
             </div>
          </div>
@@ -137,14 +137,17 @@
         modal.style.display = "none"
         body.style.overflow = 'auto';
     }) 
-    
-    /* let hidden = document.querySelectorAll('.test')
+    function cno (){
+    	
+    	
+    }
+     let hidden = document.querySelectorAll('.test')
     let a = document.querySelectorAll('.a')    
     a.forEach((val,idx) =>{ 
     	val.addEventListener('click',function(){
     		console.log(hidden[idx])    	
     	})    	
-    }) */
+    }) 
 </script>
    </th:block>
    <!-- Blog Section End -->
