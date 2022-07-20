@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="zxx" xmlns:th="http://www.thymeleaf.org"
-	layout:decorate="~{layouts/layout}">
+   layout:decorate="~{layouts/layout}">
 
 <head>
 <meta charset="UTF-8">
@@ -12,128 +12,144 @@
 </head>
 
 <body>
-	<th:block layout:fragment="content">
+   <th:block layout:fragment="content">
+<!-- [[${cList}]]  -->
+      <!-- 모달창 시작 -->
+      <div th:each="chl:${cList}" class="modal">
+         <div class="modal_body">
+            <div class="modal_title">
+               <h2 th:text="${chl.ctitle}">Challenge</h2>
+            </div>
+            <div class="modal_content">
+               <p th:text="${chl.cdday}+'일 동안 '+${chl.ctitle}+'에 도전하세요!'"></p>
+               <p th:text="${chl.cdday}+'일 동안 지속됩니다.'"></p>
+               <p>한번 도전 시 취소는 불가능합니다.</p>
+            </div>
+            <div class="modal_btn">
+               <a th:href="@{../challenge/start(cno=${chl.cno})}"></a>
+               <button  class="modal_s" onclick="cno">도전</button>
+               <button class="modal_c">취소</button>
+            </div>
+         </div>
+      </div>
+      <!-- 모달창 종료 -->
+      <!-- Breadcrumb Section Begin -->
+      <section class="breadcrumb-section set-bg"
+         data-setbg="img/breadcrumb.jpg">
+         <div class="container">
+            <div class="row">
+               <div class="col-lg-12 text-center">
+                  <div class="breadcrumb__text">
+                     <h2>챌린지</h2>
+                     <div class="breadcrumb__option">
+                        <span>Challenge</span>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+      <!-- Breadcrumb Section End -->
 
-		<!-- 모달창 시작 -->
-		<div class="modal">
-			<div class="modal_body">
-				<div class="modal_title">
-					<h2>Challenge</h2>
-				</div>
-				<div class="modal_content">
-					<p th:text="${chl.cdday}+'일 동안 '+${chl.ctitle}+'에 도전하세요!'"></p>
-					<p>챌린지에 도전하시겠습니까?</p>
-					<p>도전은 30일간 지속됩니다.</p>
-					<p>한번 도전 시 취소는 불가능합니다.</p>
-				</div>
-				<div class="modal_btn">
-					<a th:href="@{../challenge/start(cno=${chl.cno})}"><button
-							class="modal_s">도전</button></a>
-					<button class="modal_c">취소</button>
-				</div>
-			</div>
-		</div>
-		<!-- 모달창 종료 -->
-		<!-- Breadcrumb Section Begin -->
-		<section class="breadcrumb-section set-bg"
-			data-setbg="img/breadcrumb.jpg">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-12 text-center">
-						<div class="breadcrumb__text">
-							<h2>챌린지</h2>
-							<div class="breadcrumb__option">
-								<span>Challenge</span>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-		<!-- Breadcrumb Section End -->
+      <!-- Blog Section Begin -->
+      <section class="blog spad">
+         <div class="container">
+            <div class="row">
+               <div class="col-lg-4 col-md-5">
+                  <div class="blog__sidebar">
+                     <div class="blog__sidebar__search">
+                        <form action="/challenge?ctitle=" method="get" style="margin-right: 60px;">
+                           <input name="ctitle" type="text" placeholder="챌린지 검색">
+                           <button type="submit" value="검색">
+                              <span class="icon_search"></span>
+                           </button>
+                        </form>
+                     </div>
+                     <div class="blog__sidebar__item">
+                        <h4>Categories</h4>
+                        <ul>
+                           <li><a href="/challenge">챌린지 목록</a></li>
+                           <li><a href="/challenge/challenging">진행중인 챌린지</a></li>
+                           <li><a href="/challenge/challengeEnd">완료한 챌린지</a></li>
+                        </ul>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-lg-8 col-md-7">
+                  <div class="row">
+                     <div th:each="chl:${cList}" class="col-lg-6 col-md-6 col-sm-6">
+                        <div class="blog__item">
+                           <div class="blog__item__cpic">
+                              <img th:src="@{${chl.filepath}}" alt="">
+                           </div>
+                           <div class="blog__item__text">
+                              <ul>
+                                 <li><i th:text="' '+'D-'+${chl.cdday}"
+                                    class="fa fa-calendar-o"></i></li>
+                              </ul>
+                              <h5>
+                                 <input type="hidden" th:value="${chl.cno}" class="test">
+                                 <a th:text="${chl.ctitle}"></a>
+                              </h5>
+                              <p th:text="${chl.cdday}+'일 동안 '+${chl.ctitle}+'에 도전하세요!'"></p>
+                              <a href="#" class="blog__btn">도전하기<span
+                                 class="arrow_right"></span></a>
+                              <div style="float: right;">
+                                 <button class="site-btn">
+                                    <a th:href="@{../challenge/cUpdate(cno=${chl.cno})}">수정</a>
+                                 </button>
+                                 <button class="site-btn">
+                                    <a th:href="@{/challenge/delete(cno=${chl.cno})}">삭제</a>
+                                 </button>
+                                 <button class="a" >
+                                    <a>테스트</a>
+                                 </button>
+                              </div>
+                           </div>
 
-		<!-- Blog Section Begin -->
-		<section class="blog spad">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-4 col-md-5">
-						<div class="blog__sidebar">
-							<div class="blog__sidebar__search">
-								<form action="/challenge?ctitle=" method="get"
-									style="margin-right: 60px;">
-									<input name="title" type="text" placeholder="챌린지 검색">
-									<button type="submit">
-										<span class="icon_search"></span>
-									</button>
-								</form>
-							</div>
-							<div class="blog__sidebar__item">
-								<h4>Categories</h4>
-								<ul>
-									<li><a href="/challenge">챌린지 목록</a></li>
-									<li><a href="/challenge/challenging">진행중인 챌린지</a></li>
-									<li><a href="/challenge/challengeEnd">완료한 챌린지</a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-8 col-md-7">
-						<div class="row">
-							<div th:each="chl:${cList}" class="col-lg-6 col-md-6 col-sm-6">
-								<div class="blog__item">
-									<div class="blog__item__cpic">
-										<img th:src="@{${chl.filepath}}" alt="">
-									</div>
-									<div class="blog__item__text">
-										<ul>
-											<li><i th:text="' '+'D-'+${chl.cdday}"
-												class="fa fa-calendar-o"></i></li>
-										</ul>
-										<h5>
-											<div value="${chl.cno}" id="test"></div>
-											<a th:text="${chl.ctitle}"></a>
-										</h5>
-										<p th:text="${chl.cdday}+'일 동안 '+${chl.ctitle}+'에 도전하세요!'"></p>
-										<a href="#" class="blog__btn">도전하기<span
-											class="arrow_right"></span></a>
-
-										<button class="site-btn" type="button" style="float: right;">
-											<a th:href="@{../challenge/cUpdate(cno=${chl.cno})}">수정</a>
-										</button>
-
-									</div>
-
-								</div>
-							</div>
-						</div>
-						<div style="float: right;">
-							<button class="site-btn"
-								th:onclick="location.href='../challenge/cWrite'">챌린지 작성</button>
-						</div>
-						<div class="col-lg-12">
-							<div class="product__pagination blog__pagination">
-								<a href="#">1</a> <a href="#">2</a> <a href="#">3</a> <a
-									href="#"><i class="fa fa-long-arrow-right"></i></a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-		<script>
+                        </div>
+                     </div>
+                  </div>
+                  <div style="float: right;">
+                     <button class="site-btn"
+                        th:onclick="location.href='../challenge/cWrite'">챌린지 작성</button>
+                  </div>
+                  <div class="col-lg-12">
+                     <div class="product__pagination blog__pagination">
+                        <a href="#">1</a> <a href="#">2</a> <a href="#">3</a> <a
+                           href="#"><i class="fa fa-long-arrow-right"></i></a>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+      <script>
     const body = document.querySelector('body');
-    const modal = document.querySelector('.modal');
+    const modal = document.querySelector('.modal');   
+    
     $('.blog__btn').click((e) =>{
         modal.style.display = "flex"
-        body.style.overflow = 'hidden';
+        body.style.overflow = 'hidden';        
     })
     const closeBtn = modal.querySelector(".modal_c")
     closeBtn.addEventListener("click", e => {
         modal.style.display = "none"
         body.style.overflow = 'auto';
-    })    
+    }) 
+    function cno (){
+    	
+    	
+    }
+     let hidden = document.querySelectorAll('.test')
+    let a = document.querySelectorAll('.a')    
+    a.forEach((val,idx) =>{ 
+    	val.addEventListener('click',function(){
+    		console.log(hidden[idx])    	
+    	})    	
+    }) 
 </script>
-	</th:block>
-	<!-- Blog Section End -->
+   </th:block>
+   <!-- Blog Section End -->
 </body>
 </html>
