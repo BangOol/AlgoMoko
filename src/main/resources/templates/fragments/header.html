@@ -7,15 +7,14 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   
 
-   
+
+
 </head>
 <body>
 
 <!-- Header Section Begin -->
 <th:block th:fragment="header">
-
     <div class="header__top">
         <div class="container">
             <div class="row">
@@ -86,17 +85,17 @@
         </div>
     </div>
  <script th:inline="javascript">
- 	
+
         // 동적으로 만들어진 버튼의 이벤트 처리를 하려면 선택자를 2개 주어야 한다. -> $(넓은 선택자).on("이벤트 이름", "실제 선택자", function())
         $("#menu_authenticated").on("click", "#logout", (e)=> {
-            
+
             e.preventDefault();
             var choice = confirm('로그아웃하시겠습니까?');
             if(choice==false)
                 return;
           	else if(choice ==true)
           	return "/main";
-        });	
+        });
     </script>
 </body>
 

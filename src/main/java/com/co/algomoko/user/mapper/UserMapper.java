@@ -12,6 +12,8 @@ public interface UserMapper {
 	public int update(UserVO uservo);
 	public UserVO search(UserVO uservo);
 	public List<UserVO> userlist(UserVO uservo);
-	
+
 	public boolean existByMid(String mid);
+	public UserVO findId(String mid);
+
 }
