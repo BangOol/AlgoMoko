@@ -72,6 +72,13 @@ public class DiaryServiceImpl implements DiaryService {
 		return diaryMapper.rerank(recpvo);
 	}
 
+	@Override
+	public DiaryVO fonlist(String diaryVO) {
+		return diaryMapper.fonlist(diaryVO);
+	}
+
+	
+
 	
 
 }

@@ -23,5 +23,6 @@ public interface DiaryService {
     public String insertdetail(DiaryVO diaryVO);
     public List<DiaryVO> custom(DiaryVO diaryVO);
     public List<RecipeVO> rerank(RecipeVO recpvo);
+    public DiaryVO fonlist(String diaryVO);
 }
 

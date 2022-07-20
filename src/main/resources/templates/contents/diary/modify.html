@@ -160,29 +160,30 @@ span {
 	</div>
 	</div>
 				
-				
+	
 			
 	<!-- 모달창 종료 -->
     
     
-    
-    
+   
+     
     <br><br>
+   
     <div class="checked">
     <div class="form-check">
     <label class="form-check-label">
-    <input type="radio" class="form-check-input" name="membershipRadios" value="aa">아침
+    <input type="radio" class="form-check-input" name="membershipRadios" value="aa" th:checked="${modify[0].dddo eq 'aa'}">아침
     
     <i class="input-helper">
     </div>
     <div class="form-check">
     <label class="form-check-label">
-    <input type="radio" class="form-check-input" name="membershipRadios" value="bb">점심
+    <input type="radio" class="form-check-input" name="membershipRadios" value="bb" th:checked="${modify[0].dddo eq 'bb'}">점심
     <i class="input-helper">
     </div>
     <div class="form-check">
     <label class="form-check-label">
-    <input type="radio" class="form-check-input" name="membershipRadios" value="cc">저녁
+    <input type="radio" class="form-check-input" name="membershipRadios" value="cc" th:checked="${modify[0].dddo eq 'cc'}">저녁
     <i class="input-helper">
     </div>
     <button id="che">찾기</button>
@@ -191,7 +192,7 @@ span {
     <div class="mb-2 row">
     <label for="html5-date-input" class="col-md-2 col-form-label"></label>
     <div class="col-md-2">
-    <input class="form-control" type="date" value="" id="html5-date-input">
+    <input class="form-control" type="date" th:value ="${dat}" id="html5-date-input">
     </div>
     </div>
     </div>
@@ -208,16 +209,29 @@ span {
       <table class="table table-borderless">
           <thead>
               <tr>
-                  <th scope="col"></th>
+                  
                   <th scope="col">재료명</th>
                   <th scope="col">칼로리</th>
                   <th scope="col">수량</th>
               </tr>
           </thead>
           <tbody id ="tbody1">
-            
-              
-
+            <th:block th:each="qweqwe:${modify}">
+	            <tr> 
+	              <th>
+	              <input th:value="${qweqwe.ddname}" class="thth1" type="text" name="ddname" >
+	              </th>
+ 	              <th>
+	              <input th:value="${qweqwe.cal}" class="thth2" type="text" name="cal" >
+	              </th>
+	              <th>
+	              <input th:value="${qweqwe.amount}" class="thth3" type="text" name="amount" >
+	              </th>
+	              <td class="shoping__cart__item__close"><button class="icon_close"></td>
+	              </tr>
+			
+			</th:block>
+			
           </tbody>
           
           
@@ -233,7 +247,7 @@ span {
                 <h3>내용</h3>
                 <br>
 
-               <textarea class="form-control" id="con" rows="5" ></textarea>
+               <input type="textarea" class="form-control" id="con" rows="1" ></textarea>
               </div>
         </div>
       </div>
@@ -266,8 +280,9 @@ span {
   </div>
   
 </div>
-<button type="button" class="btn btn-primary" onclick="/insert" >등록</button>
-<button type="button" class="btn btn-primary " onclick="location.href='todaysic.html'">취소</button>
+</th:block>
+<button type="button" class="btn btn-primary" id="insert" onclick="location.href='sicmain'">등록</button>
+<button type="button" class="btn btn-primary " onclick="location.href='todaysic'">취소</button>
     
 
       <div th:replace="~{fragments/footer}"></div>
@@ -410,35 +425,6 @@ $(function(){
             
    }) 
 			
-   
-
-   
-   $("#che").on("click",function(){
-   		var check = $("input[name='membershipRadios']:checked").val();
-  		 var date = $("#html5-date-input").val();
-  		 var jae = $(".foodname").text();
-  		 var amo = $(".amount").text();
-  		 var con = $("#con").val();
-  		   		 
-  		 console.log(amo);
-  		 $.ajax({
-   		
-   				url: 'insert',  
-             	
-             	data:{check,jae,con,date,amo},
-             	
-
-				   
-   })
-  		 
-  		 
-  		 
-   
-   })
-   		
-		
-  		 
-   
    
             
           

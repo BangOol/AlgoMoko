@@ -18,7 +18,6 @@ public class DiaryVO {
     private String ddname;
     private String f0;
     private String dday;
-    private List<DiaryVO> diarys;
     private int amount;
     private int cal;
     private int carb;
