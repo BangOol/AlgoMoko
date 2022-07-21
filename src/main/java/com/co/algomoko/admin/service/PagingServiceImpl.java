@@ -13,14 +13,12 @@ public class PagingServiceImpl implements PagingService{
 
     @Autowired
     AdminMapper adminMapper;
-    @Override
-    public List<Map<String, Object>> SelectAllList() throws Exception {
-        return adminMapper.SelectAllList();
-    }
+
+
 
     @Override
     public List<Map<String, Object>> SelectAllList(PaginationUser paginationUser) throws Exception {
-        return adminMapper.SelectAllList();
+        return adminMapper.SelectAllList(paginationUser);
     }
 
     @Override

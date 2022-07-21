@@ -30,10 +30,13 @@ class AdminRestControllerTest {
                                      Model model) throws Exception{
         ModelAndView modelAndView = new ModelAndView();
         int listCnt = pagingService.TableCount();
+        currentPage = 1;
+        cntPerPage = 10;
+        pageSize = 10;
+
         PaginationUser paginationUser = new PaginationUser(currentPage, cntPerPage, pageSize);
         paginationUser.setTotalRecordCount(listCnt);
         System.out.println(paginationUser);
-
         modelAndView.addObject("pagination", paginationUser);
         modelAndView.addObject("Alllist", pagingService.SelectAllList(paginationUser));
         modelAndView.setViewName("contents/admin/userFormUserlist");

@@ -31,8 +31,6 @@ public interface AdminMapper {
     List<StatisticVO> bmiRate(); // 회원 BMI 통계
 
 
-    // 페이징
-    public List<Map<String, Object>> SelectAllList() throws Exception;
 
     //Paging
     public List<Map<String, Object>> SelectAllList(PaginationUser paginationUser) throws Exception;
