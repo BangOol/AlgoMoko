@@ -24,5 +24,7 @@ public interface DiaryService {
     public List<DiaryVO> custom(DiaryVO diaryVO);
     public List<RecipeVO> rerank(RecipeVO recpvo);
     public DiaryVO fonlist(String diaryVO);
+    public DiaryVO diaryde(DiaryVO diaryVO);
+	 public DiaryVO detade(DiaryVO diaryVO);
 }
 

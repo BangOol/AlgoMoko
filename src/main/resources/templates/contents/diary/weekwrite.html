@@ -119,6 +119,9 @@ span {
    margin-bottom: 10px;
    margin-top: -10px;
 }
+.thth{
+		width:50px
+}
 </style>
 
     
@@ -166,32 +169,32 @@ span {
     
     
     
-    
+    <form method="post" action="insert" name="frm">
     <br><br>
     <div class="checked">
     <div class="form-check">
     <label class="form-check-label">
-    <input type="radio" class="form-check-input" name="membershipRadios" value="aa">아침
+    <input type="radio" class="form-check-input" name="dddo" value="aa">아침
     
     <i class="input-helper">
     </div>
     <div class="form-check">
     <label class="form-check-label">
-    <input type="radio" class="form-check-input" name="membershipRadios" value="bb">점심
+    <input type="radio" class="form-check-input" name="dddo" value="bb">점심
     <i class="input-helper">
     </div>
     <div class="form-check">
     <label class="form-check-label">
-    <input type="radio" class="form-check-input" name="membershipRadios" value="cc">저녁
+    <input type="radio" class="form-check-input" name="dddo" value="cc">저녁
     <i class="input-helper">
     </div>
-    <button id="che">찾기</button>
+    
     
     
     <div class="mb-2 row">
     <label for="html5-date-input" class="col-md-2 col-form-label"></label>
     <div class="col-md-2">
-    <input class="form-control" type="date" value="" id="html5-date-input">
+    <input class="form-control" type="date" name="ddate" value="" id="html5-date-input">
     </div>
     </div>
     </div>
@@ -208,14 +211,15 @@ span {
       <table class="table table-borderless">
           <thead>
               <tr>
-                  <th scope="col"></th>
-                  <th scope="col">재료명</th>
-                  <th scope="col">칼로리</th>
-                  <th scope="col">수량</th>
+                  
+                  <th class="thth1" scope="col">재료명</th>
+                  <th class="thth2" scope="col">칼로리</th>
+                  <th class="thth3" scope="col">수량</th>
               </tr>
           </thead>
           <tbody id ="tbody1">
             
+                       
               
 
           </tbody>
@@ -225,7 +229,7 @@ span {
       
       
     </div>
-    <div class="col-sm-5 col-xl-6">
+    <div class="col-sm-2 col-xl-3" style="margin-left: 200px;">
       <div class="tab-content">
         
          
@@ -233,7 +237,7 @@ span {
                 <h3>내용</h3>
                 <br>
 
-               <textarea class="form-control" id="con" rows="5" ></textarea>
+               <input type = textarea class="form-control" name="ucon" rows="15" cols="30" ></textarea>
               </div>
         </div>
       </div>
@@ -266,9 +270,9 @@ span {
   </div>
   
 </div>
-<button type="button" class="btn btn-primary" id="insert" onclick="location.href='sicmain'">등록</button>
-<button type="button" class="btn btn-primary " onclick="location.href='todaysic'">취소</button>
-    
+<button type="button" class="btn btn-primary" onclick="submit()" id="che">등록</button>
+<button type="button" class="btn btn-primary " onclick="location.href='todaysic.html'">취소</button>
+    </form>
 
       <div th:replace="~{fragments/footer}"></div>
 
@@ -285,7 +289,7 @@ span {
 <script>
 
 	  
-          
+         
               
   
 
@@ -327,18 +331,8 @@ span {
             });
 
 $(function(){
+ 
 
-
-
-	
-  
-  
-    $("tr").on("click", ".icon_close" ,function(){
-          
-     	$(this).closest("tr").remove();
-     
-    })
-  
 
 
 
@@ -378,58 +372,46 @@ $(function(){
                         
                      })
                   })
-               $("#modalbtn").on("click", function(){
+                  
+                  
+                  
+            $("#modalbtn").on("click", function(){
                   var tbody = $('#tbody1');
                    
-                var tr =  $('<tr>');
-               var th = $('<th>').attr('scope','row').addClass('ssuumm');
-                 var td1 = $('<td>').html(gin).addClass('foodname');
-                 var td2 = $('<td>').html(gic);
-                 var td3 = $('<td>').html(gia).addClass('amount');
-                 var td4 = $('<td>').addClass('shoping__cart__item__close');
-                 var button = $('<button>').addClass('icon_close');
-                 button.on("click",function(){
+               var tr =  $('<tr>');
+               var th1 = $('<th>').append($('<input>').val(gin).addClass('thth1').attr('type','text').attr('name','ddname'));
+               var th2 = $('<th>').append($('<input>').val(gic).addClass('thth2').attr('type','text').attr('name','cal'));
+               var th3 = $('<th>').append($('<input>').val(gia).addClass('thth3').attr('type','text').attr('name','amount'));
+               var td4 = $('<td>').addClass('shoping__cart__item__close');
+               var button = $('<button>').addClass('icon_close');
+               var td5 = $(td4).append(button);
+               button.on("click",function(){
                  	console.log($(this));
                    $(this).closest("tr").remove();
                  })
-                 var td5 = $(td4).append(button);
-            var a = $(tr).append(th);
-            var b = $(tr).append(td1,td2,td3,td5);
-            var c = $(tbody).append(a);
+				 
+            
+            var b = $(tr).append(th1,th2,th3,td5);
+            
             var d = $(tbody).append(b);
-                     
-                  
-                                
+             
               
                })
                        
 
                
             })
-             
+
+            
+           
+            
             
    }) 
 			
    
 
    
-      $("#insert").on("click",function(){
-   		var check = $("input[name='membershipRadios']:checked").val();
-  		 var date = $("#html5-date-input").val();
-  		 var jae = $(".foodname").text();
-  		 var amo = $(".amount").text();
-  		 var con = $("#con").val();
-  		   		 
-  		 location.href='insert?check='+check+'&date='+date+'&jae='+jae+'&amo='+amo+'&con='+con;
-             	
-
-				   
-   })
-  		 
-  		 
-  		 
-   
- 
+  
    		
 		
   		 

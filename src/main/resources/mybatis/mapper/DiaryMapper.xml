@@ -16,7 +16,7 @@ where TO_CHAR(a.ddate,'iw')  =TO_CHAr(to_date(sysdate,'yy-MM-dd'),'iw') and a.dd
 <select id="sicDay" resultType="DiaryVO">
 select b.mid, a.ddname,a.dddo,a.amount, a.cal, a.carb, a.prot, a.fat, trunc(a.ddate) as ddate, to_char(a.ddate, 'day') as dday, b.ucon
 from diary_detail a, diary b
-where TO_CHAR(a.ddate,'iw')  =TO_CHAr(to_date(sysdate,'yy-MM-dd'),'iw') and a.dddo=b.dddo and a.mid = b.mid and TRUNC(a.ddate) = trunc(b.ddate) and trunc(sysdate)=TRUNC(a.ddate) and b.mid = #{mid}
+where TO_CHAR(a.ddate,'iw')  =TO_CHAr(to_date(sysdate,'yy-MM-dd'),'iw') and a.dddo=b.dddo and a.mid = b.mid and TRUNC(a.ddate) = trunc(b.ddate) and trunc(#{ddate})=TRUNC(a.ddate) and b.mid = #{mid}
 order by b.ucon
 </select>
 <!-- 총 칼로리 -->
@@ -38,7 +38,7 @@ order by b.ucon
 <select id="con" resultType="DiaryVO">
 select ucon
 from diary
-where mid= #{mid} and TRUNC(ddate) = trunc(sysdate) and dddo=#{dddo}
+where mid= #{mid} and TRUNC(ddate) = trunc(#{ddate}) and dddo=#{dddo}
 </select>
 <!-- 주간칼로리 -->
 <select id="jukcal" resultType="DiaryVO">
@@ -78,5 +78,14 @@ select*from recipe order by hit desc
 		where
 		ddname = #{ddname}
 	</select>
+
+<select id="diaryde" resultType="DiaryVO">
+delete diary
+where mid=#{mid} and TRUNC(ddate) = trunc(#{ddate}) and dddo=#{dddo}
+</select>
+<select id="detade" resultType="DiaryVO">
+delete diary_detail
+where mid=#{mid} and TRUNC(ddate) = trunc(#{ddate}) and dddo=#{dddo}
+</select>
 
 </mapper>

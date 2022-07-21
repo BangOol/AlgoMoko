@@ -117,9 +117,7 @@
          margin-top: -10px;
       }
 
-      .thththth {
-         width: 192px;
-      }
+
    </style>
 
 
@@ -165,28 +163,26 @@
    <!-- 모달창 종료 -->
 
 
-
-
    <br><br>
-
+ <form method="post" action="modifyde" name="frm" id="frm">
    <div class="checked">
       <div class="form-check">
 
          <label class="form-check-label">
-            <input type="radio" class="form-check-input" name="membershipRadios" value="aa"
+            <input type="radio" class="form-check-input" name="dddo" value="aa" onclick="return(false);"
                th:checked="${modify[0].dddo eq 'aa'}">아침
 
             <i class="input-helper">
       </div>
       <div class="form-check">
          <label class="form-check-label">
-            <input type="radio" class="form-check-input" name="membershipRadios" value="bb"
+            <input type="radio" class="form-check-input" name="dddo" value="bb" onclick="return(false);"
                th:checked="${modify[0].dddo eq 'bb'}">점심
             <i class="input-helper">
       </div>
       <div class="form-check">
          <label class="form-check-label">
-            <input type="radio" class="form-check-input" name="membershipRadios" value="cc"
+            <input type="radio" class="form-check-input" name="dddo" value="cc" onclick="return(false);"
                th:checked="${modify[0].dddo eq 'cc'}">저녁
             <i class="input-helper">
       </div>
@@ -196,7 +192,7 @@
       <div class="mb-2 row">
          <label for="html5-date-input" class="col-md-2 col-form-label"></label>
          <div class="col-md-2">
-            <input class="form-control" type="date" th:value="${dat}" id="html5-date-input">
+            <input class="form-control" readonly type="date" name="ddate" th:value="${dat}" id="html5-date-input">
          </div>
       </div>
    </div>
@@ -213,10 +209,9 @@
             <table class="table table-borderless">
                <thead>
                   <tr>
-                     <th></th>
-                     <th>재료명</th>
-                     <th>칼로리</th>
-                     <th>수량</th>
+                  <th scope="col">재료명</th>
+                  <th scope="col">칼로리</th>
+                  <th scope="col">수량</th>
                   </tr>
                </thead>
                <tbody id="tbody1">
@@ -248,8 +243,8 @@
                <div class="product__details__tab__desc">
                   <span>내용
                      <br>
-                     <input type=textarea class="form-control" name="ucon" rows="1" cols="30"
-                        style="width : 200px;"></textarea></span>
+                     <input th:value="${con[0].ucon}" type=textarea class="form-control" name="ucon" rows="1" cols="30" 
+                        style="width : 200px;"></span>
                </div>
             </div>
          </div>
@@ -282,9 +277,10 @@
 
    </div>
       </th:block>
-      <button type="button" class="btn btn-primary" id="insert" onclick="location.href='sicmain'">등록</button>
+      <button type="submit" class="btn btn-primary" id="insert">수정</button>
+      <button type="button" class="btn btn-primary" onclick="diaryde()" id="insert">삭제</button>
       <button type="button" class="btn btn-primary " onclick="location.href='todaysic'">취소</button>
-
+ </form>
 
       <div th:replace="~{fragments/footer}"></div>
 
@@ -389,29 +385,27 @@
 
                   })
                })
-               $("#modalbtn").on("click", function () {
+               $("#modalbtn").on("click", function(){
                   var tbody = $('#tbody1');
-
-                  var tr = $('<tr>');
-                  var th = $('<th>').attr('scope', 'row').addClass('ssuumm');
-                  var td1 = $('<td>').html(gin).addClass('foodname');
-                  var td2 = $('<td>').html(gic);
-                  var td3 = $('<td>').html(gia).addClass('amount');
-                  var td4 = $('<td>').addClass('shoping__cart__item__close');
-                  var button = $('<button>').addClass('icon_close');
-                  button.on("click", function () {
-                     console.log($(this));
-                     $(this).closest("tr").remove();
-                  })
-                  var td5 = $(td4).append(button);
-                  var a = $(tr).append(th);
-                  var b = $(tr).append(td1, td2, td3, td5);
-                  var c = $(tbody).append(a);
-                  var d = $(tbody).append(b);
-
-
-
-
+                   
+               var tr =  $('<tr>');
+               var th1 = $('<th>').append($('<input>').val(gin).addClass('thth1').attr('type','text').attr('name','ddname'));
+               var th2 = $('<th>').append($('<input>').val(gic).addClass('thth2').attr('type','text').attr('name','cal'));
+               var th3 = $('<th>').append($('<input>').val(gia).addClass('thth3').attr('type','text').attr('name','amount'));
+               var td4 = $('<td>').addClass('shoping__cart__item__close');
+               var button = $('<button>').addClass('icon_close');
+               var td5 = $(td4).append(button);
+               button.on("click",function(){
+                 	console.log($(this));
+                   $(this).closest("tr").remove();
+                 })
+				 
+            
+            var b = $(tr).append(th1,th2,th3,td5);
+            
+            var d = $(tbody).append(b);
+             
+              
                })
 
 
@@ -420,6 +414,11 @@
 
 
          })
+         
+         function diaryde(){
+        $("#frm").attr("action", "delete").submit();
+        
+    }
       </script>
 
 
