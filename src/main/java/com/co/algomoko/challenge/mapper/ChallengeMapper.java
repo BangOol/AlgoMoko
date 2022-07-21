@@ -32,4 +32,8 @@ public interface ChallengeMapper {
 	// 진행중인 챌린지 목록
 	public List<MyChallengeVO> mcList();
 	
+	
+	// 챌린지 인증 페이지
+	
+	
 }
