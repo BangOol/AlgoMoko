@@ -6,24 +6,15 @@
 	select *
 	from challenge
 	where cno = #{cno}
-	</select>
-	<!-- 챌린지 검색 -->
-	<select id="cSearch" resultType="com.co.algomoko.challenge.domain.ChallengeVO">
-	select cno, ctitle, cdday, filepath
-	from challenge
-	where ctitle like '%' || #{ctitle} || '%' 
-	</select>
+	</select>	
 	<!-- 챌린지 목록 -->
 	<select id="cList" resultType="com.co.algomoko.challenge.domain.ChallengeVO">
-	select *
-	from challenge
-	order by cno
+	<![CDATA[select *
+		 	 from (select * from challenge
+		 		   where ctitle like '%' || #{ctitle,jdbcType=VARCHAR} || '%'
+		 		   order by cno)
+			 where rownum <=6]]>
 	</select>
-	<!-- 진행중인 챌린지 목록 -->
-	<!-- <select id="mcList" resultType="com.co.algomoko.challenge.domain.MyChallengeVO">
-	select *
-	from my_challenge
-	</select> -->
 	<!-- 챌린지 작성 -->
 	<insert id="cInsert" parameterType="com.co.algomoko.challenge.domain.ChallengeVO">
 	insert into challenge (cno, ctitle, ccon, cdday, filepath, filename)

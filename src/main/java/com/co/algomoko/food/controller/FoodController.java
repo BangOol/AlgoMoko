@@ -23,7 +23,7 @@ public class FoodController {
 	FoodMapper dao;
 
 	@GetMapping("food")
-	public String food(@RequestParam(value = "ing", required = false) String ing, Model model) {		
+	public String food(@RequestParam(value="ing", required=false) String ing, Model model) {		
 		if (ing != null) {
 			// 검색어가 있으면 검색해서 띄우기
 			FoodVO foodVO = new FoodVO();

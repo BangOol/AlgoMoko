@@ -30,4 +30,5 @@
 				 from (select * from food order by fview desc)
 				 where rownum <= 6]]>
 	</select>		
+	
 </mapper>
