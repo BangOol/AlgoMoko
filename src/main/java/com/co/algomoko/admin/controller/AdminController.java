@@ -4,6 +4,7 @@ import com.co.algomoko.admin.domain.AdminVO;
 import com.co.algomoko.admin.paging.PaginationUser;
 import com.co.algomoko.admin.service.AdminService;
 import com.co.algomoko.admin.service.PagingService;
+import com.co.algomoko.user.domain.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -43,12 +44,13 @@ public class AdminController {
     public ModelAndView moveUserList(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage,
                                @RequestParam(value = "cntPerPage", defaultValue = "10") int cntPerPage,
                                @RequestParam(value = "pageSize", defaultValue = "10") int pageSize,
-                               Map<String, Object> map,
-                               Model model) throws Exception{
+                               @RequestParam(value = "type", defaultValue = "null") String type,
+                               @RequestParam(value = "keyword", defaultValue = "null") String keyword) throws Exception{
         ModelAndView modelAndView = new ModelAndView();
-        int listCnt = pagingService.TableCount(); // 전체 회원 수
+        // 전체 회원 수
+        int listCnt = pagingService.TableCount();
         //view 단에서 받은 현재 페이지, 페이지 당 출력 페이지 개수, 화면 하단 페이지 사이즈 가져와서 입력.
-        PaginationUser paginationUser = new PaginationUser(currentPage, cntPerPage, pageSize);
+        PaginationUser paginationUser = new PaginationUser(currentPage, cntPerPage, pageSize, type, keyword);
 
         /*
         전체 회원 수를 입력하여 0보다 컸을 때
@@ -56,8 +58,6 @@ public class AdminController {
         이전 페이지 존재 여부, 다음 페이지 존재 여부를 확인하고, paginationUser에 넣는다.
         */
         paginationUser.setTotalRecordCount(listCnt);
-        System.out.println(paginationUser);
-
         modelAndView.addObject("pagination", paginationUser); // 값을 paginantion으로 뿌림.
         modelAndView.addObject("Alllist", pagingService.SelectAllList(paginationUser)); // 회원 전체 데이터를 뿌림.
         modelAndView.setViewName("contents/admin/userFormUserlist");

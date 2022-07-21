@@ -24,21 +24,16 @@
         ,GET_CODE(B0) AS B0
         FROM MEMBERS
         )
-        <if test="firstRecordIndex !=null and lastRecordIndex != null">
+        <if test="firstRecordIndex != null and lastRecordIndex != null">
             WHERE ROW_NUM BETWEEN #{firstRecordIndex} AND
             #{lastRecordIndex}
         </if>
-    </select>
-    <select id="findUserList" resultMap="members" resultType="com.co.algomoko.admin.domain.AdminVO">
-        SELECT MID, SEX, NICK,GET_CODE(B0) AS B0
-        FROM MEMBERS
-        WHERE
         <choose>
             <when test="type != null and type.equals('email')">
-                MID LIKE '%' || #{keyword} || '%'
+                AND MID LIKE '%' || #{keyword} || '%'
             </when>
             <when test="type != null and type.equals('nick')">
-                NICK LIKE '%' || #{keyword} || '%'
+                AND NICK LIKE '%' || #{keyword} || '%'
             </when>
         </choose>
     </select>
