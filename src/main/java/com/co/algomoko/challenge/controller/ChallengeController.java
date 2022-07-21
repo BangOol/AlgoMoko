@@ -24,23 +24,18 @@ public class ChallengeController {
 	@Autowired
 	ChallengeMapper dao;
 
-	// 챌린지 검색
-//	@GetMapping("ctitle")
-//	public String challenge(@RequestParam("ctitle") String ctitle, Model model) {
-//		if(ctitle != null) {
-//			ChallengeVO cVO = new ChallengeVO();
-//			cVO.setCtitle(ctitle);
-//			List<ChallengeVO> result = dao.cSearch(cVO);
-//			model.addAttribute("ctitle", result);
-//		}
-//		return "redirect:/challenge";
-//	}
 	// 챌린지 목록
 	@GetMapping("")
-	public String challenge(ChallengeVO cVO, Model model) {
-
+	public String challenge(@RequestParam(value = "ctitle", required = false) String ctitle, Model model, ChallengeVO cVO) {
+		// 검색
+		if (ctitle != null) {
+			 
+			cVO.setCtitle(ctitle);
+			List<ChallengeVO> result = dao.cList(cVO);
+			model.addAttribute("search", result);
+		}		
 		List<ChallengeVO> cList = dao.cList(cVO);
-		model.addAttribute("cList", cList);
+		model.addAttribute("cList", cList);	
 
 		return "contents/challenge/challenge";
 	}
@@ -59,15 +54,9 @@ public class ChallengeController {
 
 	// 챌린지 작성
 	@PostMapping("cWrite")
-	public String cInsert(@RequestParam("filename2") MultipartFile file, ChallengeVO cVO) throws Exception { // 글 작성시
-																												// file을
-																												// 추가하기
-																												// 위해
-																												// MultipartFile
-																												// 추가
+	public String cInsert(@RequestParam("filename2") MultipartFile file, ChallengeVO cVO) throws Exception {
 		// file == multi 스트링변환
 		String projectpath = System.getProperty("user.dir") + "/src/main/resources/static/img/chl"; // user.dir은 프로젝트
-																									// 경로를 담아줌
 		UUID uuid = UUID.randomUUID(); // 랜덤으로 이름 생성
 		String filename = uuid + "_" + file.getOriginalFilename(); // 파일 이름은 UUID에 있는 랜덤값 + 원래 파일 이름
 		File saveFile = new File(projectpath, filename); // 위에 적힌 경로에, name으로 저장
