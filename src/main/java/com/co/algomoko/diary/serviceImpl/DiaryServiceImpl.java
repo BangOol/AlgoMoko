@@ -77,6 +77,17 @@ public class DiaryServiceImpl implements DiaryService {
 		return diaryMapper.fonlist(diaryVO);
 	}
 
+	@Override
+	public DiaryVO diaryde(DiaryVO diaryVO) {
+		return diaryMapper.diaryde(diaryVO);
+	}
+	
+
+	@Override
+	public DiaryVO detade(DiaryVO diaryVO) {
+		return diaryMapper.detade(diaryVO);
+	}
+
 	
 
 	

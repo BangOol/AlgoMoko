@@ -20,4 +20,6 @@ public interface DiaryMapper {
 	 public List<DiaryVO> custom(DiaryVO diaryVO);
 	 public List<RecipeVO> rerank(RecipeVO recpvo);
 	 public DiaryVO fonlist(String ddnames);
+	 public DiaryVO diaryde(DiaryVO diaryVO);
+	 public DiaryVO detade(DiaryVO diaryVO);
 }

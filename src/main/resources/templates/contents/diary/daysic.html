@@ -11,6 +11,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Ogani | Template</title>
+  
+    
+    
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
@@ -58,153 +61,119 @@
 
         <!-- Shoping Cart Section Begin -->
 
-	
+        
+
       <p id="date" th:text="${std}"><p>
-        <section class="shoping-cart spad">
+        <section class="shoping-cart spad" style="padding-top: 10px;">
           <div class="container">
               <div class="row">
                   <div class="col-lg-12">
                       <div class="shoping__cart__table">
                       
-                          <table>
+                          <table style="width:600px; margin-left:300px;">
                               <thead>
                                   <tr>
                                       <th></th>
-										<th>kcal</th>
+									  <th>kcal</th>
                                       <th>인분(양)</th>
                                       <th>3대영양소</th>
                                   </tr>
-                                  
                               </thead>
                                
-                              
-                              
-                              
                               <thead>
-                                  <tr>
+                                  <tr style="width:300px;">
                                       <th class="shoping__product" >아침</th>
-
                                   </tr>
                               </thead>
+                              
                               <tbody data-dddo='aa'>
-                             
-                              <th:block th:each="today:${todaysic}">
+                             <th:if="${#lists.size(aade) != 0}">
+                              <th:block th:each="aade:${aade}">
                               
-                              <tr th:if= "${today.dddo == 'aa'}" class="detail">
+                              <tr class="detail">
                               
-                              <td th:text="${today.ddname}" class="shoping__cart__item">
-                                          <img src="img/cart/cart-1.jpg" alt="">
-                                          <h5></h5>
-                                      </td>
-                                      <td <td th:text="|${today.cal}kcal|"  class="shoping__cart__price">
-                                          
-                                      </td>
-
-                                      <td th:text="${today.amount}" class="shoping__cart__total">
-                                          
-                                      </td>
-                                      </td>
-
-                                      <td th:text="|${today.carb},${today.prot},${today.fat}|" class="shoping__cart__total">
-                                          
-                                      </td>
+                              <td th:text="${aade.ddname}" class="shoping__cart__total" >
+                                      <img src="img/cart/cart-1.jpg" alt=""> </td>
+                                      <td <td th:text="|${aade.cal}kcal|"  class="shoping__cart__total"> </td>
+                                      <td th:text="${aade.amount}" class="shoping__cart__total"></td></td>
+                                      <td th:text="|${aade.carb},${aade.prot},${aade.fat}|" class="shoping__cart__total"></td>
                                   </tr>
                              </th:block>
-                             </tbody>
+                             
+                             <tr th:unless="${#lists.size(aade) != 0}" class="detail insert">
+                                  <td><img src="/img/plus.jpg" style="margin-left:250px; width: 100px;"></td>
+                                  </tr>
                              
                              <thead>
                                   <tr>
                                       <th class="shoping__product" >점심</th>
-
                                   </tr>
                               </thead>
+                              
                               <tbody data-dddo='bb'>
-                              <th:block th:each="today:${todaysic}" >
-                              <tr th:if= "${today.ddname == null }" class="detail">
-                              <td class="shoping__cart__price"><a href="write"><img src="img/list-icon.png" style="width: 200px; height: 100px;"></a></td>
-                              <tr th:if="${today.dddo == 'bb'}" class="detail">
-                              <td th:text="${today.ddname}" class="shoping__cart__item">
-                                          <img src="img/cart/cart-1.jpg" alt="">
-                                          <h5></h5>
-                                      </td>
-                                      <td <td th:text="|${today.cal}kcal|"  class="shoping__cart__price">
-                                          
-                                      </td>
-
-                                      <td th:text="${today.amount}" class="shoping__cart__total">
-                                          
-                                      </td>
-                                      <td th:text="|${today.carb},${today.prot},${today.fat}|" class="shoping__cart__total">
-                                          
-                                      </td>
+                              <th:if="${#lists.size(aade) != 0}">
+                               <th:block th:each="bbde:${bbde}">
+                              
+                              <tr class="detail">
+                              
+                              <td th:text="${bbde.ddname}" class="shoping__cart__item" style="text-align:center;">
+                                          <img src="img/cart/cart-1.jpg" alt=""></td>
+                                      <td <td th:text="|${bbde.cal}kcal|"  class="shoping__cart__total"></td>
+                                      <td th:text="${bbde.amount}" class="shoping__cart__total"></td></td>
+                                      <td th:text="|${bbde.carb},${bbde.prot},${bbde.fat}|" class="shoping__cart__total"></td>
                                   </tr>
                              </th:block>
+                             
+                             <tr th:unless="${#lists.size(bbde) != 0}" class="detail insert">
+                                  <td><img src="/img/plus.jpg" style="margin-left:250px; width: 100px;"></td>
+                                  </tr>
                              </tbody>
                              
                              <thead>
                                   <tr>
-                                      <th class="shoping__product" >저녁</th>
-										<td></td>
+                                      <th class="shoping__product">저녁</th>
                                   </tr>
                               </thead>
+                              
                               <tbody data-dddo='cc'>
-                               <td></td>
-                              <th:block th:each="today:${todaysic}" >
+                              <th:if="${#lists.size(aade) != 0}">
+                               <th:block th:each="ccde:${ccde}">
+                              	
+                              	<tr class="detail">
                               
-                              <tr th:if="${today.dddo == 'cc'}" class="detail">
-                              
-                              <td th:text="${today.ddname}" class="shoping__cart__item">
-                                          <img src="img/cart/cart-1.jpg" alt="">
-                                          
-                                          <h5></h5>
-                                      </td>
-                                      <td <td th:text="|${today.cal}kcal|"  class="shoping__cart__price">
-                                          
-                                      </td>
-
-                                      <td th:text="${today.amount}" class="shoping__cart__total">
-                                          
-                                      </td>
-                                      <td th:text="|${today.carb},${today.prot},${today.fat}|" class="shoping__cart__total">
-                                          
-                                      </td>
+                              <td th:text="${ccde.ddname}" class="shoping__cart__total" style="text-align:center;">
+                                      <img src="img/cart/cart-1.jpg" alt=""></td>
+                                      <td <td th:text="|${ccde.cal}kcal|"  class="shoping__cart__total"></td>
+                                      <td th:text="${ccde.amount}" class="shoping__cart__total"></td></td>
+                                      <td th:text="|${ccde.carb},${ccde.prot},${ccde.fat}|" class="shoping__cart__total"></td>
                                   </tr>
                              </th:block>
                              
+                             <tr th:unless="${#lists.size(ccde) != 0}" class="detail insert">
+                                  <td><img src="/img/plus.jpg" style="margin-left:250px; width: 100px;"></td>
+                                  </tr>
                              </tbody>
+                             
                              <thead>
                                   <tr>
-                                      <th class="shoping__product" >총 칼로리</th>
-
+                                  <th></th>
+                                      <th class="shoping__product" style="text-align:center;">총 칼로리</th>
                                   </tr>
                               </thead>
+                              
                               <tbody>
-                              
                               <th:block th:each="result:${resultCal}" >
-                              
-                              
-                              <tr th:if="${todaysic[0].ddate==result.ddate}" >
-                              <td th:text="${result.sumcal}" class="shoping__cart__item">
-                                          
-                                          <img src="img/cart/cart-1.jpg" alt="">
-                                          <h5></h5>
-                                      </td>
-                                      
-                                      
+                              <tr>
+                              <th></th>
+                              <th th:text="${result.sumcal}" class="shoping__product" style="text-align:center;">
+                                          <img src="img/cart/cart-1.jpg" alt=""></th>
                                   </tr>
-                                   
                              </th:block>
-                                                         
-                                  
-                               
                           </table>
-                          <button class="btn btn-primary blog__btn" onclick="location.href='modify'">수정</button>
                       </div>
                   </div>
               </div>
              
-               
-                 
               </div>
           </div>
       </section>
@@ -226,12 +195,11 @@
 			var date = $('#date').text()
 			
                 location.href='/modify?dddo='+no+'&date='+date;
-                    
                 
-               
-
 
             })
+            
+            
 			})
         	
         

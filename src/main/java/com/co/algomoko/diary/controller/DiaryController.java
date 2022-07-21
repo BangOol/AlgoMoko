@@ -94,16 +94,20 @@ public class DiaryController {
 	@RequestMapping(value="daysic") 
     public String daysic(@RequestParam("date") String date, Model model, DiaryVO diaryVO, HttpServletResponse response)
     	throws IOException, ParseException{
+		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String strDate = date;
 		String std = date;
 		Date date1 = new Date(sdf.parse(strDate).getTime());
-		
 		diaryVO.setMid("user13");
 		diaryVO.setDdate(date1);
-		System.out.println(std);
+		diaryVO.setDddo("aa");
+		model.addAttribute("aade",dao.detail(diaryVO));
+		diaryVO.setDddo("bb");
+		model.addAttribute("bbde",dao.detail(diaryVO));
+		diaryVO.setDddo("cc");
+		model.addAttribute("ccde",dao.detail(diaryVO));
 		model.addAttribute("std",std);
-		model.addAttribute("todaysic",dao.custom(diaryVO));
 		model.addAttribute("resultCal",dao.resultCal(diaryVO));
 		
 		
@@ -138,13 +142,52 @@ public class DiaryController {
 		diaryVO.setDdate(date1);
 		diaryVO.setDddo(dddo);
 		 
-		System.out.println(dao.detail(diaryVO));
-		model.addAttribute("modify",dao.detail(diaryVO));
 		
+		model.addAttribute("modify",dao.detail(diaryVO));
+		model.addAttribute("con",dao.con(diaryVO));
 		model.addAttribute("dat",date);
 		return "contents/diary/modify";
         
     }
+	@RequestMapping("/modifyde")
+public String modifyde(HttpServletResponse response,DiaryVO diaryVO)throws IOException, ParseException { 
+		diaryVO.setMid("user13");
+		dao.diaryde(diaryVO);
+		dao.detade(diaryVO);
+		
+		dao.insert(diaryVO);
+		String[] ddnames = diaryVO.getDdname().split(",");
+		List<String> ddnameList = new ArrayList<String>();	
+		DiaryVO res = new DiaryVO();
+		for(int i=0;i< ddnames.length;i++) {
+			
+			ddnameList.add(ddnames[i]);
+			
+			
+		}
+
+		  for(int i=0;i< ddnameList.size();i++) { 
+			  res = dao.fonlist(ddnames[i]);
+			  
+			  res.setMid("user13");
+			  res.setDdate(diaryVO.getDdate());
+			  res.setDddo(diaryVO.getDddo());
+			  dao.insertdetail(res);
+		  }
+
+                return "contents/diary/succ"; 
+
+	}
+	@RequestMapping("/delete")
+public String delete(HttpServletResponse response,DiaryVO diaryVO)throws IOException, ParseException { 
+		diaryVO.setMid("user13");
+		dao.diaryde(diaryVO);
+		dao.detade(diaryVO);
+		
+		
+                return "contents/diary/succ"; 
+
+	}
 	
 	@RequestMapping("weekwrite")
     public String weekwrite(){

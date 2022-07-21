@@ -212,9 +212,9 @@ span {
           <thead>
               <tr>
                   
-                  <th class="thth" scope="col">재료명</th>
-                  <th class="thth" scope="col">칼로리</th>
-                  <th class="thth" scope="col">수량</th>
+                  <th class="thth1" scope="col">재료명</th>
+                  <th class="thth2" scope="col">칼로리</th>
+                  <th class="thth3" scope="col">수량</th>
               </tr>
           </thead>
           <tbody id ="tbody1">
@@ -273,7 +273,7 @@ span {
 <button type="button" class="btn btn-primary" onclick="submit()" id="che">등록</button>
 <button type="button" class="btn btn-primary " onclick="location.href='todaysic.html'">취소</button>
     </form>
-<button id="qwer">qweqweqwe</button>
+
       <div th:replace="~{fragments/footer}"></div>
 
     <!-- Js Plugins -->
@@ -394,16 +394,7 @@ $(function(){
             var b = $(tr).append(th1,th2,th3,td5);
             
             var d = $(tbody).append(b);
-                     
-                  
-                 
-         /*  <tr>
-            
-            <th><input class="thth" type=text readonly value="아니"></th>
-            <th><input class="thth" type=text readonly value="아니"></th>
-            <th><input class="thth" type=text readonly value="아니"></th>
-            
-            </tr>*/               
+             
               
                })
                        
