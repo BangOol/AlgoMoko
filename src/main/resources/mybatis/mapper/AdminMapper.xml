@@ -30,10 +30,10 @@
         </if>
         <choose>
             <when test="type != null and type.equals('email')">
-                AND MID LIKE '%' || #{keyword} || '%'
+                AND MID LIKE '%'||#{keyword}||'%'
             </when>
             <when test="type != null and type.equals('nick')">
-                AND NICK LIKE '%' || #{keyword} || '%'
+                AND NICK LIKE '%'||#{keyword}||'%'
             </when>
         </choose>
     </select>

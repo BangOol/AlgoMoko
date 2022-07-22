@@ -47,11 +47,15 @@ public class AdminController {
                                @RequestParam(value = "type", defaultValue = "null") String type,
                                @RequestParam(value = "keyword", defaultValue = "null") String keyword) throws Exception{
         ModelAndView modelAndView = new ModelAndView();
+
         // 전체 회원 수
         int listCnt = pagingService.TableCount();
         //view 단에서 받은 현재 페이지, 페이지 당 출력 페이지 개수, 화면 하단 페이지 사이즈 가져와서 입력.
-        PaginationUser paginationUser = new PaginationUser(currentPage, cntPerPage, pageSize, type, keyword);
 
+
+        PaginationUser paginationUser = new PaginationUser(currentPage, cntPerPage, pageSize);
+        paginationUser.setKeyword(keyword);
+        paginationUser.setType(type);
         /*
         전체 회원 수를 입력하여 0보다 컸을 때
         전체 페이지 수, 리스트의 첫 페이지 번호, 마지막 번호, ROW_NUM의 첫, 마지막 값,
