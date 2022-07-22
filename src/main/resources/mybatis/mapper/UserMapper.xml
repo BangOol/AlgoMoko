@@ -26,13 +26,21 @@
 		SELECT COUNT(*) FROM MEMBERS WHERE MID = #{mid}
 	</select>
 
-
-
+	<!-- login -->
+	<select id="login" resultType="UserVO">
+		SELECT COUNT(*) FROM MEMBERS WHERE MID = #{mid}
+	</select>
+	
+	
 	<delete id="delete">
 		DELETE FROM MEMBERS WHERE MID = #{mid}
 	</delete>
 
 	<select id="findId" resultType="UserVO">
+		SELECT * FROM MEMBERS WHERE MID=#{mid}
+	</select>
+	
+	<select id="findId1" resultType="Account">
 		SELECT * FROM MEMBERS WHERE MID=#{mid}
 	</select>
 

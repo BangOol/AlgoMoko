@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html  lang="ko"
-       xmlns:th= "http://www.w3.org/1999/xhtml" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+       xmlns:th= "http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
        >
-
+<!-- xmlns:th="http://www.thymeleaf.org"  -->
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -32,10 +32,12 @@
                     </div>
                     <div sec:authorize="isAuthenticated()" class="header__top__right" id="menu_authenticated">
                         <div class="header__top__right__auth" style="font-family: 'Jua'">
-                            <a href="logout" style="float: right; margin : 0 0 0 10px" id="logout"><i class="fa fa-user" ></i>Logout</a>
-                            <a href="#" style="float: right; margin : 0 10px">#{nick} 님, 반갑습니다!</a>
-                            <a href="mypage" style="float: right; margin : 0 10px">내정보</a>
-                            <a href="adminpage" style="float: right; margin : 0 10px">관리자정보</a>
+                        	<form id="logoutf" action="/logout" method="get"></form>
+                            <a href="#"  style="float: right; margin : 0 0 0 10px" id="logout"><i class="fa fa-user" ></i>Logout</a>
+                    
+                            <a href="#" style="float: right; margin : 0 10px">[[${nick}]] 님, 반갑습니다!</a>
+                            <a href="myPage" style="float: right; margin : 0 10px">내정보</a>
+                            <a sec:authorize="hasRole('u0')" href="adminpage" style="float: right; margin : 0 10px">관리자정보</a>
                         </div>
                     </div>
                 </div>
@@ -92,9 +94,10 @@
             e.preventDefault();
             var choice = confirm('로그아웃하시겠습니까?');
             if(choice==false)
-                return;
+                return false;
+                
           	else if(choice ==true)
-          	return "/main";
+          	 $('#logoutf').submit();
         });
     </script>
 </body>
