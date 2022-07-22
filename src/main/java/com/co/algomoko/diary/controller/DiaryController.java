@@ -36,14 +36,14 @@ import com.co.algomoko.food.mapper.FoodMapper;
 
 import groovyjarjarantlr4.v4.parse.ANTLRParser.action_return;
 
-
+@RequestMapping("/diary")
 @Controller
 public class DiaryController {
 	
 	@Autowired DiaryMapper dao;
 	@Autowired FoodMapper dao1;
 	
-	@RequestMapping("sicmain")
+	@RequestMapping("")
     public String sicmain(Model model, DiaryVO diaryVO){
 		Calendar calendar= Calendar.getInstance();
 		calendar.set(Calendar.HOUR_OF_DAY, 0);
@@ -64,15 +64,31 @@ public class DiaryController {
         return "contents/diary/cal";
     }
 	@RequestMapping("myre")
-    public String myre(){
-        return "contents/diary/myre";
+    public String myre(Model model , RecipeVO recipeVO){
+		recipeVO.setMid("user13");
+		
+		model.addAttribute("rlist",dao.rlist(recipeVO));
+		
+		
+		return "contents/diary/myre";
+	}
+	@RequestMapping("redetail")
+	    public String redetail(@RequestParam("rname") String rname ,Model model , RecipeVO recipeVO){
+			recipeVO.setMid("user13");
+			recipeVO.setRname(rname);
+			System.out.println(dao.redetail(recipeVO));
+			model.addAttribute("redetail",dao.redetail(recipeVO));
+			return "contents/diary/redetail";
+		
+		
+		
     }
-	@RequestMapping("/succ")
+	@RequestMapping("succ")
     public String succ(){
 		
         return "contents/diary/succ";
     }
-	@RequestMapping("/todaysic")
+	@RequestMapping("todaysic")
     public String todaysic(Model model, DiaryVO diaryVO){
 		Calendar calendar= Calendar.getInstance();
 		calendar.set(Calendar.HOUR_OF_DAY, 0);
@@ -129,7 +145,7 @@ public class DiaryController {
     public String writema(){
         return "contents/diary/writema";
     }
-	@RequestMapping("/modify")
+	@RequestMapping("modify")
     public String modify(Model model, DiaryVO diaryVO, 
     		@RequestParam("dddo") String dddo,
     		@RequestParam("date") String date) throws ParseException{
@@ -149,7 +165,7 @@ public class DiaryController {
 		return "contents/diary/modify";
         
     }
-	@RequestMapping("/modifyde")
+	@RequestMapping("modifyde")
 public String modifyde(HttpServletResponse response,DiaryVO diaryVO)throws IOException, ParseException { 
 		diaryVO.setMid("user13");
 		dao.diaryde(diaryVO);
@@ -178,7 +194,7 @@ public String modifyde(HttpServletResponse response,DiaryVO diaryVO)throws IOExc
                 return "contents/diary/succ"; 
 
 	}
-	@RequestMapping("/delete")
+	@RequestMapping("delete")
 public String delete(HttpServletResponse response,DiaryVO diaryVO)throws IOException, ParseException { 
 		diaryVO.setMid("user13");
 		dao.diaryde(diaryVO);
@@ -190,8 +206,18 @@ public String delete(HttpServletResponse response,DiaryVO diaryVO)throws IOExcep
 	}
 	
 	@RequestMapping("weekwrite")
-    public String weekwrite(){
-        return "contents/diary/weekwrite";
+    public String weekwrite(Model model, 
+    		@RequestParam("dddo") String dddo,
+    		@RequestParam("date") String date) throws ParseException{
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String strDate = date;
+		
+		Date date1 = new Date(sdf.parse(strDate).getTime());
+		
+		model.addAttribute("dddo",dddo);
+		model.addAttribute("date",date);
+		return "contents/diary/weekwrite";
+        
     }
 	
 	@RequestMapping(value="insert") 
@@ -224,7 +250,7 @@ public String delete(HttpServletResponse response,DiaryVO diaryVO)throws IOExcep
 	}
    
 	
-	@RequestMapping("/flist")
+	@RequestMapping("flist")
 	@ResponseBody
 	public List<FoodVO> flist(@RequestParam("btnbtn") String btnbtn, Model model){
 		

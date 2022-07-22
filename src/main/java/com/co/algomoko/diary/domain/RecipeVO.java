@@ -10,7 +10,6 @@ public class RecipeVO {
     private String rname;
     private String rnick;
     private int amount;
-    
     private int cal;
     private int carb;
     private int prot;
@@ -18,6 +17,6 @@ public class RecipeVO {
     private String rrecipe;
     private String unitcd;
     private int hit;
-	
-    
+    private String fing;
+	private String gram;
 }

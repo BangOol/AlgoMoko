@@ -136,13 +136,12 @@
   </div>
   <script>
   (function(){
-    $(function(){
-
-       // calendar element 취득
+   $(function(){
+       
       var calendarEl = $('#calendar1')[0];
-      // full-calendar 생성하기
+      
       var calendar = new FullCalendar.Calendar(calendarEl, {
-        // 해더에 표시할 툴바
+        
         headerToolbar: {
           left: 'prev,next today',
           center: 'title',
@@ -153,10 +152,13 @@
 
         
       });
-      // 캘린더 랜더링
+      
       calendar.render();
     });
+      
   })();
+
+
 </script>
 
     
