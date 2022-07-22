@@ -11,6 +11,6 @@ public class MyChallengeVO extends ChallengeVO {
 	private int cno2;
 	private String uid;
 	private int cper;
-	private Date sdate;
-	private Date edate;
+	private String sdate;
+	private String edate;
 }

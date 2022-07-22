@@ -26,26 +26,30 @@ public class ChallengeController {
 
 	// 챌린지 목록
 	@GetMapping("")
-	public String challenge(@RequestParam(value = "ctitle", required = false) String ctitle, Model model, ChallengeVO cVO) {
+	public String challenge(@RequestParam(value = "ctitle", required = false) String ctitle, Model model,
+			ChallengeVO cVO) {
 		// 검색
 		if (ctitle != null) {
-			 
+
 			cVO.setCtitle(ctitle);
 			List<ChallengeVO> result = dao.cList(cVO);
 			model.addAttribute("search", result);
-		}		
+		}
 		List<ChallengeVO> cList = dao.cList(cVO);
-		model.addAttribute("cList", cList);	
+		model.addAttribute("cList", cList);
 
 		return "contents/challenge/challenge";
 	}
 
 	// 진행중인 챌린지 목록
-	/*
-	 * @GetMapping("challenging") public String challenging(Model model) {
-	 * List<MyChallengeVO> mcList = dao.mcList(); model.addAttribute("mcList",
-	 * mcList); return "contents/challenge/challenging"; }
-	 */
+
+	@GetMapping("challenging")
+	public String challenging(Model model) {
+		List<MyChallengeVO> mcList = dao.mcList();
+		model.addAttribute("mcList", mcList);
+		return "contents/challenge/challenging";
+	}
+
 	// 챌린지 작성페이지로 이동
 	@GetMapping("cWrite")
 	private String cWrite() {
@@ -96,10 +100,20 @@ public class ChallengeController {
 	}
 
 	// 진행중인 챌린지 1개추가하는 용도
+	// http://localhost:82/challenge/start 이게 입력되면 애가 실행됨
 	@GetMapping("start")
-	public String getStart(int cno) {
-		System.out.println("넘어온번호 : " + cno);
+	public String getStart(int cno, Model model) {
+		System.out.println("넘어온번호 : " + cno); // select * from my_challenge where cno2 = cno; => 있으면? 빠꾸, 없으면 insert
+		
 		dao.mcInsert(cno);
-		return "contents/challenge/challenging";
+		return "redirect:/challenge/challenging"; // 다른 화면으로 토스
+
 	}
+	
+	@GetMapping("/challengeDetail")
+	public String getDetail() {
+		return "contents/challenge/challengeDetail";
+	}
+	
+
 }

@@ -37,4 +37,10 @@
 	insert into my_challenge 
 	values(mycno.nextval, #{cno}, '진휘용', 0, to_char(sysdate, 'MMDD'), to_char(sysdate+30, 'MMDD'))
 	</insert>
+	<!--진행중인 챌린지 목록  -->
+	<select id="mcList" resultType="com.co.algomoko.challenge.domain.MyChallengeVO">
+	select a.ctitle, a.cno, a.cdday, b.sdate, b.edate, a.filepath
+	from challenge a, my_challenge b
+	where a.cno = b.cno2
+	</select>	
 </mapper>

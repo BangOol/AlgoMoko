@@ -61,7 +61,7 @@
 							<div th:each="mc:${mcList}" class="col-lg-6 col-md-6 col-sm-6">
 								<div class="blog__item">
 									<div class="blog__item__cpic">
-										<img src="../img/chl/cola.png" alt="">
+										<img th:src="@{${mc.filepath}}" alt="">
 									</div>
 									<div class="blog__item__text">
 										<ul>
@@ -73,8 +73,7 @@
 										<h5 th:text="${mc.ctitle}"><a>탄산 끊기</a></h5>
 										<p th:text="${mc.cdday}+'일 동안 '+${mc.ctitle}+' 도전중!'">30일 동안 탄산 끊기 도전중!</p>
 										<p>이행률 : 70%</p>
-										<a href="#" class="blog__btn">인증하기 <span
-											class="arrow_right"></span></a>
+										<a href="/challenge/challengeDetail" class="blog__btn">인증하기 <span class="arrow_right"></span></a>
 									</div>
 								</div>
 							</div>
