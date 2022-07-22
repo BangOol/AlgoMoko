@@ -39,8 +39,18 @@
 	</insert>
 	<!--진행중인 챌린지 목록  -->
 	<select id="mcList" resultType="com.co.algomoko.challenge.domain.MyChallengeVO">
-	select a.ctitle, a.cno, a.cdday, b.sdate, b.edate, a.filepath
+	select *
 	from challenge a, my_challenge b
 	where a.cno = b.cno2
 	</select>	
+	<!-- 진행중인 챌린지 상세 -->
+	<select id="dList" resultType="com.co.algomoko.challenge.domain.ChallengeValidationVO">
+	select *
+	from challenge a
+    join my_challenge b
+    on a.cno = b.cno2 
+    left outer join challenge_validation c 
+    on  b.cno2 = c.cno3
+    where a.cno = #{cno}
+	</select>
 </mapper>

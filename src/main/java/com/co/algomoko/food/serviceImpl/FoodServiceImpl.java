@@ -34,14 +34,9 @@ public class FoodServiceImpl implements FoodService {
 	}
 
 	@Override
-	public List<FoodVO> getList(FoodVO searchVO) {
-		return mapper.getList(searchVO);
-	}
-
-	@Override
-	public int getListCnt(FoodVO searchVO) {
-		return mapper.getListCnt(searchVO);
-	}
+	public List<FoodVO> rList(FoodVO foodVO) {
+		return mapper.rList(foodVO);
+	}	
 
 
 }

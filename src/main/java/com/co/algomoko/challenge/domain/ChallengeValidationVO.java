@@ -1,14 +1,13 @@
 package com.co.algomoko.challenge.domain;
 
-import java.sql.Clob;
-import java.util.Date;
-
 import lombok.Data;
 
 @Data
-public class ChallengeValidationVO {
+public class ChallengeValidationVO extends MyChallengeVO {
 	private int cvno;
-	private int mycno;
-	private Clob cvimg;
-	private Date cvdate;
+	private int cno3;
+	private String cvimg;
+	private String cvdate;
+	private int round;
+	private String attyn;
 }

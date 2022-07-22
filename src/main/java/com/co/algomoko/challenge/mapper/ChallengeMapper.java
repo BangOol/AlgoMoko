@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.co.algomoko.challenge.domain.ChallengeVO;
+import com.co.algomoko.challenge.domain.ChallengeValidationVO;
 import com.co.algomoko.challenge.domain.MyChallengeVO;
 @Repository
 public interface ChallengeMapper {
@@ -32,8 +33,8 @@ public interface ChallengeMapper {
 	// 진행중인 챌린지 목록
 	public List<MyChallengeVO> mcList();
 	
-	
-	// 챌린지 인증 페이지
+	// 진행중인 챌린지 상세
+	public ChallengeValidationVO dList(int cno);
 	
 	
 }

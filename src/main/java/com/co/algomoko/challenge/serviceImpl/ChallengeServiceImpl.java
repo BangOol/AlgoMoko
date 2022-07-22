@@ -1,13 +1,12 @@
 package com.co.algomoko.challenge.serviceImpl;
 
-import java.io.File;
 import java.util.List;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.co.algomoko.challenge.domain.ChallengeVO;
+import com.co.algomoko.challenge.domain.ChallengeValidationVO;
 import com.co.algomoko.challenge.domain.MyChallengeVO;
 import com.co.algomoko.challenge.mapper.ChallengeMapper;
 import com.co.algomoko.challenge.service.ChallengeService;
@@ -58,7 +57,7 @@ public class ChallengeServiceImpl implements ChallengeService {
 	public void cDelete(int cno) {
 		mapper.cDelete(cno);
 	}
-
+	// 챌린지 도전
 	@Override
 	public void mcInsert(int cno) {
 		mapper.mcInsert(cno);
@@ -69,4 +68,10 @@ public class ChallengeServiceImpl implements ChallengeService {
 	public List<ChallengeVO> cSearch(ChallengeVO cVO) {
 		return mapper.cSearch(cVO);
 	}
+
+	@Override
+	public ChallengeValidationVO dList(int cno) {
+		return mapper.dList(cno);
+	}
+	
 }
