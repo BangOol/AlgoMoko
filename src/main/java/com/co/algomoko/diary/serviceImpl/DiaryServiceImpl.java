@@ -88,6 +88,16 @@ public class DiaryServiceImpl implements DiaryService {
 		return diaryMapper.detade(diaryVO);
 	}
 
+	@Override
+	public List<RecipeVO> rlist(RecipeVO recpvo) {
+		return diaryMapper.rlist(recpvo);
+	}
+
+	@Override
+	public List<RecipeVO> redetail(RecipeVO recpvo) {
+		return diaryMapper.redetail(recpvo);
+	}
+
 	
 
 	

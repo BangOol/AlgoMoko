@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="description" content="Ogani Template">
+   <meta name="keywords" content="Ogani, unica, creative, html">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>Ogani | Template</title>
+
+   <!-- Google Font -->
+   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+   <!-- Favicon -->
+   <link href="img/favicon.ico" rel="icon">
+
+   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+
+   <!-- Css Styles -->
+   <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+   <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
+   <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
+   <link rel="stylesheet" href="css/nice-select.css" type="text/css">
+   <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
+   <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
+   <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
+   <link rel="stylesheet" href="css/style.css" type="text/css">
+
+   <link rel="stylesheet" href="https://uicdn.toast.com/grid/latest/tui-grid.css" />
+   <script src="https://uicdn.toast.com/grid/latest/tui-grid.js">
+   </script>
+
+   <script>
+      $(function () {
+
+         $("#datepicker").datepicker({
+            dateFormat: 'yy-mm-dd',
+            prevText: '이전 달',
+            nextText: '다음 달',
+            monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+            monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+            dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+            dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+            dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+            showMonthAfterYear: true,
+            yearSuffix: '년'
+         })
+      });
+   </script>
+   <style>
+      .btn-secondary {
+         margin-left: 20px;
+      }
+
+      span {
+         color: #494949;
+         font-weight: bold;
+      }
+
+      #pageing {
+         border: 1px solid #e6e6e6;
+         line-height: 30px;
+         background-color: #fff;
+         color: #999999;
+      }
+
+      .input {
+         height: 23px;
+         margin-left: 10px;
+         margin-right: 10px;
+         display: inline-block;
+         padding: 0 10px;
+         vertical-align: middle;
+         border: 1px solid #dddddd;
+         width: 20%;
+         color: rgb(94, 94, 94);
+         border-radius: 5px;
+         text-align: center;
+      }
+
+      #leftinput,
+      #rightinput {
+         margin-right: 18px;
+      }
+
+      #leftinput1,
+      #rightinput1 {
+         background-color: #f1f1f1;
+      }
+
+      #startCndate {
+         margin-right: 10px;
+      }
+
+      #endCndate {
+         margin-left: 5px;
+      }
+
+      .dataTable-input {
+         height: 40px;
+      }
+
+      .nameing {
+         float: right;
+         font-size: medium;
+         font-weight: normal;
+         margin-top: 15px;
+      }
+
+      #modal {
+         display: none;
+      }
+
+      .title {
+         text-align: center;
+         margin-bottom: 10px;
+         margin-top: -10px;
+      }
+
+
+   </style>
+
+
+
+</head>
+
+<body>
+   <div th:replace="~{fragments/header}"></div>
+   <div th:replace="~{fragments/aside}"></div>
+
+
+
+  
+
+
+ <form method="post" action="" name="frm" id="frm">
+   
+
+   <div class="container">
+      <div class="row">
+         <div class="col-sm-7 col-xl-6">
+
+
+
+            <table class="table table-borderless">
+               <thead>
+                  <tr>
+                  <th scope="col">재료명</th>
+                  <th scope="col">칼로리</th>
+                  <th scope="col">수량</th>
+                  </tr>
+               </thead>
+               <tbody id="tbody1">
+                  <th:block th:each="redetail:${redetail}">
+                     <tr>
+                        <th>
+                        <input th:value="${redetail.fing}" class="thth1" type="text" name="ddname">
+                        </th>
+                        <th>
+                        <input th:value="${redetail.cal}" class="thth2" type="text" name="cal">
+                        </th>
+                        <th>
+                         <input th:value="${redetail.amount}" class="thth3" type="text" name="amount">
+                        </th>
+                        <td class="shoping__cart__item__close"><button class="icon_close"></td>
+                     </tr>
+
+                  </th:block>
+
+               </tbody>
+
+
+            </table>
+
+
+         </div>
+          <div class="col-sm-2 col-xl-3" style="margin-left: 200px;">
+            <div class="tab-content">
+               <div class="product__details__tab__desc">
+                  <span>내용
+                     <br>
+                     <input th:value="${redetail[0].rrecipe}" type=textarea class="form-control" name="ucon" rows="1" cols="30" 
+                        style="width : 200px;"></span>
+               </div>
+            </div>
+         </div>
+      </div>
+
+   </div>
+   </div>
+   <!-- Progress Bar -->
+
+   <div class="flex flex-1 flex-col md:flex-row lg:flex-row mx-2 mt-2">
+      <div class="rounded overflow-hidden shadow bg-white mx-2 w-50 pt-2">
+         <div class="px-6 py-2 border-b border-light-grey">
+            <div class="font-bold text-xl">kcal</div>
+         </div>
+
+
+
+         <div class="shadow w-100 bg-grey-light">
+            <div class="bg-blue-500 text-xs leading-none py-1 text-center text-white" style="width: 45%">45%
+
+            </div>
+
+
+
+
+
+         </div>
+
+      </div>
+
+   </div>
+      </th:block>
+      <button type="submit" class="btn btn-primary" id="insert">수정</button>
+      <button type="button" class="btn btn-primary" onclick="diaryde()" id="insert">삭제</button>
+      <button type="button" class="btn btn-primary " onclick="location.href='todaysic'">취소</button>
+ </form>
+
+      <div th:replace="~{fragments/footer}"></div>
+
+      <!-- Js Plugins -->
+      <script src="js/jquery-3.3.1.min.js"></script>
+      <script src="js/bootstrap.min.js"></script>
+      <script src="js/jquery.nice-select.min.js"></script>
+      <script src="js/jquery-ui.min.js"></script>
+      <script src="js/jquery.slicknav.js"></script>
+      <script src="js/mixitup.min.js"></script>
+      <script src="js/owl.carousel.min.js"></script>
+      <script src="js/main.js"></script>
+
+      <script>
+         var gin;
+         var gic;
+         var gia;
+         const body = document.querySelector('body');
+         const modal = document.querySelector('.modal');
+
+         /*제품정보 그리드*/
+         const giupData = [];
+
+
+         const jepoom = new tui.Grid({
+            el: document.getElementById('gridpro'),
+            data: giupData,
+            scrollY: true,
+            rowHeaders: ['rowNum'],
+            bodyHeight: 300,
+
+
+            columns: [{
+               header: '재료명',
+               name: 'ing',
+               align: 'center',
+
+            }, {
+               header: '칼로리',
+               name: 'cal',
+               align: 'center',
+
+            }, {
+               header: '수량',
+               name: 'amount',
+               align: 'center',
+
+            }]
+         });
+
+       
+
+
+
+
+</body>
+
+</html>

@@ -88,4 +88,15 @@ delete diary_detail
 where mid=#{mid} and TRUNC(ddate) = trunc(#{ddate}) and dddo=#{dddo}
 </select>
 
+
+<select id="rlist" resultType="RecipeVO">
+select*from recipe where mid=#{mid}
+</select>
+
+<select id="redetail" resultType="RecipeVO">
+select*from recipe_ing where rname=#{rname} and mid = #{mid}
+</select>
+
+
+
 </mapper>

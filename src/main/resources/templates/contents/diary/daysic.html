@@ -61,8 +61,6 @@
 
         <!-- Shoping Cart Section Begin -->
 
-        
-
       <p id="date" th:text="${std}"><p>
         <section class="shoping-cart spad" style="padding-top: 10px;">
           <div class="container">
@@ -100,8 +98,9 @@
                                   </tr>
                              </th:block>
                              
-                             <tr th:unless="${#lists.size(aade) != 0}" class="detail insert">
-                                  <td><img src="/img/plus.jpg" style="margin-left:250px; width: 100px;"></td>
+                             <tr th:unless="${#lists.size(aade) != 0}" class="pinsert">
+                             
+                                  <td><img class="plusnew" src="/img/plus.jpg" style="margin-left:250px; width: 100px;"></td>
                                   </tr>
                              
                              <thead>
@@ -116,7 +115,7 @@
                               
                               <tr class="detail">
                               
-                              <td th:text="${bbde.ddname}" class="shoping__cart__item" style="text-align:center;">
+                              <td th:text="${bbde.ddname}" class="shoping__cart__total" style="text-align:center;">
                                           <img src="img/cart/cart-1.jpg" alt=""></td>
                                       <td <td th:text="|${bbde.cal}kcal|"  class="shoping__cart__total"></td>
                                       <td th:text="${bbde.amount}" class="shoping__cart__total"></td></td>
@@ -124,8 +123,8 @@
                                   </tr>
                              </th:block>
                              
-                             <tr th:unless="${#lists.size(bbde) != 0}" class="detail insert">
-                                  <td><img src="/img/plus.jpg" style="margin-left:250px; width: 100px;"></td>
+                             <tr th:unless="${#lists.size(bbde) != 0}" class="pinsert">
+                                  <td><img src="/img/plus.jpg" class="plusnew" style="margin-left:250px; width: 100px;"></td>
                                   </tr>
                              </tbody>
                              
@@ -149,8 +148,8 @@
                                   </tr>
                              </th:block>
                              
-                             <tr th:unless="${#lists.size(ccde) != 0}" class="detail insert">
-                                  <td><img src="/img/plus.jpg" style="margin-left:250px; width: 100px;"></td>
+                             <tr th:unless="${#lists.size(ccde) != 0}" class="pinsert">
+                                  <td><img src="/img/plus.jpg" class="plusnew" style="margin-left:250px; width: 100px;"></td>
                                   </tr>
                              </tbody>
                              
@@ -185,23 +184,36 @@
 <div th:replace="~{fragments/footer}"></div>
      
 <script>
+			
+
+
+			
         $(function () {
             
             
 			
-			$("tbody").click(function(){
+			$(".detail").click(function(){
 			
-			var no = $(this).attr('data-dddo')
-			var date = $('#date').text()
-			
-                location.href='/modify?dddo='+no+'&date='+date;
+			var	no = $(this).parent().attr('data-dddo')
+			var	date = $('#date').text()
+			 location.href='/modify?dddo='+no+'&date='+date;
+                
                 
 
             })
             
-            
-			})
-        	
+             $(".pinsert").click(function(){
+			
+			var	no = $(this).parent().attr('data-dddo')
+			var	date = $('#date').text()
+			
+                location.href='/weekwrite?dddo='+no+'&date='+date;
+                
+
+            })     
+	
+			
+      })  	
         
     </script>
     <!-- Js Plugins -->

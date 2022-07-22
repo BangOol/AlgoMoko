@@ -1,214 +1,212 @@
 <!DOCTYPE html>
-<html  lang="ko"
-       xmlns:th="http://www.thymeleaf.org"
-       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-       >
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="description" content="Ogani Template">
-    <meta name="keywords" content="Ogani, unica, creative, html">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Ogani | Template</title>
+   <meta charset="UTF-8">
+   <meta name="description" content="Ogani Template">
+   <meta name="keywords" content="Ogani, unica, creative, html">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>Ogani | Template</title>
 
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
-        <!-- Favicon -->
-        <link href="img/favicon.ico" rel="icon">
+   <!-- Google Font -->
+   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+   <!-- Favicon -->
+   <link href="img/favicon.ico" rel="icon">
 
-<link
-	href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap"
-	rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
 
-<!-- Css Styles -->
-<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
-<link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
-<link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
-<link rel="stylesheet" href="css/nice-select.css" type="text/css">
-<link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
-<link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
-<link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
-<link rel="stylesheet" href="css/style.css" type="text/css">
+   <!-- Css Styles -->
+   <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+   <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
+   <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
+   <link rel="stylesheet" href="css/nice-select.css" type="text/css">
+   <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
+   <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
+   <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
+   <link rel="stylesheet" href="css/style.css" type="text/css">
 
-<link rel="stylesheet" href="https://uicdn.toast.com/grid/latest/tui-grid.css" />
-<script src="https://uicdn.toast.com/grid/latest/tui-grid.js">
-</script>
+   <link rel="stylesheet" href="https://uicdn.toast.com/grid/latest/tui-grid.css" />
+   <script src="https://uicdn.toast.com/grid/latest/tui-grid.js">
+   </script>
 
-    <script>
-    $( function() {
-       
-      $( "#datepicker" ).datepicker({
-        dateFormat: 'yy-mm-dd',
-  prevText: '이전 달',
-  nextText: '다음 달',
-  monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-  monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-  dayNames: ['일', '월', '화', '수', '목', '금', '토'],
-  dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
-  dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
-  showMonthAfterYear: true,
-  yearSuffix: '년'
-      })
-    } );
-    
-    </script>
-    <style>
-.btn-secondary {
-   margin-left: 20px;
-}
+   <script>
+      $(function () {
 
-span {
-   color: #494949;
-   font-weight: bold;
-}
+         $("#datepicker").datepicker({
+            dateFormat: 'yy-mm-dd',
+            prevText: '이전 달',
+            nextText: '다음 달',
+            monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+            monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+            dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+            dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+            dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+            showMonthAfterYear: true,
+            yearSuffix: '년'
+         })
+      });
+   </script>
+   <style>
+      .btn-secondary {
+         margin-left: 20px;
+      }
 
-#pageing {
-   border: 1px solid #e6e6e6;
-   line-height: 30px;
-   background-color: #fff;
-   color: #999999;
-}
+      span {
+         color: #494949;
+         font-weight: bold;
+      }
 
-.input {
-   height: 23px;
-   margin-left: 10px;
-   margin-right: 10px;
-   display: inline-block;
-   padding: 0 10px;
-   vertical-align: middle;
-   border: 1px solid #dddddd;
-   width: 20%;
-   color: rgb(94, 94, 94);
-   border-radius: 5px;
-   text-align: center;
-}
+      #pageing {
+         border: 1px solid #e6e6e6;
+         line-height: 30px;
+         background-color: #fff;
+         color: #999999;
+      }
 
-#leftinput, #rightinput {
-   margin-right: 18px;
-}
-#leftinput1, #rightinput1 {
-   background-color: #f1f1f1;
-}
+      .input {
+         height: 23px;
+         margin-left: 10px;
+         margin-right: 10px;
+         display: inline-block;
+         padding: 0 10px;
+         vertical-align: middle;
+         border: 1px solid #dddddd;
+         width: 20%;
+         color: rgb(94, 94, 94);
+         border-radius: 5px;
+         text-align: center;
+      }
 
-#startCndate {
-   margin-right: 10px;
-}
+      #leftinput,
+      #rightinput {
+         margin-right: 18px;
+      }
 
-#endCndate {
-   margin-left: 5px;
-}
+      #leftinput1,
+      #rightinput1 {
+         background-color: #f1f1f1;
+      }
 
-.dataTable-input {
-   height: 40px;
-}
+      #startCndate {
+         margin-right: 10px;
+      }
 
-.nameing {
-   float: right;
-   font-size: medium;
-   font-weight: normal;
-   margin-top: 15px;
-}
+      #endCndate {
+         margin-left: 5px;
+      }
 
-#modal {
-   display: none;
-}
+      .dataTable-input {
+         height: 40px;
+      }
 
-.title {
-   text-align: center;
-   margin-bottom: 10px;
-   margin-top: -10px;
-}
-.thth{
-		width:50px
-}
-</style>
+      .nameing {
+         float: right;
+         font-size: medium;
+         font-weight: normal;
+         margin-top: 15px;
+      }
 
-    
-    
+      #modal {
+         display: none;
+      }
+
+      .title {
+         text-align: center;
+         margin-bottom: 10px;
+         margin-top: -10px;
+      }
+
+
+   </style>
+
+
+
 </head>
 
 <body>
    <div th:replace="~{fragments/header}"></div>
-<div th:replace="~{fragments/aside}"></div>
-      
-         
-    
-<!-- Table End -->
-    </section>
-    <!-- Blog Section End -->
-    <input type="text" readonly placeholder="재료 입력" style ="outline:1px solid #c3bfbf";>
-    <button type="button" id="btnmod dialog" class="btn btn-primary blog__btn">검색</button>
-    <div id="dialog" title="재료 검색"></div>
-    <!-- 모달창 시작 -->
-	<div class="modal">
-		<div class="modal1_body">
-			<div class="modal_title">
-				<input type="text" id = "textex"><button id="btnbtn" name="btnbtn" class="btn btn-primary">검색</button>
-			<div class="modal_content">
-			
-			</div>
-			</div>
-				 <!-- 제품모달 그리드 -->
+   <div th:replace="~{fragments/aside}"></div>
+
+
+
+   <!-- Table End -->
+   </section>
+   <!-- Blog Section End -->
+      <input type="text" readonly placeholder="재료 입력" style="outline:1px solid #c3bfbf;">
+      <button type="button" id="btnmod dialog" class="btn btn-primary blog__btn">검색</button>
+      <div id="dialog" title="재료 검색"></div>
+      <!-- 모달창 시작 -->
+      <div class="modal">
+         <div class="modal1_body">
+            <div class="modal_title">
+               <input type="text" id="textex"><button id="btnbtn" name="btnbtn" class="btn btn-primary">검색</button>
+               <div class="modal_content">
+
+               </div>
+            </div>
+            <!-- 제품모달 그리드 -->
             <div class="container-fluid px-4">
 
-                  <div id="gridpro"></div>
+               <div id="gridpro"></div>
                <div class="modal_btn">
-				<button id="modalbtn" class="modal_s">등록</button>
-				<button class="modal_c">취소</button>
-			</div>
+                  <button id="modalbtn" class="modal_s">등록</button>
+                  <button class="modal_c">취소</button>
             </div>
          </div>
       </div>
-	</div>
-	</div>
-				
-				
-			
-	<!-- 모달창 종료 -->
-    
-    
-    
-    <form method="post" action="insert" name="frm">
-    <br><br>
-    <div class="checked">
-    <div class="form-check">
-    <label class="form-check-label">
-    <input type="radio" class="form-check-input" name="dddo" value="aa">아침
-    
-    <i class="input-helper">
-    </div>
-    <div class="form-check">
-    <label class="form-check-label">
-    <input type="radio" class="form-check-input" name="dddo" value="bb">점심
-    <i class="input-helper">
-    </div>
-    <div class="form-check">
-    <label class="form-check-label">
-    <input type="radio" class="form-check-input" name="dddo" value="cc">저녁
-    <i class="input-helper">
-    </div>
-    
-    
-    
-    <div class="mb-2 row">
-    <label for="html5-date-input" class="col-md-2 col-form-label"></label>
-    <div class="col-md-2">
-    <input class="form-control" type="date" name="ddate" value="" id="html5-date-input">
-    </div>
-    </div>
-    </div>
-  
-   
-    
-    
-      <div class="container">
-        <div class="row">
-    <div class="col-sm-7 col-xl-6">
+   </div>
+   </div>
 
 
-              
-      <table class="table table-borderless">
+
+   <!-- 모달창 종료 -->
+
+
+   <br><br>
+ <form method="post" action="insert" name="frm" id="frm">
+   <div class="checked">
+      <div class="form-check">
+
+         <label class="form-check-label">
+            <input type="radio" class="form-check-input" name="dddo" value="aa" onclick="return(false);"
+               th:checked="${dddo eq 'aa'}">아침
+
+            <i class="input-helper">
+      </div>
+      <div class="form-check">
+         <label class="form-check-label">
+            <input type="radio" class="form-check-input" name="dddo" value="bb" onclick="return(false);"
+               th:checked="${dddo eq 'bb'}">점심
+            <i class="input-helper">
+      </div>
+      <div class="form-check">
+         <label class="form-check-label">
+            <input type="radio" class="form-check-input" name="dddo" value="cc" onclick="return(false);"
+               th:checked="${dddo eq 'cc'}">저녁
+            <i class="input-helper">
+      </div>
+      <button id="che">찾기</button>
+
+
+      <div class="mb-2 row">
+         <label for="html5-date-input" class="col-md-2 col-form-label"></label>
+         <div class="col-md-2">
+            <input class="form-control" readonly type="date" name="ddate" th:value="${date}" id="html5-date-input">
+         </div>
+      </div>
+   </div>
+
+
+
+
+   <div class="container">
+      <div class="row">
+         <div class="col-sm-7 col-xl-6">
+
+
+
+           <table class="table table-borderless">
           <thead>
               <tr>
                   
