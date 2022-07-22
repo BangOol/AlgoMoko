@@ -41,13 +41,12 @@ public class PaginationUser {
     // 다음 페이지 존재 여부
     private boolean hasNextPage;
 
+    // 검색 변수
+    String type;
+    String keyword;
 
-    // 회원 검색용 VO
-    private String type;
-    private String keyword;
 
-
-    public PaginationUser(int currentPage, int cntPerPage, int pageSize, String type, String keyword) {
+    public PaginationUser(int currentPage, int cntPerPage, int pageSize) {
         //강제입력방지
         if (currentPage < 1) {
             currentPage = 1;

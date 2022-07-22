@@ -28,36 +28,5 @@ public class AdminRestController {
         this.adminService = adminService;
     }
 
-    // 유저 리스트 - 검색
-    @GetMapping("/findUserList")
-    public List<AdminVO> findUserList(@RequestParam("type") String type, @RequestParam("keyword") String keyword, Model model) throws  Exception{
-        AdminVO adminVO = new AdminVO();
-        adminVO.setType(type);
-        adminVO.setKeyword(keyword);
-        return adminService.findUserList(adminVO);
-    }
-//    // 블랙리스트 조회
-//    @PostMapping("/findBlackList")
-//    public List<AdminVO> findBlackList(){
-//        return  adminService.findBlackList();
-//    }
-//    // 제한 조치 유저 조회
-//    @PostMapping("/findRestrictList")
-//    public List<AdminVO> findRestrictList(){
-//        return adminService.findRestrictList();
-//    }
-//    // 전체 유저 조회
-//    @PostMapping("/findAllList")
-//    public List<AdminVO> findAllList() {
-//        return .();
-//    }
-
-    // 유저리스트 창 이동(블랙리스트, 제한리스트 포함)
-//    @GetMapping("/UserList")
-//    public String moveUserList(Model model) throws Exception{
-//        model.addAttribute("list", adminService.makeList());
-//        return "contents/admin/userFormUserlist";
-//    }
-    // 유저리스트 창 이동(블랙리스트, 제한리스트 포함)
 
 }
