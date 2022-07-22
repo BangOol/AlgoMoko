@@ -5,12 +5,13 @@ import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.co.algomoko.challenge.domain.ChallengeVO;
+import com.co.algomoko.challenge.domain.ChallengeValidationVO;
 import com.co.algomoko.challenge.domain.MyChallengeVO;
 
 public interface ChallengeService {
 	// 챌린지 조회
 	public ChallengeVO getPage(int cno);
-	
+
 	// 챌린지 검색
 	public List<ChallengeVO> cSearch(ChallengeVO cVO);
 
@@ -31,4 +32,7 @@ public interface ChallengeService {
 
 	// 진행중인 챌린지 목록
 	public List<MyChallengeVO> mcList();
+
+	// 진행중인 챌린지 상세
+	public ChallengeValidationVO dList(int cno);
 }

@@ -72,8 +72,8 @@
 										</ul>
 										<h5 th:text="${mc.ctitle}"><a>탄산 끊기</a></h5>
 										<p th:text="${mc.cdday}+'일 동안 '+${mc.ctitle}+' 도전중!'">30일 동안 탄산 끊기 도전중!</p>
-										<p>이행률 : 70%</p>
-										<a href="/challenge/challengeDetail" class="blog__btn">인증하기 <span class="arrow_right"></span></a>
+										<p th:text="'이행률 : '+${mc.cper}+'%'">이행률 : 70%</p>
+										<a th:href="@{/challenge/challengeDetail(cno=${mc.cno})}" class="blog__btn">인증하기 <span class="arrow_right"></span></a>
 									</div>
 								</div>
 							</div>

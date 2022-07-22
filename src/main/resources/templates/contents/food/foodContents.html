@@ -95,14 +95,14 @@
 												<td>단위</td>
 											</tr>
 										</thead>
-										<tbody th:each="food:${fList}">
+										<tbody th:each="rel:${rList}">
 											<tr>
 												<td class="shoping__cart__total" style="font-size: 14px;">
-													<a th:href="@{/foodContents(ing=${food.ing})}"th:text="${food.ing}" ></a>
+													<a th:href="@{/foodContents(ing=${rel.ing})}"th:text="${rel.ing}" ></a>
 												</td>
 												<td class="shoping__cart__price"></td>
-												<td th:text="${food.cal}+kcal"+ class="shoping__cart__total"></td>
-												<td th:text="${food.amount}+${food.f0}" class="shoping__cart__total"></td>
+												<td th:text="${rel.cal}+kcal"+ class="shoping__cart__total"></td>
+												<td th:text="${rel.amount}+${rel.f0}" class="shoping__cart__total"></td>
 											</tr>
 										</tbody>
 									</table>

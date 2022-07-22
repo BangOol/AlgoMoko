@@ -1,11 +1,9 @@
 package com.co.algomoko.food.domain;
 
-import com.co.algomoko.food.page.PageVO;
-
 import lombok.Data;
 
 @Data
-public class FoodVO extends PageVO {
+public class FoodVO {
 	private String ing; //음식명
 	private int cal; // 칼로리
 	private int amount; // 1회당 제공량

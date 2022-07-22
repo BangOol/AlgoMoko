@@ -57,10 +57,14 @@ public class FoodController {
 		}
 		// 음식 검색수(조회수) +1
 		dao.plusView(ing);
+		// 연관 검색어
+		FoodVO foodVO1 = new FoodVO();
+		foodVO1.setIng(ing);
+		List<FoodVO> result1 = dao.rList(foodVO1);
+		model.addAttribute("rList", result1);
 		// 인기 검색어 1~6등 조회수 순으로 표시
 		FoodVO foodVO3 = new FoodVO();
-		foodVO3.setIng(ing);
-		;
+		foodVO3.setIng(ing);		
 		List<FoodVO> result3 = dao.pList(foodVO3);
 		model.addAttribute("pList", result3);
 		return "contents/food/foodContents";

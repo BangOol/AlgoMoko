@@ -30,5 +30,11 @@
 				 from (select * from food order by fview desc)
 				 where rownum <= 6]]>
 	</select>		
+	<!-- 연관 검색어 -->
+	<select id="rList" resultType="com.co.algomoko.food.domain.FoodVO">
+		select ing, amount, cal, f0
+		from food
+		where ing like '%' || #{ing} || '%' and ing not like #{ing}
+	</select>
 	
 </mapper>
