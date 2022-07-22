@@ -1,29 +1,44 @@
 package com.co.algomoko.user.domain;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Setter
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 public class Account implements UserDetails{
     private String mid;
     private String mpw;
-    private Boolean enabled;
-    private Collection<GrantedAuthority> authorities;
-
+    //private Boolean enabled;
+//    private Collection<GrantedAuthority> authorities;
+    private String U0;
+   
+    private UserVO vo;
+    
+    public Account(UserVO vo) {
+    	this.vo = vo;
+    }
+    
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         // TODO Auto-generated method stub
-        return authorities;
+    	 List<GrantedAuthority> auth = new ArrayList<>();
+        //return Collections.singletonList(new SimpleGrantedAuthority(this.U0));
+        auth.add(new SimpleGrantedAuthority(this.U0));
+        return auth;
     }
 
     @Override
@@ -56,10 +71,12 @@ public class Account implements UserDetails{
         return true;
     }
 
+	
+
     @Override
     public boolean isEnabled() {
         // TODO Auto-generated method stub
-        return enabled;
+        return true;
     }
 
 }

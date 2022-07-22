@@ -39,7 +39,10 @@
 
     <!-- login Begin -->
     <section class = "login__form">
-            <form id="login_form" method="post" action="/login">
+   		 	<div class="alert alert-danger" id="msg_div" style="display:none;">
+           	 	<strong>서버 메시지 </strong><span th:text="${msg}"></span>
+        	</div>
+            <form id="login_form" method="post" action="/loginForm/login">
 
                 <div class="container">
 

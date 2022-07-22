@@ -1,69 +1,98 @@
 package com.co.algomoko.security;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.*;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.method.configuration.*;
+import org.springframework.security.config.annotation.web.builders.*;
+import org.springframework.security.config.annotation.web.configuration.*;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.password.*;
 
-import com.co.algomoko.user.service.UserService;
+import com.co.algomoko.user.service.LoginSuccessHandler;
+import com.co.algomoko.user.service.UserLoginService;
+
+import lombok.AllArgsConstructor;
+
+
+@AllArgsConstructor
 
 @Configuration
-
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
-//    @Autowired
-//    private UserService userService;
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+		
+		private UserLoginService userLoginService;
+		
+		private LoginSuccessHandler successHandler;
+		
+		//private PasswordEncoder passwordEncoder;	
+		
+		@Bean
+		public PasswordEncoder passwordEncoder() {
+			return new BCryptPasswordEncoder();
+		}
+						
+	    		 
+    
+//		@Bean
+//		public DaoAuthenticationProvider daoAuthenticationProvider() {
+//		// DaoAuthenticationProvider : id와 password로 인증할 수 있도록 하는 구현체
+//		DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+//		provider.setPasswordEncoder(passwordEncoder);
+//		provider.setUserDetailsService(userLoginService);
+//		return provider;
+//			}
+   
     @Override
       public void configure(WebSecurity web) {
-        web.ignoring().antMatchers("/css/**", "/js/**", "/img/**","/favicon.ico", "/resources/**", "/error");
+        web.ignoring().antMatchers("/","/logout","/css/**", "/js/**", "/img/**","/favicon.ico", "/resources/**", "/error");
       }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception{
         http
+        .csrf().disable()
+        
         .authorizeRequests()
-        .antMatchers("/contents").permitAll()
-        .antMatchers("/loginForm").permitAll()
-        .antMatchers("/login").permitAll()
+	        .antMatchers("/contents/**").permitAll()
+	        .antMatchers("/loginForm").permitAll()
+	        .antMatchers("/login").permitAll()
+	        .antMatchers("/sicmain").hasRole("U0")
         .and()
 
         .formLogin()
-            .loginPage("/loginForm").loginProcessingUrl("/login")
+            .loginPage("/loginForm").loginProcessingUrl("/loginForm/login")
             .usernameParameter("mid").passwordParameter("mpw")
-            .defaultSuccessUrl("/main").failureUrl("/error")
+            .successHandler(successHandler)
+            .defaultSuccessUrl("/main").failureUrl("/error").permitAll()
             //권한 관련 오류처리
         .and()
             .exceptionHandling().accessDeniedPage("/error")
         //로그아웃 설정, 로그 아웃 후 세션 제거
         .and()
-            .logout().logoutUrl("/logout").logoutSuccessUrl("/main")
-            .invalidateHttpSession(true)
-        .and()
-            .csrf().disable();
+            .logout()
+            .logoutUrl("/logout")
+            .logoutSuccessUrl("/main")
+            .invalidateHttpSession(true);
+        
 
     }
-
+    
+    
+    
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.userDetailsService(userService)
-//            .passwordEncoder(userService.passwordEncoder());
+        auth.userDetailsService(userLoginService)
+           .passwordEncoder(passwordEncoder());
     }
-
+   
+    
  }
+
+
 
 //package com.co.algomoko.security;
 //

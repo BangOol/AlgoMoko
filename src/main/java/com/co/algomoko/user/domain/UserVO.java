@@ -24,9 +24,11 @@ public class UserVO {
     private Integer tweight;
     private String U0;
     private String B0;
-    private UserGrade grade;
-    private Boolean enabled;
-    private String authority;
+    //private Role role;
+    
+    
+    //private Boolean enabled;
+    
 
 }
 
