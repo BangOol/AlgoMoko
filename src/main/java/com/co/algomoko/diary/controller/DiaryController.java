@@ -78,6 +78,7 @@ public class DiaryController {
 			recipeVO.setRname(rname);
 			System.out.println(dao.redetail(recipeVO));
 			model.addAttribute("redetail",dao.redetail(recipeVO));
+			model.addAttribute("rrecp",dao.rlist(recipeVO));
 			return "contents/diary/redetail";
 		
 		
@@ -117,7 +118,9 @@ public class DiaryController {
 		Date date1 = new Date(sdf.parse(strDate).getTime());
 		diaryVO.setMid("user13");
 		diaryVO.setDdate(date1);
+		
 		diaryVO.setDddo("aa");
+		
 		model.addAttribute("aade",dao.detail(diaryVO));
 		diaryVO.setDddo("bb");
 		model.addAttribute("bbde",dao.detail(diaryVO));
