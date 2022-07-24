@@ -22,7 +22,7 @@
              data-setbg="/img/breadcrumb.jpg">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12 text-center">
+                <div class="col-lg-12 text-center" style="font-family: 'Cairo', 'Jua', sans-serif">
                     <div class="breadcrumb__text">
                         <h2>유저 관리</h2>
                         <div class="breadcrumb__option">
@@ -45,14 +45,16 @@
                         <div class="sidebar__item" style="font-family: 'Cairo', 'Jua', sans-serif">
                             <h4>my Page</h4>
                             <ul>
-                                <li><a href="UserList">회원 관리</a></li>
-                                <li><a href="Statistics">통계</a></li>
-                                <li><a href="UserStatistics">- 회원 통계</a></li>
-                                <li><a href="Statistics">- 식단 통계</a></li>
-                                <li><a href="Statistics">- 챌린지 통계</a></li>
-                                <li><a href="Inquiry">1:1문의 내역 확인</a></li>
-                                <li><a href="FAQ">FAQ 이동</a></li>
-                                <li><a href="#">레시피 관리</a></li>
+                                <ul>
+                                    <li><a href="/Admin/UserList">회원 관리</a></li>
+                                    <li><a href="/Admin/Statistics">통계</a></li>
+                                    <li><a href="/Admin/UserStatistics">- 회원 통계</a></li>
+                                    <li><a href="/Admin/Statistics">- 식단 통계</a></li>
+                                    <li><a href="/Admin/Statistics">- 챌린지 통계</a></li>
+                                    <li><a href="/Admin/Inquiry">1:1문의 내역 확인</a></li>
+                                    <li><a href="/Admin/FAQ">FAQ 이동</a></li>
+                                    <li><a href="#">레시피 관리</a></li>
+                                </ul>
                             </ul>
                         </div>
                     </div>
@@ -63,17 +65,18 @@
                     <div class="row">
                         <table class="table table-hover" style="text-align: center">
                             <h4>회원관리</h4>
-                            <div class="d-flex flex-row-reverse col-lg-12 ">
-                                <div class="p-2 border" onclick="findAllList()">전체리스트</div>
-                                <div class="p-2 border" onclick="findRestrictList()">제한리스트</div>
-                                <div class="p-2 border" onclick="findBlackList()">블랙리스트</div>
-                            </div>
+<!--                            <div class="d-flex flex-row-reverse col-lg-12 ">-->
+<!--                                <div class="p-2 border" onclick="findAllList()">전체리스트</div>-->
+<!--                                <div class="p-2 border" onclick="findRestrictList()">제한리스트</div>-->
+<!--                                <div class="p-2 border" onclick="findBlackList()">블랙리스트</div>-->
+<!--                            </div>-->
                             <thead>
                             <tr>
                                 <th scope="col" style="margin:20px 0">아이디</th>
                                 <th scope="col">성별</th>
                                 <th scope="col">닉네임</th>
                                 <th scope="col">상태</th>
+                                <th scope="col"상세정보></th>
                             </tr>
                             </thead>
                             <!-- 게시판 출력하는 부분. mapper에서 currentPage, cntperPege, pageSize를 default 값을 받아서 첫 페이지를 보여줌. -->
@@ -86,7 +89,11 @@
                                         <td>[[${Alllist.sex}]]</td>
                                         <td>[[${Alllist.nick}]]</td>
                                         <td>[[${Alllist.B0}]]</td>
-                                        <td th:value="${Alllist.uid}">이동</td>
+                                        <td th:value="${Alllist.uid}">
+                                            <a th:href="@{/Admin/moveUserDetail(uid=${Alllist.uid})}" style="line-height: 100%">
+                                                이동
+                                            </a>
+                                        </td>
                                     </tr>
                                 </div>
                             </div>
@@ -109,21 +116,33 @@
                                 <!-- 이전 페이지가 있는 경우 -->
                                 <div th:if="${pagination.hasPreviousPage == true}"  style="display: inline-block; margin: 0 10px">
                                     <a class="direction prev" href="javascript:void(0);"
-                                       th:onclick="|movePage(1,${pagination.cntPerPage},${pagination.pageSize},${pagination.type},${pagination.keyword})|">
+                                       th:data-type="${pagination.type}"
+                                       th:data-keyword="${pagination.keyword}"
+                                       th:onclick="|location.href='/Admin/UserList?currentPage=1&cntPerPage=${pagination.cntPerPage}&pageSize=${pagination.pageSize}&type=this.getAttribute('data-type')&keyword=this.getAttribute('data-keyword')'|">
+<!--                                       th:onclick="|movepage=(${pagination.currentPage}, ${pagination.cntPerPage}, ${pagination.pageSize}, this.getAttribute('data-type'), this.getAttribute('data-keyword'))|">-->
+<!--                                       th:onclick="|location.href='/Admin/UserList?currentPage=1&cntPerPage=${pagination.cntPerPage}&pageSize=${pagination.pageSize}&type=(this.getAttribute('data-type'))&keyword=(this.getAttribute('data-keyword')'|">-->
                                         &lt;&lt;
                                     </a>
                                     <a class="direction prev" href="javascript:void(0);"
-                                       th:onclick="|movePage(${pagination.currentPage - 1} , ${pagination.cntPerPage},${pagination.pageSize},${pagination.type},${pagination.keyword})|">
+                                       th:data-type="${pagination.type}"
+                                       th:data-keyword="${pagination.keyword}"
+                                       th:onclick="|location.href='/Admin/UserList?currentPage=${pagination.currentPage-1}&cntPerPage=${pagination.cntPerPage}&pageSize=${pagination.pageSize}&type=this.getAttribute('data-type')&keyword=this.getAttribute('data-keyword')'|">
+<!--                                       th:onclick="|location.href='/Admin/UserList?currentPage=${pagination.currentPage-1}&cntPerPage=${pagination.cntPerPage}&pageSize=${pagination.pageSize}&type=(this.getAttribute('data-type'))&keyword=(this.getAttribute('data-keyword')'|">-->
                                         &lt;
                                     </a>
                                 </div>
                                 <!-- 이전 페이지가 없는 경우 -->
                                 <div th:if="${pagination.hasPreviousPage == false}"  style=" display: inline-block; margin: 0 10px">
                                     <a class="direction prev" href="javascript:void(0);"
-                                       th:onclick="|movePage(1,${pagination.cntPerPage},${pagination.pageSize},${pagination.type},${pagination.keyword})|">
+                                       th:data-type="${pagination.type}"
+                                       th:data-keyword="${pagination.keyword}"
+                                       th:onclick="|location.href='/Admin/UserList?currentPage=1&cntPerPage=${pagination.cntPerPage}&pageSize=${pagination.pageSize}&type=this.getAttribute('data-type')&keyword=this.getAttribute('data-keyword')'|">
+<!--                                       th:onclick="|location.href='/Admin/UserList?currentPage=1&cntPerPage=${pagination.cntPerPage}&pageSize=${pagination.pageSize}&type=(this.getAttribute('data-type'))&keyword=(this.getAttribute('data-keyword')'|">-->
                                         &lt;&lt; </a>
                                     <a class="direction prev" href="javascript:void(0);"
-                                       th:onclick="|movePage(${pagination.currentPage},${pagination.cntPerPage},${pagination.pageSize},${pagination.type},${pagination.keyword})|">
+                                       th:data-type="${pagination.type}"
+                                       th:data-keyword="${pagination.keyword}"
+                                       th:onclick="|location.href='/Admin/UserList?currentPage=${pagination.currentPage}&cntPerPage=${pagination.cntPerPage}&pageSize=${pagination.pageSize}&type=this.getAttribute('data-type')&keyword=this.getAttribute('data-keyword')'|">
                                         &lt;
                                     </a>
                                 </div>
@@ -133,7 +152,12 @@
                                 <div th:each="idx:${#numbers.sequence(pagination.firstPage, pagination.lastPage)}"  style="display: inline-block; margin: 0 10px">
                                         <a style="color: #cc0000; font-weight:700; margin-bottom: 2px; "
                                            href="javascript:void(0)"
-                                           th:onclick="|movePage(${idx},${pagination.cntPerPage},${pagination.pageSize},${pagination.type},${pagination.keyword})|" th:value="${idx}">
+                                           th:data-type="${pagination.type}"
+                                           th:data-keyword="${pagination.keyword}"
+                                           th:onclick="|location.href='/Admin/UserList?currentPage=${pagination.currentPage}&cntPerPage=${pagination.cntPerPage}&pageSize=${pagination.pageSize}&type=this.getAttribute('data-type')&keyword=this.getAttribute('data-keyword')'|"
+                                           th:value="${idx}">
+
+
                                             [[${idx}]]
                                         </a>
                                 </div>
@@ -142,25 +166,33 @@
                         <!-- 다음 페이지 이동 있을 시 -->
                         <div th:if="${pagination.hasNextPage == true}"  style="display: inline-block; margin: 0 10px">
                             <a class="direction next" href="javascript:void(0);"
-                               th:onclick="|movePage(${pagination.currentPage+1},${pagination.cntPerPage},${pagination.pageSize},${pagination.type},${pagination.keyword})|">
+                               th:data-type="${pagination.type}"
+                               th:data-keyword="${pagination.keyword}"
+                               th:onclick="|location.href='/Admin/UserList?currentPage=${pagination.currentPage+1}&cntPerPage=${pagination.cntPerPage}&pageSize=${pagination.pageSize}&type=this.getAttribute('data-type')&keyword=this.getAttribute('data-keyword')'|">
                                 &gt;</a>
                         </div>
                         <!-- CSS적 요소를 위해 위와 분리함. -->
                         <div th:if="${pagination.hasNextPage == true}"  style=" display: inline-block; margin: 0 10px">
                             <a class="direction next" href="javascript:void(0);"
-                               th:onclick="|movePage(${pagination.totalRecordCount},${pagination.cntPerPage},${pagination.pageSize},${pagination.type},${pagination.keyword})|">
+                               th:data-type="${pagination.type}"
+                               th:data-keyword="${pagination.keyword}"
+                               th:onclick="|location.href='/Admin/UserList?currentPage=${pagination.currentPage}&cntPerPage=${pagination.cntPerPage}&pageSize=${pagination.pageSize}&type=this.getAttribute('data-type')&keyword=this.getAttribute('data-keyword')'|">
                                 &gt;&gt;</a>
                         </div>
 
                         <!-- 다음 페이지 이동 없을 시 -->
                         <div th:if="${pagination.hasNextPage == false}"  style=" display: inline-block; margin: 0 10px">
                             <a class="direction next" href="javascript:void(0);"
-                               th:onclick="|movePage(${pagination.currentPage},${pagination.cntPerPage},${pagination.pageSize},${pagination.type},${pagination.keyword})|">
+                               th:data-type="${pagination.type}"
+                               th:data-keyword="${pagination.keyword}"
+                               th:onclick="|location.href='/Admin/UserList?currentPage=${pagination.currentPage}&cntPerPage=${pagination.cntPerPage}&pageSize=${pagination.pageSize}&type=this.getAttribute('data-type')&keyword=this.getAttribute('data-keyword')'|">
                                 &gt;</a>
                         </div>
                         <div th:if="${pagination.hasNextPage == false}"  style=" display: inline-block; margin: 0 10px">
                             <a class="direction next" href="javascript:void(0);"
-                               th:onclick="|movePage(${pagination.totalRecordCount},${pagination.cntPerPage},${pagination.pageSize},${pagination.type},${pagination.keyword})|">
+                               th:data-type="${pagination.type}"
+                               th:data-keyword="${pagination.keyword}"
+                               th:onclick="|location.href='/Admin/UserList?currentPage=${pagination.totalRecordCount}&cntPerPage=${pagination.cntPerPage}&pageSize=${pagination.pageSize}&type=this.getAttribute('data-type')&keyword=this.getAttribute('data-keyword')'|">
                                 >>
                             </a>
                         </div>
@@ -206,7 +238,7 @@
         </div>
     </section>
     <script>
-        let cont = '변경';
+        let cont = '이동';
 
         //10,20,30개씩 selectBox 클릭 이벤트
         function changeSelectBox(currentPage, cntPerPage, pageSize) {
@@ -224,23 +256,24 @@
             url = url + "&pageSize=" + pageSize;
             url = url + "&type=" + type;
             url = url + "&keyword=" + keyword;
+            console.log(url);
             location.href = url;
         }
 
-        function findBlackList() {
-            let boardtable = document.getElementById("boardtable");
-            fetch("/findBlackList", {
-                method: 'GET'
-            }).then((Response) => {
-                console.log(Response);
-                console.log(Response.body);
-            })
-        }
+        // function findBlackList() {
+        //     let boardtable = document.getElementById("boardtable");
+        //     fetch("/findBlackList", {
+        //         method: 'GET'
+        //     }).then((Response) => {
+        //         console.log(Response);
+        //         console.log(Response.body);
+        //     })
+        // }
 
         // function findBlackList(){
         //     $.ajax({
-        //         type: 'POST',
-        //         url : "/findBlackList",
+        //         type: 'GET',
+        //         url : "/Admin/findBlackList",
         //         success : function(result){
         //             //테이블 초기화
         //             $('#boardtable').empty();
@@ -250,52 +283,8 @@
         //                     str += "<td>"+lists.uid +"</td>";
         //                     str+="<td>" +lists.sex +"</td>";
         //                     str+="<td>"+lists.nick +"</td>";
-        //                     str+="<td>"+lists.b0 +"</td>";
+        //                     str+="<td>"+lists.B0 +"</td>";
         //                     str+="<td>"+ "<a href='/userRestrict?uid='+lists?.uid>"+cont+"</a>" +"</td>"
-        //                     str+="</tr>"
-        //                     $('#boardtable').append(str);
-        //                 })
-        //             }
-        //         }
-        //     })
-        // }
-        // function findRestrictList(){
-        //     $.ajax({
-        //         type: 'POST',
-        //         url : "/findRestrictList",
-        //         success : function(result){
-        //             //테이블 초기화
-        //             $('#boardtable').empty();
-        //             if(result.length>=1){
-        //                 result.forEach(function(lists){
-        //                     str='<tr>'
-        //                     str += "<td>"+lists.uid +"</td>";
-        //                     str+="<td>" +lists.sex +"</td>";
-        //                     str+="<td>"+lists.nick +"</td>";
-        //                     str+="<td>"+lists.b0 +"</td>";
-        //                     str+="<td>"+ "<a href='/userRestrict?uid='+lists?.uid>"+cont+"</a>" +"</td>"
-        //                     str+="</tr>"
-        //                     $('#boardtable').append(str);
-        //                 })
-        //             }
-        //         }
-        //     })
-        // }
-        // function findAllList(){
-        //     $.ajax({
-        //         type: 'POST',
-        //         url : "/findAllList",
-        //         success : function(result){
-        //             //테이블 초기화
-        //             $('#boardtable').empty();
-        //             if(result.length>=1){
-        //                 result.forEach(function(lists){
-        //                     str='<tr>'
-        //                     str += "<td>"+lists.uid +"</td>";
-        //                     str+="<td>" +lists.sex +"</td>";
-        //                     str+="<td>"+lists.nick +"</td>";
-        //                     str+="<td>"+lists.b0 +"</td>";
-        //                     str+="<td>"+ "<a href='/userRestrict?uid='"+ lists?.uid+">"+cont+"</a>" +"</td>"
         //                     str+="</tr>"
         //                     $('#boardtable').append(str);
         //                 })
@@ -304,12 +293,16 @@
         //     })
         // }
 
-        function moveUserRestrict() {
-            fetch({
-                url: '/userRestrict',
-                method: 'GET'
-            }).then()
-        }
+
+
+
+        //
+        // function moveUserRestrict() {
+        //     fetch({
+        //         url: '/userRestrict',
+        //         method: 'GET'
+        //     }).then()
+        // }
 
         // let findUserPress = document.getElementById('findUserPress');
         // findUserPress.addEventListener("keypress", findUserList);

@@ -15,9 +15,9 @@
 <th:block layout:fragment="content">
     <!--회원 목록 body-->
     <!-- Breadcrumb Section Begin -->
-    <section class="breadcrumb-section set-bg" data-setbg="img/breadcrumb.jpg">
+    <section class="breadcrumb-section set-bg" data-setbg="/img/breadcrumb.jpg">
         <div class="container">
-            <div class="row">
+            <div class="row" style="font-family: 'Cairo', 'Jua', sans-serif">
                 <div class="col-lg-12 text-center">
                     <div class="breadcrumb__text">
                         <h2 style="font-family: 'Cairo', 'Jua', sans-serif">관리자</h2>
@@ -41,14 +41,16 @@
                         <div class="sidebar__item" style="font-family: 'Cairo', 'Jua', sans-serif">
                             <h4>my Page</h4>
                             <ul>
-                                <li><a href="UserList">회원 관리</a></li>
-                                <li><a href="Statistics">통계</a></li>
-                                <li><a href="UserStatistics">- 회원 통계</a></li>
-                                <li><a href="Statistics">- 식단 통계</a></li>
-                                <li><a href="Statistics">- 챌린지 통계</a></li>
-                                <li><a href="Inquiry">1:1문의 내역 확인</a></li>
-                                <li><a href="FAQ">FAQ 이동</a></li>
-                                <li><a href="#">레시피 관리</a></li>
+                                <ul>
+                                    <li><a href="/Admin/UserList">회원 관리</a></li>
+                                    <li><a href="/Admin/Statistics">통계</a></li>
+                                    <li><a href="/Admin/UserStatistics">- 회원 통계</a></li>
+                                    <li><a href="/Admin/Statistics">- 식단 통계</a></li>
+                                    <li><a href="/Admin/Statistics">- 챌린지 통계</a></li>
+                                    <li><a href="/Admin/Inquiry">1:1문의 내역 확인</a></li>
+                                    <li><a href="/Admin/FAQ">FAQ 이동</a></li>
+                                    <li><a href="#">레시피 관리</a></li>
+                                </ul>
                             </ul>
                         </div>
                     </div>

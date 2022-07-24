@@ -9,7 +9,7 @@ import java.util.List;
 public interface AdminService {
     List<AdminVO> findUserList(AdminVO adminVO);
     List<AdminVO> findDetailUser(AdminVO adminVO);
-    String insertRestrict(AdminVO adminVO);
+    int insertRestrict(AdminVO adminVO); // 회원 상태 제한
 //    List<AdminVO> findBlackList();
 //    List<AdminVO> findRestrictList();
     List<StatisticVO> genderRate();

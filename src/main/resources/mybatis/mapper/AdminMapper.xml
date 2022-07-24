@@ -39,7 +39,7 @@
     </select>
 
     <select id="findDetailUser" resultMap="members" resultType="com.co.algomoko.admin.domain.AdminVO">
-        SELECT MID, NICK, BIRTH, HEIGHT, WEIGHT, TWEIGHT, TCAL, B0
+        SELECT MID, NICK, BIRTH, HEIGHT, WEIGHT, TWEIGHT, TCAL, GET_CODE(B0) AS B0
         FROM MEMBERS
         WHERE MID = #{uid}
     </select>
@@ -50,17 +50,17 @@
             WHERE MID = #{uid}
     </insert>
 
-    <select id="findBlackList" resultMap="members" resultType="com.co.algomoko.admin.domain.AdminVO">
-        SELECT MID, SEX, NICK,GET_CODE(B0) AS B0
-        FROM MEMBERS
-        WHERE B0 = 'b3'
-    </select>
+<!--    <select id="findBlackList" resultMap="members" resultType="com.co.algomoko.admin.domain.AdminVO">-->
+<!--        SELECT MID, SEX, NICK,GET_CODE(B0) AS B0-->
+<!--        FROM MEMBERS-->
+<!--        WHERE B0 = 'b3'-->
+<!--    </select>-->
 
-    <select id="findRestrictList" resultMap="members" resultType="com.co.algomoko.admin.domain.AdminVO">
-        SELECT MID, SEX, NICK,GET_CODE(B0) AS B0
-        FROM MEMBERS
-        WHERE B0 = 'b1' or B0 = 'b2'
-    </select>
+<!--    <select id="findRestrictList" resultMap="members" resultType="com.co.algomoko.admin.domain.AdminVO">-->
+<!--        SELECT MID, SEX, NICK,GET_CODE(B0) AS B0-->
+<!--        FROM MEMBERS-->
+<!--        WHERE B0 = 'b1' or B0 = 'b2'-->
+<!--    </select>-->
     <select id="genderRate" resultType="com.co.algomoko.admin.domain.StatisticVO">
         SELECT COUNT(MID) as totalRate,
                COUNT(CASE WHEN sex='female' THEN MID ELSE NULL END) femaleRate,
