@@ -19,13 +19,13 @@
 	<insert id="cInsert" parameterType="com.co.algomoko.challenge.domain.ChallengeVO">
 	insert into challenge (cno, ctitle, ccon, cdday, filepath, filename)
 	values(CNO.nextval, #{ctitle}, #{ccon}, #{cdday}, #{filepath}, #{filename})
-	</insert>
+	</insert>		
 	<!-- 챌린지 수정 -->
 	<update id="cUpdate" parameterType="com.co.algomoko.challenge.domain.ChallengeVO">
 	update challenge
 	set ctitle = #{ctitle}, ccon = #{ccon}, cdday = #{cdday}, filepath = #{filepath}, filename = #{filename}
 	where cno = #{cno}
-	</update>
+	</update>	
 	<!-- 챌린지 삭제 -->
 	<delete id="cDelete" parameterType="int">
 	delete
@@ -35,15 +35,15 @@
 	<!-- 진행중인 챌린지 추가 -->
 	<insert id="mcInsert" parameterType="int">
 	insert into my_challenge 
-	values(mycno.nextval, #{cno}, '진휘용', 0, to_char(sysdate, 'MMDD'), to_char(sysdate+30, 'MMDD'))
+	values(mycno.nextval, #{cno}, '진휘용', 0, to_char(sysdate, 'YYYY-MM-DD'), to_char(sysdate+30, 'YYYY-MM-DD'),0)
 	</insert>
 	<!--진행중인 챌린지 목록  -->
 	<select id="mcList" resultType="com.co.algomoko.challenge.domain.MyChallengeVO">
 	select *
 	from challenge a, my_challenge b
 	where a.cno = b.cno2
-	</select>	
-	<!-- 진행중인 챌린지 상세 -->
+	</select>		
+	<!-- 진행중인 챌린지 상세 -->	
 	<select id="dList" resultType="com.co.algomoko.challenge.domain.ChallengeValidationVO">
 	select *
 	from challenge a
@@ -53,4 +53,15 @@
     on  b.cno2 = c.cno3
     where a.cno = #{cno}
 	</select>
+	<!-- 챌린지 인증 이동  -->
+	<select id="getd" resultType="com.co.algomoko.challenge.domain.MyChallengeVO">
+	select * 
+	from my_challenge
+	where cno2= #{cno2}
+	</select>
+	<!-- 챌린지 인증 -->
+	<update id="valid" parameterType="com.co.algomoko.challenge.domain.MyChallengeVO">
+	update my_challenge
+	set round = #{trunc(round,1)}, vcon = #{vcon}
+	</update>
 </mapper>

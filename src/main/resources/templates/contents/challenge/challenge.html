@@ -99,10 +99,8 @@
 												th:onclick="chl_click(this.getAttribute('cno'), this.getAttribute('title'), this.getAttribute('dday'));">도전하기
 												<span class="arrow_right"></span></a>
 											<div style="float: right;">
-												<a th:href="@{../challenge/cUpdate(cno=${chl.cno})}"><button
-														class="site-btn">수정</button></a> <a
-													th:href="@{/challenge/delete(cno=${chl.cno})}"><button
-														class="site-btn">삭제</button></a>												
+												<a th:href="@{../challenge/cUpdate(cno=${chl.cno})}"><button class="site-btn">수정</button></a> <a
+													th:href="@{/challenge/delete(cno=${chl.cno})}"><button class="site-btn">삭제</button></a>												
 											</div>
 										</div>
 
@@ -112,8 +110,7 @@
 						</div>
 
 						<div style="float: right;">
-							<button class="site-btn"
-								th:onclick="location.href='../challenge/cWrite'">챌린지 작성</button>
+							<button class="site-btn" th:onclick="location.href='../challenge/cWrite'">챌린지 작성</button>
 						</div>
 						<div class="col-lg-12">
 							<div class="product__pagination blog__pagination">

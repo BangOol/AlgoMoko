@@ -10,4 +10,7 @@ public class ChallengeValidationVO extends MyChallengeVO {
 	private String cvdate;
 	private int round;
 	private String attyn;
+	private String vcon;
+	private int ccper;
+	
 }

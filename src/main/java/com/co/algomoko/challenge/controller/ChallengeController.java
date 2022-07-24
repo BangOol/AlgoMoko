@@ -60,7 +60,7 @@ public class ChallengeController {
 	// 챌린지 작성
 	@PostMapping("cWrite")
 	public String cInsert(@RequestParam("filename2") MultipartFile file, ChallengeVO cVO) throws Exception {
-		// file == multi 스트링변환		
+		// file == multi 스트링변환
 		String projectpath = System.getProperty("user.dir") + "/src/main/resources/static/img/chl"; // user.dir은 프로젝트
 		UUID uuid = UUID.randomUUID(); // 랜덤으로 이름 생성
 		String filename = uuid + "_" + file.getOriginalFilename(); // 파일 이름은 UUID에 있는 랜덤값 + 원래 파일 이름
@@ -71,13 +71,6 @@ public class ChallengeController {
 		dao.cInsert(cVO);
 		return "redirect:/challenge";
 	}
-	// 챌린지 디테일
-		@GetMapping("challengeDetail")
-		public String dList(int cno, Model model) {
-			model.addAttribute("dList", dao.dList(cno));
-			System.out.println(dao.dList(cno));
-			return "contents/challenge/challengeDetail";
-		}
 
 	// 챌린지 수정페이지로 이동
 	@GetMapping("cUpdate")
@@ -110,28 +103,46 @@ public class ChallengeController {
 	// 진행중인 챌린지 1개추가하는 용도
 	@GetMapping("start")
 	public String getStart(int cno, Model model) {
-		System.out.println("넘어온번호 : " + cno); 
+		System.out.println("넘어온번호 : " + cno);
 		// 중복처리
 		List<MyChallengeVO> result = dao.mcList();
-	      int check = 0;
-	      for (MyChallengeVO r : result) {
-	         if (cno == Integer.parseInt(r.getCno())) {
-	            System.out.println("같은거 있음");
-	            check = 1;
-	            break;
-	         }	          
-	      }
-	      if (check == 1) {
-	         model.addAttribute("msg", "이미 도전중입니다.");
-	         model.addAttribute("url", "/challenge");
-	         return "redirect:/challenge/";
-	      }
+		int check = 0;
+		for (MyChallengeVO r : result) {
+			if (cno == Integer.parseInt(r.getCno())) {
+				System.out.println("중복");
+				check = 1;
+				break;
+			}
+		}
+		if (check == 1) {
+			model.addAttribute("msg", "이미 도전중입니다.");
+			model.addAttribute("url", "/challenge");
+			return "redirect:/challenge";
+		}
 		dao.mcInsert(cno);
-		return "redirect:/challenge/challenging"; 
+		return "redirect:/challenge/challenging";
 
-	}	
+	}
 
-	
-	
+	// 챌린지 디테일
+	@GetMapping("challengeDetail")
+	public String dList(int cno, Model model) {
+		model.addAttribute("dList", dao.dList(cno));
+		return "contents/challenge/challengeDetail";
+	}
+
+	// 챌린지 인증페이지로 이동
+	@GetMapping("cValidation")
+	public String valid(int cno2, Model model) {
+		model.addAttribute("getd", dao.getd(cno2));
+		return "contents/challenge/cValidation";
+	}
+
+	// 챌린지 인증
+	@PostMapping("cValidation")
+	public String valid(ChallengeValidationVO vVO) {
+		dao.valid(vVO);
+		return "redirect:/challenge/challenging";
+	}
 
 }

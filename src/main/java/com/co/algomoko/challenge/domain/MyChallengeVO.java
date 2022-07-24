@@ -3,7 +3,6 @@ package com.co.algomoko.challenge.domain;
 import java.util.Date;
 
 import lombok.Data;
-import lombok.Getter;
 
 @Data
 public class MyChallengeVO extends ChallengeVO {
@@ -13,4 +12,6 @@ public class MyChallengeVO extends ChallengeVO {
 	private int cper;
 	private String sdate;
 	private String edate;
+	private int round;
+	private String vcno;
 }

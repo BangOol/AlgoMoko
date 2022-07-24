@@ -53,44 +53,36 @@
 								<div class="col-lg-6 col-md-6 col-sm-6">
 									<div class="blog__item">
 										<div class="blog__item__pic">
-											</br> </br> </br> <img th:src="@{${dList.filepath}}" alt="">
+											<br><br><br><img th:src="@{${dList.filepath}}" alt="">
 										</div>
 									</div>
 								</div>
 								<div class="col-lg-6 col-md-6 col-sm-6">
 									<div class="blog__item__text">
-										</br> </br>
-										<h3 th:text="${dList.ctitle}" style="text-align: center">아침
-											먹기</h3>
-										</br> </br>
+										<br> <br>
+										<h3 th:text="${dList.ctitle}" style="text-align: center"></h3>
+										<br> <br>
 										<p th:text="|${dList.cdday} 동안 ${dList.ctitle}에 도전중입니다!|"
-											style="text-align: center;">30일 동안 아침 먹기에 도전중입니다!</p>
-										<p th:text="${dList.ccon}">아침 먹기의 효능 : 아침밥은 에너지를 공급하고 체온을
-											높이는 작용을 한다. 호르몬을 규칙적으로 분비시켜 신체리듬을 안정되게 하고 환절기나 쌀쌀한 날씨에 감기예방에
-											도움이 된다. 아침식사 습관은 심장병 발병 위험도 낮춰준다.</p>
-										<h4 th:text="'이행률 : '+${dList.cper}+'%'"
-											style="text-align: center;">이행률 : 0%</h4>
+											style="text-align: center;"></p>
+										<p th:text="${dList.ccon}"></p>
+										<h4 th:text="'이행률 : '+${dList.ccper}+'%'"style="text-align: center;"></h4>
 									</div>
 								</div>
-							</div>
-							</br>
-							<hr>
-							</br>
+							</div><br>
+							<hr><br>
 							<div class="row">
 								<div class="col-lg-7 col-md-6 col-sm-6">
 									<div class="blog__item__text" style="text-align: center;">
 										<ul>
-											<li th:text="'시작날짜 : '+${dList.sdate}"><i
-												class="fa fa-calendar-o"></i>시작날짜: 7월5일</li>
-											<li th:text="'종료날짜 : '+${dList.edate}"><i
-												class="fa fa-calendar-o"></i>종료날짜: 8월3일</li>
+											<li th:text="'시작날짜 : '+${dList.sdate}"><i class="fa fa-calendar-o"></i></li>
+											<li th:text="'종료날짜 : '+${dList.edate}"><i class="fa fa-calendar-o"></i></li>
 										</ul>
-										</br>
+										<br>
 									</div>
 									<div>
 										<table id="challenge_table" style="width: 100%;	border: 1px solid #444444;">
-											<tr>
-												<td>1일차</td>
+											<tr th:each="list:${dList}">
+												<td th:text="|${list.round}일차|">1일차</td>
 												<td>2일차</td>
 												<td>3일차</td>
 												<td>4일차</td>
@@ -129,7 +121,7 @@
 												<td>29일차</td>
 												<td>30일차</td>
 											</tr>
-										</table>
+										</table>										
 									</div>
 								</div>
 								<div class="col-lg-5 col-md-6 col-sm-6"
@@ -145,11 +137,10 @@
 										enctype="multipart/form-data">
 										<input style="margin-left: 70px;" type='file' name='content' />
 									</form>
-									</br>
+									<br>
 									<div id="container">
 										<div class="blog__item__text">
-											<a href="#" class="blog__btn">인증하기 <span
-												class="arrow_right"></span></a>
+											<a href=# class="blog__btn">인증하기 <span class="arrow_right"></span></a>
 										</div>
 									</div>
 								</div>
