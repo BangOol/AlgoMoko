@@ -68,7 +68,7 @@ public class AdminController {
         return modelAndView;
     }
 
-    // 신고 유저 상세창 이동
+    // 신고 유저 상세 창 이동
     @GetMapping("ReportUserDetail")
     public String moveUserReportDetail() throws Exception{
         return "contents/admin/userFormReportUserDatail";
@@ -100,6 +100,7 @@ public class AdminController {
     // 관리자 전용 - FAQ 창 이동
     @GetMapping("FAQ")
     public String moveFAQ() throws Exception{
+
         return "contents/support/FAQ";
     }
 

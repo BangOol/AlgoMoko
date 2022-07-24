@@ -14,4 +14,15 @@
         FROM FAQ
         WHERE Q0 = #{Q0}
     </select>
+
+    <select id="list" resultType="com.co.algomoko.support.domain.InquiryVO">
+        SELECT QNO, QTITLE, QANS, QDATE
+        FROM QUESTION
+    </select>
+
+    <select id="searchNo" resultType="com.co.algomoko.support.domain.InquiryVO">
+        SELECT MAX(QNO) + 1 AS QNO
+        FROM QUESTION
+    </select>
+
 </mapper>

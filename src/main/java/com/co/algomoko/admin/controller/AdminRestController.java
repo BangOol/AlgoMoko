@@ -27,6 +27,4 @@ public class AdminRestController {
     public AdminRestController(AdminService adminService){
         this.adminService = adminService;
     }
-
-
 }

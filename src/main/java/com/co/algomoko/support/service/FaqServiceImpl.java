@@ -15,4 +15,5 @@ public class FaqServiceImpl implements FaqService {
     public List<FaqVO> FAQList(FaqVO faqVo) {
         return faqMapper.FAQList(faqVo);
     }
+
 }
