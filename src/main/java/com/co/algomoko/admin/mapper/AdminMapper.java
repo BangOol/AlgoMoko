@@ -15,7 +15,7 @@ public interface AdminMapper {
 
     public List<AdminVO> findDetailUser(AdminVO adminVO);
 
-    public String insertRestrict(AdminVO adminVO);
+    public int insertRestrict(AdminVO adminVO);
 
     List<AdminVO> findBlackList();
 

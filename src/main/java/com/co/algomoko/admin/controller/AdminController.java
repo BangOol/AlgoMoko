@@ -52,7 +52,6 @@ public class AdminController {
         int listCnt = pagingService.TableCount();
         //view 단에서 받은 현재 페이지, 페이지 당 출력 페이지 개수, 화면 하단 페이지 사이즈 가져와서 입력.
 
-
         PaginationUser paginationUser = new PaginationUser(currentPage, cntPerPage, pageSize);
         paginationUser.setKeyword(keyword);
         paginationUser.setType(type);
@@ -106,7 +105,7 @@ public class AdminController {
 
 
     // 유저 리스트 - 상세 조회 및 제한 여부 창 이동
-    @GetMapping("userRestrict")
+    @GetMapping("moveUserDetail")
     public String moveUserRestrict(@RequestParam("uid") String uid, Model model)  throws Exception{
         AdminVO adminVO = new AdminVO();
         adminVO.setUid(uid);
@@ -115,12 +114,12 @@ public class AdminController {
     }
 
     // 유저 리스트 - 유저 제한상태 변경([ex]정상->3일 제한)
-    @PostMapping("insertRestrict")
+    @PostMapping("")
     public String alertUserRestrict(@RequestParam("type") String type, @RequestParam("uid") String uid, Model model){
         AdminVO adminVO = new AdminVO();
         adminVO.setType(type);
         adminVO.setUid(uid);
         adminService.insertRestrict(adminVO);
-        return "contents/admin/userFormUserlist";
+        return "contents/admin/userFormMain";
     }
 }

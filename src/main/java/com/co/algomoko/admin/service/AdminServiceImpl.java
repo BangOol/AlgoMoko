@@ -27,7 +27,7 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public String insertRestrict(AdminVO adminVO) {
+    public int insertRestrict(AdminVO adminVO) {
         return adminMapper.insertRestrict(adminVO);
     }
 
