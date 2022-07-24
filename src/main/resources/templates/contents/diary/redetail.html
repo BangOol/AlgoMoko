@@ -17,14 +17,14 @@
    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
 
    <!-- Css Styles -->
-   <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
-   <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
-   <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
-   <link rel="stylesheet" href="css/nice-select.css" type="text/css">
-   <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
-   <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
-   <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
-   <link rel="stylesheet" href="css/style.css" type="text/css">
+   <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
+   <link rel="stylesheet" href="/css/font-awesome.min.css" type="text/css">
+   <link rel="stylesheet" href="/css/elegant-icons.css" type="text/css">
+   <link rel="stylesheet" href="/css/nice-select.css" type="text/css">
+   <link rel="stylesheet" href="/css/jquery-ui.min.css" type="text/css">
+   <link rel="stylesheet" href="/css/owl.carousel.min.css" type="text/css">
+   <link rel="stylesheet" href="/css/slicknav.min.css" type="text/css">
+   <link rel="stylesheet" href="/css/style.css" type="text/css">
 
    <link rel="stylesheet" href="https://uicdn.toast.com/grid/latest/tui-grid.css" />
    <script src="https://uicdn.toast.com/grid/latest/tui-grid.js">
@@ -138,7 +138,7 @@
 
    <div class="container">
       <div class="row">
-         <div class="col-sm-7 col-xl-6">
+         <div class="col-sm-4 col-xl-6">
 
 
 
@@ -162,7 +162,7 @@
                         <th>
                          <input th:value="${redetail.amount}" class="thth3" type="text" name="amount">
                         </th>
-                        <td class="shoping__cart__item__close"><button class="icon_close"></td>
+                        
                      </tr>
 
                   </th:block>
@@ -174,12 +174,12 @@
 
 
          </div>
-          <div class="col-sm-2 col-xl-3" style="margin-left: 200px;">
+          <div class="col-sm-8 col-xl-3" style="margin-left: 200px;">
             <div class="tab-content">
                <div class="product__details__tab__desc">
-                  <span>내용
+                  <span>레시피
                      <br>
-                     <input th:value="${redetail[0].rrecipe}" type=textarea class="form-control" name="ucon" rows="1" cols="30" 
+                     <input th:value="${rrecp[0].rrecipe}" type=textarea class="form-control" name="ucon" rows="10" cols="30" 
                         style="width : 200px;"></span>
                </div>
             </div>
@@ -220,15 +220,15 @@
 
       <div th:replace="~{fragments/footer}"></div>
 
-      <!-- Js Plugins -->
-      <script src="js/jquery-3.3.1.min.js"></script>
-      <script src="js/bootstrap.min.js"></script>
-      <script src="js/jquery.nice-select.min.js"></script>
-      <script src="js/jquery-ui.min.js"></script>
-      <script src="js/jquery.slicknav.js"></script>
-      <script src="js/mixitup.min.js"></script>
-      <script src="js/owl.carousel.min.js"></script>
-      <script src="js/main.js"></script>
+    <!-- Js Plugins -->
+    <script src="/js/jquery-3.3.1.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/jquery.nice-select.min.js"></script>
+    <script src="/js/jquery-ui.min.js"></script>
+    <script src="/js/jquery.slicknav.js"></script>
+    <script src="/js/mixitup.min.js"></script>
+    <script src="/js/owl.carousel.min.js"></script>
+    <script src="/js/main.js"></script>
 
       <script>
          var gin;
