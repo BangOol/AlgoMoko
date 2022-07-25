@@ -44,10 +44,10 @@ public class UserServiceImpl implements UserService{
 	public int signup(UserVO uservo){
 		String encodedPassword = passwordEncoder.encode(uservo.getMpw());
 		System.out.println(encodedPassword + "넘오어오나");
-		uservo.setU0("U0");
+		uservo.setU0("u1");
 		//uservo.setEnabled(false);
 		uservo.setMpw(encodedPassword);
-
+		
 		//로그인이니 회원정보 단건조회...
 		return mapper.insert(uservo);
 	}

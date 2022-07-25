@@ -60,7 +60,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	        .antMatchers("/contents/**").permitAll()
 	        .antMatchers("/loginForm").permitAll()
 	        .antMatchers("/login").permitAll()
-	        .antMatchers("/sicmain").hasRole("U0")
+	        //.antMatchers("/diary/**").hasRole("u1")
+	        //.antMatchers("/diary/**").hasAuthority("u1")
+	        .antMatchers("/diary/**").hasAnyAuthority("u1","u0")
+	        .antMatchers("/admin/**").hasAuthority("u0")
+	        
         .and()
 
         .formLogin()
