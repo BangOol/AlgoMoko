@@ -118,7 +118,7 @@
                                     <a class="direction prev" href="javascript:void(0);"
                                        th:data-type="${pagination.type}"
                                        th:data-keyword="${pagination.keyword}"
-                                       th:onclick="|location.href='/Admin/UserList?currentPage=1&cntPerPage=${pagination.cntPerPage}&pageSize=${pagination.pageSize}&type=this.getAttribute('data-type')&keyword=this.getAttribute('data-keyword')'|">
+                                       th:onclick="|location.href='/Admin/UserList?currentPage=1&cntPerPage=${pagination.cntPerPage}&pageSize=${pagination.pageSize}&type=this.getAttribute(data-type)&keyword=this.getAttribute(data-keyword)'|">
 <!--                                       th:onclick="|movepage=(${pagination.currentPage}, ${pagination.cntPerPage}, ${pagination.pageSize}, this.getAttribute('data-type'), this.getAttribute('data-keyword'))|">-->
 <!--                                       th:onclick="|location.href='/Admin/UserList?currentPage=1&cntPerPage=${pagination.cntPerPage}&pageSize=${pagination.pageSize}&type=(this.getAttribute('data-type'))&keyword=(this.getAttribute('data-keyword')'|">-->
                                         &lt;&lt;
@@ -126,7 +126,7 @@
                                     <a class="direction prev" href="javascript:void(0);"
                                        th:data-type="${pagination.type}"
                                        th:data-keyword="${pagination.keyword}"
-                                       th:onclick="|location.href='/Admin/UserList?currentPage=${pagination.currentPage-1}&cntPerPage=${pagination.cntPerPage}&pageSize=${pagination.pageSize}&type=this.getAttribute('data-type')&keyword=this.getAttribute('data-keyword')'|">
+                                       th:onclick="|location.href='/Admin/UserList?currentPage=${pagination.currentPage-1}&cntPerPage=${pagination.cntPerPage}&pageSize=${pagination.pageSize}&type=this.getAttribute(data-type)&keyword=this.getAttribute(data-keyword)'|">
 <!--                                       th:onclick="|location.href='/Admin/UserList?currentPage=${pagination.currentPage-1}&cntPerPage=${pagination.cntPerPage}&pageSize=${pagination.pageSize}&type=(this.getAttribute('data-type'))&keyword=(this.getAttribute('data-keyword')'|">-->
                                         &lt;
                                     </a>
@@ -136,13 +136,13 @@
                                     <a class="direction prev" href="javascript:void(0);"
                                        th:data-type="${pagination.type}"
                                        th:data-keyword="${pagination.keyword}"
-                                       th:onclick="|location.href='/Admin/UserList?currentPage=1&cntPerPage=${pagination.cntPerPage}&pageSize=${pagination.pageSize}&type=this.getAttribute('data-type')&keyword=this.getAttribute('data-keyword')'|">
+                                       th:onclick="|location.href='/Admin/UserList?currentPage=1&cntPerPage=${pagination.cntPerPage}&pageSize=${pagination.pageSize}&type=this.getAttribute(data-type)&keyword=this.getAttribute(data-keyword)'|">
 <!--                                       th:onclick="|location.href='/Admin/UserList?currentPage=1&cntPerPage=${pagination.cntPerPage}&pageSize=${pagination.pageSize}&type=(this.getAttribute('data-type'))&keyword=(this.getAttribute('data-keyword')'|">-->
                                         &lt;&lt; </a>
                                     <a class="direction prev" href="javascript:void(0);"
                                        th:data-type="${pagination.type}"
                                        th:data-keyword="${pagination.keyword}"
-                                       th:onclick="|location.href='/Admin/UserList?currentPage=${pagination.currentPage}&cntPerPage=${pagination.cntPerPage}&pageSize=${pagination.pageSize}&type=this.getAttribute('data-type')&keyword=this.getAttribute('data-keyword')'|">
+                                       th:onclick="|location.href='/Admin/UserList?currentPage=${pagination.currentPage}&cntPerPage=${pagination.cntPerPage}&pageSize=${pagination.pageSize}&type=this.getAttribute(data-type)&keyword=this.getAttribute(data-keyword)'|">
                                         &lt;
                                     </a>
                                 </div>
@@ -154,50 +154,51 @@
                                            href="javascript:void(0)"
                                            th:data-type="${pagination.type}"
                                            th:data-keyword="${pagination.keyword}"
-                                           th:onclick="|location.href='/Admin/UserList?currentPage=${pagination.currentPage}&cntPerPage=${pagination.cntPerPage}&pageSize=${pagination.pageSize}&type=this.getAttribute('data-type')&keyword=this.getAttribute('data-keyword')'|"
+                                           th:onclick="|location.href='/Admin/UserList?currentPage=${idx}&cntPerPage=${pagination.cntPerPage}&pageSize=${pagination.pageSize}&type=this.getAttribute(data-type)&keyword=this.getAttribute(data-keyword)'|"
                                            th:value="${idx}">
 
 
                                             [[${idx}]]
                                         </a>
                                 </div>
+                                <!-- 다음 페이지 이동 있을 시 -->
+                                <div th:if="${pagination.hasNextPage == true}"  style="display: inline-block; margin: 0 10px">
+                                    <a class="direction next" href="javascript:void(0);"
+                                       th:data-type="${pagination.type}"
+                                       th:data-keyword="${pagination.keyword}"
+                                       th:onclick="|location.href='/Admin/UserList?currentPage=${pagination.currentPage+1}&cntPerPage=${pagination.cntPerPage}&pageSize=${pagination.pageSize}&type=this.getAttribute(data-type)&keyword=this.getAttribute(data-keyword)'|">
+                                        &gt;</a>
+                                </div>
+                                <!-- CSS적 요소를 위해 위와 분리함. -->
+                                <div th:if="${pagination.hasNextPage == true}"  style=" display: inline-block; margin: 0 10px">
+                                    <a class="direction next" href="javascript:void(0);"
+                                       th:data-type="${pagination.type}"
+                                       th:data-keyword="${pagination.keyword}"
+                                       th:onclick="|location.href='/Admin/UserList?currentPage=${pagination.currentPage}&cntPerPage=${pagination.cntPerPage}&pageSize=${pagination.pageSize}&type=this.getAttribute(data-type)&keyword=this.getAttribute(data-keyword)'|">
+                                        &gt;&gt;</a>
+                                </div>
+
+                                <!-- 다음 페이지 이동 없을 시 -->
+                                <div th:if="${pagination.hasNextPage == false}"  style=" display: inline-block; margin: 0 10px">
+                                    <a class="direction next" href="javascript:void(0);"
+                                       th:data-type="${pagination.type}"
+                                       th:data-keyword="${pagination.keyword}"
+                                       th:onclick="|location.href='/Admin/UserList?currentPage=${pagination.totalRecordCount}&cntPerPage=${pagination.cntPerPage}&pageSize=${pagination.pageSize}&type=this.getAttribute(data-type)&keyword=this.getAttribute(data-keyword)'|">
+                                        &gt;</a>
+                                </div>
+                                <div th:if="${pagination.hasNextPage == false}"  style=" display: inline-block; margin: 0 10px">
+                                    <a class="direction next" href="javascript:void(0);"
+                                       th:data-type="${pagination.type}"
+                                       th:data-keyword="${pagination.keyword}"
+                                       th:onclick="|location.href='/Admin/UserList?currentPage=${pagination.totalRecordCount}&cntPerPage=${pagination.cntPerPage}&pageSize=${pagination.pageSize}&type=this.getAttribute(data-type)&keyword=this.getAttribute(data-keyword)'|">
+                                        >>
+                                    </a>
+                                </div>
+
+                                <!-- /paginate -->
                             </div>
                         </div>
-                        <!-- 다음 페이지 이동 있을 시 -->
-                        <div th:if="${pagination.hasNextPage == true}"  style="display: inline-block; margin: 0 10px">
-                            <a class="direction next" href="javascript:void(0);"
-                               th:data-type="${pagination.type}"
-                               th:data-keyword="${pagination.keyword}"
-                               th:onclick="|location.href='/Admin/UserList?currentPage=${pagination.currentPage+1}&cntPerPage=${pagination.cntPerPage}&pageSize=${pagination.pageSize}&type=this.getAttribute('data-type')&keyword=this.getAttribute('data-keyword')'|">
-                                &gt;</a>
-                        </div>
-                        <!-- CSS적 요소를 위해 위와 분리함. -->
-                        <div th:if="${pagination.hasNextPage == true}"  style=" display: inline-block; margin: 0 10px">
-                            <a class="direction next" href="javascript:void(0);"
-                               th:data-type="${pagination.type}"
-                               th:data-keyword="${pagination.keyword}"
-                               th:onclick="|location.href='/Admin/UserList?currentPage=${pagination.currentPage}&cntPerPage=${pagination.cntPerPage}&pageSize=${pagination.pageSize}&type=this.getAttribute('data-type')&keyword=this.getAttribute('data-keyword')'|">
-                                &gt;&gt;</a>
-                        </div>
 
-                        <!-- 다음 페이지 이동 없을 시 -->
-                        <div th:if="${pagination.hasNextPage == false}"  style=" display: inline-block; margin: 0 10px">
-                            <a class="direction next" href="javascript:void(0);"
-                               th:data-type="${pagination.type}"
-                               th:data-keyword="${pagination.keyword}"
-                               th:onclick="|location.href='/Admin/UserList?currentPage=${pagination.currentPage}&cntPerPage=${pagination.cntPerPage}&pageSize=${pagination.pageSize}&type=this.getAttribute('data-type')&keyword=this.getAttribute('data-keyword')'|">
-                                &gt;</a>
-                        </div>
-                        <div th:if="${pagination.hasNextPage == false}"  style=" display: inline-block; margin: 0 10px">
-                            <a class="direction next" href="javascript:void(0);"
-                               th:data-type="${pagination.type}"
-                               th:data-keyword="${pagination.keyword}"
-                               th:onclick="|location.href='/Admin/UserList?currentPage=${pagination.totalRecordCount}&cntPerPage=${pagination.cntPerPage}&pageSize=${pagination.pageSize}&type=this.getAttribute('data-type')&keyword=this.getAttribute('data-keyword')'|">
-                                >>
-                            </a>
-                        </div>
-
-                        <!-- /paginate -->
 
                         <!-- 몇 개씩 화면에 출력할 것인지 선택 -->
                         <div class="bottom">
