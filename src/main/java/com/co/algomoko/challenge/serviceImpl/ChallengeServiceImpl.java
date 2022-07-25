@@ -79,11 +79,12 @@ public class ChallengeServiceImpl implements ChallengeService {
 	public MyChallengeVO getd(int cno2) {
 		return mapper.getd(cno2);
 	}
-	// 챌린지 이동
+	// 챌린지 인증
 	@Override
-	public int valid(MyChallengeVO mVO) {
-		return mapper.valid(mVO);
+	public int valid(ChallengeValidationVO vVO) {
+		return mapper.valid(vVO);
 	}
+	
 	
 	
 

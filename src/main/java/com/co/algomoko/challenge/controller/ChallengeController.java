@@ -121,7 +121,6 @@ public class ChallengeController {
 		}
 		dao.mcInsert(cno);
 		return "redirect:/challenge/challenging";
-
 	}
 
 	// 챌린지 디테일
@@ -134,6 +133,7 @@ public class ChallengeController {
 	// 챌린지 인증페이지로 이동
 	@GetMapping("cValidation")
 	public String valid(int cno2, Model model) {
+		System.out.println("번호:"+cno2);
 		model.addAttribute("getd", dao.getd(cno2));
 		return "contents/challenge/cValidation";
 	}
@@ -142,7 +142,9 @@ public class ChallengeController {
 	@PostMapping("cValidation")
 	public String valid(ChallengeValidationVO vVO) {
 		dao.valid(vVO);
+		System.out.println(vVO);
 		return "redirect:/challenge/challenging";
 	}
-
+	
+	//
 }

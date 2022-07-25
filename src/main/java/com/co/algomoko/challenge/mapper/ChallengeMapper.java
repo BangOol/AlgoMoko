@@ -39,6 +39,6 @@ public interface ChallengeMapper {
 	public ChallengeValidationVO dList(int cno);
 	
 	// 챌린지 인증하기
-	public int valid(MyChallengeVO mVO);
+	public int valid(ChallengeValidationVO vVO);
 	
 }

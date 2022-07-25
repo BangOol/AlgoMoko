@@ -29,7 +29,7 @@ public interface ChallengeService {
 	// 챌린지 삭제(관리자만)
 	public void cDelete(int cno);
 
-	// 도전하기누르면 추가
+	// 진행중인 챌린지 추가
 	public void mcInsert(int cno);
 
 	// 진행중인 챌린지 목록
@@ -39,5 +39,5 @@ public interface ChallengeService {
 	public ChallengeValidationVO dList(int cno);
 
 	// 챌린지 인증하기
-	public int valid(MyChallengeVO mVO);
+	public int valid(ChallengeValidationVO vVO);
 }
