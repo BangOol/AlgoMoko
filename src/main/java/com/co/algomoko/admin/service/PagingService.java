@@ -10,4 +10,7 @@ public interface PagingService {
     public List<Map<String, Object>> SelectAllList(PaginationUser paginationUser) throws Exception;
     //count
     public int TableCount() throws Exception;
+
+
+
 }

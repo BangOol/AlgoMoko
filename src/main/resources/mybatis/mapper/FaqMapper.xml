@@ -8,6 +8,17 @@
         <result property="faqCon" column="FAQCON"/>
         <result property="faqFile" column="FAQFILE"/>
         <result property="Q0" column="Q0"/>
+        <result property="mid" column="MID"></result>
+    </resultMap>
+    <resultMap id="InqType" type="com.co.algomoko.support.domain.InquiryVO">
+        <result property="qno" column="QNO"/>
+        <result property="A0" column="A0"/>
+        <result property="qans" column="QANS"/>
+        <result property="qdate" column="QDATE"/>
+        <result property="nick" column="NICK"/>
+        <result property="qtitle" column="QTITLE"/>
+        <result property="C0" column="C0"/>
+        <result property="mid" column="MID"/>
     </resultMap>
     <select id="FAQList" resultMap="FaqType" resultType="com.co.algomoko.support.domain.FaqVO">
         SELECT FAQNO, FAQTITLE, FAQCON
@@ -15,14 +26,40 @@
         WHERE Q0 = #{Q0}
     </select>
 
-    <select id="list" resultType="com.co.algomoko.support.domain.InquiryVO">
-        SELECT QNO, QTITLE, QANS, QDATE
-        FROM QUESTION
-    </select>
 
     <select id="searchNo" resultType="com.co.algomoko.support.domain.InquiryVO">
         SELECT MAX(QNO) + 1 AS QNO
         FROM QUESTION
+    </select>
+
+    <select id="inqTableCount" resultType="int" >
+        SELECT COUNT(*)
+        FROM QUESTION
+    </select>
+
+    <select id="inqAllList" resultType="hashmap" resultMap="InqType">
+        SELECT *
+        FROM (
+        SELECT ROW_NUMBER() OVER(ORDER BY MID DESC) AS
+        ROW_NUM
+        ,NICK
+        ,QTITLE
+        ,QANS
+        ,QDATE
+        FROM QUESTION
+        )
+        <if test="firstRecordIndex != null and lastRecordIndex != null">
+            WHERE ROW_NUM BETWEEN #{firstRecordIndex} AND
+            #{lastRecordIndex}
+        </if>
+        <choose>
+            <when test="type != null and type.equals('email')">
+                AND MID LIKE '%'||#{keyword}||'%'
+            </when>
+            <when test="type != null and type.equals('nick')">
+                AND NICK LIKE '%'||#{keyword}||'%'
+            </when>
+        </choose>
     </select>
 
 </mapper>
