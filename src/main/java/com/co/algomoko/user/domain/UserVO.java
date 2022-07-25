@@ -24,8 +24,11 @@ public class UserVO {
     private Integer tweight;
     private String U0;
     private String B0;
-    //private Role role;
+    private Role role;	
     
+    public String getRoleVal() {
+    	return this.role.getValue();
+    }
     
     //private Boolean enabled;
     

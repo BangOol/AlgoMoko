@@ -43,7 +43,7 @@
                     <!-- menu bar Begin -->
                     <div class="sidebar">
                         <div class="sidebar__item" style="font-family: 'Cairo', 'Jua', sans-serif">
-                            <h4>my Page</h4>
+                            <h4>관리자 페이지</h4>
                             <ul>
                                 <ul>
                                     <li><a href="/Admin/UserList">회원 관리</a></li>
@@ -51,9 +51,8 @@
                                     <li><a href="/Admin/UserStatistics">- 회원 통계</a></li>
                                     <li><a href="/Admin/Statistics">- 식단 통계</a></li>
                                     <li><a href="/Admin/Statistics">- 챌린지 통계</a></li>
-                                    <li><a href="/Admin/Inquiry">1:1문의 내역 확인</a></li>
-                                    <li><a href="/Admin/FAQ">FAQ 이동</a></li>
-                                    <li><a href="#">레시피 관리</a></li>
+                                    <li><a href="/Inquiry">1:1문의 내역 확인</a></li>
+                                    <li><a href="/FAQ">FAQ 이동</a></li>
                                 </ul>
                             </ul>
                         </div>
@@ -137,7 +136,7 @@
                                        th:data-type="${pagination.type}"
                                        th:data-keyword="${pagination.keyword}"
                                        th:onclick="|location.href='/Admin/UserList?currentPage=1&cntPerPage=${pagination.cntPerPage}&pageSize=${pagination.pageSize}&type=this.getAttribute(data-type)&keyword=this.getAttribute(data-keyword)'|">
-<!--                                       th:onclick="|location.href='/Admin/UserList?currentPage=1&cntPerPage=${pagination.cntPerPage}&pageSize=${pagination.pageSize}&type=(this.getAttribute('data-type'))&keyword=(this.getAttribute('data-keyword')'|">-->
+<!--                                       th   :onclick="|location.href='/Admin/UserList?currentPage=1&cntPerPage=${pagination.cntPerPage}&pageSize=${pagination.pageSize}&type=(this.getAttribute('data-type'))&keyword=(this.getAttribute('data-keyword')'|">-->
                                         &lt;&lt; </a>
                                     <a class="direction prev" href="javascript:void(0);"
                                        th:data-type="${pagination.type}"

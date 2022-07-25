@@ -6,6 +6,10 @@ import java.sql.Date;
 
 @Data
 public class InquiryVO {
+    // 검색 필터
+    private String type;
+    private String keyword;
+
     int qno;
     String C0;
     String mid;

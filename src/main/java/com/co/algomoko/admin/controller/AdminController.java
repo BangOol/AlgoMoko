@@ -64,7 +64,6 @@ public class AdminController {
         modelAndView.addObject("pagination", paginationUser); // 값을 paginantion으로 뿌림.
         modelAndView.addObject("Alllist", pagingService.SelectAllList(paginationUser)); // 회원 전체 데이터를 뿌림.
         modelAndView.setViewName("contents/admin/userFormUserlist");
-        System.out.println(modelAndView);
         return modelAndView;
     }
 
@@ -88,20 +87,6 @@ public class AdminController {
         model.addAttribute("ageRate", adminService.ageRate()); // 회원 나이 비율
         model.addAttribute("bmiRate", adminService.bmiRate()); // 회원 BMI 비율
         return "contents/admin/UserStatistics";
-    }
-
-
-    // 관리자 전용 - 1:1 문의 창 이동
-    @GetMapping("Inquiry")
-    public String moveInquiry() throws Exception{
-        return "contents/support/Inquiry";
-    }
-
-    // 관리자 전용 - FAQ 창 이동
-    @GetMapping("FAQ")
-    public String moveFAQ() throws Exception{
-
-        return "contents/support/FAQ";
     }
 
 

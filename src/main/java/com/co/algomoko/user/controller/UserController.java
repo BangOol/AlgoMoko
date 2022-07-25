@@ -107,7 +107,7 @@ public class UserController {
 	
 	//회원가입 최종 처리
 	@PostMapping("/signup")
-	public String signup(@RequestParam("sex") String sex, @RequestParam("tweight") String tweight ,@RequestParam("B0") String B0, @RequestParam("U1") String U0, UserVO vo) {
+	public String signup(@RequestParam("sex") String sex, @RequestParam("tweight") String tweight ,  UserVO vo) {
 		System.out.println(vo);
 		int num = userService.signup(vo);
 		if(num == 1) {

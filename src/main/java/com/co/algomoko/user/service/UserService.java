@@ -11,6 +11,8 @@ import com.co.algomoko.user.domain.UserVO;
 public interface UserService {
 	public UserVO memberInfo(UserVO uservo);
 	public UserVO login(UserVO uservo);
+	
+	//회원가입
 	public int signup(UserVO uservo);
 	
 
