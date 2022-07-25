@@ -62,6 +62,6 @@
 	<!-- 챌린지 인증 -->
 	<update id="valid" parameterType="com.co.algomoko.challenge.domain.MyChallengeVO">
 	update my_challenge
-	set round = #{trunc(round,1)}, vcon = #{vcon}
+	set round = trunc(#{round},1), vcno = #{vcno}
 	</update>
 </mapper>
