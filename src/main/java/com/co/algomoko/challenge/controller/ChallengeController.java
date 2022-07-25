@@ -102,8 +102,9 @@ public class ChallengeController {
 
 	// 진행중인 챌린지 1개추가하는 용도
 	@GetMapping("start")
-	public String getStart(int cno, Model model) {
+	public String getStart(int cno, int cdday, Model model) {
 		System.out.println("넘어온번호 : " + cno);
+		System.out.println("넘어온데이 : " + cdday);
 		// 중복처리
 		List<MyChallengeVO> result = dao.mcList();
 		int check = 0;
@@ -114,12 +115,13 @@ public class ChallengeController {
 				break;
 			}
 		}
+		
 		if (check == 1) {
 			model.addAttribute("msg", "이미 도전중입니다.");
 			model.addAttribute("url", "/challenge");
 			return "redirect:/challenge";
 		}
-		dao.mcInsert(cno);
+		dao.mcInsert(cno, cdday);
 		return "redirect:/challenge/challenging";
 	}
 
@@ -133,16 +135,45 @@ public class ChallengeController {
 	// 챌린지 인증페이지로 이동
 	@GetMapping("cValidation")
 	public String valid(int cno2, Model model) {
-		System.out.println("번호:"+cno2);
 		model.addAttribute("getd", dao.getd(cno2));
+		
+		int round = dao.getRound(cno2);
+		System.out.println("번호:"+cno2+" 일차 : "+round);
 		return "contents/challenge/cValidation";
 	}
 
 	// 챌린지 인증
-	@PostMapping("cValidation")
-	public String valid(ChallengeValidationVO vVO) {
+	@PostMapping("cValidation/certi")
+	public String valid(int cno2, @RequestParam("vcon") String vcon) {
+		
+		ChallengeValidationVO vVO = new ChallengeValidationVO();
+		int round = dao.getRound(cno2);
+		
+		vVO.setCno(cno2);
+		vVO.setRound(round);
+		vVO.setVcon(vcon);
+		System.out.println("번호:"+vVO.getCno()+" 일차 : "+round+" 내용 : "+vcon);
+		
+		// 00일차 인증내역이 없으면 insert 
+		// 00일차 인증내역이 있으면 이미 인증했습니다
+		// round랑 cno 기준으로 row을 select해옴 => null이냐 아니냐 체크
+		// select * from challenge_validation where round = #{round} and cno3 = #{cno} 
+		
+		// 챌린지인증
 		dao.valid(vVO);
-		System.out.println(vVO);
+		// 이행률 업데이트
+		// 인증횟수/도전일수
+		// 도전일수 = cdday (challenge)
+		// 인증횟수 = count(*) (challenge_valdation)
+		ChallengeVO cddayVO = dao.getPage(cno2); 
+		System.out.println("전체개수 : "+cddayVO.getCdday());
+		int certiCount = dao.getCertiCount(cno2);
+		double cper = (double)certiCount/(double)cddayVO.getCdday()*100;
+		
+		System.out.println("전체개수 : "+cddayVO.getCdday()+" 인증개수 : "+certiCount+" 이행률 : "+Math.round(cper*100/100.0)+"%");
+		dao.cperUpdate(cno2, (int)cper);
+		
+		
 		return "redirect:/challenge/challenging";
 	}
 	

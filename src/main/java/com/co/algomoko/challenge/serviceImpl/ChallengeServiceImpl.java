@@ -59,8 +59,8 @@ public class ChallengeServiceImpl implements ChallengeService {
 	}
 	// 챌린지 도전
 	@Override
-	public void mcInsert(int cno) {
-		mapper.mcInsert(cno);
+	public void mcInsert(int cno, int cdday) {
+		mapper.mcInsert(cno, cdday);
 	}
 	
 	// 챌린지 검색
@@ -83,6 +83,27 @@ public class ChallengeServiceImpl implements ChallengeService {
 	@Override
 	public int valid(ChallengeValidationVO vVO) {
 		return mapper.valid(vVO);
+	}
+
+	// 일차 구하기
+	@Override
+	public int getRound(int cno) {
+		// TODO Auto-generated method stub
+		return mapper.getRound(cno);
+	}
+
+	// 인증 갯수 구하기
+	@Override
+	public int getCertiCount(int cno) {
+		// TODO Auto-generated method stub
+		return mapper.getCertiCount(cno);
+	}
+
+	// 이행률 업데이트
+	@Override
+	public int cperUpdate(int cno, int cper) {
+		// TODO Auto-generated method stub
+		return mapper.cperUpdate(cno, cper);
 	}
 	
 	
