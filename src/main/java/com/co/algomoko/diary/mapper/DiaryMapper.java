@@ -23,5 +23,7 @@ public interface DiaryMapper {
 	 public DiaryVO diaryde(DiaryVO diaryVO);
 	 public DiaryVO detade(DiaryVO diaryVO);
 	 public List<RecipeVO> rlist(RecipeVO recpvo);
+	 public List<RecipeVO> onelist(RecipeVO recpvo);
 	 public List<RecipeVO> redetail(RecipeVO recpvo);
+	 public int tcal(String mid);
 }

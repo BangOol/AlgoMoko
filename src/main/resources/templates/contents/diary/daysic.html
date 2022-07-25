@@ -58,6 +58,8 @@
 
 <div th:replace="~{fragments/header}"></div>
 <div th:replace="~{fragments/aside}"></div>
+[[${#lists.size(resultCal)==0}]]
+
 
         <!-- Shoping Cart Section Begin -->
 
@@ -92,7 +94,7 @@
                               
                               <td th:text="${aade.ddname}" class="shoping__cart__total" >
                                       <img src="img/cart/cart-1.jpg" alt=""> </td>
-                                      <td <td th:text="|${aade.cal}kcal|"  class="shoping__cart__total"> </td>
+                                      <td td th:text="|${aade.cal}kcal|"  class="shoping__cart__total"> </td>
                                       <td th:text="${aade.amount}" class="shoping__cart__total"></td></td>
                                       <td th:text="|${aade.carb},${aade.prot},${aade.fat}|" class="shoping__cart__total"></td>
                                   </tr>
@@ -117,7 +119,7 @@
                               
                               <td th:text="${bbde.ddname}" class="shoping__cart__total" style="text-align:center;">
                                           <img src="img/cart/cart-1.jpg" alt=""></td>
-                                      <td <td th:text="|${bbde.cal}kcal|"  class="shoping__cart__total"></td>
+                                      <td td th:text="|${bbde.cal}kcal|"  class="shoping__cart__total"></td>
                                       <td th:text="${bbde.amount}" class="shoping__cart__total"></td></td>
                                       <td th:text="|${bbde.carb},${bbde.prot},${bbde.fat}|" class="shoping__cart__total"></td>
                                   </tr>
@@ -142,7 +144,7 @@
                               
                               <td th:text="${ccde.ddname}" class="shoping__cart__total" style="text-align:center;">
                                       <img src="img/cart/cart-1.jpg" alt=""></td>
-                                      <td <td th:text="|${ccde.cal}kcal|"  class="shoping__cart__total"></td>
+                                      <td td th:text="|${ccde.cal}kcal|"  class="shoping__cart__total"></td>
                                       <td th:text="${ccde.amount}" class="shoping__cart__total"></td></td>
                                       <td th:text="|${ccde.carb},${ccde.prot},${ccde.fat}|" class="shoping__cart__total"></td>
                                   </tr>
@@ -152,22 +154,42 @@
                                   <td><img src="/img/plus.jpg" class="plusnew" style="margin-left:250px; width: 100px;"></td>
                                   </tr>
                              </tbody>
-                             
+                             </th:block>
                              <thead>
                                   <tr>
-                                  <th></th>
-                                      <th class="shoping__product" style="text-align:center;">총 칼로리</th>
+                                  	  <th class="shoping__product" style="text-align:center;">총 칼로리</th>
+                                      <th class="shoping__product" style="text-align:center;">일일 칼로리</th>
                                   </tr>
                               </thead>
                               
                               <tbody>
-                              <th:block th:each="result:${resultCal}" >
-                              <tr>
-                              <th></th>
-                              <th th:text="${result.sumcal}" class="shoping__product" style="text-align:center;">
-                                          <img src="img/cart/cart-1.jpg" alt=""></th>
+                             
+                              
+                              
+                              <tr th:if="${#lists.size(resultCal)} == 0">
+                              
+                              <td  class="shoping__product" style="text-align:center;">일지를 등록해주세요
+                                          </td>
+                                          
+                                          <td th:text="${tcal}" class="shoping__product" style="text-align:center;">
+                                          </td>
                                   </tr>
-                             </th:block>
+                             
+                              
+                              
+                              
+                              <tr th:unless="${#lists.size(resultCal)} == 0">
+                              
+                              <td th:text="${resultCal[0].sumcal}"  class="shoping__product" style="text-align:center;">
+                                          </td>
+                                          
+                                          <td th:text="${tcal}" class="shoping__product" style="text-align:center;">
+                                          </td>
+                                  </tr>
+                             
+                             
+                             
+                             
                           </table>
                       </div>
                   </div>

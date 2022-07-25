@@ -93,8 +93,16 @@ where mid=#{mid} and TRUNC(ddate) = trunc(#{ddate}) and dddo=#{dddo}
 select*from recipe where mid=#{mid}
 </select>
 
+<select id="onelist" resultType="RecipeVO">
+select*from recipe where mid=#{mid} and rname=#{rname}
+</select>
+
 <select id="redetail" resultType="RecipeVO">
 select*from recipe_ing where rname=#{rname} and mid = #{mid}
+</select>
+
+<select id="tcal" resultType="int">
+select tcal from members where mid=#{mid}	
 </select>
 
 

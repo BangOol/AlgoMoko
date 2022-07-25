@@ -17,6 +17,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.freemarker.FreeMarkerAutoConfiguration;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,14 +46,16 @@ public class DiaryController {
 	@Autowired FoodMapper dao1;
 	
 	@RequestMapping("")
-    public String sicmain(Model model, DiaryVO diaryVO){
+    public String sicmain(Model model, DiaryVO diaryVO,Authentication authentication){
 		Calendar calendar= Calendar.getInstance();
 		calendar.set(Calendar.HOUR_OF_DAY, 0);
 		calendar.set(Calendar.MINUTE, 0);
 		calendar.set(Calendar.SECOND, 0);
 		calendar.set(Calendar.MILLISECOND, 0);
+		UserDetails mid = (UserDetails) authentication.getPrincipal();
+		diaryVO.setMid(mid.getUsername());
 		diaryVO.setDdate(calendar.getTime());
-		diaryVO.setMid("user13");
+		
 		
 		model.addAttribute("todaysic",dao.findDay(diaryVO));
 		model.addAttribute("resultCal",dao.jukcal(diaryVO));
@@ -64,8 +68,9 @@ public class DiaryController {
         return "contents/diary/cal";
     }
 	@RequestMapping("myre")
-    public String myre(Model model , RecipeVO recipeVO){
-		recipeVO.setMid("user13");
+    public String myre(Model model , RecipeVO recipeVO,Authentication authentication){
+		UserDetails mid = (UserDetails) authentication.getPrincipal();
+		recipeVO.setMid(mid.getUsername());
 		
 		model.addAttribute("rlist",dao.rlist(recipeVO));
 		
@@ -73,12 +78,15 @@ public class DiaryController {
 		return "contents/diary/myre";
 	}
 	@RequestMapping("redetail")
-	    public String redetail(@RequestParam("rname") String rname ,Model model , RecipeVO recipeVO){
-			recipeVO.setMid("user13");
-			recipeVO.setRname(rname);
-			System.out.println(dao.redetail(recipeVO));
+	    public String redetail(@RequestParam("rname") String rname ,Model model , RecipeVO recipeVO,Authentication authentication){
+			
+		UserDetails mid = (UserDetails) authentication.getPrincipal();
+		recipeVO.setMid(mid.getUsername());
+			
+			recipeVO.setMid("user1");
+			model.addAttribute("rrecp",dao.onelist(recipeVO));
 			model.addAttribute("redetail",dao.redetail(recipeVO));
-			model.addAttribute("rrecp",dao.rlist(recipeVO));
+			model.addAttribute("rname",rname);
 			return "contents/diary/redetail";
 		
 		
@@ -90,17 +98,31 @@ public class DiaryController {
         return "contents/diary/succ";
     }
 	@RequestMapping("todaysic")
-    public String todaysic(Model model, DiaryVO diaryVO){
+    public String todaysic(Model model, DiaryVO diaryVO,Authentication authentication) throws ParseException{
 		Calendar calendar= Calendar.getInstance();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		
+		
 		calendar.set(Calendar.HOUR_OF_DAY, 0);
 		calendar.set(Calendar.MINUTE, 0);
 		calendar.set(Calendar.SECOND, 0);
 		calendar.set(Calendar.MILLISECOND, 0);
+		UserDetails mid = (UserDetails) authentication.getPrincipal();
+		diaryVO.setMid(mid.getUsername());
 		diaryVO.setDdate(calendar.getTime());
-		diaryVO.setMid("user13");
 		
 		
 		
+		diaryVO.setDddo("aa");
+		System.out.println(dao.resultCal(diaryVO));
+		model.addAttribute("aade",dao.detail(diaryVO));
+		diaryVO.setDddo("bb");
+		model.addAttribute("bbde",dao.detail(diaryVO));
+		diaryVO.setDddo("cc");
+		model.addAttribute("tcal",dao.tcal("user1"));
+		model.addAttribute("ccde",dao.detail(diaryVO));
+		
+		model.addAttribute("resultCal",dao.resultCal(diaryVO));
 		model.addAttribute("todaysic",dao.sicDay(diaryVO));
 		model.addAttribute("resultCal",dao.resultCal(diaryVO));
 		model.addAttribute("ddd",calendar.getTime());
@@ -109,14 +131,15 @@ public class DiaryController {
 	
 	
 	@RequestMapping(value="daysic") 
-    public String daysic(@RequestParam("date") String date, Model model, DiaryVO diaryVO, HttpServletResponse response)
+    public String daysic(@RequestParam("date") String date, Model model, DiaryVO diaryVO,Authentication authentication ,HttpServletResponse response)
     	throws IOException, ParseException{
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String strDate = date;
 		String std = date;
 		Date date1 = new Date(sdf.parse(strDate).getTime());
-		diaryVO.setMid("user13");
+		UserDetails mid = (UserDetails) authentication.getPrincipal();
+		diaryVO.setMid(mid.getUsername());
 		diaryVO.setDdate(date1);
 		
 		diaryVO.setDddo("aa");
@@ -125,6 +148,7 @@ public class DiaryController {
 		diaryVO.setDddo("bb");
 		model.addAttribute("bbde",dao.detail(diaryVO));
 		diaryVO.setDddo("cc");
+		model.addAttribute("tcal",dao.tcal("user1"));
 		model.addAttribute("ccde",dao.detail(diaryVO));
 		model.addAttribute("std",std);
 		model.addAttribute("resultCal",dao.resultCal(diaryVO));
@@ -133,31 +157,33 @@ public class DiaryController {
 		return "contents/diary/daysic";
     }
 	@RequestMapping("weeklybest")
-    public String weeklybest(Model model,RecipeVO recpvo){
-		
+    public String weeklybest(Model model,RecipeVO recpvo,Authentication authentication){
+		UserDetails mid = (UserDetails) authentication.getPrincipal();
+		recpvo.setMid(mid.getUsername());
 		model.addAttribute("rank",dao.rerank(recpvo));
 		
 		
         return "contents/diary/weeklybest";
     }
 	@RequestMapping("write")
-    public String write(){
+    public String write(Authentication authentication){
         return "contents/diary/write";
     }
 	@RequestMapping("writema")
-    public String writema(){
+    public String writema(Authentication authentication){
         return "contents/diary/writema";
     }
 	@RequestMapping("modify")
     public String modify(Model model, DiaryVO diaryVO, 
     		@RequestParam("dddo") String dddo,
-    		@RequestParam("date") String date) throws ParseException{
+    		@RequestParam("date") String date,Authentication authentication) throws ParseException{
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String strDate = date;
 		
 		Date date1 = new Date(sdf.parse(strDate).getTime());
+		UserDetails mid = (UserDetails) authentication.getPrincipal();
+		diaryVO.setMid(mid.getUsername());
 		
-		diaryVO.setMid("user13");
 		diaryVO.setDdate(date1);
 		diaryVO.setDddo(dddo);
 		 
@@ -169,8 +195,9 @@ public class DiaryController {
         
     }
 	@RequestMapping("modifyde")
-public String modifyde(HttpServletResponse response,DiaryVO diaryVO)throws IOException, ParseException { 
-		diaryVO.setMid("user13");
+public String modifyde(HttpServletResponse response,DiaryVO diaryVO,Authentication authentication)throws IOException, ParseException { 
+		UserDetails mid = (UserDetails) authentication.getPrincipal();
+		diaryVO.setMid(mid.getUsername());
 		dao.diaryde(diaryVO);
 		dao.detade(diaryVO);
 		
@@ -188,7 +215,7 @@ public String modifyde(HttpServletResponse response,DiaryVO diaryVO)throws IOExc
 		  for(int i=0;i< ddnameList.size();i++) { 
 			  res = dao.fonlist(ddnames[i]);
 			  
-			  res.setMid("user13");
+			  res.setMid(mid.getUsername());
 			  res.setDdate(diaryVO.getDdate());
 			  res.setDddo(diaryVO.getDddo());
 			  dao.insertdetail(res);
@@ -198,8 +225,9 @@ public String modifyde(HttpServletResponse response,DiaryVO diaryVO)throws IOExc
 
 	}
 	@RequestMapping("delete")
-public String delete(HttpServletResponse response,DiaryVO diaryVO)throws IOException, ParseException { 
-		diaryVO.setMid("user13");
+public String delete(HttpServletResponse response,DiaryVO diaryVO,Authentication authentication)throws IOException, ParseException { 
+		UserDetails mid = (UserDetails) authentication.getPrincipal();
+		diaryVO.setMid(mid.getUsername());
 		dao.diaryde(diaryVO);
 		dao.detade(diaryVO);
 		
@@ -211,7 +239,7 @@ public String delete(HttpServletResponse response,DiaryVO diaryVO)throws IOExcep
 	@RequestMapping("weekwrite")
     public String weekwrite(Model model, 
     		@RequestParam("dddo") String dddo,
-    		@RequestParam("date") String date) throws ParseException{
+    		@RequestParam("date") String date,Authentication authentication) throws ParseException{
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String strDate = date;
 		
@@ -224,9 +252,10 @@ public String delete(HttpServletResponse response,DiaryVO diaryVO)throws IOExcep
     }
 	
 	@RequestMapping(value="insert") 
-	public String insert(HttpServletResponse response,DiaryVO diaryVO)throws IOException, ParseException { 
+	public String insert(HttpServletResponse response,DiaryVO diaryVO,Authentication authentication)throws IOException, ParseException { 
 		
-		diaryVO.setMid("user13");
+		UserDetails mid = (UserDetails) authentication.getPrincipal();
+		diaryVO.setMid(mid.getUsername());
 		dao.insert(diaryVO);
 		
 		String[] ddnames = diaryVO.getDdname().split(",");
@@ -242,7 +271,7 @@ public String delete(HttpServletResponse response,DiaryVO diaryVO)throws IOExcep
 		  for(int i=0;i< ddnameList.size();i++) { 
 			  res = dao.fonlist(ddnames[i]);
 			  
-			  res.setMid("user13");
+			  res.setMid(mid.getUsername());
 			  res.setDdate(diaryVO.getDdate());
 			  res.setDddo(diaryVO.getDddo());
 			  dao.insertdetail(res);
