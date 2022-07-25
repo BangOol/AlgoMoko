@@ -25,19 +25,22 @@ public class Account implements UserDetails{
     //private Boolean enabled;
 //    private Collection<GrantedAuthority> authorities;
     private String U0;
-   
+    
     private UserVO vo;
     
     public Account(UserVO vo) {
     	this.vo = vo;
     }
     
+  
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         // TODO Auto-generated method stub
     	 List<GrantedAuthority> auth = new ArrayList<>();
         //return Collections.singletonList(new SimpleGrantedAuthority(this.U0));
+    	 
         auth.add(new SimpleGrantedAuthority(this.U0));
+       // auth.add(new SimpleGrantedAuthority(Role.class.getCanonicalName());
         return auth;
     }
 
