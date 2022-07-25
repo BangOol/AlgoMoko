@@ -130,28 +130,59 @@
 
 
 
-  
+   <!-- Table End -->
+   </section>
+   <!-- Blog Section End -->
+      <input type="text" readonly placeholder="재료 입력" style="outline:1px solid #c3bfbf;">
+      <button type="button" id="btnmod dialog" class="btn btn-primary blog__btn">검색</button>
+      <div id="dialog" title="재료 검색"></div>
+      <!-- 모달창 시작 -->
+      <div class="modal">
+         <div class="modal1_body">
+            <div class="modal_title">
+               <input type="text" id="textex"><button id="btnbtn" name="btnbtn" class="btn btn-primary">검색</button>
+               <div class="modal_content">
+
+               </div>
+            </div>
+            <!-- 제품모달 그리드 -->
+            <div class="container-fluid px-4">
+
+               <div id="gridpro"></div>
+               <div class="modal_btn">
+                  <button id="modalbtn" class="modal_s">등록</button>
+                  <button class="modal_c">취소</button>
+            </div>
+         </div>
+      </div>
+   </div>
+   </div>
 
 
- <form method="post" action="" name="frm" id="frm">
+
+   <!-- 모달창 종료 -->
+
+
+   <br><br>
+ <form method="post" action="/diary/modifyde" name="frm" id="frm">
    
-
    <div class="container">
       <div class="row">
-         <div class="col-sm-4 col-xl-6">
+         <div class="col-sm-7 col-xl-6">
 
 
 
             <table class="table table-borderless">
                <thead>
                   <tr>
-                  <th scope="col">재료명</th>
+                  <th scope="col">재료</th>
                   <th scope="col">칼로리</th>
                   <th scope="col">수량</th>
                   </tr>
                </thead>
                <tbody id="tbody1">
                   <th:block th:each="redetail:${redetail}">
+                  
                      <tr>
                         <th>
                         <input th:value="${redetail.fing}" class="thth1" type="text" name="ddname">
@@ -160,12 +191,14 @@
                         <input th:value="${redetail.cal}" class="thth2" type="text" name="cal">
                         </th>
                         <th>
-                         <input th:value="${redetail.amount}" class="thth3" type="text" name="amount">
+                        <input th:value="${redetail.gram}" class="thth2" type="text" name="cal">
                         </th>
                         
+                        
+                        <td class="shoping__cart__item__close"><button class="icon_close"></td>
                      </tr>
 
-                  </th:block>
+                  
 
                </tbody>
 
@@ -174,13 +207,14 @@
 
 
          </div>
-          <div class="col-sm-8 col-xl-3" style="margin-left: 200px;">
+          <div class="col-sm-2 col-xl-3" style="margin-left: 200px;">
             <div class="tab-content">
                <div class="product__details__tab__desc">
                   <span>레시피
                      <br>
-                     <input th:value="${rrecp[0].rrecipe}" type=textarea class="form-control" name="ucon" rows="10" cols="30" 
+                    <input th:value="${rrecp[0].rrecipe}" type=textarea class="form-control" name="ucon" rows="1" cols="30" 
                         style="width : 200px;"></span>
+                     
                </div>
             </div>
          </div>
@@ -188,6 +222,7 @@
 
    </div>
    </div>
+   </th:block>
    <!-- Progress Bar -->
 
    <div class="flex flex-1 flex-col md:flex-row lg:flex-row mx-2 mt-2">
@@ -267,7 +302,95 @@
             }]
          });
 
-       
+         $(function () {
+
+
+
+
+
+
+            $("tr").on("click", ".icon_close", function () {
+
+               $(this).closest("tr").remove();
+
+            })
+
+
+
+
+
+            $('.blog__btn').click((e) => {
+               jepoom.refreshLayout();
+               modal.style.display = "flex";
+               body.style.overflow = 'hidden';
+            })
+            const closeBtn = modal.querySelector(".modal_c")
+            closeBtn.addEventListener("click", e => {
+               modal.style.display = "none";
+               body.style.overflow = 'auto';
+            })
+
+
+
+
+
+            /*음식조회*/
+            $("#btnbtn").on("click", function () {
+               var btnbtn = $('#textex').val();
+               console.log(btnbtn);
+               $.ajax({
+                  url: '/diary/flist',
+                  type: 'GET', // == method
+                  data: {
+                     btnbtn
+                  },
+
+               }).done(function (response) {
+                  jepoom.refreshLayout();
+                  jepoom.resetData(response)
+                  jepoom.on('click', e => {
+                     var rok = e.rowKey
+                     gin = jepoom.getRow(rok).ing
+                     gic = jepoom.getRow(rok).cal
+                     gia = jepoom.getRow(rok).amount
+
+                  })
+               })
+               $("#modalbtn").on("click", function(){
+                  var tbody = $('#tbody1');
+                   
+               var tr =  $('<tr>');
+               var th1 = $('<th>').append($('<input>').val(gin).addClass('thth1').attr('type','text').attr('name','ddname'));
+               var th2 = $('<th>').append($('<input>').val(gic).addClass('thth2').attr('type','text').attr('name','cal'));
+               var th3 = $('<th>').append($('<input>').val(gia).addClass('thth3').attr('type','text').attr('name','amount'));
+               var td4 = $('<td>').addClass('shoping__cart__item__close');
+               var button = $('<button>').addClass('icon_close');
+               var td5 = $(td4).append(button);
+               button.on("click",function(){
+                 	console.log($(this));
+                   $(this).closest("tr").remove();
+                 })
+				 
+            
+            var b = $(tr).append(th1,th2,th3,td5);
+            
+            var d = $(tbody).append(b);
+             
+              
+               })
+
+
+
+            })
+
+
+         })
+         
+         function diaryde(){
+        $("#frm").attr("action", "delete").submit();
+        
+    }
+      </script>
 
 
 

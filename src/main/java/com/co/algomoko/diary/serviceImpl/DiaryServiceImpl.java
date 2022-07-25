@@ -98,6 +98,17 @@ public class DiaryServiceImpl implements DiaryService {
 		return diaryMapper.redetail(recpvo);
 	}
 
+	@Override
+	public List<RecipeVO> onelist(RecipeVO recpvo) {
+		return diaryMapper.onelist(recpvo);
+	}
+
+	@Override
+	public int tcal(String mid) {
+		
+		return diaryMapper.tcal(mid);
+	}
+
 	
 
 	
