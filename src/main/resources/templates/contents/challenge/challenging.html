@@ -67,13 +67,15 @@
 										<ul>
 											<!-- <li><i th:text="' '+'D-'+${chl.cdday}"
 												class="fa fa-calendar-o"></i></li> -->
-											<li th:text="${mc.sdate}"><i class="fa fa-calendar-o"></i>시작날짜: 7월5일</li>
-											<li th:text="${mc.edate}"><i class="fa fa-calendar-o"></i>종료날짜: 8월3일</li>
+											<li th:text="|시작날짜 : ${mc.sdate}|"><i class="fa fa-calendar-o"></i>시작날짜: 7월5일</li>
+											<li th:text="|종료날짜 : ${mc.edate}|"><i class="fa fa-calendar-o"></i>종료날짜: 8월3일</li>
 										</ul>
 										<h5 th:text="${mc.ctitle}"><a>탄산 끊기</a></h5>
 										<p th:text="${mc.cdday}+'일 동안 '+${mc.ctitle}+' 도전중!'">30일 동안 탄산 끊기 도전중!</p>
-										<p th:text="'이행률 : '+${mc.cper}+'%'">이행률 : 70%</p>
-										<a th:href="@{/challenge/challengeDetail(cno=${mc.cno})}" class="blog__btn">인증하기 <span class="arrow_right"></span></a>
+										<p th:text="'이행률 : '+${mc.round}/${mc.cdday}*100+'%'">이행률 : 70%</p>
+										<a th:href="@{/challenge/challengeDetail(cno=${mc.cno2})}" class="blog__btn">인증하기 <span class="arrow_right"></span></a>
+										<a th:href="@{/challenge/cValidation(cno2=${mc.cno2})}" class="blog__btn">간소화인증하기 <span class="arrow_right"></span></a>
+										
 									</div>
 								</div>
 							</div>

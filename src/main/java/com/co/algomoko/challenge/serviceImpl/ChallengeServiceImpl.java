@@ -68,10 +68,24 @@ public class ChallengeServiceImpl implements ChallengeService {
 	public List<ChallengeVO> cSearch(ChallengeVO cVO) {
 		return mapper.cSearch(cVO);
 	}
-
+	
+	// 챌린지 인증 페이지
 	@Override
 	public ChallengeValidationVO dList(int cno) {
 		return mapper.dList(cno);
 	}
+	// 챌린지 인증 페이지 이동	
+	@Override
+	public MyChallengeVO getd(int cno2) {
+		return mapper.getd(cno2);
+	}
+	// 챌린지 이동
+	@Override
+	public int valid(MyChallengeVO mVO) {
+		return mapper.valid(mVO);
+	}
+	
+	
+
 	
 }

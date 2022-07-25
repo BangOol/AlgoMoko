@@ -11,6 +11,8 @@ import com.co.algomoko.challenge.domain.MyChallengeVO;
 public interface ChallengeMapper {
 	// 챌린지 조회
 	public ChallengeVO getPage(int cno);
+	//
+	public MyChallengeVO getd(int cno2);
 	
 	// 챌린지 검색
 	public List<ChallengeVO> cSearch(ChallengeVO cVO);
@@ -27,7 +29,7 @@ public interface ChallengeMapper {
 	// 챌린지 삭제(관리자만)
 	public void cDelete(int cno);
 	
-	// 도전하기누르면 추가
+	// 진행중인 챌린지 추가
 	public void mcInsert(int cno);
 	
 	// 진행중인 챌린지 목록
@@ -36,5 +38,7 @@ public interface ChallengeMapper {
 	// 진행중인 챌린지 상세
 	public ChallengeValidationVO dList(int cno);
 	
+	// 챌린지 인증하기
+	public int valid(MyChallengeVO mVO);
 	
 }
