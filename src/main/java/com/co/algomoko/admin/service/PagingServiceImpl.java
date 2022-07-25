@@ -2,6 +2,7 @@ package com.co.algomoko.admin.service;
 
 import com.co.algomoko.admin.mapper.AdminMapper;
 import com.co.algomoko.admin.paging.PaginationUser;
+import com.co.algomoko.support.mapper.FaqMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,7 @@ public class PagingServiceImpl implements PagingService{
 
 
 
+
     @Override
     public List<Map<String, Object>> SelectAllList(PaginationUser paginationUser) throws Exception {
         return adminMapper.SelectAllList(paginationUser);
@@ -25,4 +27,6 @@ public class PagingServiceImpl implements PagingService{
     public int TableCount() throws Exception {
         return adminMapper.TableCount();
     }
+
+
 }
