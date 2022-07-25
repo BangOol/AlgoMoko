@@ -14,7 +14,7 @@
 	<th:block layout:fragment="content">
 		<!-- Breadcrumb Section Begin -->
 		<section class="breadcrumb-section set-bg"
-			data-setbg="../img/chl/b.jpg">
+			data-setbg="img/chl/chlmain.jpg">
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-12 text-center">
@@ -62,7 +62,7 @@
 										<br> <br>
 										<h3 th:text="${dList.ctitle}" style="text-align: center"></h3>
 										<br> <br>
-										<p th:text="|${dList.cdday} 동안 ${dList.ctitle}에 도전중입니다!|"
+										<p th:text="|${dList.cdday}일 동안 ${dList.ctitle}에 도전중입니다!|"
 											style="text-align: center;"></p>
 										<p th:text="${dList.ccon}"></p>
 										<h4 th:text="'이행률 : '+${dList.ccper}+'%'"style="text-align: center;"></h4>
