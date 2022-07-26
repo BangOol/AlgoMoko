@@ -164,12 +164,12 @@
 
 
    <br><br>
- <form method="post" action="/diary/modifyde" name="frm" id="frm">
+ <form method="post" action="/diary/remodify" name="frm" id="frm">
    
    <div class="container">
       <div class="row">
          <div class="col-sm-7 col-xl-6">
-
+		<input th:value="${redetail[0].rname}" name="rname" readonly>
 
 
             <table class="table table-borderless">
@@ -185,13 +185,13 @@
                   
                      <tr>
                         <th>
-                        <input th:value="${redetail.fing}" class="thth1" type="text" name="ddname">
+                        <input th:value="${redetail.fing}" class="thth1" type="text" name="fing">
                         </th>
                         <th>
                         <input th:value="${redetail.cal}" class="thth2" type="text" name="cal">
                         </th>
                         <th>
-                        <input th:value="${redetail.gram}" class="thth2" type="text" name="cal">
+                        <input th:value="${redetail.aamount}" class="thth3" type="text" name="aamount">
                         </th>
                         
                         
@@ -212,8 +212,9 @@
                <div class="product__details__tab__desc">
                   <span>레시피
                      <br>
-                    <input th:value="${rrecp[0].rrecipe}" type=textarea class="form-control" name="ucon" rows="1" cols="30" 
-                        style="width : 200px;"></span>
+                    <input th:value="${rrecp[0].rrecipe}" type="textarea" class="form-control" name="rrecipe" rows="4" cols="20" 
+                        style="width : 200px; height:200px; resize: both;"></span>
+                       
                      
                </div>
             </div>
@@ -231,18 +232,7 @@
             <div class="font-bold text-xl">kcal</div>
          </div>
 
-
-
-         <div class="shadow w-100 bg-grey-light">
-            <div class="bg-blue-500 text-xs leading-none py-1 text-center text-white" style="width: 45%">45%
-
-            </div>
-
-
-
-
-
-         </div>
+		<td><input type="text" id="seipSum"></td>
 
       </div>
 
@@ -250,7 +240,7 @@
       </th:block>
       <button type="submit" class="btn btn-primary" id="insert">수정</button>
       <button type="button" class="btn btn-primary" onclick="diaryde()" id="insert">삭제</button>
-      <button type="button" class="btn btn-primary " onclick="location.href='todaysic'">취소</button>
+      <button type="button" class="btn btn-primary " onclick="history.go(-1);">취소</button>
  </form>
 
       <div th:replace="~{fragments/footer}"></div>
@@ -305,15 +295,36 @@
          $(function () {
 
 
+			function result() {
+				
+				
+					var sum = 0;
+				$(".thth2").each(function () {
+					sum += Number($(this).val());
+				});
+
+
+				$("#seipSum").val(sum);
+
+			}
+
+			result()
 
 
 
 
-            $("tr").on("click", ".icon_close", function () {
 
-               $(this).closest("tr").remove();
+			$(".icon_close").on("click", function () {
 
-            })
+				$(this).closest("tr").remove();
+
+				result()
+				
+
+
+
+			})
+
 
 
 
@@ -360,7 +371,7 @@
                   var tbody = $('#tbody1');
                    
                var tr =  $('<tr>');
-               var th1 = $('<th>').append($('<input>').val(gin).addClass('thth1').attr('type','text').attr('name','ddname'));
+               var th1 = $('<th>').append($('<input>').val(gin).addClass('thth1').attr('type','text').attr('name','fing'));
                var th2 = $('<th>').append($('<input>').val(gic).addClass('thth2').attr('type','text').attr('name','cal'));
                var th3 = $('<th>').append($('<input>').val(gia).addClass('thth3').attr('type','text').attr('name','amount'));
                var td4 = $('<td>').addClass('shoping__cart__item__close');
@@ -369,12 +380,14 @@
                button.on("click",function(){
                  	console.log($(this));
                    $(this).closest("tr").remove();
+                   result()
                  })
 				 
             
             var b = $(tr).append(th1,th2,th3,td5);
             
             var d = $(tbody).append(b);
+            result()
              
               
                })
@@ -387,7 +400,7 @@
          })
          
          function diaryde(){
-        $("#frm").attr("action", "delete").submit();
+        $("#frm").attr("action", "redelete").submit();
         
     }
       </script>

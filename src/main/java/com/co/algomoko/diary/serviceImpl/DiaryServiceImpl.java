@@ -109,6 +109,31 @@ public class DiaryServiceImpl implements DiaryService {
 		return diaryMapper.tcal(mid);
 	}
 
+	@Override
+	public String tomem(String mid) {
+		return diaryMapper.tomem(mid);
+	}
+
+	@Override
+	public void reinsert(RecipeVO recipeVO) {
+		
+	}
+
+	@Override
+	public void redeinsert(RecipeVO recipeVO) {
+		
+	}
+
+	@Override
+	public void redelete(RecipeVO recipeVO) {
+		
+	}
+
+	@Override
+	public void rededelete(RecipeVO recipeVO) {
+		
+	}
+
 	
 
 	

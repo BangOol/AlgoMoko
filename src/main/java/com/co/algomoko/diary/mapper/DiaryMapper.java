@@ -26,4 +26,9 @@ public interface DiaryMapper {
 	 public List<RecipeVO> onelist(RecipeVO recpvo);
 	 public List<RecipeVO> redetail(RecipeVO recpvo);
 	 public int tcal(String mid);
+	 public String tomem(String mid);
+	 public void reinsert(RecipeVO recipeVO);
+	 public void redeinsert(RecipeVO recipeVO);
+	 public void redelete(RecipeVO recipeVO);
+	 public void rededelete(RecipeVO recipeVO);
 }
