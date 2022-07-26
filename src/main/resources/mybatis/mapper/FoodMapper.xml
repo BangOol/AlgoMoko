@@ -3,15 +3,17 @@
 		  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.co.algomoko.food.mapper.FoodMapper">
 	<!-- 음식 검색 결과 리스트 -->
-	<select id="fList" resultType="com.co.algomoko.food.domain.FoodVO">
+	<select id="fList"
+		resultType="com.co.algomoko.food.domain.FoodVO">
 		<![CDATA[select ing, cal, amount, F0
 				 from (select ing, cal, amount, F0
 					   from food
 		 			   where ing like '%' || #{ing} || '%'	order by ing)
-				 where rownum <=4]]>
+				 ]]>
 	</select>
 	<!-- 음식 검색 결과 단건 조회 -->
-	<select id="fListOne" resultType="com.co.algomoko.food.domain.FoodVO">
+	<select id="fListOne"
+		resultType="com.co.algomoko.food.domain.FoodVO">
 		select ing, amount, cal, carb, prot, fat, F0
 		from food
 		where
@@ -29,12 +31,14 @@
 		<![CDATA[select ing
 				 from (select * from food order by fview desc)
 				 where rownum <= 6]]>
-	</select>		
+	</select>
 	<!-- 연관 검색어 -->
-	<select id="rList" resultType="com.co.algomoko.food.domain.FoodVO">
+	<select id="rList"
+		resultType="com.co.algomoko.food.domain.FoodVO">
 		select ing, amount, cal, f0
 		from food
-		where ing like '%' || #{ing} || '%' and ing not like #{ing}
+		where ing like '%' ||
+		#{ing} || '%' and ing not like #{ing}
 	</select>
-	
+
 </mapper>

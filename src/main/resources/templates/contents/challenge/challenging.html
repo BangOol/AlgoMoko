@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zxx" xmlns:th="http://www.thymeleaf.org"
+<html lang="zxx" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 	layout:decorate="~{layouts/layout}">
 
 <head>
@@ -49,9 +49,9 @@
 							<div class="blog__sidebar__item">
 								<h4>Categories</h4>
 								<ul>
-									<li><a href="/challenge">챌린지 목록</a></li>
-									<li><a href="/challenge/challenging">진행중인 챌린지</a></li>
-									<li><a href="/challenge/challengeEnd">완료한 챌린지</a></li>
+									<li><a href="../challenge">챌린지 목록</a></li>
+									<li><a href="../challenge/challenging">진행중인 챌린지</a></li>
+									<li><a href="../challenge/challengeEnd">완료한 챌린지</a></li>
 								</ul>
 							</div>
 						</div>
@@ -73,8 +73,11 @@
 										<h5 ><a th:text="${mc.ctitle}">탄산 끊기</a></h5>
 										<p th:text="${mc.cdday}+'일 동안 '+${mc.ctitle}+' 도전중!'"></p>
 										<p th:text="'이행률 : '+${mc.cper}+'%'"></p>
-										<a th:href="@{/challenge/challengeDetail(cno=${mc.cno2})}" class="blog__btn">인증하기 <span class="arrow_right"></span></a>
-										<a th:href="@{/challenge/cValidation(cno2=${mc.cno2})}" class="blog__btn">간소화인증하기 <span class="arrow_right"></span></a>										
+<!-- 										<a th:href="@{/challenge/challengeDetail(cno=${mc.cno2})}" class="blog__btn">인증하기 <span class="arrow_right"></span></a>
+ -->										<a sec:authorize="hasAuthority('u1')" th:href="@{/challenge/cValidation(cno2=${mc.cno2})}" class="site-btn">인증하기</a>
+ 											<a sec:authorize="hasAuthority('u1')"th:href="@{/challenge/deleting(cno2=${mc.cno2})}" class="site-btn">포기하기</a>
+ 																				
+ 																
 									</div>
 								</div>
 							</div>

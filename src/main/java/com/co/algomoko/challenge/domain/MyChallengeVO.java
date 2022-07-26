@@ -8,7 +8,7 @@ import lombok.Data;
 public class MyChallengeVO extends ChallengeVO {
 	private int mycno;
 	private String cno2;
-	private String uid;
+	private String mid;
 	private int cper;
 	private String sdate;
 	private String edate;

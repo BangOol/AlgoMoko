@@ -6,6 +6,7 @@ import lombok.Data;
 public class ChallengeVO{
 	
 	private String cno;
+	private String mid;
 	private String ctitle;
 	private String ccon;
 	private int cdday;
