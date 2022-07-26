@@ -37,7 +37,7 @@
                    			<div sec:authentication="name"></div>
                    			<div sec:authentication="principal.authorities"></div>
                    			
-                            <a href="#" style="float: right; margin : 0 10px">[[${nick}]] 님, 반갑습니다!</a>
+                           	<a href="#" style="float: right; margin : 0 10px">[[${nick}]] 님, 반갑습니다!</a>
                             <a href="myPage" style="float: right; margin : 0 10px">내정보</a>
                             <a sec:authorize="hasAuthority('u0')" href="Admin" style="float: right; margin : 0 10px">관리자정보</a>
                         </div>

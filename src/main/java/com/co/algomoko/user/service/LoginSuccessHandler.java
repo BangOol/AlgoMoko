@@ -36,5 +36,6 @@ public class LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 			 else 
 	            new DefaultRedirectStrategy().sendRedirect(request, response, "/main");
 	        }
+		
  }
 

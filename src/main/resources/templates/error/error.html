@@ -9,7 +9,16 @@
 </head>
 <body>
 <th:block layout:fragment="content">
-<h3>test error!!</h3>
-</th:block>
+<div style="text-align: center; margin : 100px ">
+
+<h1>test error!!</h1>
+	error code : <span th:text="${code}"></span>
+    <br>error msg : <span th:text="${msg}"></span>
+    <br>timestamp : <span th:text="${timestamp}"></span>
+</div>
+ 	</th>
+
+
+
 </body>
 </html>

@@ -1,5 +1,6 @@
 package com.co.algomoko.user.domain;
 
+import lombok.Builder;
 import lombok.Data;
 
 import java.sql.Date;
@@ -10,6 +11,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 @Data
+
 public class UserVO {
     private String mid;
     private String mpw;
