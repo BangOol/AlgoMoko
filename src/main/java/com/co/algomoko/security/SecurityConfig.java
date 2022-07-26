@@ -8,7 +8,10 @@ import org.springframework.security.config.annotation.web.builders.*;
 import org.springframework.security.config.annotation.web.configuration.*;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.*;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
+import com.co.algomoko.user.service.LoginFailureHandler;
 import com.co.algomoko.user.service.LoginSuccessHandler;
 import com.co.algomoko.user.service.UserLoginService;
 
@@ -26,7 +29,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		
 		private UserLoginService userLoginService;
 		
-		private LoginSuccessHandler successHandler;
+		private final LoginFailureHandler failureHandler;
+			
+		private final LoginSuccessHandler successHandler;
 		
 		//private PasswordEncoder passwordEncoder;	
 		
@@ -37,14 +42,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 						
 	    		 
     
-//		@Bean
-//		public DaoAuthenticationProvider daoAuthenticationProvider() {
-//		// DaoAuthenticationProvider : id와 password로 인증할 수 있도록 하는 구현체
-//		DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-//		provider.setPasswordEncoder(passwordEncoder);
-//		provider.setUserDetailsService(userLoginService);
-//		return provider;
-//			}
+
    
     @Override
       public void configure(WebSecurity web) {
@@ -64,7 +62,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	        //.antMatchers("/diary/**").hasRole("u1")
 	        //.antMatchers("/diary/**").hasAuthority("u1")
 	        .antMatchers("/diary/**").hasAnyAuthority("u1","u0")
-          .antMatchers("/diary/**").permitAll()
+
+	        
+
 	        .antMatchers("/Admin/**").hasAuthority("u0")
 	        
 
@@ -74,21 +74,26 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
             .loginPage("/loginForm").loginProcessingUrl("/loginForm/login")
             .usernameParameter("mid").passwordParameter("mpw")
             .successHandler(successHandler)
-            .defaultSuccessUrl("/main").failureUrl("/error").permitAll()
+            .defaultSuccessUrl("/main").permitAll()
             //권한 관련 오류처리
-        .and()
-            .exceptionHandling().accessDeniedPage("/error")
+        
         //로그아웃 설정, 로그 아웃 후 세션 제거
         .and()
             .logout()
             .logoutUrl("/logout")
             .logoutSuccessUrl("/main")
-            .invalidateHttpSession(true);
+            .invalidateHttpSession(true)
+        .and().exceptionHandling().accessDeniedPage("/denied");
         
 
     }
-    
-    
+   
+//   @Bean
+//   public AuthenticationFailureHandler failureHandler() {
+//	   return new LoginFailureHandler() ;
+//   }
+   
+   
     
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {

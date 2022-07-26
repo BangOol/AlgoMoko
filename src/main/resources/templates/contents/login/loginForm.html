@@ -71,6 +71,10 @@
     </section>
     <script>
         $(document).ready(function() {
+			// ★ 수정 부분!
+		     const queryString = location.search.substr(1);
+    		if (queryString == "error")
+      			  alert("로그인에 실패했습니다.");
 
 
             $('#login').click(function(e) {

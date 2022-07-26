@@ -43,7 +43,8 @@
 	<select id="findId1" resultType="Account">
 		SELECT * FROM MEMBERS WHERE MID=#{mid}
 	</select>
-
+	
+	
 	<!--  <update id="update">
        update member
        <trim suffixOverrides="," prefix="set">

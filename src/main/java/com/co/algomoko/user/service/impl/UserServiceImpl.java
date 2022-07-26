@@ -1,14 +1,13 @@
 package com.co.algomoko.user.service.impl;
 
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 import com.co.algomoko.user.domain.Account;
 import com.co.algomoko.user.domain.UserVO;
 import com.co.algomoko.user.mapper.UserMapper;
@@ -58,7 +57,7 @@ public class UserServiceImpl implements UserService{
 
 		return !mapper.existByMid(mid);
 	}
-	//임시, 아이디찾기기능
+	//회원가입 중복방지기능
 	@Override
 	public UserVO findId(String mid) {
 		// TODO Auto-generated method stub
@@ -70,10 +69,23 @@ public class UserServiceImpl implements UserService{
 		// TODO Auto-generated method stub
 		return this.passwordEncoder;
 	}
+	//로그인 중복
 	@Override
 	public Account findId1(String mid) {
 		// TODO Auto-generated method stub
 		return mapper.findId1(mid);
+	}
+	// 아이디 찾기
+	@Override
+	public String findId2(String mid) {
+		// TODO Auto-generated method stub
+		UserVO vo = mapper.findId(mid);
+		if(vo == null)
+			return null;
+		return vo.getMid();
+	}
+	//비밀번호 찾기
+	
 	}
 	
 
@@ -81,4 +93,3 @@ public class UserServiceImpl implements UserService{
 
 
 
-}
