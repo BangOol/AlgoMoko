@@ -58,7 +58,7 @@
 
 <div th:replace="~{fragments/header}"></div>
 <div th:replace="~{fragments/aside}"></div>
-[[${#lists.size(resultCal)==0}]]
+
 
 
         <!-- Shoping Cart Section Begin -->
@@ -156,9 +156,10 @@
                              </tbody>
                              </th:block>
                              <thead>
-                                  <tr>
+                                  <tr id="recal">
                                   	  <th class="shoping__product" style="text-align:center;">총 칼로리</th>
                                       <th class="shoping__product" style="text-align:center;">일일 칼로리</th>
+                                      
                                   </tr>
                               </thead>
                               
@@ -178,13 +179,14 @@
                               
                               
                               
-                              <tr th:unless="${#lists.size(resultCal)} == 0">
+                              <tr th:unless="${#lists.size(resultCal)} == 0" id="concon">
                               
-                              <td th:text="${resultCal[0].sumcal}"  class="shoping__product" style="text-align:center;">
+                              <td th:text="${resultCal[0].sumcal}" id="tocal"  class="shoping__product" style="text-align:center;">
                                           </td>
                                           
-                                          <td th:text="${tcal}" class="shoping__product" style="text-align:center;">
+                                          <td th:text="${tcal}" id="daycal" class="shoping__product" style="text-align:center;">
                                           </td>
+                                          
                                   </tr>
                              
                              
@@ -212,6 +214,25 @@
 			
         $(function () {
             
+            function comparison(){
+					var a = Number($("#tocal").html());
+					var b = Number($("#daycal").html());
+					var recal = $("#recal");
+					var concon = $("#concon");
+					if(a<=b){
+						$("#recal").append($("<th>").addClass('shoping__product').html("비교").css("text-align", "center"))
+						$("#concon").append($("<td>").addClass('shoping__product').html("적당히 먹었네").css("text-align", "center"))
+						
+						//잘먹었다
+					}else{
+						$("#recal").append($("<th>").addClass('shoping__product').html("비교").css("text-align", "center"))
+						$("#concon").append($("<td>").addClass('shoping__product').html("줜나 처먹었네").css("text-align", "center"))
+					}
+			
+				
+				}
+				comparison()
+				
             
 			
 			$(".detail").click(function(){

@@ -162,43 +162,20 @@
 
 
 	<br><br>
-	<form method="post" action="/diary/modifyde" name="frm" id="frm">
-		<div class="checked">
-			<div class="form-check">
-
-				<label class="form-check-label">
-					<input type="radio" class="form-check-input" name="dddo" value="aa" onclick="return(false);"
-						th:checked="${modify[0].dddo eq 'aa'}">아침
-
-					<i class="input-helper">
-			</div>
-			<div class="form-check">
-				<label class="form-check-label">
-					<input type="radio" class="form-check-input" name="dddo" value="bb" onclick="return(false);"
-						th:checked="${modify[0].dddo eq 'bb'}">점심
-					<i class="input-helper">
-			</div>
-			<div class="form-check">
-				<label class="form-check-label">
-					<input type="radio" class="form-check-input" name="dddo" value="cc" onclick="return(false);"
-						th:checked="${modify[0].dddo eq 'cc'}">저녁
-					<i class="input-helper">
-			</div>
-			<button id="che">찾기</button>
-
-
-			<div class="mb-2 row">
-				<label for="html5-date-input" class="col-md-2 col-form-label"></label>
-				<div class="col-md-2">
-					<input class="form-control" readonly type="date" name="ddate" th:value="${dat}"
-						id="html5-date-input">
+	<form method="post" action="/diary/reinsertde" name="frm" id="frm">
+	
+<div class="col-sm-2 col-xl-3" style="margin-left: 200px;">
+					<div class="tab-content">
+						<div class="product__details__tab__desc">
+							<span>음식 이름
+								<br>
+								<input type=textarea class="form-control" name="rname" rows="1"
+									cols="30" style="width : 200px;"></span>
+						</div>
+					</div>
 				</div>
-			</div>
-		</div>
 
-
-
-
+			
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-7 col-xl-6">
@@ -208,27 +185,13 @@
 					<table class="table table-borderless">
 						<thead>
 							<tr>
-								<th scope="col">재료명</th>
+								<th scope="col">재료</th>
 								<th scope="col">칼로리</th>
 								<th scope="col">수량</th>
 							</tr>
 						</thead>
 						<tbody id="tbody1">
-							<th:block th:each="qweqwe:${modify}">
-								<tr>
-									<th>
-										<input th:value="${qweqwe.ddname}" class="thth1" type="text" name="ddname">
-									</th>
-									<th>
-										<input th:value="${qweqwe.cal}" class="thth2" type="text" name="cal">
-									</th>
-									<th>
-										<input th:value="${qweqwe.amount}" class="thth3" type="text" name="amount">
-									</th>
-									<td class="shoping__cart__item__close"><button class="icon_close"></td>
-								</tr>
-
-							</th:block>
+							
 
 						</tbody>
 
@@ -238,15 +201,37 @@
 
 				</div>
 				<div class="col-sm-2 col-xl-3" style="margin-left: 200px;">
+				<table class ="generic" width="100">
+				<tbody id="rebody">
+					<tr><button type="button" id="addrebtn" class="btn btn-primary">추가</button>
+					</tr>				
+					<tr>
+					<td style="width:150px" id="recnt">1</td>
+					<td width="500">
+					<textarea class="form-control" row="5" name="rrecipe1" id="rrecipe1" style="width: 500px;"></textarea>
+					</tr>
+
+					
+				
+				
+				
+				</tbody>
+				
+				
+				</table>
+				
+				
+				</div>
+				<!--<div class="col-sm-2 col-xl-3" style="margin-left: 200px;">
 					<div class="tab-content">
 						<div class="product__details__tab__desc">
-							<span>내용
+							<span>레시피
 								<br>
-								<input th:value="${con[0].ucon}" type=textarea class="form-control" name="ucon" rows="1"
+								<input type=textarea class="form-control" name="rrecipe" rows="1"
 									cols="30" style="width : 200px; height:200px; resize: both;"></span>
 						</div>
 					</div>
-				</div>
+				</div>-->
 			</div>
 
 		</div>
@@ -273,8 +258,8 @@
 
 		</div>
 		</th:block>
-		<button type="submit" class="btn btn-primary" id="insert">수정</button>
-		<button type="button" class="btn btn-primary" onclick="diaryde()" id="insert">삭제</button>
+		<button type="submit" class="btn btn-primary" id="insert">등록</button>
+		
 		<button type="button" class="btn btn-primary " onclick="history.go(-1);">취소</button>
 	</form>
 
@@ -410,7 +395,7 @@
 					var tbody = $('#tbody1');
 
 					var tr = $('<tr>');
-					var th1 = $('<th>').append($('<input>').val(gin).addClass('thth1').attr('type', 'text').attr('name', 'ddname'));
+					var th1 = $('<th>').append($('<input>').val(gin).addClass('thth1').attr('type', 'text').attr('name', 'fing'));
 					var th2 = $('<th>').append($('<input>').val(gic).addClass('thth2').attr('type', 'text').attr('name', 'cal'));
 					var th3 = $('<th>').append($('<input>').val(gia).addClass('thth3').attr('type', 'text').attr('name', 'amount'));
 					var td4 = $('<td>').addClass('shoping__cart__item__close');
@@ -438,12 +423,40 @@
 
 		})
 
-		function diaryde() {
-			$("#frm").attr("action", "delete").submit();
+					function diaryde() {
+						$("#frm").attr("action", "delete").submit();
+			
+					}
+					var a = 1;
+				$("#addrebtn").on("click", function () {
+						
+						var recnt = Number($("#recnt").html());
+						if(a >= 6){
+							
+							alert('더이상 추가할수없다');
+									
+							return false;
+							
+					}else{
+							
+							recnt += a;
+							var tr = `<tr>
+										<td style="width:150px" id="recnt">${recnt}</td>
+										<td width="500">
+										<textarea class="form-control" row="5" name="rrecipe${recnt}" id="rrecipe${recnt}" style="width: 500px;"></textarea>
+										</tr>`
+							$("#rebody").append(tr)
+							
+							
+							a += 1;
+							
+						}		
+						
+						 
+						console.log(recnt);
+					
 
-		}
-
-
+			})
 
 
 

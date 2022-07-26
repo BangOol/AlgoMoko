@@ -37,6 +37,7 @@ import com.co.algomoko.food.domain.FoodVO;
 import com.co.algomoko.food.mapper.FoodMapper;
 
 import groovyjarjarantlr4.v4.parse.ANTLRParser.action_return;
+import lombok.Data;
 
 @RequestMapping("/diary")
 @Controller
@@ -83,7 +84,7 @@ public class DiaryController {
 		UserDetails mid = (UserDetails) authentication.getPrincipal();
 		recipeVO.setMid(mid.getUsername());
 			
-			recipeVO.setMid("user1");
+			
 			model.addAttribute("rrecp",dao.onelist(recipeVO));
 			model.addAttribute("redetail",dao.redetail(recipeVO));
 			model.addAttribute("rname",rname);
@@ -92,6 +93,55 @@ public class DiaryController {
 		
 		
     }
+	@RequestMapping("remodify") 
+	public String remodify(HttpServletResponse response,RecipeVO recipeVO,Authentication authentication)throws IOException, ParseException { 
+		UserDetails mid = (UserDetails) authentication.getPrincipal();
+		recipeVO.setMid(mid.getUsername());
+		System.out.println(recipeVO);
+		recipeVO.setNick(dao.tomem(recipeVO.getMid()));
+		
+		dao.redelete(recipeVO);
+		dao.rededelete(recipeVO);
+		int cal = 0;//총칼
+		int carb = 0;//총탄
+		int prot = 0;//총단
+		int rfat = 0;//총지
+				
+		String[] fings = recipeVO.getFing().split(",");
+		List<String> ddnameList = new ArrayList<String>();	
+		DiaryVO res = new DiaryVO();
+		for(int i=0;i< fings.length;i++) {
+			
+			ddnameList.add(fings[i]);
+			
+			
+		}
+
+		  for(int i=0;i< ddnameList.size();i++) { 
+			  res = dao.fonlist(fings[i]);
+			 System.out.println(res);
+			 recipeVO.setMid(mid.getUsername());
+			 recipeVO.setFing(res.getDdname());
+			 recipeVO.setCal(res.getCal());
+			 recipeVO.setAamount(res.getAmount());
+			  dao.redeinsert(recipeVO);
+			  cal = cal+res.getCal();
+			 carb = carb+res.getCarb();
+			 prot = prot+res.getProt();
+			 rfat = rfat+res.getFat();
+			  		  
+		  }
+		  recipeVO.setCal(cal);
+		  recipeVO.setCarb(carb);
+		  recipeVO.setProt(prot);
+		  recipeVO.setRfat(rfat);
+		 
+		  
+		  dao.reinsert(recipeVO);
+
+                return "contents/diary/succ"; 
+
+	}
 	@RequestMapping("succ")
     public String succ(){
 		
@@ -99,34 +149,29 @@ public class DiaryController {
     }
 	@RequestMapping("todaysic")
     public String todaysic(Model model, DiaryVO diaryVO,Authentication authentication) throws ParseException{
-		Calendar calendar= Calendar.getInstance();
+		Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String std = sdf.format(date);
 		
-		
-		calendar.set(Calendar.HOUR_OF_DAY, 0);
-		calendar.set(Calendar.MINUTE, 0);
-		calendar.set(Calendar.SECOND, 0);
-		calendar.set(Calendar.MILLISECOND, 0);
 		UserDetails mid = (UserDetails) authentication.getPrincipal();
 		diaryVO.setMid(mid.getUsername());
-		diaryVO.setDdate(calendar.getTime());
+		diaryVO.setDdate(date);
+		
 		
 		
 		
 		diaryVO.setDddo("aa");
-		System.out.println(dao.resultCal(diaryVO));
 		model.addAttribute("aade",dao.detail(diaryVO));
 		diaryVO.setDddo("bb");
 		model.addAttribute("bbde",dao.detail(diaryVO));
 		diaryVO.setDddo("cc");
-		model.addAttribute("tcal",dao.tcal("user1"));
+		model.addAttribute("tcal",dao.tcal(diaryVO.getMid()));
 		model.addAttribute("ccde",dao.detail(diaryVO));
+		model.addAttribute("std",std);
+		model.addAttribute("resultCal",dao.resultCal(diaryVO));
 		
-		model.addAttribute("resultCal",dao.resultCal(diaryVO));
-		model.addAttribute("todaysic",dao.sicDay(diaryVO));
-		model.addAttribute("resultCal",dao.resultCal(diaryVO));
-		model.addAttribute("ddd",calendar.getTime());
-		return "contents/diary/todaysic";
+		
+		return "contents/diary/daysic";
     }
 	
 	
@@ -143,12 +188,11 @@ public class DiaryController {
 		diaryVO.setDdate(date1);
 		
 		diaryVO.setDddo("aa");
-		
 		model.addAttribute("aade",dao.detail(diaryVO));
 		diaryVO.setDddo("bb");
 		model.addAttribute("bbde",dao.detail(diaryVO));
 		diaryVO.setDddo("cc");
-		model.addAttribute("tcal",dao.tcal("user1"));
+		model.addAttribute("tcal",dao.tcal(diaryVO.getMid()));
 		model.addAttribute("ccde",dao.detail(diaryVO));
 		model.addAttribute("std",std);
 		model.addAttribute("resultCal",dao.resultCal(diaryVO));
@@ -235,6 +279,19 @@ public String delete(HttpServletResponse response,DiaryVO diaryVO,Authentication
                 return "contents/diary/succ"; 
 
 	}
+	@RequestMapping("redelete") 
+	public String redelete(HttpServletResponse response,RecipeVO recipeVO,Authentication authentication)throws IOException, ParseException { 
+		UserDetails mid = (UserDetails) authentication.getPrincipal();
+		recipeVO.setMid(mid.getUsername());
+		recipeVO.setNick(dao.tomem(recipeVO.getMid()));
+		
+		dao.redelete(recipeVO);
+		dao.rededelete(recipeVO);
+		
+
+                return "contents/diary/succ"; 
+
+	}
 	
 	@RequestMapping("weekwrite")
     public String weekwrite(Model model, 
@@ -276,6 +333,87 @@ public String delete(HttpServletResponse response,DiaryVO diaryVO,Authentication
 			  res.setDddo(diaryVO.getDddo());
 			  dao.insertdetail(res);
 		  }
+
+                return "contents/diary/succ"; 
+
+	}
+	
+	
+	
+	
+	@RequestMapping("reinsert") 
+	public String reinsert(DiaryVO diaryVO,Authentication authentication)throws IOException, ParseException { 
+		
+		UserDetails mid = (UserDetails) authentication.getPrincipal();
+		diaryVO.setMid(mid.getUsername());
+		
+
+
+                return "contents/diary/reinsert"; 
+
+	}
+	
+	@RequestMapping("reinsertde") 
+	public String reinsertde(HttpServletResponse response,RecipeVO recipeVO,Authentication authentication)throws IOException, ParseException { 
+		
+		int cal = 0;//총칼
+		int carb = 0;//총탄
+		int prot = 0;//총단
+		int rfat = 0;//총지
+		UserDetails mid = (UserDetails) authentication.getPrincipal();
+		recipeVO.setMid(mid.getUsername());
+		recipeVO.setNick(dao.tomem(recipeVO.getMid()));
+		System.out.println(recipeVO);
+		
+		String[] fings = recipeVO.getFing().split(",");
+		List<String> ddnameList = new ArrayList<String>();	
+		DiaryVO res = new DiaryVO();
+		
+			if(recipeVO.getRrecipe1()==null) {
+				recipeVO.setRrecipe1("");
+			}if(recipeVO.getRrecipe2()==null) {
+				recipeVO.setRrecipe2("");
+			}if(recipeVO.getRrecipe3()==null) {
+				recipeVO.setRrecipe3("");
+			}if(recipeVO.getRrecipe4()==null) {
+				recipeVO.setRrecipe4("");
+			}if(recipeVO.getRrecipe5()==null) {
+				recipeVO.setRrecipe5("");
+			}if(recipeVO.getRrecipe6()==null) {
+				recipeVO.setRrecipe6("");
+			}
+		System.out.println(recipeVO);
+		
+		
+		
+		for(int i=0;i< fings.length;i++) {
+			
+			ddnameList.add(fings[i]);
+			
+			
+		}
+
+		  for(int i=0;i< ddnameList.size();i++) { 
+			  res = dao.fonlist(fings[i]);
+			 System.out.println(res);
+			 recipeVO.setMid(mid.getUsername());
+			 recipeVO.setFing(res.getDdname());
+			 recipeVO.setCal(res.getCal());
+			 recipeVO.setAamount(res.getAmount());
+			  dao.redeinsert(recipeVO);
+			  cal = cal+res.getCal();
+			 carb = carb+res.getCarb();
+			 prot = prot+res.getProt();
+			 rfat = rfat+res.getFat();
+			  		  
+		  }
+		  recipeVO.setCal(cal);
+		  recipeVO.setCarb(carb);
+		  recipeVO.setProt(prot);
+		  recipeVO.setRfat(rfat);
+		 
+		  
+		  dao.reinsert(recipeVO);
 
                 return "contents/diary/succ"; 
 

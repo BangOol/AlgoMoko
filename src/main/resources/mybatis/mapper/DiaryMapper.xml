@@ -105,6 +105,32 @@ select*from recipe_ing where rname=#{rname} and mid = #{mid}
 select tcal from members where mid=#{mid}	
 </select>
 
+<select id="tomem" resultType="string">
+select nick from members where mid=#{mid}	
+</select>
+
+<select id="reinsert">
+insert into recipe values(
+RECIPE_SEQ.nextval, #{rname},#{nick},#{cal},#{amount},#{carb},#{prot},#{rfat},#{rrecipe1},#{rrecipe2},#{rrecipe3},#{rrecipe4},#{rrecipe5},#{rrecipe6},#{mid},null,0
+
+
+)
+</select>
+<select id="redeinsert">
+insert into recipe_ing values(
+#{fing},RECIPE_ING_SEQ.nextval,null,#{rname},#{mid},null,#{cal},#{aamount}
+)
+</select>
+
+<select id="redelete">
+delete recipe
+where mid = #{mid} and rname = #{rname}
+</select>
+
+<select id="rededelete">
+delete recipe_ing
+where mid = #{mid} and rname = #{rname}
+</select>
 
 
 </mapper>
