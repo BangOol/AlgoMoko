@@ -62,7 +62,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	        //.antMatchers("/diary/**").hasRole("u1")
 	        //.antMatchers("/diary/**").hasAuthority("u1")
 	        .antMatchers("/diary/**").hasAnyAuthority("u1","u0")
+
 	        
+
 	        .antMatchers("/Admin/**").hasAuthority("u0")
 	        
 
