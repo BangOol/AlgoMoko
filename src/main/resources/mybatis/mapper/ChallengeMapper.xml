@@ -34,15 +34,21 @@
 	</delete>
 	<!-- 진행중인 챌린지 추가 -->
 	<insert id="mcInsert" parameterType="int">
-	insert into my_challenge (mycno, cno2, mid, sdate, edate )
-	values(mycno.nextval, #{cno}, '진휘용', to_char(sysdate, 'YYYY-MM-DD'), to_char(sysdate+30, 'YYYY-MM-DD'))
+	insert into my_challenge (mycno, cno2, mid, sdate, edate ) 
+	values(mycno.nextval, #{cno}, '진휘용', to_char(sysdate, 'YYYY-MM-DD'), to_date(sysdate, 'YYYY-MM-DD')+#{cdday})
 	</insert>
 	<!--진행중인 챌린지 목록  -->
 	<select id="mcList" resultType="com.co.algomoko.challenge.domain.MyChallengeVO">
-	select *
+	<![CDATA[select *
 	from challenge a, my_challenge b
-	where a.cno = b.cno2
+	where a.cno = b.cno2 and b.cper<100 ]]>
 	</select>		
+	<!-- 완료된 챌린지 -->
+	<!-- <select id="mcList" resultType="com.co.algomoko.challenge.domain.MyChallengeVO">
+	<![CDATA[select *
+	from challenge a, my_challenge b
+	where a.cno = b.cno2 and b.cper=100 ]]>
+	</select> -->
 	<!-- 진행중인 챌린지 상세 -->	
 	<select id="dList" resultType="com.co.algomoko.challenge.domain.ChallengeValidationVO">
 	select *
@@ -59,10 +65,27 @@
 	from my_challenge
 	where cno2 = #{cno2}
 	</select>
+	
 	<!-- 챌린지 간소화인증 -->
-	<update id="valid" parameterType="com.co.algomoko.challenge.domain.MyChallengeVO">
+	<insert id="valid" parameterType="com.co.algomoko.challenge.domain.ChallengeValidationVO">
+	insert into challenge_validation (cvno, cno3, cvdate, round, attyn, vcon) 
+	values(cvno.nextval, #{cno}, sysdate, #{round}, '1', #{vcon})
+	</insert>
+	
+	<select id="getRound" parameterType="int" resultType="int">
+	select ceil(sysdate-to_date(a.sdate, 'YYYY-MM-DD'))
+	from my_challenge a, challenge b
+	where a.cno2 = b.cno and a.cno2 = #{cno}
+	</select>
+	
+	<select id="getCertiCount" parameterType="int" resultType="int">
+	select count(*) from challenge_validation where cno3 = #{cno}
+	</select>
+	
+	<!-- 이행률 업데이트 -->
+	<update id="cperUpdate" parameterType="int">
 	update my_challenge
-	set round = #{round}
-	where cno2 = #{cno2}
+	set cper = #{cper}
+	where cno2 = #{cno}
 	</update>
 </mapper>

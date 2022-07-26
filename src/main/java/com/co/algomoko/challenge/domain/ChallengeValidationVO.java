@@ -3,9 +3,9 @@ package com.co.algomoko.challenge.domain;
 import lombok.Data;
 
 @Data
-public class ChallengeValidationVO extends MyChallengeVO {
+public class ChallengeValidationVO {
 	private int cvno;
-	private int cno3;
+	private int cno;
 	private String cvimg;
 	private String cvdate;
 	private int round;

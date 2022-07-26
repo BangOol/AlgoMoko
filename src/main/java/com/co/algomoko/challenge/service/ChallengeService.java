@@ -30,7 +30,7 @@ public interface ChallengeService {
 	public void cDelete(int cno);
 
 	// 진행중인 챌린지 추가
-	public void mcInsert(int cno);
+	public void mcInsert(int cno, int cdday);
 
 	// 진행중인 챌린지 목록
 	public List<MyChallengeVO> mcList();
@@ -40,4 +40,13 @@ public interface ChallengeService {
 
 	// 챌린지 인증하기
 	public int valid(ChallengeValidationVO vVO);
+	
+	// 오늘 일차 구하기
+	public int getRound(int cno);
+	
+	// 인증 갯수 구하기
+	public int getCertiCount(int cno);
+	
+	// 이행률업데이트
+	public int cperUpdate(int cno, int cper);
 }
