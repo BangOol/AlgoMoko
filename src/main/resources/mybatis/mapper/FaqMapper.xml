@@ -19,6 +19,7 @@
         <result property="qtitle" column="QTITLE"/>
         <result property="C0" column="C0"/>
         <result property="mid" column="MID"/>
+        <result property="qcon" column="QCON"/>
     </resultMap>
     <select id="FAQList" resultMap="FaqType" resultType="com.co.algomoko.support.domain.FaqVO">
         SELECT FAQNO, FAQTITLE, FAQCON
@@ -60,6 +61,47 @@
                 AND NICK LIKE '%'||#{keyword}||'%'
             </when>
         </choose>
+        ORDER BY QDATE DESC
+    </select>
+
+    <insert id="insertInquiry" parameterType="com.co.algomoko.support.domain.InquiryVO">
+        INSERT INTO QUESTION(qno,
+                             qtitle,
+                             qcon,
+                             nick,
+                             mid,
+                             A0,
+                             qans,
+                             qdate,
+                             C0)
+        VALUES (#{qno},
+                #{qtitle},
+                #{qcon},
+                #{nick},
+                #{mid},
+                #{a0},
+                #{qans},
+                sysdate,
+                #{C0}
+                )
+    </insert>
+
+    <select id="getNick" parameterType="com.co.algomoko.support.domain.InquiryVO" resultType="String">
+        SELECT NICK
+        FROM MEMBERS
+        WHERE MID = #{username}
+    </select>
+    <select id="getU0" parameterType="com.co.algomoko.admin.domain.AdminVO" resultType="String">
+        SELECT U0
+        FROM MEMBERS
+        WHERE MID = #{mid}
+    </select>
+
+    <select id="InquiryDetail" resultType="com.co.algomoko.support.domain.InquiryVO">
+        SELECT QCON, QTITLE, QDATE, NICK, QANS
+        FROM QUESTION
+        WHERE NICK = #{nick}
+        AND QTITLE = #{qtitle}
     </select>
 
 </mapper>

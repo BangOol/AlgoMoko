@@ -32,10 +32,10 @@
     <!-- Contact Section End -->
     <div class="container">
         <form action="/Inquiry/insert" method="get">
-        <table class="table table-hover" style="text-align: center; margin: 100px 0 300px 0;">
+        <table class="table table-hover" style="text-align: center; margin: 100px 0 300px 0; border: 1px solid">
             <tr>
                 <th scope="col">글번호</th>
-                <td><input type="text" th:value="${searchNo[0].qno}" style="width: 600px;" readonly></td>
+                <td><input type="text" th:value="${searchNo[0].qno}" style="width: 600px;" name="qno" readonly></td>
             </tr>
             <tr>
                 <th scope="col">제목</th>
@@ -48,6 +48,13 @@
                 </td>
             </tr>
         </table>
+            <select name = "option" value="c0">
+                <option value = "c0">챌린지 문의</option>
+                <option value = "c1">일지 문의</option>
+                <option value = "c2">음식 문의</option>
+                <option value = "c3">신고 문의</option>
+                <option value = "c4">일반 문의</option>
+            </select>
             <button type="submit" value="등록">등록</button>
         </form>
     </div>

@@ -7,7 +7,13 @@ import java.util.List;
 public interface InquiryService {
     List<InquiryVO> searchNo();
 
-    void insertInquiry(String title, String content);
+    void insertInquiry(InquiryVO inquiryVO);
     List<InquiryVO> list();
+
+    String getNick(String username);
+    
+    String getU0(String mid); // u0 값 가져오기
+
+    List<InquiryVO> InquiryDetail(InquiryVO inquiryVO);
 
 }

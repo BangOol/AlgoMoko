@@ -24,7 +24,21 @@ public class InquiryServiceImpl implements InquiryService{
         return faqMapper.list();
     }
     @Override
-    public void insertInquiry(String title, String content){
-        faqMapper.insertInquiry(title, content);
+    public void insertInquiry(InquiryVO inquiryVO){
+        faqMapper.insertInquiry(inquiryVO);
+    }
+    @Override
+    public String getNick(String username){
+        return faqMapper.getNick(username);
+    }
+
+    @Override
+    public String getU0(String mid){
+        return faqMapper.getU0(mid);
+    }
+
+    @Override
+    public List<InquiryVO> InquiryDetail(InquiryVO inquiryVO){
+        return faqMapper.InquiryDetail(inquiryVO);
     }
 }
