@@ -15,7 +15,7 @@ public interface FoodMapper {
 	public List<FoodVO> pList(FoodVO foodVO);
 	// 연관 검색어
 	public List<FoodVO> rList(FoodVO foodVO);
-	
+
 	
 	
 	

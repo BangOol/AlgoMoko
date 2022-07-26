@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zxx" xmlns:th="http://www.thymeleaf.org"
+<html lang="zxx" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 	layout:decorate="~{layouts/layout}">
 
 <head>
@@ -8,13 +8,8 @@
 <meta name="keywords" content="Ogani, unica, creative, html">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>Ogani | Template</title>
-<style>
-.blog__item__pic img {
-	width: 360px;
-	height: 240px;
-}
-</style>
+<title>challenging</title>
+
 </head>
 
 <body>
@@ -28,7 +23,7 @@
 						<div class="breadcrumb__text">
 							<h2>완료한 챌린지</h2>
 							<div class="breadcrumb__option">
-								<span>challenge-End</span>
+								<span>End Challenge</span>
 							</div>
 						</div>
 					</div>
@@ -63,110 +58,19 @@
 					</div>
 					<div class="col-lg-8 col-md-7">
 						<div class="row">
-							<div class="col-lg-6 col-md-6 col-sm-6">
+							<div th:each="e:${eList}" class="col-lg-6 col-md-6 col-sm-6">
 								<div class="blog__item">
 									<div class="blog__item__cpic">
-										<img src="../img/chl/cola.png" alt="">
+										<img th:src="@{${e.filepath}}" alt="">
 									</div>
 									<div class="blog__item__text">
 										<ul>
-											<li><i class="fa fa-calendar-o"></i> 30일</li>
+											<li th:text="|시작날짜 : ${e.sdate}|"><i class="fa fa-calendar-o"></i></li>
+											<li th:text="|종료날짜 : ${e.edate}|"><i class="fa fa-calendar-o"></i></li>
 										</ul>
-										<h5>
-											<a>탄산 끊기</a>
-										</h5>
-										<p>30일 동안 탄산 끊기에 도전하세요!</p>
-										<p>이행률 : 70%</p>
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-6 col-md-6 col-sm-6">
-								<div class="blog__item">
-									<div class="blog__item__cpic">
-										<img src="../img/chl/mdsnack.png" alt="">
-									</div>
-									<div class="blog__item__text">
-										<ul>
-											<li><i class="fa fa-calendar-o"></i>시작날짜: 7월5일</li>
-											<li><i class="fa fa-calendar-o"></i>종료날짜: 8월3일</li>
-										</ul>
-										<h5>
-											<a>야식 끊기</a>
-										</h5>
-										<p>30일 동안 야식 끊기에 도전중!</p>
-										<p>이행률 : 70%</p>
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-6 col-md-6 col-sm-6">
-								<div class="blog__item">
-									<div class="blog__item__cpic">
-										<img src="../img/chl/vegetables.jpg" alt="">
-									</div>
-									<div class="blog__item__text">
-										<ul>
-											<li><i class="fa fa-calendar-o"></i>시작날짜: 7월5일</li>
-											<li><i class="fa fa-calendar-o"></i>종료날짜: 8월3일</li>
-										</ul>
-										<h5>
-											<a>야채 먹기</a>
-										</h5>
-										<p>30일 야채 먹기에 도전중!</p>
-										<p>이행률 : 70%</p>
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-6 col-md-6 col-sm-6">
-								<div class="blog__item">
-									<div class="blog__item__cpic">
-										<img src="../img/chl/flour.jpg" alt="">
-									</div>
-									<div class="blog__item__text">
-										<ul>
-											<li><i class="fa fa-calendar-o"></i>시작날짜: 7월5일</li>
-											<li><i class="fa fa-calendar-o"></i>종료날짜: 8월3일</li>
-										</ul>
-										<h5>
-											<a>밀가루 끊기</a>
-										</h5>
-										<p>30일 동안 밀가루 끊기에 도전중!</p>
-										<p>이행률 : 70%</p>
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-6 col-md-6 col-sm-6">
-								<div class="blog__item">
-									<div class="blog__item__cpic">
-										<img src="../img/chl/water.png" alt="">
-									</div>
-									<div class="blog__item__text">
-										<ul>
-											<li><i class="fa fa-calendar-o"></i> 30일</li>
-										</ul>
-										<h5>
-											<a>하루에 물 2L 마시기</a>
-										</h5>
-										<p>30일 동안 하루에 물 2L 마시기에 도전하세요!</p>
-										<a href="#" class="blog__btn">도전하기 <span
-											class="arrow_right"></span></a>
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-6 col-md-6 col-sm-6">
-								<div class="blog__item">
-									<div class="blog__item__cpic">
-										<img src="../img/chl/breakfast.jpg" alt="">
-									</div>
-									<div class="blog__item__text">
-										<ul>
-											<li><i class="fa fa-calendar-o"></i>시작날짜: 7월5일</li>
-											<li><i class="fa fa-calendar-o"></i>종료날짜: 8월3일</li>
-										</ul>
-										<h5>
-											<a>아침 먹기</a>
-										</h5>
-										<p>30일 동안 아침 먹기에 도전중!</p>
-										<p>이행률 : 70%</p>
+										<h5 ><a th:text="${e.ctitle}">탄산 끊기</a></h5>
+										<p th:text="|${e.cdday}일 동안 ${e.ctitle} 도전을 완료했습니다.|"></p>
+										<p th:text="'이행률 : '+${e.cper}+'%'"></p>													
 									</div>
 								</div>
 							</div>

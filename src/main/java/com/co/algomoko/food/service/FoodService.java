@@ -19,4 +19,5 @@ public interface FoodService {
 
 	// 연관 검색어
 	public List<FoodVO> rList(FoodVO foodVO);
+	
 }

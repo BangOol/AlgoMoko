@@ -57,28 +57,31 @@ public class ChallengeServiceImpl implements ChallengeService {
 	public void cDelete(int cno) {
 		mapper.cDelete(cno);
 	}
+
 	// 챌린지 도전
 	@Override
 	public void mcInsert(int cno, int cdday) {
 		mapper.mcInsert(cno, cdday);
 	}
-	
+
 	// 챌린지 검색
 	@Override
 	public List<ChallengeVO> cSearch(ChallengeVO cVO) {
 		return mapper.cSearch(cVO);
 	}
-	
+
 	// 챌린지 인증 페이지
 	@Override
 	public ChallengeValidationVO dList(int cno) {
 		return mapper.dList(cno);
 	}
-	// 챌린지 인증 페이지 이동	
+
+	// 챌린지 인증 페이지 이동
 	@Override
 	public MyChallengeVO getd(int cno2) {
 		return mapper.getd(cno2);
 	}
+
 	// 챌린지 인증
 	@Override
 	public int valid(ChallengeValidationVO vVO) {
@@ -88,26 +91,36 @@ public class ChallengeServiceImpl implements ChallengeService {
 	// 일차 구하기
 	@Override
 	public int getRound(int cno) {
-		// TODO Auto-generated method stub
 		return mapper.getRound(cno);
 	}
 
 	// 인증 갯수 구하기
 	@Override
 	public int getCertiCount(int cno) {
-		// TODO Auto-generated method stub
 		return mapper.getCertiCount(cno);
 	}
 
 	// 이행률 업데이트
 	@Override
 	public int cperUpdate(int cno, int cper) {
-		// TODO Auto-generated method stub
 		return mapper.cperUpdate(cno, cper);
 	}
-	
-	
-	
 
+	// 완료된 챌린지
+	@Override
+	public List<MyChallengeVO> eList() {
+		return mapper.eList();
+	}
+
+	@Override
+	public int getDup(int cno, int round) {
+		return mapper.getDup(cno, round);
+	}
 	
+	// 진행중인 챌린지 삭제
+	@Override
+	public void deleting(int cno2) {
+		mapper.deleting(cno2);
+	}
+
 }

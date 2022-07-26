@@ -36,7 +36,9 @@ public class FoodServiceImpl implements FoodService {
 	@Override
 	public List<FoodVO> rList(FoodVO foodVO) {
 		return mapper.rList(foodVO);
-	}	
+	}
+
+	
 
 
 }
