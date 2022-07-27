@@ -2,466 +2,483 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <head>
-	<meta charset="UTF-8">
-	<meta name="description" content="Ogani Template">
-	<meta name="keywords" content="Ogani, unica, creative, html">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Ogani | Template</title>
+   <meta charset="UTF-8">
+   <meta name="description" content="Ogani Template">
+   <meta name="keywords" content="Ogani, unica, creative, html">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>Ogani | Template</title>
 
-	<!-- Google Font -->
-	<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
-	<!-- Favicon -->
-	<link href="img/favicon.ico" rel="icon">
+   <!-- Google Font -->
+   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+   <!-- Favicon -->
+   <link href="img/favicon.ico" rel="icon">
 
-	<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
 
-	<!-- Css Styles -->
-	<link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
-	<link rel="stylesheet" href="/css/font-awesome.min.css" type="text/css">
-	<link rel="stylesheet" href="/css/elegant-icons.css" type="text/css">
-	<link rel="stylesheet" href="/css/nice-select.css" type="text/css">
-	<link rel="stylesheet" href="/css/jquery-ui.min.css" type="text/css">
-	<link rel="stylesheet" href="/css/owl.carousel.min.css" type="text/css">
-	<link rel="stylesheet" href="/css/slicknav.min.css" type="text/css">
-	<link rel="stylesheet" href="/css/style.css" type="text/css">
+   <!-- Css Styles -->
+   <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
+   <link rel="stylesheet" href="/css/font-awesome.min.css" type="text/css">
+   <link rel="stylesheet" href="/css/elegant-icons.css" type="text/css">
+   <link rel="stylesheet" href="/css/nice-select.css" type="text/css">
+   <link rel="stylesheet" href="/css/jquery-ui.min.css" type="text/css">
+   <link rel="stylesheet" href="/css/owl.carousel.min.css" type="text/css">
+   <link rel="stylesheet" href="/css/slicknav.min.css" type="text/css">
+   <link rel="stylesheet" href="/css/style.css" type="text/css">
 
-	<link rel="stylesheet" href="https://uicdn.toast.com/grid/latest/tui-grid.css" />
-	<script src="https://uicdn.toast.com/grid/latest/tui-grid.js">
-	</script>
+   <link rel="stylesheet" href="https://uicdn.toast.com/grid/latest/tui-grid.css" />
+   <script src="https://uicdn.toast.com/grid/latest/tui-grid.js">
+   </script>
 
-	<script>
-		$(function () {
+   <script>
+      $(function () {
 
-			$("#datepicker").datepicker({
-				dateFormat: 'yy-mm-dd',
-				prevText: '이전 달',
-				nextText: '다음 달',
-				monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-				monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-				dayNames: ['일', '월', '화', '수', '목', '금', '토'],
-				dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
-				dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
-				showMonthAfterYear: true,
-				yearSuffix: '년'
-			})
-		});
-	</script>
-	<style>
-		.btn-secondary {
-			margin-left: 20px;
-		}
+         $("#datepicker").datepicker({
+            dateFormat: 'yy-mm-dd',
+            prevText: '이전 달',
+            nextText: '다음 달',
+            monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+            monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+            dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+            dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+            dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+            showMonthAfterYear: true,
+            yearSuffix: '년'
+         })
+      });
+   </script>
+   <style>
+      .btn-secondary {
+         margin-left: 20px;
+      }
 
-		span {
-			color: #494949;
-			font-weight: bold;
-		}
+      span {
+         color: #494949;
+         font-weight: bold;
+      }
 
-		#pageing {
-			border: 1px solid #e6e6e6;
-			line-height: 30px;
-			background-color: #fff;
-			color: #999999;
-		}
+      #pageing {
+         border: 1px solid #e6e6e6;
+         line-height: 30px;
+         background-color: #fff;
+         color: #999999;
+      }
 
-		.input {
-			height: 23px;
-			margin-left: 10px;
-			margin-right: 10px;
-			display: inline-block;
-			padding: 0 10px;
-			vertical-align: middle;
-			border: 1px solid #dddddd;
-			width: 20%;
-			color: rgb(94, 94, 94);
-			border-radius: 5px;
-			text-align: center;
-		}
+      .input {
+         height: 23px;
+         margin-left: 10px;
+         margin-right: 10px;
+         display: inline-block;
+         padding: 0 10px;
+         vertical-align: middle;
+         border: 1px solid #dddddd;
+         width: 20%;
+         color: rgb(94, 94, 94);
+         border-radius: 5px;
+         text-align: center;
+      }
 
-		#leftinput,
-		#rightinput {
-			margin-right: 18px;
-		}
+      #leftinput,
+      #rightinput {
+         margin-right: 18px;
+      }
 
-		#leftinput1,
-		#rightinput1 {
-			background-color: #f1f1f1;
-		}
+      #leftinput1,
+      #rightinput1 {
+         background-color: #f1f1f1;
+      }
 
-		#startCndate {
-			margin-right: 10px;
-		}
+      #startCndate {
+         margin-right: 10px;
+      }
 
-		#endCndate {
-			margin-left: 5px;
-		}
+      #endCndate {
+         margin-left: 5px;
+      }
 
-		.dataTable-input {
-			height: 40px;
-		}
+      .dataTable-input {
+         height: 40px;
+      }
 
-		.nameing {
-			float: right;
-			font-size: medium;
-			font-weight: normal;
-			margin-top: 15px;
-		}
+      .nameing {
+         float: right;
+         font-size: medium;
+         font-weight: normal;
+         margin-top: 15px;
+      }
 
-		#modal {
-			display: none;
-		}
+      #modal {
+         display: none;
+      }
 
-		.title {
-			text-align: center;
-			margin-bottom: 10px;
-			margin-top: -10px;
-		}
-	</style>
+      .title {
+         text-align: center;
+         margin-bottom: 10px;
+         margin-top: -10px;
+      }
+   </style>
 
 
 
 </head>
 
 <body>
-	<div th:replace="~{fragments/header}"></div>
-	<div th:replace="~{fragments/aside}"></div>
+   <div th:replace="~{fragments/header}"></div>
+   <div th:replace="~{fragments/aside}"></div>
 
 
 
-	<!-- Table End -->
-	</section>
-	<!-- Blog Section End -->
-	<input type="text" readonly placeholder="재료 입력" style="outline:1px solid #c3bfbf;">
-	<button type="button" id="btnmod dialog" class="btn btn-primary blog__btn">검색</button>
-	<div id="dialog" title="재료 검색"></div>
-	<!-- 모달창 시작 -->
-	<div class="modal">
-		<div class="modal1_body">
-			<div class="modal_title">
-				<input type="text" id="textex"><button id="btnbtn" name="btnbtn" class="btn btn-primary">검색</button>
-				<div class="modal_content">
+   <!-- Table End -->
+   </section>
+   <!-- Blog Section End -->
+   <input type="text" readonly placeholder="재료 입력" style="outline:1px solid #c3bfbf;">
+   <button type="button" id="btnmod dialog" class="btn btn-primary blog__btn">검색</button>
+   <div id="dialog" title="재료 검색"></div>
+   <!-- 모달창 시작 -->
+   <div class="modal">
+      <div class="modal1_body">
+         <div class="modal_title">
+            <input type="text" id="textex"><button id="btnbtn" name="btnbtn" class="btn btn-primary">검색</button>
+            <div class="modal_content">
 
-				</div>
-			</div>
-			<!-- 제품모달 그리드 -->
-			<div class="container-fluid px-4">
+            </div>
+         </div>
+         <!-- 제품모달 그리드 -->
+         <div class="container-fluid px-4">
 
-				<div id="gridpro"></div>
-				<div class="modal_btn">
-					<button id="modalbtn" class="modal_s">등록</button>
-					<button class="modal_c">취소</button>
-				</div>
-			</div>
-		</div>
-	</div>
-	</div>
-
-
-
-	<!-- 모달창 종료 -->
+            <div id="gridpro"></div>
+            <div class="modal_btn">
+               <button id="modalbtn" class="modal_s">등록</button>
+               <button class="modal_c">취소</button>
+            </div>
+         </div>
+      </div>
+   </div>
+   </div>
 
 
-	<br><br>
-	<form method="post" action="/diary/reinsertde" name="frm" id="frm">
-	
+
+   <!-- 모달창 종료 -->
+
+
+   <br><br>
+   <form method="post" action="/diary/reinsertde" name="frm" id="frm">
+   
 <div class="col-sm-2 col-xl-3" style="margin-left: 200px;">
-					<div class="tab-content">
-						<div class="product__details__tab__desc">
-							<span>음식 이름
-								<br>
-								<input type=textarea class="form-control" name="rname" rows="1"
-									cols="30" style="width : 200px;"></span>
-						</div>
-					</div>
-				</div>
+               <div class="tab-content">
+                  <div class="product__details__tab__desc">
+                     <span>음식 이름
+                        <br>
+                        <input type=textarea class="form-control" name="rname" rows="1"
+                           cols="30" style="width : 200px;"></span>
+                  </div>
+               </div>
+            </div>
 
+         
+      <div class="container">
+         <div class="row">
+            <div class="col-sm-7 col-xl-6">
+
+
+
+               <table class="table table-borderless">
+                  <thead>
+                     <tr>
+                        <th scope="col">재료</th>
+                        <th scope="col">칼로리</th>
+                        <th scope="col">수량</th>
+                     </tr>
+                  </thead>
+                  <tbody id="tbody1">
+                     
+				
+                  </tbody>
+
+
+               </table>
+
+
+            </div>
+            <div class="col-sm-2 col-xl-3" style="margin-left: 200px;">
+            
+            <table class ="generic" width="100">
+            <tbody id="rebody">
+               <button type="button" id="addrebtn" class="btn btn-primary">추가</button>
+               
+               레시피      
+               <tr>
+               <td style="width:150px" id="recnt"></td>
+               <td width="500">
+               <textarea class="form-control rrecipe" row="5" name="rrecipe" id="rrecipe" style="width: 500px;"></textarea>
+               </tr>
+
+               <p id="btnbtnbtn">레시피레시피레시피</p>
+            
+            
+            
+            </tbody>
+            
+            
+            </table>
+            
+            
+            </div>
+            <!--<div class="col-sm-2 col-xl-3" style="margin-left: 200px;">
+               <div class="tab-content">
+                  <div class="product__details__tab__desc">
+                     <span>레시피
+                        <br>
+                        <input type=textarea class="form-control" name="rrecipe" rows="1"
+                           cols="30" style="width : 200px; height:200px; resize: both;"></span>
+                  </div>
+               </div>
+            </div>-->
+         </div>
+
+      </div>
+      </div>
+      <!-- Progress Bar -->
+
+      <div class="flex flex-1 flex-col md:flex-row lg:flex-row mx-2 mt-2">
+         <div class="rounded overflow-hidden shadow bg-white mx-2 w-50 pt-2">
+            <div class="px-6 py-2 border-b border-light-grey">
+               <div class="font-bold text-xl">kcal</div>
+            </div>
+
+
+
+            <td><input type="text" id="seipSum"></td>
+
+
+
+
+
+         </div>
+
+      </div>
+
+      </div>
+      </th:block>
+      <button type="submit" class="btn btn-primary" id="insert">등록</button>
+      
+      <button type="button" class="btn btn-primary " onclick="history.go(-1);">취소</button>
+   </form>
+
+   <div th:replace="~{fragments/footer}"></div>
+
+   <!-- Js Plugins -->
+   <script src="/js/jquery-3.3.1.min.js"></script>
+   <script src="/js/bootstrap.min.js"></script>
+   <script src="/js/jquery.nice-select.min.js"></script>
+   <script src="/js/jquery-ui.min.js"></script>
+   <script src="/js/jquery.slicknav.js"></script>
+   <script src="/js/mixitup.min.js"></script>
+   <script src="/js/owl.carousel.min.js"></script>
+   <script src="/js/main.js"></script>
+
+   <script>
+      var gin;
+      var gic;
+      var gia;
+      const body = document.querySelector('body');
+      const modal = document.querySelector('.modal');
+
+      /*제품정보 그리드*/
+      const giupData = [];
+
+
+      const jepoom = new tui.Grid({
+         el: document.getElementById('gridpro'),
+         data: giupData,
+         scrollY: true,
+         rowHeaders: ['rowNum'],
+         bodyHeight: 300,
+
+
+         columns: [{
+            header: '재료명',
+            name: 'ing',
+            align: 'center',
+
+         }, {
+            header: '칼로리',
+            name: 'cal',
+            align: 'center',
+
+         }, {
+            header: '수량',
+            name: 'amount',
+            align: 'center',
+
+         }]
+      });
+
+      $(function () {
+         
+   
+
+
+         function result() {
+            
+            
+               var sum = 0;
+            $(".thth2").each(function () {
+               sum += Number($(this).val());
+            });
+
+
+            $("#seipSum").val(sum);
+
+         }
+
+         result()
+
+
+
+
+
+         $(".icon_close").on("click", function () {
+
+            $(this).closest("tr").remove();
+
+            result()
+            
+
+
+
+         })
+
+
+
+
+
+         $('.blog__btn').click((e) => {
+            jepoom.refreshLayout();
+            modal.style.display = "flex";
+            body.style.overflow = 'hidden';
+         })
+         const closeBtn = modal.querySelector(".modal_c")
+         closeBtn.addEventListener("click", e => {
+            modal.style.display = "none";
+            body.style.overflow = 'auto';
+         })
+
+		var rece;
+	function resultrec(){
+		$(".rrecipe").each(function(){
 			
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-7 col-xl-6">
-
-
-
-					<table class="table table-borderless">
-						<thead>
-							<tr>
-								<th scope="col">재료</th>
-								<th scope="col">칼로리</th>
-								<th scope="col">수량</th>
-							</tr>
-						</thead>
-						<tbody id="tbody1">
-							
-
-						</tbody>
-
-
-					</table>
-
-
-				</div>
-				<div class="col-sm-2 col-xl-3" style="margin-left: 200px;">
-				<table class ="generic" width="100">
-				<tbody id="rebody">
-					<tr><button type="button" id="addrebtn" class="btn btn-primary">추가</button>
-					</tr>				
-					<tr>
-					<td style="width:150px" id="recnt">1</td>
-					<td width="500">
-					<textarea class="form-control" row="5" name="rrecipe1" id="rrecipe1" style="width: 500px;"></textarea>
-					</tr>
-
-					
-				
-				
-				
-				</tbody>
-				
-				
-				</table>
-				
-				
-				</div>
-				<!--<div class="col-sm-2 col-xl-3" style="margin-left: 200px;">
-					<div class="tab-content">
-						<div class="product__details__tab__desc">
-							<span>레시피
-								<br>
-								<input type=textarea class="form-control" name="rrecipe" rows="1"
-									cols="30" style="width : 200px; height:200px; resize: both;"></span>
-						</div>
-					</div>
-				</div>-->
-			</div>
+    		var aaa= $(this).val();
+       		rece+=aaa;
+	
+	})
+
+}
+		  
+		       
 
-		</div>
-		</div>
-		<!-- Progress Bar -->
 
-		<div class="flex flex-1 flex-col md:flex-row lg:flex-row mx-2 mt-2">
-			<div class="rounded overflow-hidden shadow bg-white mx-2 w-50 pt-2">
-				<div class="px-6 py-2 border-b border-light-grey">
-					<div class="font-bold text-xl">kcal</div>
-				</div>
 
 
+         /*음식조회*/
+         $("#btnbtn").on("click", function () {
+            var btnbtn = $('#textex').val();
+            console.log(btnbtn);
+            $.ajax({
+               url: '/diary/flist',
+               type: 'GET', // == method
+               data: {
+                  btnbtn
+               },
 
-				<td><input type="text" id="seipSum"></td>
+            }).done(function (response) {
+               jepoom.refreshLayout();
+               jepoom.resetData(response)
+               jepoom.on('click', e => {
+                  var rok = e.rowKey
+                  gin = jepoom.getRow(rok).ing
+                  gic = jepoom.getRow(rok).cal
+                  gia = jepoom.getRow(rok).amount
 
+               })
+            })
 
 
 
 
-			</div>
 
-		</div>
+            $("#modalbtn").on("click", function () {
+               var tbody = $('#tbody1');
 
-		</div>
-		</th:block>
-		<button type="submit" class="btn btn-primary" id="insert">등록</button>
-		
-		<button type="button" class="btn btn-primary " onclick="history.go(-1);">취소</button>
-	</form>
+               var tr = $('<tr>');
+               var th1 = $('<th>').append($('<input>').val(gin).addClass('thth1').attr('type', 'text').attr('name', 'fing'));
+               var th2 = $('<th>').append($('<input>').val(gic).addClass('thth2').attr('type', 'text').attr('name', 'cal'));
+               var th3 = $('<th>').append($('<input>').val(gia).addClass('thth3').attr('type', 'text').attr('name', 'amount'));
+               var td4 = $('<td>').addClass('shoping__cart__item__close');
+               var button = $('<button>').addClass('icon_close');
+               var td5 = $(td4).append(button);
+               button.on("click", function () {
+                  console.log($(this));
+                  $(this).closest("tr").remove();
+                  result()
+               })
 
-	<div th:replace="~{fragments/footer}"></div>
 
-	<!-- Js Plugins -->
-	<script src="/js/jquery-3.3.1.min.js"></script>
-	<script src="/js/bootstrap.min.js"></script>
-	<script src="/js/jquery.nice-select.min.js"></script>
-	<script src="/js/jquery-ui.min.js"></script>
-	<script src="/js/jquery.slicknav.js"></script>
-	<script src="/js/mixitup.min.js"></script>
-	<script src="/js/owl.carousel.min.js"></script>
-	<script src="/js/main.js"></script>
+               var b = $(tr).append(th1, th2, th3, td5);
 
-	<script>
-		var gin;
-		var gic;
-		var gia;
-		const body = document.querySelector('body');
-		const modal = document.querySelector('.modal');
+               var d = $(tbody).append(b);
 
-		/*제품정보 그리드*/
-		const giupData = [];
+               result()
 
+            })
 
-		const jepoom = new tui.Grid({
-			el: document.getElementById('gridpro'),
-			data: giupData,
-			scrollY: true,
-			rowHeaders: ['rowNum'],
-			bodyHeight: 300,
 
 
-			columns: [{
-				header: '재료명',
-				name: 'ing',
-				align: 'center',
+         })
 
-			}, {
-				header: '칼로리',
-				name: 'cal',
-				align: 'center',
 
-			}, {
-				header: '수량',
-				name: 'amount',
-				align: 'center',
+      })
 
-			}]
-		});
+               function diaryde() {
+                  $("#frm").attr("action", "delete").submit();
+         
+               }
+               var a = 1;
+               var b = 1;
+            $("#addrebtn").on("click", function () {
+                  
+                  var recnt = Number($("#recnt").html());
+                  if(b >= 6){
+                     
+                     alert('더이상 추가할수없다');
+                           
+                     return false;
+                     
+               }else{
+                     
+                     b += a;
+                     var tr = `<tr>
+                              <td style="width:150px" id="recnt"></td>
+                              <td width="500" class="trre">
+                              <textarea class="form-control rrecipe" row="5" name="rrecipe" id="rrecipe" style="width: 500px;"></textarea>
+                              </tr>`
+                     $("#rebody").append(tr)
+                     
+                     
+                     
+                     
+                  }      
+                  
+                   
+                  console.log(recnt);
+               
 
-		$(function () {
-			
+         })
 
-			function result() {
-				
-				
-					var sum = 0;
-				$(".thth2").each(function () {
-					sum += Number($(this).val());
-				});
 
 
-				$("#seipSum").val(sum);
 
-			}
-
-			result()
-
-
-
-
-
-			$(".icon_close").on("click", function () {
-
-				$(this).closest("tr").remove();
-
-				result()
-				
-
-
-
-			})
-
-
-
-
-
-			$('.blog__btn').click((e) => {
-				jepoom.refreshLayout();
-				modal.style.display = "flex";
-				body.style.overflow = 'hidden';
-			})
-			const closeBtn = modal.querySelector(".modal_c")
-			closeBtn.addEventListener("click", e => {
-				modal.style.display = "none";
-				body.style.overflow = 'auto';
-			})
-
-
-
-
-
-			/*음식조회*/
-			$("#btnbtn").on("click", function () {
-				var btnbtn = $('#textex').val();
-				console.log(btnbtn);
-				$.ajax({
-					url: '/diary/flist',
-					type: 'GET', // == method
-					data: {
-						btnbtn
-					},
-
-				}).done(function (response) {
-					jepoom.refreshLayout();
-					jepoom.resetData(response)
-					jepoom.on('click', e => {
-						var rok = e.rowKey
-						gin = jepoom.getRow(rok).ing
-						gic = jepoom.getRow(rok).cal
-						gia = jepoom.getRow(rok).amount
-
-					})
-				})
-
-
-
-
-
-				$("#modalbtn").on("click", function () {
-					var tbody = $('#tbody1');
-
-					var tr = $('<tr>');
-					var th1 = $('<th>').append($('<input>').val(gin).addClass('thth1').attr('type', 'text').attr('name', 'fing'));
-					var th2 = $('<th>').append($('<input>').val(gic).addClass('thth2').attr('type', 'text').attr('name', 'cal'));
-					var th3 = $('<th>').append($('<input>').val(gia).addClass('thth3').attr('type', 'text').attr('name', 'amount'));
-					var td4 = $('<td>').addClass('shoping__cart__item__close');
-					var button = $('<button>').addClass('icon_close');
-					var td5 = $(td4).append(button);
-					button.on("click", function () {
-						console.log($(this));
-						$(this).closest("tr").remove();
-						result()
-					})
-
-
-					var b = $(tr).append(th1, th2, th3, td5);
-
-					var d = $(tbody).append(b);
-
-					result()
-
-				})
-
-
-
-			})
-
-
-		})
-
-					function diaryde() {
-						$("#frm").attr("action", "delete").submit();
-			
-					}
-					var a = 1;
-				$("#addrebtn").on("click", function () {
-						
-						var recnt = Number($("#recnt").html());
-						if(a >= 6){
-							
-							alert('더이상 추가할수없다');
-									
-							return false;
-							
-					}else{
-							
-							recnt += a;
-							var tr = `<tr>
-										<td style="width:150px" id="recnt">${recnt}</td>
-										<td width="500">
-										<textarea class="form-control" row="5" name="rrecipe${recnt}" id="rrecipe${recnt}" style="width: 500px;"></textarea>
-										</tr>`
-							$("#rebody").append(tr)
-							
-							
-							a += 1;
-							
-						}		
-						
-						 
-						console.log(recnt);
-					
-
-			})
-
-
-
-
-	</script>
+   </script>
 
 
 
