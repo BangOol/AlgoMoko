@@ -1,5 +1,7 @@
 package com.co.algomoko.user.controller;
 
+import java.security.Principal;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -7,9 +9,11 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -33,12 +37,16 @@ public class UserController {
 	}
 	
 	
-	//test
+	//메인페이지
 	@GetMapping("index")
 	public String mainPage3() {
 		return "contents/index";
 	}
-
+	
+	@GetMapping("myPage")
+	public String mypage() {
+		return "contents/user/myPage";
+	}
 
 
 	//회원가입 과정 페이지들
@@ -65,13 +73,15 @@ public class UserController {
 		return "contents/login/loginForm";
 	}
 	
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/login")
-	public void login(HttpSession session, HttpServletRequest request) {
-	    // 로그인에 실패한 경우
-	    if (session.getAttribute("msg") != null) {
-	        request.setAttribute("msg", session.getAttribute("msg"));
-	        session.removeAttribute("msg");
-	    }
+	public void login(Principal principal,Model model) {
+		System.out.println("로그인");
+	    System.out.println("nick" + principal.getName());
+	    String mid = principal.getName();
+	    UserVO vo = userService.findId(mid);
+	    model.addAttribute("headerNick",vo);
+	    System.out.println(model);
 	}
 	
 	
@@ -101,11 +111,7 @@ public class UserController {
 		// return ResponseEntity.ok(true); -> 바로 윗 줄은 이렇게도 작성 가능하다.
 	}
 	
-	//에러페이지...
-//	@GetMapping("error")
-//	public String errorHand() {
-//		return "error/error";
-//	}
+	
 
 
 	
@@ -120,6 +126,12 @@ public class UserController {
 
 			return "contents/login/signup";
 		}
+	}
+	
+	//아디비번찾기
+	@GetMapping("/findAccount")
+	public String findAccount() {
+		return "contents/login/findAccount";
 	}
 	
 	//아이디 찾기 이동

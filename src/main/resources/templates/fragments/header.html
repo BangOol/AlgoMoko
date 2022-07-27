@@ -19,25 +19,20 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-8">
-
+							
                 </div>
                 <div class="col-md-4">
                     <div sec:authorize="isAnonymous()" class="header__top__right" id="menu_anonymous">
                         <div class="header__top__right__auth" style="font-family: 'Jua'">
-                            <a href="loginForm" style="float: right; margin : 0 0 0 10px"><i class="fa fa-user" ></i>Login</a>
-                            <a href="#" style="float: right; margin : 0 10px">아이디 찾기</a>
-                            <a href="#" style="float: right; margin : 0 10px">비밀번호 찾기</a>
+                            <a href="loginForm" style="float: right; margin : 0 0 0 10px"><i class="fa fa-user" ></i>Login</a>                         
                             <a href="registerIdForm1" style="float: right; margin : 0 10px">회원 가입</a>
                         </div>
                     </div>
                     <div sec:authorize="isAuthenticated()" class="header__top__right" id="menu_authenticated">
                         <div class="header__top__right__auth" style="font-family: 'Jua'">
                         	<form id="logoutf" action="/logout" method="get"></form>
-                            <a href="#"  style="float: right; margin : 0 0 0 10px" id="logout"><i class="fa fa-user" ></i>Logout</a>
-                   			<div sec:authentication="name"></div>
-                   			<div sec:authentication="principal.authorities"></div>
-                   			
-                           	<a href="#" style="float: right; margin : 0 10px">[[${nick}]] 님, 반갑습니다!</a>
+                            <a href="#"  style="float: right; margin : 0 0 0 10px" id="logout"><i class="fa fa-user" ></i>Logout</a>                   			                 	
+                           	<a  style="float: right; margin : 0 10px" th:text= "|${#authentication.principal.nick}님, 반갑습니다!|"></a>
                             <a href="myPage" style="float: right; margin : 0 10px">내정보</a>
                             <a sec:authorize="hasAuthority('u0')" href="Admin" style="float: right; margin : 0 10px">관리자정보</a>
                         </div>
