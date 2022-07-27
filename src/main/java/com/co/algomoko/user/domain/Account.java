@@ -22,15 +22,15 @@ import lombok.Setter;
 public class Account implements UserDetails{
     private String mid;
     private String mpw;
+    private String nick;
     //private Boolean enabled;
 //    private Collection<GrantedAuthority> authorities;
+    //권한 !!
     private String U0;
     
-    private UserVO vo;
     
-    public Account(UserVO vo) {
-    	this.vo = vo;
-    }
+    
+    
     
   
     @Override
@@ -39,7 +39,7 @@ public class Account implements UserDetails{
     	 List<GrantedAuthority> auth = new ArrayList<>();
         //return Collections.singletonList(new SimpleGrantedAuthority(this.U0));
     	 
-        auth.add(new SimpleGrantedAuthority(this.U0));
+        auth.add(new SimpleGrantedAuthority(U0));
        // auth.add(new SimpleGrantedAuthority(Role.class.getCanonicalName());
         return auth;
     }

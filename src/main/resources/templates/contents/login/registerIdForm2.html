@@ -57,8 +57,6 @@
             </div>
         </div>
     </div>
-
-
     <!-- 이메일인증모달창end -->
     <!-- 회원 정보 Begin -->
 
@@ -244,20 +242,31 @@
         const modal = document.querySelector('.modal');
 
         $('#checkId').click((e) =>{
-            //e.preventDefault();
-            modal.style.display = "flex";
-            body.style.overflow = 'hidden';
-
-            var a = $('#mid').val()
-
-            console.log('email: ' +a)
-            $.ajax({
-                url:"email",
-                type:'post',
-                data: {mid: a}
-
-            })
-
+        	  $.ajax("/registerIdForm2/id_check?mid=" + $('#mid').val())
+                    .done(() => {
+                        if("#checkId" == false){
+                            alert ("이메일 인증은 필수입니다")
+                        }else {
+                        
+                         e.preventDefault();
+			            modal.style.display = "flex";
+			            body.style.overflow = 'hidden';
+			
+			            var a = $('#mid').val()
+			
+			            console.log('email: ' +a)
+			            $.ajax({
+			                url:"email",
+			                type:'post',
+			                data: {mid: a}
+			
+			            })
+                        
+                        
+                        
+                        }
+                    })
+                    .fail(() => $('#mid_msg').text("사용 중인 아이디입니다.").attr('class', fail));
 
         })
 

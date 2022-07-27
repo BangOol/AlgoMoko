@@ -47,22 +47,22 @@ public class UserLoginService implements UserDetailsService{
 //
     	Account ac;
     	ac = ser.findId1(mid);
-    	UserVO vo = ser.findId(mid);
-    	
-    	if (vo == null){
-            throw new UsernameNotFoundException("User not authorized.");
-        }
+//    	UserVO vo = ser.findId(mid);
+//    	
+//    	if (vo == null){
+//            throw new UsernameNotFoundException("User not authorized.");
+//        }
     	
     	if (ac == null){
             throw new UsernameNotFoundException("User not authorized.");
         }
-    	ac = Account.builder().mid(mid).mpw(vo.getMpw()).build();
+    	//ac = Account.builder().mid(mid).mpw(ac.getMpw()).build();
     	//Collection<GrantedAuthority> authorities = new ArrayList<>();
     	Collection<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-    	String authority = vo.getU0(); 
+    	String authority = ac.getU0(); 
+    	System.out.println(authority);
     	authorities.add(new SimpleGrantedAuthority(authority));
-    	System.out.println(authorities+"<=권한 확인1");
-    	System.out.println(authority+"<=권한 확인2");
+    	System.out.println(authorities+"<=권한 확인1");    	
     	ac.setU0(authority);
     	
     	System.out.println(ac);

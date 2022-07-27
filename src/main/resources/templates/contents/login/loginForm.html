@@ -29,7 +29,7 @@
                         <h2>로그인</h2>
                         <div class="breadcrumb__option">
 
-                            <span>자신의 정보를 확인 가능합니다.</span>
+                            <span>Login</span>
                         </div>
                     </div>
                 </div>
@@ -38,7 +38,7 @@
     </section>
 
     <!-- login Begin -->
-    <section class = "login__form">
+    <section class = "login__form" style = "text-align: center">
    		 	<div class="alert alert-danger" id="msg_div" style="display:none;">
            	 	<strong>서버 메시지 </strong><span th:text="${msg}"></span>
         	</div>
@@ -46,7 +46,7 @@
 
                 <div class="container">
 
-                    <img src = "img/로고.PNG" class = "loginLogo">
+                   <center> <img src = "img/로고.PNG" class = "loginLogo"></center>
                     <div class = "login__form__detail">
                         <input id="mid" type = "email" name ="mid" placeholder="이메일을 입력하세요">
                     </div>
@@ -59,8 +59,8 @@
                     <br>
                     <button id="login" >로그인</button>
                     <ul>
-                        <a href=""><li>아이디 찾기</li></a>
-                        <a href=""><li>비밀번호 찾기</li></a>
+                        <a href="findAccount"><li>아이디 찾기</li></a>
+                        <a href="findAccount"><li>비밀번호 찾기</li></a>
                         <a href="registerIdForm1"><li>회원가입</li></a>
                     </ul>
 

@@ -25,7 +25,7 @@ const birthPattern = /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/;
 function check(value, pattern, message, span) {
     // 입력 안 함
     if (value == "") {
-        span.text("필수 입력입니다.").attr('class', 'fail');
+        span.text("필수 입력 항목 입니다.").attr('class', 'fail');
         return false;
     }
     // 패턴 체크
@@ -63,7 +63,7 @@ function mpw2Check() {
     $("#mpw2_msg").text("");
     const $password2 = $("#mpw2").val();
     if($password2=="") {
-        $("#mpw2_msg").text("필수입력입니다").attr("class","fail");
+        $("#mpw2_msg").text("필수 입력 항목 입니다.").attr("class","fail");
         return false;
     } 
     if($password2!==$("#mpw").val()) {
@@ -77,6 +77,7 @@ function mpw2Check() {
 function midCheck() {
     $("#mid_msg").text("");
     return check($("#mid").val(), midPattern, "정확한 이메일형식을 입력하세요", $("#mid_msg"))
+    
 }
 
 // 3-6. 입력한 생일 확인 함수
@@ -89,7 +90,7 @@ function sexCheck(){
  	$("#sex_msg").text("");
  	const $sex = $("#sex").val();
  	if($sex=="") {
-        $("#sex_msg").text("필수입력입니다").attr("class","fail");
+        $("#sex_msg").text("필수 입력 항목 입니다.").attr("class","fail");
         return false;
     } 
     	return true;
@@ -99,7 +100,7 @@ function heightCheck(){
 	$("#height_msg").text("");
 	const $height = $("#height").val();
 	if($height=="") {
-        $("#height_msg").text("필수입력입니다").attr("class","fail");
+        $("#height_msg").text("필수 입력 항목 입니다.").attr("class","fail");
         return false;
     } 
     	return true;
@@ -109,7 +110,7 @@ function weightCheck(){
 	 $("#weight_msg").text("");
 	 const $weight = $("#weight").val();
 	 if($weight=="") {
-        $("#weight_msg").text("필수입력입니다").attr("class","fail");
+        $("#weight_msg").text("필수 입력 항목 입니다.").attr("class","fail");
         return false;
     } 
     	return true;
