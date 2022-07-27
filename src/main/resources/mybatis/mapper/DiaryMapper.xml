@@ -111,9 +111,7 @@ select nick from members where mid=#{mid}
 
 <select id="reinsert">
 insert into recipe values(
-RECIPE_SEQ.nextval, #{rname},#{nick},#{cal},#{amount},#{carb},#{prot},#{rfat},#{rrecipe1},#{rrecipe2},#{rrecipe3},#{rrecipe4},#{rrecipe5},#{rrecipe6},#{mid},null,0
-
-
+RECIPE_SEQ.nextval, #{rname},#{nick},#{cal},#{amount},#{carb},#{prot},#{rfat},#{rrecipe},#{mid},null,0
 )
 </select>
 <select id="redeinsert">

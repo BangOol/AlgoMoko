@@ -13,7 +13,7 @@ public class RecipeVO {
     private int carb;
     private int prot;
     private int rfat;
-    private String rrecipe1;
+    private String rrecipe;
     private String rrecipe2;
     private String rrecipe3;
     private String rrecipe4;
