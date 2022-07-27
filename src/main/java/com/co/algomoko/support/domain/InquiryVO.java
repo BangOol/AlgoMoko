@@ -17,7 +17,8 @@ public class InquiryVO {
     String qtitle;
     String qcon;
     Date qdate;
-    String qfile;
+    Date ansdate;
+    String qanst;
     String qans;
     String A0;
 

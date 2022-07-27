@@ -24,8 +24,9 @@
     <div class="container">
         <div class="col-lg-4">
             <div class="contact__form__title" style="margin: 50px 0 0 0; font-family: 'Cairo', 'Jua', sans-serif">
-                <h2>1:1 문의</h2>
-                <sub style="padding: 10px 0 50px 15px">만족스런 답변을 위해 노력하겠습니다.</sub>
+                <h2 style="font-family: 'Cairo', 'Jua', sans-serif">1:1 문의</h2>
+                <sub style="padding: 10px 0 50px 15px; font-family: 'Cairo', 'Jua', sans-serif">만족스런 답변을 위해
+                    노력하겠습니다.</sub>
             </div>
         </div>
     </div>
@@ -43,42 +44,81 @@
                     <td>[[${list.qtitle}]]</td>
                 </tr>
                 <tr>
-                    <th>내용</th>
-                    <td>[[${list.qcon}]]</td>
-                </tr>
-                <tr>
                     <th>작성 날짜</th>
                     <td>[[${list.qdate}]]</td>
                 </tr>
+                <tr>
+                    <th>질문 유형</th>
+                    <td>[[${list.C0}]]</td>
+                </tr>
+                <tr>
+                    <th>내용</th>
+                    <td>
+                        <textarea
+                                style="width: 800px; height: 300px; resize: none; text-align: left; border-bottom: 1px solid"
+                                readonly>[[${list.qcon}]]</textarea>
+                    </td>
+                </tr>
+
             </div>
             <div th:if="${#lists.size(list)==null}">
                 <p>해당하는 내용이 없습니다.</p>
             </div>
             </tbody>
         </table>
-
-        <div th:if="${u0} == 'u0'" >
-            <h3>관리자 답변 창</h3>
-            <form action="/Inquiry/inqResult" method="get">
-                <table>
-                    <tbody>
+        <div th:if="${list[0].a0 == 'a1'}">
+            <table class="table table-hover" style="text-align: center">
+                <tbody th:each="list:${list}">
+                <div th:if="${#lists.size(list)>0}">
                     <tr>
                         <th>제목</th>
-                        <td>
-                            <input name="title" type="text" placeholder="제목을 입력해주세요">
-                        </td>
+                        <td>[[${list.qanst}]]</td>
+                    </tr>
+                    <tr>
+                        <th>작성 날짜</th>
+                        <td>[[${list.ansdate}]]</td>
                     </tr>
                     <tr>
                         <th>내용</th>
                         <td>
-                        <textarea name="content" style="resize: none; width: 800px; height: 600px"
+                            <textarea
+                                    style="width: 800px; height: 300px; resize: none; text-align: left; border-bottom: 1px solid"
+                                    readonly>[[${list.qans}]]</textarea>
+                        </td>
+                    </tr>
+
+                </div>
+                </tbody>
+            </table>
+        </div>
+        <div th:if="${u0} == 'u0'">
+            <h3 style="font-family: 'Cairo', 'Jua', sans-serif; padding: 70px 0 30px 0 ">관리자 답변 창</h3>
+            <form action="/Inquiry/inqResult" method="post">
+                <table class="table table-hover">
+                    <tbody>
+                    <tr style=" border-top: 1px solid;">
+                        <th style="text-align: center">제목</th>
+                        <td>
+                            <input name="qanst" type="text" placeholder="제목을 입력해주세요" style="width: 920px">
+                        </td>
+                    </tr>
+                    <tr style="border-top: 1px solid;">
+                        <th style="text-align: center">내용</th>
+                        <td style="border-bottom: 1px solid;">
+                        <textarea name="qans" style="resize: none; width: 920px; height: 300px; "
                                   placeholder="내용을 입력해주세요.">
                         </textarea>
-                            <input type="hidden" name ="a0" value = "a1">
                         </td>
                     </tr>
                     </tbody>
                 </table>
+                <input type="hidden" name="a0" value="a1">
+                <input type="hidden" name="qno" th:value="${list[0].qno}">
+                <input type="hidden"  name="nick" th:value="${list[0].nick}">
+                <button type="submit"
+                        style="width: 80px; height: 40px; border: 1px solid #a0aec0; border-radius: 5px;  padding-bottom: 50px; float: right">
+                    등록
+                </button>
             </form>
         </div>
     </div>

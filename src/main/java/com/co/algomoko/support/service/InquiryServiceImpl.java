@@ -41,4 +41,9 @@ public class InquiryServiceImpl implements InquiryService{
     public List<InquiryVO> InquiryDetail(InquiryVO inquiryVO){
         return faqMapper.InquiryDetail(inquiryVO);
     }
+
+    @Override
+    public int insertInqAns(InquiryVO inquiryVO){
+        return faqMapper.insertInqAns(inquiryVO);
+    }
 }

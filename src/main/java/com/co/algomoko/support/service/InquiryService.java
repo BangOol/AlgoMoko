@@ -16,4 +16,6 @@ public interface InquiryService {
 
     List<InquiryVO> InquiryDetail(InquiryVO inquiryVO);
 
+    int insertInqAns(InquiryVO inquiryVO);
+
 }
