@@ -12,5 +12,6 @@ public class ChallengeValidationVO {
 	private String attyn;
 	private String vcon;
 	private int ccper;
+	private String mid;
 	
 }
