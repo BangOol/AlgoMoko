@@ -1,11 +1,15 @@
 package com.co.algomoko.challenge.controller;
 
 import java.io.File;
+import java.security.Principal;
 import java.util.List;
 import java.util.UUID;
 
+import org.apache.catalina.authenticator.SpnegoAuthenticator.AuthenticateAction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -47,16 +51,23 @@ public class ChallengeController {
 	// 진행중인 챌린지 목록
 
 	@GetMapping("challenging")
-	public String challenging(Model model) {
-		List<MyChallengeVO> mcList = dao.mcList();
+	public String challenging(Model model, Authentication authentication) {
+		
+		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+		String mid = userDetails.getUsername(); 
+		
+		List<MyChallengeVO> mcList = dao.mcList(mid);
 		model.addAttribute("mcList", mcList);
 		return "contents/challenge/challenging";
 	}
 
 	// 완료된 챌린지 페이지
 	@GetMapping("challengeEnd")
-	public String end(Model model) {
-		List<MyChallengeVO> eList = dao.eList();
+	public String end(Model model, Authentication at) {
+		UserDetails userDetails = (UserDetails) at.getPrincipal();
+		String mid = userDetails.getUsername();
+		
+		List<MyChallengeVO> eList = dao.eList(mid);
 		model.addAttribute("eList", eList);
 		return "contents/challenge/challengeEnd";
 	}
@@ -114,18 +125,22 @@ public class ChallengeController {
 	// 진행중인 챌린지 삭제
 	//@PostAuthorize("u0")
 	@GetMapping("deleting")
-	public String deleting(int cno2) {
+	public String deleting(int cno2, RedirectAttributes ra) {
 		dao.deleting(cno2);
 		return "redirect:/challenge/challenging";
 	}
 
 	// 진행중인 챌린지 1개추가하는 용도
 	@GetMapping("start")
-	public String getStart(int cno, int cdday, Model model, RedirectAttributes ra) {
+	public String getStart(int cno, int cdday, MyChallengeVO mVO, Model model, RedirectAttributes ra, Authentication at) {		
+		String mid= at.getName();
+		mVO.setMid(mid);
+		
+		System.out.println("아이디 : " + mid);
 		System.out.println("넘어온번호 : " + cno);
 		System.out.println("넘어온데이 : " + cdday);
 		// 중복처리
-		List<MyChallengeVO> result = dao.mcList();
+		List<MyChallengeVO> result = dao.mcList(mid);
 		int check = 0;
 		for (MyChallengeVO r : result) {
 			if (cno == Integer.parseInt(r.getCno())) {
@@ -135,24 +150,26 @@ public class ChallengeController {
 			}
 		}
 		if (check == 1) {
-			ra.addFlashAttribute("msg", "이미 도전중입니다.");
+			ra.addFlashAttribute("msg", "이미 도전중인 챌린지입니다.");
 			return "redirect:/challenge";
 		}
-		dao.mcInsert(cno, cdday);
+		dao.mcInsert(mid, cno, cdday);		 
 		return "redirect:/challenge/challenging";
 	}
 
 	// 챌린지 인증
 	@PostMapping("cValidation/certi")
-	public String valid(int cno2, @RequestParam("vcon") String vcon) {
-
+	public String valid(int cno2, @RequestParam("vcon") String vcon, Authentication at) {
+		UserDetails userDetails = (UserDetails)at.getPrincipal();
+		String mid = userDetails.getUsername();
 		ChallengeValidationVO vVO = new ChallengeValidationVO();
-		int round = dao.getRound(cno2);
+		int round = dao.getRound(cno2, mid);
 
 		vVO.setCno(cno2);
 		vVO.setRound(round);
 		vVO.setVcon(vcon);
-		System.out.println("번호:" + vVO.getCno() + " 일차 : " + round + " 내용 : " + vcon);
+		vVO.setMid(mid);
+		System.out.println("번호:" + vVO.getCno() + " 일차 : " + round + " 내용 : " + vcon + "아이디 : " + mid);
 
 		// 00일차 인증내역이 없으면 insert
 		// 00일차 인증내역이 있으면 이미 인증했습니다
@@ -167,22 +184,27 @@ public class ChallengeController {
 		// 인증횟수 = count(*) (challenge_valdation)
 		ChallengeVO cddayVO = dao.getPage(cno2);
 		System.out.println("전체개수 : " + cddayVO.getCdday());
-		int certiCount = dao.getCertiCount(cno2);
+		int certiCount = dao.getCertiCount(cno2, mid);
+		System.out.println("인증개수 : " + certiCount);
 		double cper = (double) certiCount / (double) cddayVO.getCdday() * 100;
 
 		System.out.println("전체개수 : " + cddayVO.getCdday() + " 인증개수 : " + certiCount + " 이행률 : "
 				+ Math.round(cper * 100 / 100.0) + "%");
-		dao.cperUpdate(cno2, (int) cper);
+		dao.cperUpdate(cno2, (int) cper, mid);
 
 		return "redirect:/challenge/challenging";
 	}
 
 	// 챌린지 인증페이지로 이동
 	@GetMapping("cValidation")
-	public String valid(int cno2, Model model) {
-		model.addAttribute("getd", dao.getd(cno2));
+	public String valid(int cno2, Model model, Authentication at) {
+		UserDetails userDetails = (UserDetails)at.getPrincipal();
+		String mid = userDetails.getUsername();
+		System.out.println(mid);
+		System.out.println(cno2);
+		model.addAttribute("getd", dao.getd(cno2, mid));
 
-		int round = dao.getRound(cno2);
+		int round = dao.getRound(cno2,mid);
 		System.out.println("번호:" + cno2 + " 일차 : " + round);
 		return "contents/challenge/cValidation";
 	}
@@ -193,5 +215,4 @@ public class ChallengeController {
 //		model.addAttribute("dList", dao.dList(cno));
 //		return "contents/challenge/challengeDetail";
 //	}
-
 }

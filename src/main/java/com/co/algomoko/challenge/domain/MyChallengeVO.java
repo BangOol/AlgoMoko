@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 public class MyChallengeVO extends ChallengeVO {
 	private int mycno;
-	private String cno2;
+	private int cno2;
 	private String mid;
 	private int cper;
 	private String sdate;
