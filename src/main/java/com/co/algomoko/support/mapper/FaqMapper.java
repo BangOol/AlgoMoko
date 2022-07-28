@@ -29,4 +29,8 @@ public interface FaqMapper {
     public List<InquiryVO> InquiryDetail(InquiryVO inquiryVO);
 
     public int insertInqAns(InquiryVO inquiryVO);
+
+    public int updateInquiry(InquiryVO inquiryVO);
+
+    public int deleteInquiry(InquiryVO inquiryVO);
 }

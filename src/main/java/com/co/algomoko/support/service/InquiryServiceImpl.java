@@ -46,4 +46,14 @@ public class InquiryServiceImpl implements InquiryService{
     public int insertInqAns(InquiryVO inquiryVO){
         return faqMapper.insertInqAns(inquiryVO);
     }
+
+    @Override
+    public int updateInquiry(InquiryVO inquiryVO){
+        return faqMapper.updateInquiry(inquiryVO);
+    }
+
+    @Override
+    public int deleteInquiry(InquiryVO inquiryVO){
+        return faqMapper.deleteInquiry(inquiryVO);
+    }
 }

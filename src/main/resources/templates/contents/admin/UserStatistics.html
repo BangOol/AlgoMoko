@@ -308,15 +308,91 @@
 
                         <!-- 회원 나이 비율 start -->
                         <div id="piechart4" class="col-lg-12"></div>
-                        <table>
+                        <table class="col-lg-12" style="border: 1px solid; padding: 20px 0">
                             <thead>
-
+                                <tr>
+                                    <th></th>
+                                    <th>10대</th>
+                                    <th>20대</th>
+                                    <th>30대</th>
+                                    <th>40대</th>
+                                    <th>50대</th>
+                                    <th>60대</th>
+                                    <th>70대</th>
+                                    <th>80대</th>
+                                    <th></th>
+                                </tr>
                             </thead>
                             <tbody>
-
+                                <tr>
+                                    <th>수</th>
+                                    <td>[[${ageRate[0].age10}]]</td>
+                                    <td>[[${ageRate[0].age20}]]</td>
+                                    <td>[[${ageRate[0].age30}]]</td>
+                                    <td>[[${ageRate[0].age40}]]</td>
+                                    <td>[[${ageRate[0].age50}]]</td>
+                                    <td>[[${ageRate[0].age60}]]</td>
+                                    <td>[[${ageRate[0].age70}]]</td>
+                                    <td>[[${ageRate[0].age80}]]</td>
+                                    <td>[[${genderRate[0].totalRate}]]</td>
+                                </tr>
+                                <tr>
+                                    <th>percent</th>
+                                    <td th:text="${#numbers.formatDecimal((ageRate[0].age10 / genderRate[0].totalRate),2,2)}"></td>
+                                    <td th:text="${#numbers.formatDecimal((ageRate[0].age20 / genderRate[0].totalRate),2,2)}"></td>
+                                    <td th:text="${#numbers.formatDecimal((ageRate[0].age30 / genderRate[0].totalRate),2,2)}"></td>
+                                    <td th:text="${#numbers.formatDecimal((ageRate[0].age40 / genderRate[0].totalRate),2,2)}"></td>
+                                    <td th:text="${#numbers.formatDecimal((ageRate[0].age50 / genderRate[0].totalRate),2,2)}"></td>
+                                    <td th:text="${#numbers.formatDecimal((ageRate[0].age60 / genderRate[0].totalRate),2,2)}"></td>
+                                    <td th:text="${#numbers.formatDecimal((ageRate[0].age70 / genderRate[0].totalRate),2,2)}"></td>
+                                    <td th:text="${#numbers.formatDecimal((ageRate[0].age80 / genderRate[0].totalRate),2,2)}"></td>
+                                    <td>1</td>
+                                </tr>
                             </tbody>
                         </table>
+                        <!-- 회원 나이 비율 end -->
+
+                        <!-- 회원 BMI 비율 start -->
                         <div id="donutchart5" class="col-lg-12"></div>
+                        <table   class="col-lg-12" style="border: 1px solid; padding: 20px 0">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>5 - 10</th>
+                                    <th>10 - 15</th>
+                                    <th>15 - 20</th>
+                                    <th>20 - 25</th>
+                                    <th>25 - 30</th>
+                                    <th>30 - 35</th>
+                                    <th>35 - 40</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th>수</th>
+                                    <td>[[${bmiRate[0].bmi1}]]</td>
+                                    <td>[[${bmiRate[0].bmi2}]]</td>
+                                    <td>[[${bmiRate[0].bmi3}]]</td>
+                                    <td>[[${bmiRate[0].bmi4}]]</td>
+                                    <td>[[${bmiRate[0].bmi5}]]</td>
+                                    <td>[[${bmiRate[0].bmi6}]]</td>
+                                    <td>[[${bmiRate[0].bmi7}]]</td>
+                                    <td>[[${genderRate[0].totalRate}]]</td>
+                                </tr>
+                                <tr>
+                                    <th>percent</th>
+                                    <td th:text="${#numbers.formatDecimal((bmiRate[0].bmi1 / genderRate[0].totalRate),2,2)}"></td>
+                                    <td th:text="${#numbers.formatDecimal((bmiRate[0].bmi2 / genderRate[0].totalRate),2,2)}"></td>
+                                    <td th:text="${#numbers.formatDecimal((bmiRate[0].bmi3 / genderRate[0].totalRate),2,2)}"></td>
+                                    <td th:text="${#numbers.formatDecimal((bmiRate[0].bmi4 / genderRate[0].totalRate),2,2)}"></td>
+                                    <td th:text="${#numbers.formatDecimal((bmiRate[0].bmi5 / genderRate[0].totalRate),2,2)}"></td>
+                                    <td th:text="${#numbers.formatDecimal((bmiRate[0].bmi6 / genderRate[0].totalRate),2,2)}"></td>
+                                    <td th:text="${#numbers.formatDecimal((bmiRate[0].bmi7 / genderRate[0].totalRate),2,2)}"></td>
+                                    <td>1</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

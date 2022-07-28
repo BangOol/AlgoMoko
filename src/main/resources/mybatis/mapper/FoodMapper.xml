@@ -37,8 +37,7 @@
 		resultType="com.co.algomoko.food.domain.FoodVO">
 		select ing, amount, cal, f0
 		from food
-		where ing like '%' ||
-		#{ing} || '%' and ing not like #{ing}
+		where ing like '%' || #{ing} || '%' and ing not like #{ing}
 	</select>
 
 </mapper>

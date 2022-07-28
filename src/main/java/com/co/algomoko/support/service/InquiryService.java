@@ -18,4 +18,8 @@ public interface InquiryService {
 
     int insertInqAns(InquiryVO inquiryVO);
 
+    int updateInquiry(InquiryVO inquiryVO);
+
+    int deleteInquiry(InquiryVO inquiryVO);
+
 }
