@@ -23,5 +23,6 @@ public interface UserMapper {
 	public boolean existByMid(String mid);
 	public Account findId1(String mid);
 	public UserVO findId(String mid);
+	public String findIdCheck(String uname, String nick, String birth);
 
 }

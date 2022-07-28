@@ -27,5 +27,6 @@ public interface UserService {
 	//비밀번호 암호화
 	public PasswordEncoder passwordEncoder();
 	//비밀번호 찾기
+	public String findIdCheck(String uname, String nick, String birth);
 	
 }

@@ -84,7 +84,12 @@ public class UserServiceImpl implements UserService{
 			return null;
 		return vo.getMid();
 	}
-	//비밀번호 찾기
+	//아이디 찾기
+	@Override
+	public String findIdCheck(String uname, String nick, String birth) {
+		
+		return mapper.findIdCheck(uname,nick,birth);
+	}
 	
 	}
 	
