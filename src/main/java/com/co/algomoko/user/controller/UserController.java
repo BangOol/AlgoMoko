@@ -128,10 +128,18 @@ public class UserController {
 		}
 	}
 	
-	//아디비번찾기
+	//아디비번찾기페이지
 	@GetMapping("/findAccount")
 	public String findAccount() {
 		return "contents/login/findAccount";
+	}
+	
+	//아이디찾기
+	@PostMapping("/findId")
+	public String findId(@RequestParam("uname") String uname, @RequestParam("nick") String nick, @RequestParam("birth") String birth) {
+		
+		String result = userService.findIdCheck(uname,nick,birth);
+		return result;				
 	}
 	
 	//아이디 찾기 이동
