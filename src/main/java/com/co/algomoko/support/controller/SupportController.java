@@ -8,6 +8,7 @@ import com.co.algomoko.support.service.InqPagingService;
 import com.co.algomoko.support.service.InquiryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,7 +21,6 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.Writer;
 import java.util.List;
 
 @Controller
@@ -107,6 +107,7 @@ public class SupportController {
                               Model model,
                               Authentication authentication,
                               HttpServletResponse response) throws IOException {
+
         // 유저의 아이디 값 호출
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         String mid = userDetails.getUsername();
@@ -137,6 +138,88 @@ public class SupportController {
         return "contents/admin/userFormMain";
     }
 
+    @GetMapping("/Inquiry/modify")
+    public String modifyInquiry(@RequestParam("nick") String nick,
+                                @RequestParam("qno") int qno,
+                                @RequestParam("qcon") String qcon,
+                                @RequestParam("qtitle") String qtitle,
+                                Model model, Authentication authentication){
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        InquiryVO inquiryVO = new InquiryVO();
+        inquiryVO.setQno(qno);
+        inquiryVO.setNick(nick);
+        inquiryVO.setQtitle(qtitle);
+        inquiryVO.setQcon(qcon);
+        model.addAttribute("list", inquiryVO);
+        return "contents/support/insertInquiry";
+    }
+
+    @PostMapping("/Inquiry/updateInq")
+    public void updateInq(@RequestParam("qno") int qno,
+                            @RequestParam("qcon") String qcon,
+                            @RequestParam("qtitle") String qtitle,
+                            @RequestParam("nick") String nick,
+                            @RequestParam("option") String c0,
+                            Model model, HttpServletResponse response,
+                            Authentication authentication) throws IOException {
+        InquiryVO inquiryVO = new InquiryVO();
+        inquiryVO.setQcon(qcon);
+        inquiryVO.setQno(qno);
+        inquiryVO.setQtitle(qtitle);
+        inquiryVO.setNick(nick);
+        inquiryVO.setC0(c0);
+
+        int a = inquiryService.updateInquiry(inquiryVO);
+        if(a != 0){
+            response.setCharacterEncoding("UTF-8");
+            response.setContentType("text/html; charset=utf-8");
+            PrintWriter w = response.getWriter();
+            String msg = "정상적으로 등록되었습니다";
+            String url = "/Inquiry/detail?nick=" +nick + "&qno=" +qno;
+            w.write("<script>alert('"+msg+"');location.href='"+url+"';</script>");
+        } else{
+            response.setCharacterEncoding("UTF-8");
+            response.setContentType("text/html; charset=utf-8");
+            PrintWriter w = response.getWriter();
+            String msg = "어떠한 문제로 인해 등록이 실패하였습니다.";
+            String url = "/Inquiry/detail?nick=" +nick + "&qno=" +qno;
+            w.write("<script>alert('"+msg+"');location.href='"+url+"';</script>");
+        }
+    }
+
+    @PostMapping("/Inquiry/delete")
+    public void InquiryDelete(@RequestParam("qno") int qno,
+                              @RequestParam("mid") String mid,
+                              @RequestParam("nick") String nick,
+                              Authentication authentication,
+                              HttpServletResponse response) throws IOException {
+
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        if(userDetails.getUsername().equals(mid)){
+            InquiryVO inquiryVO = new InquiryVO();
+            inquiryVO.setQno(qno);
+            inquiryVO.setNick(nick);
+            inquiryVO.setMid(mid);
+            int a = inquiryService.deleteInquiry(inquiryVO);
+
+            if(a != 0){
+                response.setCharacterEncoding("UTF-8");
+                response.setContentType("text/html; charset=utf-8");
+                PrintWriter w = response.getWriter();
+                String msg = "정상적으로 삭제되었습니다";
+                String url = "/Inquiry";
+                w.write("<script>alert('"+msg+"');location.href='"+url+"';</script>");
+            } else{
+                response.setCharacterEncoding("UTF-8");
+                response.setContentType("text/html; charset=utf-8");
+                PrintWriter w = response.getWriter();
+                String msg = "알 수 없는 오류로 인해 삭제가 중단되었습니다. 1:1 문의 메인 창으로 돌아갑니다.";
+                String url = "/Inquiry";
+                w.write("<script>alert('"+msg+"');location.href='"+url+"';</script>");
+            }
+        }
+    }
+
     @GetMapping("/Inquiry/detail")
     public String InquiryDetail(@RequestParam("nick") String nick,@RequestParam("qno") int qno,
                                  Authentication authentication,Model model,
@@ -154,6 +237,7 @@ public class SupportController {
             List<InquiryVO> basket = inquiryService.InquiryDetail(inquiryVO);
             model.addAttribute("list",basket);
             model.addAttribute("u0", u0);
+            model.addAttribute("username", username);
             return "contents/support/detail";
         } else {
             response.setContentType("text/html; charset=utf-8");

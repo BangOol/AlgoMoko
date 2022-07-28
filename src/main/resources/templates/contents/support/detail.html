@@ -54,18 +54,33 @@
                 <tr>
                     <th>내용</th>
                     <td>
-                        <textarea
-                                style="width: 800px; height: 300px; resize: none; text-align: left; border-bottom: 1px solid"
-                                readonly>[[${list.qcon}]]</textarea>
+                        <textarea style="width: 800px; height: 300px; resize: none; text-align: left; border-bottom: 1px solid" readonly>[[${list.qcon}]]</textarea>
                     </td>
                 </tr>
-
             </div>
             <div th:if="${#lists.size(list)==null}">
                 <p>해당하는 내용이 없습니다.</p>
             </div>
             </tbody>
         </table>
+        <form action = "/Inquiry/modify" method="get" th:if = "${list[0].mid} eq ${username} and ${list[0].a0 == 'a0'}">
+            <button type="submit">수정</button>
+            <input type="hidden" name="nick" th:value="${list[0].nick}">
+            <input type="hidden" name="qtitle" th:value="${list[0].qtitle}">
+            <input type="hidden" name="qcon" th:value="${list[0].qcon}">
+            <input type="hidden" name="C0" th:value="${list[0].c0}">
+            <input type="hidden" name="mid" th:value="${list[0].mid}">
+            <input type="hidden" name="qno" th:value="${list[0].qno}">
+        </form>
+        <form action = "/Inquiry/delete" method="post"  th:if = "${list[0].mid} eq ${username} and ${list[0].a0 == 'a0'}">
+            <button type="submit">삭제</button>
+            <input type="hidden" name="nick" th:value="${list[0].nick}">
+            <input type="hidden" name="qtitle" th:value="${list[0].qtitle}">
+            <input type="hidden" name="qcon" th:value="${list[0].qcon}">
+            <input type="hidden" name="C0" th:value="${list[0].c0}">
+            <input type="hidden" name="mid" th:value="${list[0].mid}">
+            <input type="hidden" name="qno" th:value="${list[0].qno}">
+        </form>
         <div th:if="${list[0].a0 == 'a1'}">
             <table class="table table-hover" style="text-align: center">
                 <tbody th:each="list:${list}">

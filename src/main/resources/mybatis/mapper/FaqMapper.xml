@@ -47,7 +47,7 @@
         ROW_NUM
         ,NICK
         ,GET_SUBSTR(QTITLE) AS QTITLE
-        ,QANS
+        ,GET_CODE(A0) AS A0
         ,QDATE
         ,QNO
         FROM QUESTION
@@ -100,7 +100,7 @@
     </select>
 
     <select id="InquiryDetail" resultType="com.co.algomoko.support.domain.InquiryVO">
-        SELECT QCON, QTITLE, QDATE, NICK, QANS, A0, GET_CODE(C0) AS C0, QANST, QNO
+        SELECT QCON, QTITLE, QDATE, NICK, QANS, A0, GET_CODE(C0) AS C0, QANST, QNO, MID
         FROM QUESTION
         WHERE NICK = #{nick}
         AND QNO = #{qno}
@@ -117,4 +117,20 @@
         AND QNO = ${qno}
     </insert>
 
+
+    <update id="updateInquiry" parameterType="com.co.algomoko.support.domain.InquiryVO">
+        UPDATE  QUESTION
+        SET
+            QCON = #{qcon},
+            QTITLE = #{qtitle},
+            C0 = #{c0}
+        WHERE QNO = #{qno}
+    </update>
+
+    <delete id="deleteInquiry" parameterType="com.co.algomoko.support.domain.InquiryVO">
+        DELETE FROM QUESTION
+        WHERE NICK = #{nick}
+            AND MID = #{mid}
+            AND QNO = #{qno}
+    </delete>
 </mapper>
