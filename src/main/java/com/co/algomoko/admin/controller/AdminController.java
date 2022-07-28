@@ -1,6 +1,7 @@
 package com.co.algomoko.admin.controller;
 
 import com.co.algomoko.admin.domain.AdminVO;
+import com.co.algomoko.admin.domain.StatisticVO;
 import com.co.algomoko.admin.paging.PaginationUser;
 import com.co.algomoko.admin.service.AdminService;
 import com.co.algomoko.admin.service.PagingService;
@@ -13,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -84,7 +86,7 @@ public class AdminController {
     @GetMapping("UserStatistics")
     public String moveUserStatistics(Model model) throws Exception{
         model.addAttribute("genderRate", adminService.genderRate()); // 성별 비율
-        model.addAttribute("RestrictedRate", adminService.RestrictedRate()); // 현재 제한 비율
+        model.addAttribute("RestrictedRate",adminService.RestrictedRate()); // 현재 제한 비율
         model.addAttribute("heightRate", adminService.heightRate()); // 회원 별 키 비율
         model.addAttribute("ageRate", adminService.ageRate()); // 회원 나이 비율
         model.addAttribute("bmiRate", adminService.bmiRate()); // 회원 BMI 비율
