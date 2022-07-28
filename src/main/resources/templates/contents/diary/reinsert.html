@@ -169,7 +169,7 @@
                   <div class="product__details__tab__desc">
                      <span>음식 이름
                         <br>
-                        <input type=textarea class="form-control" name="rname" rows="1"
+                        <input type=textarea required class="form-control" name="rname" rows="1"
                            cols="30" style="width : 200px;"></span>
                   </div>
                </div>
@@ -210,7 +210,7 @@
                <tr>
                <td style="width:150px" id="recnt"></td>
                <td width="500">
-               <textarea class="form-control rrecipe" row="5" name="rrecipe" id="rrecipe" style="width: 500px;"></textarea>
+              <input type="textarea" required class="form-control rrecipe" row="5" name="rrecipe" id="rrecipe" style="width: 500px;"></textarea>
                </tr>
 
            
@@ -260,7 +260,7 @@
 
       </div>
       </th:block>
-      <button type="submit" class="btn btn-primary" id="insert">등록</button>
+      <button class="btn btn-primary" id="insert">등록</button>
       
       <button type="button" class="btn btn-primary " onclick="history.go(-1);">취소</button>
    </form>

@@ -221,6 +221,7 @@
 									</th>
 									<th>
 										<input th:value="${qweqwe.cal}" class="thth2" type="text" name="cal">
+										
 									</th>
 									<th>
 										<input th:value="${qweqwe.amount}" class="thth3" type="text" name="amount">
@@ -242,7 +243,7 @@
 						<div class="product__details__tab__desc">
 							<span>내용
 								<br>
-								<input th:value="${con[0].ucon}" type=textarea class="form-control" name="ucon" rows="1"
+								<input th:value="${con[0].ucon}" type=textarea class="form-control" name="ucon" rows="1" required
 									cols="30" style="width : 200px; height:200px; resize: both;"></span>
 						</div>
 					</div>
@@ -273,7 +274,7 @@
 
 		</div>
 		</th:block>
-		<button type="submit" class="btn btn-primary" id="insert">수정</button>
+		<button class="btn btn-primary" id="insert">수정</button>
 		<button type="button" class="btn btn-primary" onclick="diaryde()" id="insert">삭제</button>
 		<button type="button" class="btn btn-primary " onclick="history.go(-1);">취소</button>
 	</form>
@@ -328,6 +329,19 @@
 		});
 
 		$(function () {
+			
+			$(".thth3").on("keyup", function () {
+				var aaa = $(this).val();
+				var bbb = $(this).parent().prev().children();
+				var ccc = $(this).parent().prev().children().val();
+				  
+			      var ddd = aaa * ccc;
+			      console.log(ccc);
+			      $(bbb).val(ddd);
+
+
+
+			})
 			
 
 			function result() {
@@ -404,8 +418,6 @@
 
 
 
-
-
 				$("#modalbtn").on("click", function () {
 					var tbody = $('#tbody1');
 
@@ -413,6 +425,7 @@
 					var th1 = $('<th>').append($('<input>').val(gin).addClass('thth1').attr('type', 'text').attr('name', 'ddname'));
 					var th2 = $('<th>').append($('<input>').val(gic).addClass('thth2').attr('type', 'text').attr('name', 'cal'));
 					var th3 = $('<th>').append($('<input>').val(gia).addClass('thth3').attr('type', 'text').attr('name', 'amount'));
+					
 					var td4 = $('<td>').addClass('shoping__cart__item__close');
 					var button = $('<button>').addClass('icon_close');
 					var td5 = $(td4).append(button);
@@ -421,7 +434,8 @@
 						$(this).closest("tr").remove();
 						result()
 					})
-
+					
+					check()
 
 					var b = $(tr).append(th1, th2, th3, td5);
 
@@ -430,11 +444,19 @@
 					result()
 
 				})
-
-
-
 			})
 
+		function check(){
+			$(".thth3").on("keyup", function () {
+						var aaa = $(this).val();
+						var bbb = $(this).parent().prev().children();
+						var ccc = $(this).parent().prev().children().val();
+						var ddd = aaa * ccc;
+					      
+					      
+					      $(bbb).val(ddd);
+					})
+		}
 
 		})
 
