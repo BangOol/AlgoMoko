@@ -127,7 +127,7 @@
 <body>
    <div th:replace="~{fragments/header}"></div>
    <div th:replace="~{fragments/aside}"></div>
-
+[[${rearrys}]]
 
 
    <!-- Table End -->
@@ -164,7 +164,11 @@
 
 
    <br><br>
+
+
  <form method="post" action="/diary/remodify" name="frm" id="frm">
+
+
    
    <div class="container">
       <div class="row">
@@ -216,11 +220,11 @@
             
             레시피   
                
-            <tr>
+            <tr th:block th:each="rearrys:${rearrys}">
                <td style="width:150px" id="recnt"></td>
                <td width="500" class="trre">
-               <th:block th:each="resres:${resres}"> 
-                  <textarea th:text="${resres}" class="form-control" row="5" name="rrecipe1" id="rrecipe1" style="width: 500px;"></textarea>
+               
+                  <textarea  th:text="${rearrys}" class="form-control" row="5" name="rrecipe" id="rrecipe" style="width: 500px;"></textarea>
                </td>
             </tr>
                
@@ -434,7 +438,7 @@
                var b = 0;
             $("#addrebtn").on("click", function () {
                   
-                  var tbody = $('.generic >tbody >tr > .trre').length;
+                   var tbody = $('.generic >tbody >tr > .trre').length;
                   console.log(tbody);
                   var recnt = Number($("#recnt").html());
                   if(tbody >= 6){
@@ -449,7 +453,7 @@
                      var tr = `<tr>
                               <td style="width:150px" id="recnt"></td>
                               <td width="500" class="trre">
-                              <textarea class="form-control" row="5" name="rrecipe${tbody+1}" id="rrecipe${tbody}" style="width: 500px;"></textarea>
+                              <textarea class="form-control" row="5" name="rrecipe" id="rrecipe" style="width: 500px;"></textarea>
                               </tr>`
                      $("#rebody").append(tr)
                      
