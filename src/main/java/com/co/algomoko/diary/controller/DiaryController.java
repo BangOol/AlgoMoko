@@ -31,6 +31,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.co.algomoko.admin.domain.AdminVO;
 import com.co.algomoko.diary.domain.DiaryVO;
+import com.co.algomoko.diary.domain.DiaryVO1;
 import com.co.algomoko.diary.domain.RecipeVO;
 import com.co.algomoko.diary.domain.ReqVO;
 import com.co.algomoko.diary.mapper.DiaryMapper;
@@ -99,7 +100,7 @@ public class DiaryController {
 				
 			}rearrys.add(rearry[i]);
       			
-			System.out.println(rearrys);
+			
       	}
       	 
 			
@@ -118,7 +119,7 @@ public class DiaryController {
 	public String remodify(HttpServletResponse response,RecipeVO recipeVO,Authentication authentication)throws IOException, ParseException { 
 		UserDetails mid = (UserDetails) authentication.getPrincipal();
 		recipeVO.setMid(mid.getUsername());
-		System.out.println(recipeVO);
+		
 		recipeVO.setNick(dao.tomem(recipeVO.getMid()));
 		
 		dao.redelete(recipeVO);
@@ -140,7 +141,7 @@ public class DiaryController {
 
 		  for(int i=0;i< ddnameList.size();i++) { 
 			  res = dao.fonlist(fings[i]);
-			 System.out.println(res);
+			
 			 recipeVO.setMid(mid.getUsername());
 			 recipeVO.setFing(res.getDdname());
 			 recipeVO.setCal(res.getCal());
@@ -260,13 +261,39 @@ public class DiaryController {
         
     }
    @RequestMapping("modifyde")
-public String modifyde(HttpServletResponse response,DiaryVO diaryVO,Authentication authentication)throws IOException, ParseException { 
+public String modifyde(HttpServletResponse response,DiaryVO diaryVO,DiaryVO1 diaryVO1,Authentication authentication)throws IOException, ParseException { 
       UserDetails mid = (UserDetails) authentication.getPrincipal();
       diaryVO.setMid(mid.getUsername());
+      
+      
       dao.diaryde(diaryVO);
       dao.detade(diaryVO);
-      
       dao.insert(diaryVO);
+ 
+      
+      
+      
+      
+      //칼로리
+      String[] cals= diaryVO1.getCal().split(",");
+      int[] nums = new int[cals.length];
+      
+      	for(int i=0;i< cals.length;i++) {
+          
+      		nums[i] = Integer.parseInt(cals[i]);
+                
+       }
+      	
+      	
+      String[] amounts = diaryVO1.getAmount().split(",");
+      int[] ams = new int[amounts.length];
+      
+      for(int i=0;i< amounts.length;i++) {
+    	  
+    	  ams[i] = Integer.parseInt(amounts[i]);
+    	  
+       }
+      
       String[] ddnames = diaryVO.getDdname().split(",");
       List<String> ddnameList = new ArrayList<String>();   
       DiaryVO res = new DiaryVO();
@@ -283,6 +310,9 @@ public String modifyde(HttpServletResponse response,DiaryVO diaryVO,Authenticati
            res.setMid(mid.getUsername());
            res.setDdate(diaryVO.getDdate());
            res.setDddo(diaryVO.getDddo());
+           res.setDdname(ddnames[i]);
+           res.setCal(nums[i]);
+           res.setAmount(ams[i]);
            dao.insertdetail(res);
         }
 
@@ -330,32 +360,60 @@ public String delete(HttpServletResponse response,DiaryVO diaryVO,Authentication
     }
    
    @RequestMapping(value="insert") 
-   public String insert(HttpServletResponse response,DiaryVO diaryVO,Authentication authentication)throws IOException, ParseException { 
+   public String insert(HttpServletResponse response,DiaryVO diaryVO, DiaryVO1 diaryVO1 ,Authentication authentication)throws IOException, ParseException { 
       
-      UserDetails mid = (UserDetails) authentication.getPrincipal();
-      diaryVO.setMid(mid.getUsername());
-      dao.insert(diaryVO);
-      
-      String[] ddnames = diaryVO.getDdname().split(",");
-      List<String> ddnameList = new ArrayList<String>();   
-      DiaryVO res = new DiaryVO();
-      for(int i=0;i< ddnames.length;i++) {
-         
-         ddnameList.add(ddnames[i]);
-         
-         
-      }
+	   UserDetails mid = (UserDetails) authentication.getPrincipal();
+	      diaryVO.setMid(mid.getUsername());
+	      System.out.println(diaryVO);
+	      dao.insert(diaryVO);
+	 
+	      
+	      
+	      
+	      
+	      //칼로리
+	      String[] cals= diaryVO1.getCal().split(",");
+	      int[] nums = new int[cals.length];
+	      
+	      	for(int i=0;i< cals.length;i++) {
+	          
+	      		nums[i] = Integer.parseInt(cals[i]);
+	                
+	       }
+	      	
+	      	
+	      String[] amounts = diaryVO1.getAmount().split(",");
+	      int[] ams = new int[amounts.length];
+	      
+	      for(int i=0;i< amounts.length;i++) {
+	    	  
+	    	  ams[i] = Integer.parseInt(amounts[i]);
+	    	  
+	       }
+	      
+	      String[] ddnames = diaryVO.getDdname().split(",");
+	      List<String> ddnameList = new ArrayList<String>();   
+	      DiaryVO res = new DiaryVO();
+	      for(int i=0;i< ddnames.length;i++) {
+	         
+	         ddnameList.add(ddnames[i]);
+	         
+	         
+	      }
 
-        for(int i=0;i< ddnameList.size();i++) { 
-           res = dao.fonlist(ddnames[i]);
-           
-           res.setMid(mid.getUsername());
-           res.setDdate(diaryVO.getDdate());
-           res.setDddo(diaryVO.getDddo());
-           dao.insertdetail(res);
-        }
+	        for(int i=0;i< ddnameList.size();i++) { 
+	           res = dao.fonlist(ddnames[i]);
+	           
+	           res.setMid(mid.getUsername());
+	           res.setDdate(diaryVO.getDdate());
+	           res.setDddo(diaryVO.getDddo());
+	           res.setDdname(ddnames[i]);
+	           res.setCal(nums[i]);
+	           res.setAmount(ams[i]);
+	           dao.insertdetail(res);
+	        }
 
-                return "contents/diary/succ"; 
+	                return "contents/diary/succ"; 
 
    }
    

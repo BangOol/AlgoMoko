@@ -169,12 +169,12 @@ span {
     
     
     
-    <form method="post" action="insert" name="frm">
+    <form method="post" action="modifyde" name="frm">
     <br><br>
     <div class="checked">
     <div class="form-check">
     <label class="form-check-label">
-    <input type="radio" class="form-check-input" name="dddo" value="aa">아침
+    <input type="radio" class="form-check-input" name="dddo" value="aa" required>아침
     
     <i class="input-helper">
     </div>
@@ -194,7 +194,7 @@ span {
     <div class="mb-2 row">
     <label for="html5-date-input" class="col-md-2 col-form-label"></label>
     <div class="col-md-2">
-    <input class="form-control" type="date" name="ddate" value="" id="html5-date-input">
+    <input required class="form-control" type="date" name="ddate" value="" id="html5-date-input" >
     </div>
     </div>
     </div>
@@ -232,12 +232,12 @@ span {
     <div class="col-sm-2 col-xl-3" style="margin-left: 200px;">
       <div class="tab-content">
         
-         
+         <button id="chchch">체크</button>
             <div class="product__details__tab__desc">
                 <h3>내용</h3>
                 <br>
 
-               <input type = textarea class="form-control" name="ucon" rows="15" cols="30" style="width : 200px; height:200px; resize: both;" ></textarea>
+               <input type = textarea required class="form-control" name="ucon" rows="15" cols="30" style="width : 200px; height:200px; resize: both;">
               </div>
         </div>
       </div>
@@ -255,11 +255,7 @@ span {
       
           
 
-              <div class="shadow w-100 bg-grey-light">
-                  <div class="bg-blue-500 text-xs leading-none py-1 text-center text-white"
-                       style="width: 45%">45%
-                  
-              </div>
+              <td><input type="text" id="seipSum"></td>
 
 
               
@@ -270,7 +266,7 @@ span {
   </div>
   
 </div>
-<button type="button" class="btn btn-primary" onclick="submit()" id="che">등록</button>
+<button class="btn btn-primary" id="che">등록</button>
 <button type="button" class="btn btn-primary " onclick="location.href='todaysic.html'">취소</button>
     </form>
 
@@ -330,97 +326,134 @@ span {
                } ]
             });
 
-$(function(){
- 
-
-
-
-
-
-    $('.blog__btn').click((e) =>{
-   		 jepoom.refreshLayout();
-        modal.style.display = "flex";
-        body.style.overflow = 'hidden';
-    })
-    const closeBtn = modal.querySelector(".modal_c")
-    closeBtn.addEventListener("click", e => {
-        modal.style.display = "none";
-        body.style.overflow = 'auto';
-    })
- 
-            
-    
-    
-      
-              /*음식조회*/
-            $("#btnbtn").on("click", function() {
-               var btnbtn = $('#textex').val();
-               console.log(btnbtn);
-                $.ajax({ 
-             url: '/flist',  
-             type: 'GET',  // == method
-             data: {btnbtn},
-              
-          }).done( function(response) {
-             jepoom.refreshLayout();
-            jepoom.resetData(response)
-          jepoom.on('click', e => {
-                        var rok = e.rowKey
-                        gin = jepoom.getRow(rok).ing
-                        gic = jepoom.getRow(rok).cal
-                        gia = jepoom.getRow(rok).amount
-                        
-                     })
-                  })
-                  
-                  
-                  
-            $("#modalbtn").on("click", function(){
-                  var tbody = $('#tbody1');
-                   
-               var tr =  $('<tr>');
-               var th1 = $('<th>').append($('<input>').val(gin).addClass('thth1').attr('type','text').attr('name','ddname'));
-               var th2 = $('<th>').append($('<input>').val(gic).addClass('thth2').attr('type','text').attr('name','cal'));
-               var th3 = $('<th>').append($('<input>').val(gia).addClass('thth3').attr('type','text').attr('name','amount'));
-               var td4 = $('<td>').addClass('shoping__cart__item__close');
-               var button = $('<button>').addClass('icon_close');
-               var td5 = $(td4).append(button);
-               button.on("click",function(){
-                 	console.log($(this));
-                   $(this).closest("tr").remove();
-                 })
-				 
-            
-            var b = $(tr).append(th1,th2,th3,td5);
-            
-            var d = $(tbody).append(b);
-             
-              
-               })
-                       
-
-               
-            })
-
-            
-           
-            
-            
-   }) 
+		$(function () {
 			
-   
 
-   
-  
-   		
+			function result() {
+				
+				
+					var sum = 0;
+				$(".thth2").each(function () {
+					sum += Number($(this).val());
+				});
+
+
+				$("#seipSum").val(sum);
+
+			}
+
+			result()
+
+
+
+
+
+			$(".icon_close").on("click", function () {
+
+				$(this).closest("tr").remove();
+
+				result()
+				
+
+
+
+			})
+
+
+
+
+
+			$('.blog__btn').click((e) => {
+				jepoom.refreshLayout();
+				modal.style.display = "flex";
+				body.style.overflow = 'hidden';
+			})
+			const closeBtn = modal.querySelector(".modal_c")
+			closeBtn.addEventListener("click", e => {
+				modal.style.display = "none";
+				body.style.overflow = 'auto';
+			})
+
+
+
+
+
+			/*음식조회*/
+			$("#btnbtn").on("click", function () {
+				var btnbtn = $('#textex').val();
+				console.log(btnbtn);
+				$.ajax({
+					url: '/diary/flist',
+					type: 'GET', // == method
+					data: {
+						btnbtn
+					},
+
+				}).done(function (response) {
+					jepoom.refreshLayout();
+					jepoom.resetData(response)
+					jepoom.on('click', e => {
+						var rok = e.rowKey
+						gin = jepoom.getRow(rok).ing
+						gic = jepoom.getRow(rok).cal
+						gia = jepoom.getRow(rok).amount
+
+					})
+				})
+
+
+
+
+
+				$("#modalbtn").on("click", function () {
+					var tbody = $('#tbody1');
+
+					var tr = $('<tr>');
+					var th1 = $('<th>').append($('<input>').val(gin).addClass('thth1').attr('type', 'text').attr('name', 'ddname'));
+					var th2 = $('<th>').append($('<input>').val(gic).addClass('thth2').attr('type', 'text').attr('name', 'cal'));
+					var th3 = $('<th>').append($('<input>').val(gia).addClass('thth3').attr('type', 'text').attr('name', 'amount'));
+					$(".thth3").on("keyup", function () {
+						var aaa = $(this).val();
+						var bbb = $(this).parent().prev().children();
+						var ccc = $(this).parent().prev().children().val();
+						var ddd = aaa * ccc;
+					      console.log($(this));
+					      $(bbb).val(ddd);
+						
+					})
+					var td4 = $('<td>').addClass('shoping__cart__item__close');
+					var button = $('<button>').addClass('icon_close');
+					var td5 = $(td4).append(button);
+					button.on("click", function () {
+						console.log($(this));
+						$(this).closest("tr").remove();
+						result()
+					})
+
+
+					var b = $(tr).append(th1, th2, th3, td5);
+
+					var d = $(tbody).append(b);
+
+					result()
+
+				})
+
+
+
+			})
+
+
+		})
+
 		
-  		 
-   
-   
-            
-          
-    
-</script> 
+
+
+
+
+
+
+	</script> 
     
 
 
