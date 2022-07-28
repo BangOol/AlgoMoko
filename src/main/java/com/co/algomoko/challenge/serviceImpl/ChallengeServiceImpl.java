@@ -119,10 +119,10 @@ public class ChallengeServiceImpl implements ChallengeService {
 		return mapper.getDup(cno, round);
 	}
 	
-	// 진행중인 챌린지 삭제
+	// 진행중인 챌린지 포기
 	@Override
-	public void deleting(int cno2) {
-		mapper.deleting(cno2);
+	public void deleting(int cno2, String mid) {
+		mapper.deleting(cno2, mid);
 	}
 
 }

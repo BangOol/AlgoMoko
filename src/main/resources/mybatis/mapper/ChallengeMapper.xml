@@ -40,30 +40,32 @@
 		from challenge
 		where cno = #{cno}
 	</delete>
-	<!-- 진행중인 챌린지 삭제 -->
-	<delete id="deleting" parameterType="int">
+	<!-- 진행중인 챌린지 포기 -->
+	<delete id="deleting" parameterType="map">
 		delete
 		from my_challenge
-		where cno2 = #{cno2}
+		where cno2 = #{cno2} and mid = #{mid}
 	</delete>
 	<!-- 진행중인 챌린지 추가 -->
 	<insert id="mcInsert" parameterType="map">
 		insert into my_challenge (mycno, cno2, mid, sdate, edate )
-		values(mycno.nextval, #{cno}, #{mid}, to_char(sysdate),	to_date(sysdate)+#{cdday})
+		values(mycno.nextval, #{cno}, #{mid}, sysdate, sysdate+#{cdday})
 	</insert>
 	<!--진행중인 챌린지 목록 -->
 	<select id="mcList"
 		resultType="com.co.algomoko.challenge.domain.MyChallengeVO">
 	<![CDATA[select *
-	from challenge a, my_challenge b
-	where a.cno = b.cno2 and b.mid = #{mid} and b.cper<100]]>
+			 from challenge a, my_challenge b 
+			 where (a.cno = b.cno2 and b.mid = #{mid} and b.cper < 100 and b.edate > sysdate) ]]>
 	</select>
 	<!-- 완료한 챌린지 목록 -->
 	<select id="eList"
 		resultType="com.co.algomoko.challenge.domain.MyChallengeVO">
 	<![CDATA[select *
-	from challenge a, my_challenge b
-	where a.cno = b.cno2 and b.mid = #{mid} and b.cper=100 ]]>
+			 from challenge a, my_challenge b
+			 where (a.cno = b.cno2 and b.mid = #{mid} and b.cper >= 100) 
+			 	or (a.cno = b.cno2 and b.mid = #{mid} and b.edate <= sysdate)
+			 	or (a.cno = b.cno2 and b.mid = #{mid} and b.cper >= 100 and b.edate <= sysdate)]]>
 	</select>
 	<!-- 진행중인 챌린지 상세 -->
 	<select id="dList"

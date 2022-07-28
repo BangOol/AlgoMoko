@@ -2,6 +2,7 @@ package com.co.algomoko.challenge.controller;
 
 import java.io.File;
 import java.security.Principal;
+import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
@@ -9,6 +10,7 @@ import org.apache.catalina.authenticator.SpnegoAuthenticator.AuthenticateAction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,7 +32,7 @@ import com.co.algomoko.challenge.mapper.ChallengeMapper;
 public class ChallengeController {
 
 	@Autowired
-	ChallengeMapper dao;
+	ChallengeMapper dao;	
 
 	// 챌린지 목록
 	@GetMapping("")
@@ -61,7 +63,7 @@ public class ChallengeController {
 		return "contents/challenge/challenging";
 	}
 
-	// 완료된 챌린지 페이지
+	// 완료된 챌린지 목록
 	@GetMapping("challengeEnd")
 	public String end(Model model, Authentication at) {
 		UserDetails userDetails = (UserDetails) at.getPrincipal();
@@ -122,11 +124,13 @@ public class ChallengeController {
 		return "redirect:/challenge";
 	}
 
-	// 진행중인 챌린지 삭제
+	// 진행중인 챌린지 포기
 	//@PostAuthorize("u0")
 	@GetMapping("deleting")
-	public String deleting(int cno2, RedirectAttributes ra) {
-		dao.deleting(cno2);
+	public String deleting(int cno2, RedirectAttributes ra, Authentication authentication) {
+		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+		String mid = userDetails.getUsername(); 
+		dao.deleting(cno2, mid);
 		return "redirect:/challenge/challenging";
 	}
 

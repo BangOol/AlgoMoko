@@ -17,6 +17,12 @@
 
 <body>
 	<th:block layout:fragment="content">
+	<script>
+		var result = '[[${msg}]]'
+		if(result != ''){
+			alert(result);
+		}		
+	</script>
 		<!-- Breadcrumb Section Begin -->
 		<section class="breadcrumb-section set-bg"
 			data-setbg="../img/chl/chlmain.jpg">
@@ -70,10 +76,8 @@
 										<ul>
 											<!-- <li><i th:text="' '+'D-'+${chl.cdday}"
 												class="fa fa-calendar-o"></i></li> -->
-											<li th:text="|시작날짜 : ${mc.sdate}|"><i
-												class="fa fa-calendar-o"></i></li>
-											<li th:text="|종료날짜 : ${mc.edate}|"><i
-												class="fa fa-calendar-o"></i></li>
+											<li><i th:text="| 시작날짜 : ${mc.sdate}|" class="fa fa-calendar-o"></i></li>
+											<li><i th:text="| 종료날짜 : ${mc.edate}|" class="fa fa-calendar-o"></i></li>
 										</ul>
 										<h5>
 											<a th:text="${mc.ctitle}">탄산 끊기</a>

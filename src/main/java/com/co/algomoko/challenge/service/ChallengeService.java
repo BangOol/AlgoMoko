@@ -43,8 +43,8 @@ public interface ChallengeService {
 	// 진행중인 챌린지 상세
 	public ChallengeValidationVO dList(int cno);
 
-	// 진행중인 챌린자 삭제
-	public void deleting(int cno2);
+	// 진행중인 챌린자 포기
+	public void deleting(int cno2, String mid);
 
 	// 챌린지 인증하기
 	public int valid(ChallengeValidationVO vVO);
