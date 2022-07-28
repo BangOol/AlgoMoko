@@ -37,6 +37,7 @@ import com.co.algomoko.diary.mapper.DiaryMapper;
 import com.co.algomoko.food.domain.FoodVO;
 import com.co.algomoko.food.mapper.FoodMapper;
 
+import ch.qos.logback.core.rolling.helper.ArchiveRemover;
 import groovyjarjarantlr4.v4.parse.ANTLRParser.action_return;
 import lombok.Data;
 
@@ -85,23 +86,29 @@ public class DiaryController {
       UserDetails mid = (UserDetails) authentication.getPrincipal();
       recipeVO.setMid(mid.getUsername());
       
-      System.out.println(dao.onelist(recipeVO).get(0).getRrecipe());
+      //System.out.println(dao.onelist(recipeVO).get(0).getRrecipe());
       
       
-      	String reces = dao.onelist(recipeVO).get(0).getRrecipe();
-      	String[] rearry = reces.split(",");
-		
-			System.out.println(rearry);
-			for(int i=0; i<rearry.length; i++) {
-				System.out.println(rearry[i]);
-			}
+      	
+      
+      	String[] rearry = dao.onelist(recipeVO).get(0).getRrecipe().split(",");
+      	List<String> rearrys = new ArrayList<String>();
+      		for(int i=0;i< rearry.length;i++) {
+      			if(rearry[i].equals("")||rearry[i].isBlank()||rearry[i].isEmpty()) {
+				continue;
+				
+			}rearrys.add(rearry[i]);
+      			
+			System.out.println(rearrys);
+      	}
+      	 
 			
 			
          
          model.addAttribute("rrecp",dao.onelist(recipeVO));
          model.addAttribute("redetail",dao.redetail(recipeVO));
          model.addAttribute("rname",rname);
-         model.addAttribute("resres",rearry);
+         model.addAttribute("rearrys",rearrys);
          return "contents/diary/redetail";
       
       
