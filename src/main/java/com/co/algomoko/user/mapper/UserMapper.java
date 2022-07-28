@@ -18,11 +18,21 @@ public interface UserMapper {
 	public UserVO search(UserVO uservo);
 	public List<UserVO> userlist(UserVO uservo);
 
+	//로그인
 	public UserVO login(String mid);
-	
-	public boolean existByMid(String mid);
+	//로그인시 아이디체크
 	public Account findId1(String mid);
+	
+	//아이디 중복체크(회원가입시)
+	public boolean existByMid(String mid);	
+	//회원가입
 	public UserVO findId(String mid);
+	
+	//아이디찾기
 	public String findIdCheck(String uname, String nick, String birth);
+	
+	//임시 비밀번호로 변경 
+	
+	public void updatepw(String mid, String encodepw);
 
 }
