@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.co.algomoko.user.domain.UserVO;
+import com.co.algomoko.user.email.service.EmailService;
 import com.co.algomoko.user.service.UserService;
 
 import groovyjarjarantlr4.v4.runtime.misc.NotNull;
@@ -29,6 +30,8 @@ import groovyjarjarantlr4.v4.runtime.misc.NotNull;
 public class UserController {
 	@Autowired 
 	UserService userService;
+	@Autowired 
+	EmailService emailService;
 	
 	//메인페이지
 	@GetMapping("main")
@@ -73,16 +76,7 @@ public class UserController {
 		return "contents/login/loginForm";
 	}
 	
-	@PreAuthorize("isAuthenticated()")
-	@GetMapping("/login")
-	public void login(Principal principal,Model model) {
-		System.out.println("로그인");
-	    System.out.println("nick" + principal.getName());
-	    String mid = principal.getName();
-	    UserVO vo = userService.findId(mid);
-	    model.addAttribute("headerNick",vo);
-	    System.out.println(model);
-	}
+	
 	
 	
 	
@@ -136,12 +130,22 @@ public class UserController {
 	
 	//아이디찾기
 	@PostMapping("/findId")
-	public String findId(@RequestParam("uname") String uname, @RequestParam("nick") String nick, @RequestParam("birth") String birth) {
+	public ResponseEntity findId(@NotNull @RequestParam("uname") String uname, @RequestParam("nick") String nick, @RequestParam("birth") String birth) {
 		
 		String result = userService.findIdCheck(uname,nick,birth);
-		return result;				
+		System.out.println(result);
+//		if(result == null)
+//			return ResponseEntity.status(HttpStatus.CONFLICT).body("입력한 회원 정보를 확인해주세요");
+		return ResponseEntity.status(HttpStatus.OK).body(result);				
 	}
 	
+	//임시비밀번호 전송
+	@PostMapping("/findPw")
+	public String findPw(@RequestParam("mid") String mid) throws Exception{
+		System.out.println("임시비밀번호 발송:"+ mid);
+		userService.sendpw(mid);
+		return "contents/main";
+	}
 	//아이디 찾기 이동
 //    @GetMapping("/member/find_id")
 //    public void findId() {

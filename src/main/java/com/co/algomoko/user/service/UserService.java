@@ -28,5 +28,7 @@ public interface UserService {
 	public PasswordEncoder passwordEncoder();
 	//비밀번호 찾기
 	public String findIdCheck(String uname, String nick, String birth);
+	//임시 비밀번호 전송
+	public void sendpw(String mid) throws Exception;
 	
 }

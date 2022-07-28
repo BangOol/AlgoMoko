@@ -44,10 +44,15 @@
 		SELECT * FROM MEMBERS WHERE MID=#{mid}
 	</select>
 	
-	<select id="findIdCheck">
+	<select id="findIdCheck" resultType="String">
 		SELECT MID FROM MEMBERS
 		WHERE UNAME=#{uname} AND NICK=#{nick} AND BIRTH=#{birth}
 	</select>
+	
+	<update id="updatepw" >
+	update members set mpw = #{mpw}
+		where mid =#{mid}
+	</update>
 	<!--  <update id="update">
        update member
        <trim suffixOverrides="," prefix="set">

@@ -39,18 +39,21 @@ function search_check(num) {
 	var idV = "";
 	// 값 받고 출력하는 ajax
 	var idSearch_click = function(){
+		var unameVal = $('#uname').val()
+		var nickVal = $('#nick').val()
+		var birthVal = $('#birth').val()
 		$.ajax({
 			type:"POST",
-			url:"/findAccount/findId?uname="+$('#uname').val()+"&nick="+$('#nick').val()+"&birth="+$('#birth').val(),
-			success:function(data){
+			url:"findId",
+			data:{uname:unameVal,nick:nickVal,birth:birthVal}		
+		}).done(function(data){
 				if(data == 0){
 					$('#mid_value').text("입력한 회원 정보를 확인해주세요!");	
 				} else {
 					$('#mid_value').text(data);
 					// 아이디값 별도로 저장
 					idV = data;
-				}
-			}
+				}		
 		})
 	}
 </script>
