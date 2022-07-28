@@ -113,10 +113,11 @@ public class ChallengeServiceImpl implements ChallengeService {
 	public List<MyChallengeVO> eList(String mid) {
 		return mapper.eList(mid);
 	}
-
+	
+	// 챌린지 인증 중복 체크
 	@Override
-	public int getDup(int cno, int round) {
-		return mapper.getDup(cno, round);
+	public int getDup(int cno, String cvdate, String mid) {
+		return mapper.getDup(cno, cvdate, mid);
 	}
 	
 	// 진행중인 챌린지 포기
@@ -124,5 +125,13 @@ public class ChallengeServiceImpl implements ChallengeService {
 	public void deleting(int cno2, String mid) {
 		mapper.deleting(cno2, mid);
 	}
+
+	@Override
+	public List<MyChallengeVO> ck() {
+		mapper.ck();
+		return null;
+	}
+
+	
 
 }

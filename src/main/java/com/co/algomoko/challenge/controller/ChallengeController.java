@@ -32,7 +32,7 @@ import com.co.algomoko.challenge.mapper.ChallengeMapper;
 public class ChallengeController {
 
 	@Autowired
-	ChallengeMapper dao;	
+	ChallengeMapper dao;
 
 	// 챌린지 목록
 	@GetMapping("")
@@ -125,24 +125,25 @@ public class ChallengeController {
 	}
 
 	// 진행중인 챌린지 포기
-	//@PostAuthorize("u0")
+	// @PostAuthorize("u0")
 	@GetMapping("deleting")
 	public String deleting(int cno2, RedirectAttributes ra, Authentication authentication) {
 		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-		String mid = userDetails.getUsername(); 
+		String mid = userDetails.getUsername();
 		dao.deleting(cno2, mid);
 		return "redirect:/challenge/challenging";
 	}
 
 	// 진행중인 챌린지 1개추가하는 용도
 	@GetMapping("start")
-	public String getStart(int cno, int cdday, MyChallengeVO mVO, Model model, RedirectAttributes ra, Authentication at) {		
-		String mid= at.getName();
+	public String getStart(int cno, int cdday, MyChallengeVO mVO, Model model, RedirectAttributes ra,
+			Authentication at) {
+		String mid = at.getName();
 		mVO.setMid(mid);
-		
+
 		System.out.println("아이디 : " + mid);
 		System.out.println("넘어온번호 : " + cno);
-		System.out.println("넘어온데이 : " + cdday);
+		System.out.println("넘어온데이 : " + cdday);		
 		// 중복처리
 		List<MyChallengeVO> result = dao.mcList(mid);
 		int check = 0;
@@ -157,58 +158,51 @@ public class ChallengeController {
 			ra.addFlashAttribute("msg", "이미 도전중인 챌린지입니다.");
 			return "redirect:/challenge";
 		}
-		dao.mcInsert(mid, cno, cdday);		 
+		dao.mcInsert(mid, cno, cdday);
 		return "redirect:/challenge/challenging";
 	}
 
 	// 챌린지 인증
-	@PostMapping("cValidation/certi")
-	public String valid(int cno2, @RequestParam("vcon") String vcon, Authentication at) {
-		UserDetails userDetails = (UserDetails)at.getPrincipal();
-		String mid = userDetails.getUsername();
-		ChallengeValidationVO vVO = new ChallengeValidationVO();
-		int round = dao.getRound(cno2, mid);
+		@PostMapping("cValidation/certi")
+		public String valid(int cno2, @RequestParam("vcon") String vcon, Authentication at) {
+			UserDetails userDetails = (UserDetails)at.getPrincipal();
+			String mid = userDetails.getUsername();
+			ChallengeValidationVO vVO = new ChallengeValidationVO();
+			
+					
+			vVO.setCno(cno2);
+			vVO.setVcon(vcon);
+			vVO.setMid(mid);
+			System.out.println("번호:" + vVO.getCno() + " 내용 : " + vcon + "아이디 : " + mid);			
+			
+			// 챌린지인증
+			dao.valid(vVO);
+			
+			// 이행률 업데이트
+			ChallengeVO cddayVO = dao.getPage(cno2);
+			System.out.println("전체개수 : " + cddayVO.getCdday());
+			int certiCount = dao.getCertiCount(cno2, mid);
+			System.out.println("인증개수 : " + certiCount);
+			double cper = (double) certiCount / (double) cddayVO.getCdday() * 100;
 
-		vVO.setCno(cno2);
-		vVO.setRound(round);
-		vVO.setVcon(vcon);
-		vVO.setMid(mid);
-		System.out.println("번호:" + vVO.getCno() + " 일차 : " + round + " 내용 : " + vcon + "아이디 : " + mid);
+			System.out.println("전체개수 : " + cddayVO.getCdday() + " 인증개수 : " + certiCount + " 이행률 : "
+					+ Math.round(cper * 100 / 100.0) + "%");
+			dao.cperUpdate(cno2, (int) cper, mid);
 
-		// 00일차 인증내역이 없으면 insert
-		// 00일차 인증내역이 있으면 이미 인증했습니다
-		// round랑 cno 기준으로 row을 select해옴 => null이냐 아니냐 체크
-		// select * from challenge_validation where round = #{round} and cno3 = #{cno}
-
-		// 챌린지인증
-		dao.valid(vVO);
-		// 이행률 업데이트
-		// 인증횟수/도전일수
-		// 도전일수 = cdday (challenge)
-		// 인증횟수 = count(*) (challenge_valdation)
-		ChallengeVO cddayVO = dao.getPage(cno2);
-		System.out.println("전체개수 : " + cddayVO.getCdday());
-		int certiCount = dao.getCertiCount(cno2, mid);
-		System.out.println("인증개수 : " + certiCount);
-		double cper = (double) certiCount / (double) cddayVO.getCdday() * 100;
-
-		System.out.println("전체개수 : " + cddayVO.getCdday() + " 인증개수 : " + certiCount + " 이행률 : "
-				+ Math.round(cper * 100 / 100.0) + "%");
-		dao.cperUpdate(cno2, (int) cper, mid);
-
-		return "redirect:/challenge/challenging";
-	}
+			return "redirect:/challenge/challenging";
+			
+		}
 
 	// 챌린지 인증페이지로 이동
 	@GetMapping("cValidation")
 	public String valid(int cno2, Model model, Authentication at) {
-		UserDetails userDetails = (UserDetails)at.getPrincipal();
+		UserDetails userDetails = (UserDetails) at.getPrincipal();
 		String mid = userDetails.getUsername();
 		System.out.println(mid);
 		System.out.println(cno2);
 		model.addAttribute("getd", dao.getd(cno2, mid));
 
-		int round = dao.getRound(cno2,mid);
+		int round = dao.getRound(cno2, mid);
 		System.out.println("번호:" + cno2 + " 일차 : " + round);
 		return "contents/challenge/cValidation";
 	}

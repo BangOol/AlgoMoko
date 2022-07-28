@@ -61,6 +61,9 @@ public interface ChallengeMapper {
 	public int cperUpdate(int cno, int cper, String mid);
 	
 	// 인증 중복 체크
-	public int getDup(int cno, int round);
+	public int getDup(int cno, String cvdate, String mid);
+	
+	// 완료된 챌린지로 이동
+	public List<MyChallengeVO> ck();
 
 }

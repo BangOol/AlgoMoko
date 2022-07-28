@@ -83,7 +83,7 @@
 											<a th:text="${mc.ctitle}">탄산 끊기</a>
 										</h5>
 										<p th:text="${mc.cdday}+'일 동안 '+${mc.ctitle}+' 도전중!'"></p>
-										<p th:text="'이행률 : '+${mc.cper}+'%'"></p>
+										<p style="color: red;" th:text="'이행률 : '+${mc.cper}+'%'"></p>
 										<!-- <a th:href="@{/challenge/challengeDetail(cno=${mc.cno2})}" class="blog__btn">인증하기 <span class="arrow_right"></span></a> -->
 										<div style="margin-left: 152px;">
 											<a sec:authorize="hasAuthority('u1')"
