@@ -20,6 +20,8 @@
         <result property="C0" column="C0"/>
         <result property="mid" column="MID"/>
         <result property="qcon" column="QCON"/>
+        <result property="qanst" column="QANST"/>
+        <result property="ansdate" column="ANSDATE"/>
     </resultMap>
     <select id="FAQList" resultMap="FaqType" resultType="com.co.algomoko.support.domain.FaqVO">
         SELECT FAQNO, FAQTITLE, FAQCON
@@ -41,12 +43,13 @@
     <select id="inqAllList" resultType="hashmap" resultMap="InqType">
         SELECT *
         FROM (
-        SELECT ROW_NUMBER() OVER(ORDER BY MID DESC) AS
+        SELECT ROW_NUMBER() OVER(ORDER BY QDATE DESC) AS
         ROW_NUM
         ,NICK
-        ,QTITLE
+        ,GET_SUBSTR(QTITLE) AS QTITLE
         ,QANS
         ,QDATE
+        ,QNO
         FROM QUESTION
         )
         <if test="firstRecordIndex != null and lastRecordIndex != null">
@@ -61,7 +64,6 @@
                 AND NICK LIKE '%'||#{keyword}||'%'
             </when>
         </choose>
-        ORDER BY QDATE DESC
     </select>
 
     <insert id="insertInquiry" parameterType="com.co.algomoko.support.domain.InquiryVO">
@@ -98,10 +100,21 @@
     </select>
 
     <select id="InquiryDetail" resultType="com.co.algomoko.support.domain.InquiryVO">
-        SELECT QCON, QTITLE, QDATE, NICK, QANS
+        SELECT QCON, QTITLE, QDATE, NICK, QANS, A0, GET_CODE(C0) AS C0, QANST, QNO
         FROM QUESTION
         WHERE NICK = #{nick}
-        AND QTITLE = #{qtitle}
+        AND QNO = #{qno}
     </select>
+
+    <insert id="insertInqAns" parameterType="com.co.algomoko.support.domain.InquiryVO" >
+        UPDATE QUESTION
+        SET
+            QANST = #{qanst},
+            QANS = #{qans},
+            A0 = #{a0},
+            ANSDATE = sysdate
+        WHERE NICK = #{nick}
+        AND QNO = ${qno}
+    </insert>
 
 </mapper>

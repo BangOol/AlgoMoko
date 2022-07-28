@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="zxx" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+<html lang="zxx" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 	layout:decorate="~{layouts/layout}">
 
 <head>
@@ -8,12 +9,20 @@
 <meta name="keywords" content="Ogani, unica, creative, html">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
 <title>challenging</title>
 
 </head>
 
 <body>
 	<th:block layout:fragment="content">
+	<script>
+		var result = '[[${msg}]]'
+		if(result != ''){
+			alert(result);
+		}		
+	</script>
 		<!-- Breadcrumb Section Begin -->
 		<section class="breadcrumb-section set-bg"
 			data-setbg="../img/chl/chlmain.jpg">
@@ -67,17 +76,24 @@
 										<ul>
 											<!-- <li><i th:text="' '+'D-'+${chl.cdday}"
 												class="fa fa-calendar-o"></i></li> -->
-											<li th:text="|시작날짜 : ${mc.sdate}|"><i class="fa fa-calendar-o"></i></li>
-											<li th:text="|종료날짜 : ${mc.edate}|"><i class="fa fa-calendar-o"></i></li>
+											<li><i th:text="| 시작날짜 : ${mc.sdate}|" class="fa fa-calendar-o"></i></li>
+											<li><i th:text="| 종료날짜 : ${mc.edate}|" class="fa fa-calendar-o"></i></li>
 										</ul>
-										<h5 ><a th:text="${mc.ctitle}">탄산 끊기</a></h5>
+										<h5>
+											<a th:text="${mc.ctitle}">탄산 끊기</a>
+										</h5>
 										<p th:text="${mc.cdday}+'일 동안 '+${mc.ctitle}+' 도전중!'"></p>
 										<p th:text="'이행률 : '+${mc.cper}+'%'"></p>
-<!-- 										<a th:href="@{/challenge/challengeDetail(cno=${mc.cno2})}" class="blog__btn">인증하기 <span class="arrow_right"></span></a>
- -->										<a sec:authorize="hasAuthority('u1')" th:href="@{/challenge/cValidation(cno2=${mc.cno2})}" class="site-btn">인증하기</a>
- 											<a sec:authorize="hasAuthority('u1')"th:href="@{/challenge/deleting(cno2=${mc.cno2})}" class="site-btn">포기하기</a>
- 																				
- 																
+										<!-- <a th:href="@{/challenge/challengeDetail(cno=${mc.cno2})}" class="blog__btn">인증하기 <span class="arrow_right"></span></a> -->
+										<div style="margin-left: 152px;">
+											<a sec:authorize="hasAuthority('u1')"
+												th:href="@{/challenge/cValidation(cno2=${mc.cno2})}"
+												class="blog__btn">인증하기</a> <a
+												id="ff" sec:authorize="hasAuthority('u1')"
+												th:href="@{/challenge/deleting(cno2=${mc.cno2})}"
+												class="blog__btn">포기하기</a>
+										</div>
+
 									</div>
 								</div>
 							</div>

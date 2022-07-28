@@ -127,7 +127,7 @@
 <body>
    <div th:replace="~{fragments/header}"></div>
    <div th:replace="~{fragments/aside}"></div>
-
+[[${rearrys}]]
 
 
    <!-- Table End -->
@@ -164,12 +164,16 @@
 
 
    <br><br>
+
+
  <form method="post" action="/diary/remodify" name="frm" id="frm">
+
+
    
    <div class="container">
       <div class="row">
          <div class="col-sm-7 col-xl-6">
-		<input th:value="${redetail[0].rname}" name="rname" readonly>
+      <input th:value="${redetail[0].rname}" name="rname" readonly>
 
 
             <table class="table table-borderless">
@@ -200,31 +204,49 @@
 
                   
 
-               </tbody>
+              </tbody>
 
 
-            </table>
+               </table>
 
-
-         </div>
-          <div class="col-sm-2 col-xl-3" style="margin-left: 200px;">
-            <div class="tab-content">
-               <div class="product__details__tab__desc">
-                  <span>레시피
-                     <br>
-                    <input th:value="${rrecp[0].rrecipe}" type="textarea" class="form-control" name="rrecipe" rows="4" cols="20" 
-                        style="width : 200px; height:200px; resize: both;"></span>
-                       
-                     
-               </div>
+</th:block>
             </div>
-         </div>
-      </div>
+            <div class="col-sm-2 col-xl-3" style="margin-left: 200px;">
+            
+            <table class ="generic" width="100">
+            <tbody id="rebody">
+            
+            <button type="button" id="addrebtn" class="btn btn-primary">추가</button>
+            
+            레시피   
+               
+            <tr th:block th:each="rearrys:${rearrys}">
+               <td style="width:150px" id="recnt"></td>
+               <td width="500" class="trre">
+               
+                  <textarea  th:text="${rearrys}" class="form-control" row="5" name="rrecipe" id="rrecipe" style="width: 500px;"></textarea>
+               </td>
+            </tr>
+               
+               
+            
+            
+               
+               
 
-   </div>
-   </div>
-   </th:block>
-   <!-- Progress Bar -->
+            </tbody>
+            
+            
+            </table>
+            
+            
+            </div>
+
+         </div>
+
+      </div>
+      </div>
+      <!-- Progress Bar -->
 
    <div class="flex flex-1 flex-col md:flex-row lg:flex-row mx-2 mt-2">
       <div class="rounded overflow-hidden shadow bg-white mx-2 w-50 pt-2">
@@ -232,7 +254,7 @@
             <div class="font-bold text-xl">kcal</div>
          </div>
 
-		<td><input type="text" id="seipSum"></td>
+      <td><input type="text" id="seipSum"></td>
 
       </div>
 
@@ -256,154 +278,200 @@
     <script src="/js/main.js"></script>
 
       <script>
-         var gin;
-         var gic;
-         var gia;
-         const body = document.querySelector('body');
-         const modal = document.querySelector('.modal');
+      var gin;
+      var gic;
+      var gia;
+      const body = document.querySelector('body');
+      const modal = document.querySelector('.modal');
 
-         /*제품정보 그리드*/
-         const giupData = [];
-
-
-         const jepoom = new tui.Grid({
-            el: document.getElementById('gridpro'),
-            data: giupData,
-            scrollY: true,
-            rowHeaders: ['rowNum'],
-            bodyHeight: 300,
+      /*제품정보 그리드*/
+      const giupData = [];
 
 
-            columns: [{
-               header: '재료명',
-               name: 'ing',
-               align: 'center',
-
-            }, {
-               header: '칼로리',
-               name: 'cal',
-               align: 'center',
-
-            }, {
-               header: '수량',
-               name: 'amount',
-               align: 'center',
-
-            }]
-         });
-
-         $(function () {
+      const jepoom = new tui.Grid({
+         el: document.getElementById('gridpro'),
+         data: giupData,
+         scrollY: true,
+         rowHeaders: ['rowNum'],
+         bodyHeight: 300,
 
 
-			function result() {
-				
-				
-					var sum = 0;
-				$(".thth2").each(function () {
-					sum += Number($(this).val());
-				});
+         columns: [{
+            header: '재료명',
+            name: 'ing',
+            align: 'center',
 
+         }, {
+            header: '칼로리',
+            name: 'cal',
+            align: 'center',
 
-				$("#seipSum").val(sum);
+         }, {
+            header: '수량',
+            name: 'amount',
+            align: 'center',
 
-			}
+         }]
+      });
 
-			result()
+      $(function () {
+         
 
-
-
-
-
-			$(".icon_close").on("click", function () {
-
-				$(this).closest("tr").remove();
-
-				result()
-				
-
-
-
-			})
-
-
-
-
-
-
-            $('.blog__btn').click((e) => {
-               jepoom.refreshLayout();
-               modal.style.display = "flex";
-               body.style.overflow = 'hidden';
-            })
-            const closeBtn = modal.querySelector(".modal_c")
-            closeBtn.addEventListener("click", e => {
-               modal.style.display = "none";
-               body.style.overflow = 'auto';
-            })
-
-
-
-
-
-            /*음식조회*/
-            $("#btnbtn").on("click", function () {
-               var btnbtn = $('#textex').val();
-               console.log(btnbtn);
-               $.ajax({
-                  url: '/diary/flist',
-                  type: 'GET', // == method
-                  data: {
-                     btnbtn
-                  },
-
-               }).done(function (response) {
-                  jepoom.refreshLayout();
-                  jepoom.resetData(response)
-                  jepoom.on('click', e => {
-                     var rok = e.rowKey
-                     gin = jepoom.getRow(rok).ing
-                     gic = jepoom.getRow(rok).cal
-                     gia = jepoom.getRow(rok).amount
-
-                  })
-               })
-               $("#modalbtn").on("click", function(){
-                  var tbody = $('#tbody1');
-                   
-               var tr =  $('<tr>');
-               var th1 = $('<th>').append($('<input>').val(gin).addClass('thth1').attr('type','text').attr('name','fing'));
-               var th2 = $('<th>').append($('<input>').val(gic).addClass('thth2').attr('type','text').attr('name','cal'));
-               var th3 = $('<th>').append($('<input>').val(gia).addClass('thth3').attr('type','text').attr('name','amount'));
-               var td4 = $('<td>').addClass('shoping__cart__item__close');
-               var button = $('<button>').addClass('icon_close');
-               var td5 = $(td4).append(button);
-               button.on("click",function(){
-                 	console.log($(this));
-                   $(this).closest("tr").remove();
-                   result()
-                 })
-				 
+         function result() {
             
-            var b = $(tr).append(th1,th2,th3,td5);
             
-            var d = $(tbody).append(b);
+               var sum = 0;
+            $(".thth2").each(function () {
+               sum += Number($(this).val());
+            });
+
+
+            $("#seipSum").val(sum);
+
+         }
+
+         result()
+
+
+
+
+
+         $(".icon_close").on("click", function () {
+
+            $(this).closest("tr").remove();
+
             result()
-             
-              
-               })
+            
 
-
-
-            })
 
 
          })
+
+
+
+
+
+         $('.blog__btn').click((e) => {
+            jepoom.refreshLayout();
+            modal.style.display = "flex";
+            body.style.overflow = 'hidden';
+         })
+         const closeBtn = modal.querySelector(".modal_c")
+         closeBtn.addEventListener("click", e => {
+            modal.style.display = "none";
+            body.style.overflow = 'auto';
+         })
+
+
+
+
+
+         /*음식조회*/
+         $("#btnbtn").on("click", function () {
+            var btnbtn = $('#textex').val();
+            console.log(btnbtn);
+            $.ajax({
+               url: '/diary/flist',
+               type: 'GET', // == method
+               data: {
+                  btnbtn
+               },
+
+            }).done(function (response) {
+               jepoom.refreshLayout();
+               jepoom.resetData(response)
+               jepoom.on('click', e => {
+                  var rok = e.rowKey
+                  gin = jepoom.getRow(rok).ing
+                  gic = jepoom.getRow(rok).cal
+                  gia = jepoom.getRow(rok).amount
+
+               })
+            })
+
+
+
+
+
+            $("#modalbtn").on("click", function () {
+               var tbody = $('#tbody1');
+
+               var tr = $('<tr>');
+               var th1 = $('<th>').append($('<input>').val(gin).addClass('thth1').attr('type', 'text').attr('name', 'fing'));
+               var th2 = $('<th>').append($('<input>').val(gic).addClass('thth2').attr('type', 'text').attr('name', 'cal'));
+               var th3 = $('<th>').append($('<input>').val(gia).addClass('thth3').attr('type', 'text').attr('name', 'amount'));
+               var td4 = $('<td>').addClass('shoping__cart__item__close');
+               var button = $('<button>').addClass('icon_close');
+               var td5 = $(td4).append(button);
+               button.on("click", function () {
+                  console.log($(this));
+                  $(this).closest("tr").remove();
+                  result()
+               })
+
+
+               var b = $(tr).append(th1, th2, th3, td5);
+
+               var d = $(tbody).append(b);
+
+               result()
+
+            })
+
+
+
+         })
+
+
+      })
+      var index = 0;
+      $(".trre").on("click", function(){
+         index = $(this).closest('tr').index();
+         console.log(index);
+      })
+
+               function diaryde() {
+                  $("#frm").attr("action", "redelete").submit();
          
-         function diaryde(){
-        $("#frm").attr("action", "redelete").submit();
-        
-    }
-      </script>
+               }
+               var a = 1;
+               var b = 0;
+            $("#addrebtn").on("click", function () {
+                  
+                   var tbody = $('.generic >tbody >tr > .trre').length;
+                  console.log(tbody);
+                  var recnt = Number($("#recnt").html());
+                  if(tbody >= 6){
+                     
+                     alert('더이상 추가할수없다');
+                           
+                     return false;
+                     
+               }else{
+                     
+                     b += tbody;
+                     var tr = `<tr>
+                              <td style="width:150px" id="recnt"></td>
+                              <td width="500" class="trre">
+                              <textarea class="form-control" row="5" name="rrecipe" id="rrecipe" style="width: 500px;"></textarea>
+                              </tr>`
+                     $("#rebody").append(tr)
+                     
+                     
+                     
+                     
+                  }      
+                  
+                   
+                  
+               
+
+         })
+
+
+
+
+   </script>
 
 
 

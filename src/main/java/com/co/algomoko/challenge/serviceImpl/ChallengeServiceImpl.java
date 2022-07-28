@@ -2,7 +2,9 @@ package com.co.algomoko.challenge.serviceImpl;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.co.algomoko.challenge.domain.ChallengeVO;
@@ -23,8 +25,8 @@ public class ChallengeServiceImpl implements ChallengeService {
 
 	// 진행중인 챌린지 목록
 	@Override
-	public List<MyChallengeVO> mcList() {
-		return mapper.mcList();
+	public List<MyChallengeVO> mcList(String mid) {
+		return mapper.mcList(mid);
 	}
 
 	// 챌린지 작성
@@ -60,8 +62,8 @@ public class ChallengeServiceImpl implements ChallengeService {
 
 	// 챌린지 도전
 	@Override
-	public void mcInsert(int cno, int cdday) {
-		mapper.mcInsert(cno, cdday);
+	public void mcInsert(String mid, int cno, int cdday) {
+		mapper.mcInsert(mid, cno, cdday);
 	}
 
 	// 챌린지 검색
@@ -78,8 +80,8 @@ public class ChallengeServiceImpl implements ChallengeService {
 
 	// 챌린지 인증 페이지 이동
 	@Override
-	public MyChallengeVO getd(int cno2) {
-		return mapper.getd(cno2);
+	public List<MyChallengeVO> getd(int cno2, String mid) {
+		return mapper.getd(cno2, mid);
 	}
 
 	// 챌린지 인증
@@ -90,26 +92,26 @@ public class ChallengeServiceImpl implements ChallengeService {
 
 	// 일차 구하기
 	@Override
-	public int getRound(int cno) {
-		return mapper.getRound(cno);
+	public int getRound(int cno, String mid) {
+		return mapper.getRound(cno, mid);
 	}
 
 	// 인증 갯수 구하기
 	@Override
-	public int getCertiCount(int cno) {
-		return mapper.getCertiCount(cno);
+	public int getCertiCount(int cno, String mid) {
+		return mapper.getCertiCount(cno, mid);
 	}
 
 	// 이행률 업데이트
 	@Override
-	public int cperUpdate(int cno, int cper) {
-		return mapper.cperUpdate(cno, cper);
+	public int cperUpdate(int cno, int cper, String mid) {
+		return mapper.cperUpdate(cno, cper, mid);
 	}
 
 	// 완료된 챌린지
 	@Override
-	public List<MyChallengeVO> eList() {
-		return mapper.eList();
+	public List<MyChallengeVO> eList(String mid) {
+		return mapper.eList(mid);
 	}
 
 	@Override
@@ -117,10 +119,10 @@ public class ChallengeServiceImpl implements ChallengeService {
 		return mapper.getDup(cno, round);
 	}
 	
-	// 진행중인 챌린지 삭제
+	// 진행중인 챌린지 포기
 	@Override
-	public void deleting(int cno2) {
-		mapper.deleting(cno2);
+	public void deleting(int cno2, String mid) {
+		mapper.deleting(cno2, mid);
 	}
 
 }

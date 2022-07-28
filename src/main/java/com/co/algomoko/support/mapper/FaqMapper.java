@@ -27,4 +27,6 @@ public interface FaqMapper {
     public String getU0(String mid); // 아이디와 일치하는 유저 U0 가져오기
 
     public List<InquiryVO> InquiryDetail(InquiryVO inquiryVO);
+
+    public int insertInqAns(InquiryVO inquiryVO);
 }

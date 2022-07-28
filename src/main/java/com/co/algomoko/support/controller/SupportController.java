@@ -1,6 +1,5 @@
 package com.co.algomoko.support.controller;
 
-import com.co.algomoko.admin.domain.AdminVO;
 import com.co.algomoko.admin.paging.PaginationUser;
 import com.co.algomoko.support.domain.FaqVO;
 import com.co.algomoko.support.domain.InquiryVO;
@@ -21,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.Writer;
 import java.util.List;
 
 @Controller
@@ -130,6 +130,7 @@ public class SupportController {
         String msg = "정상적으로 등록되었습니다";
         String url = "/Inquiry";
         response.setContentType("text/html; charset=utf-8");
+        response.setCharacterEncoding("UTF-8");
         PrintWriter w = response.getWriter();
         w.write("<script>alert('"+msg+"');location.href='"+url+"';</script>");
 
@@ -137,32 +138,66 @@ public class SupportController {
     }
 
     @GetMapping("/Inquiry/detail")
-    public String InquiryDetail(@RequestParam("nick") String nick,@RequestParam("qtitle") String qtitle,
-                                 Authentication authentication,Model model){
+    public String InquiryDetail(@RequestParam("nick") String nick,@RequestParam("qno") int qno,
+                                 Authentication authentication,Model model,
+                                HttpServletResponse response) throws IOException {
         UserDetails userDetails = (UserDetails)authentication.getPrincipal();
         String username = userDetails.getUsername(); // user 아이디 확인
         String u0 = inquiryService.getU0(username);// 아이디를 이용하여 해당 사용자가 관리자인지 확인.
 
-        InquiryVO inquiryVO = new InquiryVO();
-        inquiryVO.setNick(nick);
-        inquiryVO.setQtitle(qtitle);
+        // 접속을 시도하는 유저의 nick과 1:1 문의를 등록한 유저의 nick를 비교하기 위함.
+        String nickVal = inquiryService.getNick(username);
+        if(nickVal.equals(nick) || u0.equals("u0")){
+            InquiryVO inquiryVO = new InquiryVO();
+            inquiryVO.setNick(nick);
+            inquiryVO.setQno(qno);
+            List<InquiryVO> basket = inquiryService.InquiryDetail(inquiryVO);
+            model.addAttribute("list",basket);
+            model.addAttribute("u0", u0);
+            return "contents/support/detail";
+        } else {
+            response.setContentType("text/html; charset=utf-8");
+            response.setCharacterEncoding("UTF-8");
+            String msg = "다른 사람의 문의 내용을 확인할 수 없습니다.";
+            String url = "/Inquiry";
+            PrintWriter w = response.getWriter();
+            w.write("<script>alert('"+msg+"');location.href='"+url+"';</script>");
+        }
 
-        model.addAttribute("list",inquiryService.InquiryDetail(inquiryVO));
-        model.addAttribute("u0", u0);
-        return "contents/support/detail";
+        return "contents/index";
     }
 
-    @GetMapping("/Inquiry/inqResult")
-    public void inqResult(@RequestParam("title") String title,
-                          @RequestParam("content") String content,
+    @PostMapping("/Inquiry/inqResult")
+    public void inqResult(@RequestParam("qanst") String qanst,
+                          @RequestParam("qans") String qans,
                           @RequestParam("nick") String nick,
                           @RequestParam("a0") String a0,
+                          @RequestParam("qno") int qno,
                           Model model,
-                          Authentication authentication) throws  Exception{
+                          Authentication authentication,
+                          HttpServletResponse response) throws Exception{
         InquiryVO inquiryVO = new InquiryVO();
-        inquiryVO.setQans(content);
+        inquiryVO.setQans(qans);
         inquiryVO.setNick(nick);
+        inquiryVO.setA0(a0);
+        inquiryVO.setQanst(qanst);
+        inquiryVO.setQno(qno);
 
+        int a = inquiryService.insertInqAns(inquiryVO);
+        if(a == 0){
+            response.setContentType("text/html; charset=utf-8");
+            response.setCharacterEncoding("UTF-8");
+            String msg = "등록 과정 중 문제가 발생했습니다. 다시 등록해주시길 바랍니다.";
+            String url = "/Inquiry";
+            PrintWriter w = response.getWriter();
+            w.write("<script>alert('"+msg+"');location.href='"+url+"';</script>");
+        }
+        response.setContentType("text/html; charset=utf-8");
+        response.setCharacterEncoding("UTF-8");
+        String msg = "정상적으로 등록되었습니다";
+        String url = "/Inquiry";
+        PrintWriter w = response.getWriter();
+        w.write("<script>alert(msg);location.href='"+url+"';</script>");
 
     }
 }

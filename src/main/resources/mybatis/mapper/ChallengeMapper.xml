@@ -40,30 +40,32 @@
 		from challenge
 		where cno = #{cno}
 	</delete>
-	<!-- 진행중인 챌린지 삭제 -->
-	<delete id="deleting" parameterType="int">
+	<!-- 진행중인 챌린지 포기 -->
+	<delete id="deleting" parameterType="map">
 		delete
 		from my_challenge
-		where cno2 = #{cno2}
+		where cno2 = #{cno2} and mid = #{mid}
 	</delete>
 	<!-- 진행중인 챌린지 추가 -->
-	<insert id="mcInsert" parameterType="int">
+	<insert id="mcInsert" parameterType="map">
 		insert into my_challenge (mycno, cno2, mid, sdate, edate )
-		values(mycno.nextval, #{cno}, #{mid}, to_date(sysdate),	to_date(sysdate)+#{cdday})
+		values(mycno.nextval, #{cno}, #{mid}, sysdate, sysdate+#{cdday})
 	</insert>
 	<!--진행중인 챌린지 목록 -->
 	<select id="mcList"
 		resultType="com.co.algomoko.challenge.domain.MyChallengeVO">
 	<![CDATA[select *
-	from challenge a, my_challenge b
-	where a.cno = b.cno2 and b.cper<100]]>
+			 from challenge a, my_challenge b 
+			 where (a.cno = b.cno2 and b.mid = #{mid} and b.cper < 100 and b.edate > sysdate) ]]>
 	</select>
 	<!-- 완료한 챌린지 목록 -->
 	<select id="eList"
 		resultType="com.co.algomoko.challenge.domain.MyChallengeVO">
 	<![CDATA[select *
-	from challenge a, my_challenge b
-	where a.cno = b.cno2 and b.cper=100 ]]>
+			 from challenge a, my_challenge b
+			 where (a.cno = b.cno2 and b.mid = #{mid} and b.cper >= 100) 
+			 	or (a.cno = b.cno2 and b.mid = #{mid} and b.edate <= sysdate)
+			 	or (a.cno = b.cno2 and b.mid = #{mid} and b.cper >= 100 and b.edate <= sysdate)]]>
 	</select>
 	<!-- 진행중인 챌린지 상세 -->
 	<select id="dList"
@@ -78,41 +80,41 @@
 	</select>
 	<!-- 챌린지 간소화인증 이동 -->
 	<select id="getd"
-		resultType="com.co.algomoko.challenge.domain.MyChallengeVO">
+		resultType="com.co.algomoko.challenge.domain.MyChallengeVO" parameterType = "map">
 		select *
 		from my_challenge
-		where cno2 = #{cno2}
+		where cno2 = #{cno2} and mid = #{mid}
 	</select>
 
 	<!-- 챌린지 간소화인증 -->
 	<insert id="valid"
-		parameterType="com.co.algomoko.challenge.domain.ChallengeValidationVO">
-		insert into challenge_validation (cvno, cno3, cvdate, round, attyn, vcon)
-		values(cvno.nextval, #{cno}, sysdate, #{round}, '1', #{vcon})
+		parameterType="map">
+		insert into challenge_validation (cvno, cno3, cvdate, round, attyn, vcon, mid)
+		values(cvno.nextval, #{cno}, sysdate, #{round}, '1', #{vcon}, #{mid})
 	</insert>
 
 	<!-- 오늘 일차 구하기 -->
-	<select id="getRound" parameterType="int" resultType="int">
-		select ceil(sysdate-to_date(a.sdate, 'YYYY-MM-DD'))
+	<select id="getRound" parameterType="map" resultType="int">
+		select ceil(to_date(sysdate, 'yyyy-mm-dd')-to_date(a.sdate, 'YYYY-MM-DD'))
 		from my_challenge a, challenge b
-		where a.cno2 = b.cno and a.cno2 = #{cno}
+		where a.cno2 = b.cno and a.cno2 = #{cno} and a.mid =#{mid}
 	</select>
 
 	<!-- 인증 갯수 구하기 -->
-	<select id="getCertiCount" parameterType="int" resultType="int">
+	<select id="getCertiCount" parameterType="map" resultType="int">
 		select count(*)
 		from challenge_validation
-		where cno3 = #{cno}
+		where cno3 = #{cno} and mid = #{mid}
 	</select>
 
 	<!-- 이행률 업데이트 -->
-	<update id="cperUpdate" parameterType="int">
+	<update id="cperUpdate" parameterType="map">
 		update my_challenge
 		set cper = #{cper}
-		where cno2 = #{cno}
+		where cno2 = #{cno} and mid = #{mid}
 	</update>
 
-	<!-- 인증 중복 방지 -->
+	<!-- 인증 중복 체크 -->
 	<select id="getDup" parameterType="int">
 		select *
 		from challenge_validation
