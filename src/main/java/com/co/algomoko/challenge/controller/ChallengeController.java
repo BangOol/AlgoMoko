@@ -174,7 +174,7 @@ public class ChallengeController {
 			vVO.setVcon(vcon);
 			vVO.setMid(mid);
 			System.out.println("번호:" + vVO.getCno() + " 내용 : " + vcon + "아이디 : " + mid);			
-			
+			//
 			// 챌린지인증
 			dao.valid(vVO);
 			
