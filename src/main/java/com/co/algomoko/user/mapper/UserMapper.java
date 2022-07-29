@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.co.algomoko.user.domain.Account;
 import com.co.algomoko.user.domain.UserVO;
@@ -33,6 +34,6 @@ public interface UserMapper {
 	
 	//임시 비밀번호로 변경 
 	
-	public void updatepw(String mid, String encodepw);
+	public void updatepw(@Param("mid") String mid,@Param("mpw") String encodepw);
 
 }
