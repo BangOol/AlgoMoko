@@ -141,10 +141,10 @@ public class UserController {
 	
 	//임시비밀번호 전송
 	@PostMapping("/findPw")
-	public String findPw(@RequestParam("mid") String mid) throws Exception{
+	public String findPw(@RequestParam(value ="mid",required=false) String mid) throws Exception{
 		System.out.println("임시비밀번호 발송:"+ mid);
 		userService.sendpw(mid);
-		return "contents/main";
+		return "contents/login/findAccount";
 	}
 	//아이디 찾기 이동
 //    @GetMapping("/member/find_id")

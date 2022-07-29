@@ -32,13 +32,22 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:300&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.css" rel="stylesheet">  
-
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <link rel="stylesheet" href="/StyleCards.css"/>
   
     <link rel="stylesheet" href="/resources/demos/style.css">
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+ 
+    
+    
     <script>
+    
+        
+    
+    
+    
+    
     $( function() {
       $( "#datepicker" ).datepicker({
         dateFormat: 'yy-mm-dd',
@@ -53,6 +62,9 @@
   yearSuffix: '년'
       })
     } );
+    
+    
+    
     </script>
 </head>
 
@@ -159,7 +171,7 @@
                                   <tr id="recal">
                                   	  <th class="shoping__product" style="text-align:center;">총 칼로리</th>
                                       <th class="shoping__product" style="text-align:center;">일일 칼로리</th>
-                                      
+                                      <th></th>
                                   </tr>
                               </thead>
                               
@@ -186,9 +198,11 @@
                                           
                                           <td th:text="${tcal}" id="daycal" class="shoping__product" style="text-align:center;">
                                           </td>
+                                          <td></td>
                                           
                                   </tr>
-                             
+                                  
+                                  
                              
                              
                              
@@ -221,11 +235,13 @@
 					var concon = $("#concon");
 					if(a<=b){
 						$("#recal").append($("<th>").addClass('shoping__product').html("비교").css("text-align", "center"))
+						
 						$("#concon").append($("<td>").addClass('shoping__product').html("적당히 먹었네").css("text-align", "center"))
 						
 						//잘먹었다
 					}else{
 						$("#recal").append($("<th>").addClass('shoping__product').html("비교").css("text-align", "center"))
+						
 						$("#concon").append($("<td>").addClass('shoping__product').html("줜나 처먹었네").css("text-align", "center"))
 					}
 			
@@ -259,6 +275,7 @@
       })  	
         
     </script>
+    
     <!-- Js Plugins -->
     <script src="/js/jquery-3.3.1.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
