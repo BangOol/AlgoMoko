@@ -288,9 +288,7 @@
   
 
 
-   var gin;
-   var gic;
-   var gia;
+  
     const body = document.querySelector('body');
     const modal = document.querySelector('.modal');
 
@@ -337,7 +335,7 @@
             
             var ddd = aaa * zzz;
             
-            console.log(잘자);
+            console.log(zzz);
                $(bbb).val(ddd);
                result()
          })
@@ -390,6 +388,7 @@
          })
          const closeBtn = modal.querySelector(".modal_c")
          closeBtn.addEventListener("click", e => {
+			jepoom.refreshLayout();
             modal.style.display = "none";
             body.style.overflow = 'auto';
          })
@@ -414,7 +413,7 @@
                jepoom.resetData(response)
                jepoom.on('click', e => {
                   var rok = e.rowKey
-                  gin = jepoom.getRow(rok).ing
+                 gin = jepoom.getRow(rok).ing
                   gic = jepoom.getRow(rok).cal
                   gia = jepoom.getRow(rok).amount
 
@@ -442,7 +441,7 @@
                   
                   var ddd = aaa * zzz;
                   
-                  console.log(잘자);
+                  console.log(zzz);
                      $(bbb).val(ddd);
                      result()
                   

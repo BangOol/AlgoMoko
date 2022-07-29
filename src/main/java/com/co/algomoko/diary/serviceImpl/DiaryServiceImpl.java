@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.co.algomoko.diary.domain.DiaryVO;
+import com.co.algomoko.diary.domain.DiaryVO2;
 import com.co.algomoko.diary.domain.RecipeVO;
 import com.co.algomoko.diary.mapper.DiaryMapper;
 import com.co.algomoko.diary.service.DiaryService;
@@ -133,6 +134,13 @@ public class DiaryServiceImpl implements DiaryService {
 	public void rededelete(RecipeVO recipeVO) {
 		
 	}
+
+	@Override
+	public List<DiaryVO2> resultCal1(DiaryVO2 diaryVO2) {
+		return diaryMapper.resultCal1(diaryVO2);
+	}
+
+	
 
 	
 
