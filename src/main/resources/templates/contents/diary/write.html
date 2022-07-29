@@ -18,8 +18,8 @@
         <link href="img/favicon.ico" rel="icon">
 
 <link
-	href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap"
-	rel="stylesheet">
+   href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap"
+   rel="stylesheet">
 
 <!-- Css Styles -->
 <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
@@ -120,7 +120,7 @@ span {
    margin-top: -10px;
 }
 .thth{
-		width:50px
+      width:50px
 }
 </style>
 
@@ -141,31 +141,31 @@ span {
     <button type="button" id="btnmod dialog" class="btn btn-primary blog__btn">검색</button>
     <div id="dialog" title="재료 검색"></div>
     <!-- 모달창 시작 -->
-	<div class="modal">
-		<div class="modal1_body">
-			<div class="modal_title">
-				<input type="text" id = "textex"><button id="btnbtn" name="btnbtn" class="btn btn-primary">검색</button>
-			<div class="modal_content">
-			
-			</div>
-			</div>
-				 <!-- 제품모달 그리드 -->
+   <div class="modal">
+      <div class="modal1_body">
+         <div class="modal_title">
+            <input type="text" id = "textex"><button id="btnbtn" name="btnbtn" class="btn btn-primary">검색</button>
+         <div class="modal_content">
+         
+         </div>
+         </div>
+             <!-- 제품모달 그리드 -->
             <div class="container-fluid px-4">
 
                   <div id="gridpro"></div>
                <div class="modal_btn">
-				<button id="modalbtn" class="modal_s">등록</button>
-				<button class="modal_c">취소</button>
-			</div>
+            <button id="modalbtn" class="modal_s">등록</button>
+            <button class="modal_c">취소</button>
+         </div>
             </div>
          </div>
       </div>
-	</div>
-	</div>
-				
-				
-			
-	<!-- 모달창 종료 -->
+   </div>
+   </div>
+            
+            
+         
+   <!-- 모달창 종료 -->
     
     
     
@@ -284,19 +284,19 @@ span {
 
 <script>
 
-	  
+     
          
               
   
 
 
-	var gin;
-	var gic;
-	var gia;
+   var gin;
+   var gic;
+   var gia;
     const body = document.querySelector('body');
     const modal = document.querySelector('.modal');
 
-	/*제품정보 그리드*/
+   /*제품정보 그리드*/
             const giupData = [];
 
 
@@ -326,134 +326,153 @@ span {
                } ]
             });
 
-		$(function () {
-			
+      $(function () {
+         
+         $(".thth3").on("keyup", function () {
+            var aaa = $(this).val();
+            var bbb = $(this).parent().prev().children();
+            var ccc = $(this).parent().prev().children().val();
+            var zzz = $(this).parent().next().children().val();
+            
+            
+            var ddd = aaa * zzz;
+            
+            console.log(잘자);
+               $(bbb).val(ddd);
+               result()
+            
+         })
 
-			function result() {
-				
-				
-					var sum = 0;
-				$(".thth2").each(function () {
-					sum += Number($(this).val());
-				});
-
-
-				$("#seipSum").val(sum);
-
-			}
-
-			result()
-
-
-
-
-
-			$(".icon_close").on("click", function () {
-
-				$(this).closest("tr").remove();
-
-				result()
-				
+         function result() {
+            
+            
+               var sum = 0;
+            $(".thth2").each(function () {
+               sum += Number($(this).val());
+            });
 
 
+            $("#seipSum").val(sum);
 
-			})
+         }
 
-
-
-
-
-			$('.blog__btn').click((e) => {
-				jepoom.refreshLayout();
-				modal.style.display = "flex";
-				body.style.overflow = 'hidden';
-			})
-			const closeBtn = modal.querySelector(".modal_c")
-			closeBtn.addEventListener("click", e => {
-				modal.style.display = "none";
-				body.style.overflow = 'auto';
-			})
+         result()
 
 
 
 
 
-			/*음식조회*/
-			$("#btnbtn").on("click", function () {
-				var btnbtn = $('#textex').val();
-				console.log(btnbtn);
-				$.ajax({
-					url: '/diary/flist',
-					type: 'GET', // == method
-					data: {
-						btnbtn
-					},
+         $(".icon_close").on("click", function () {
 
-				}).done(function (response) {
-					jepoom.refreshLayout();
-					jepoom.resetData(response)
-					jepoom.on('click', e => {
-						var rok = e.rowKey
-						gin = jepoom.getRow(rok).ing
-						gic = jepoom.getRow(rok).cal
-						gia = jepoom.getRow(rok).amount
+            $(this).closest("tr").remove();
 
-					})
-				})
+            result()
+            
+
+
+
+         })
 
 
 
 
 
-				$("#modalbtn").on("click", function () {
-					var tbody = $('#tbody1');
-
-					var tr = $('<tr>');
-					var th1 = $('<th>').append($('<input>').val(gin).addClass('thth1').attr('type', 'text').attr('name', 'ddname'));
-					var th2 = $('<th>').append($('<input>').val(gic).addClass('thth2').attr('type', 'text').attr('name', 'cal'));
-					var th3 = $('<th>').append($('<input>').val(gia).addClass('thth3').attr('type', 'text').attr('name', 'amount'));
-					$(".thth3").on("keyup", function () {
-						var aaa = $(this).val();
-						var bbb = $(this).parent().prev().children();
-						var ccc = $(this).parent().prev().children().val();
-						var ddd = aaa * ccc;
-					      console.log($(this));
-					      $(bbb).val(ddd);
-						
-					})
-					var td4 = $('<td>').addClass('shoping__cart__item__close');
-					var button = $('<button>').addClass('icon_close');
-					var td5 = $(td4).append(button);
-					button.on("click", function () {
-						console.log($(this));
-						$(this).closest("tr").remove();
-						result()
-					})
-
-
-					var b = $(tr).append(th1, th2, th3, td5);
-
-					var d = $(tbody).append(b);
-
-					result()
-
-				})
-
-
-
-			})
-
-
-		})
-
-		
+         $('.blog__btn').click((e) => {
+            jepoom.refreshLayout();
+            modal.style.display = "flex";
+            body.style.overflow = 'hidden';
+         })
+         const closeBtn = modal.querySelector(".modal_c")
+         closeBtn.addEventListener("click", e => {
+            modal.style.display = "none";
+            body.style.overflow = 'auto';
+         })
 
 
 
 
 
+         /*음식조회*/
+         $("#btnbtn").on("click", function () {
+            var btnbtn = $('#textex').val();
+            console.log(btnbtn);
+            $.ajax({
+               url: '/diary/flist',
+               type: 'GET', // == method
+               data: {
+                  btnbtn
+               },
 
-	</script> 
+            }).done(function (response) {
+               jepoom.refreshLayout();
+               jepoom.resetData(response)
+               jepoom.on('click', e => {
+                  var rok = e.rowKey
+                  gin = jepoom.getRow(rok).ing
+                  gic = jepoom.getRow(rok).cal
+                  gia = jepoom.getRow(rok).amount
+
+               })
+            })
+
+
+
+
+
+            $("#modalbtn").on("click", function () {
+               var tbody = $('#tbody1');
+
+               var tr = $('<tr>');
+               var th1 = $('<th>').append($('<input>').val(gin).addClass('thth1').attr('type', 'text').attr('name', 'ddname'));
+               var th2 = $('<th>').append($('<input>').val(gic).addClass('thth2').attr('type', 'text').attr('name', 'cal'));
+               var th3 = $('<th>').append($('<input>').val(gia).addClass('thth3').attr('type', 'text').attr('name', 'amount'));
+               $(".thth3").on("keyup", function () {
+                  var aaa = $(this).val();
+                  var bbb = $(this).parent().prev().children();
+                  var ccc = $(this).parent().prev().children().val();
+                  var zzz = $(this).parent().next().children().val();
+                  
+                  
+                  var ddd = aaa * zzz;
+                  
+                  console.log(잘자);
+                     $(bbb).val(ddd);
+                     result()
+                  
+               })
+               var td4 = $('<td>').addClass('shoping__cart__item__close');
+               var button = $('<button>').addClass('icon_close');
+               var td5 = $(td4).append(button);
+               button.on("click", function () {
+                  console.log($(this));
+                  $(this).closest("tr").remove();
+                  result()
+               })
+
+
+               var b = $(tr).append(th1, th2, th3, td5);
+
+               var d = $(tbody).append(b);
+
+               result()
+
+            })
+
+
+
+         })
+
+
+      })
+
+      
+
+
+
+
+
+
+   </script> 
     
 
 

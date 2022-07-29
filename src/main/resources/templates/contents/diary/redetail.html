@@ -197,7 +197,9 @@
                         <th>
                         <input th:value="${redetail.aamount}" class="thth3" type="text" name="aamount">
                         </th>
-                        
+                        <th>
+                  <input th:value="${redetail.cal}/${redetail.aamount}" type="hidden">
+                  </th>
                         
                         <td class="shoping__cart__item__close"><button class="icon_close"></td>
                      </tr>
@@ -316,7 +318,25 @@
 
       $(function () {
          
-
+      
+         $(".thth3").on("keyup", function () {
+            var aaa = $(this).val();
+            var bbb = $(this).parent().prev().children();
+            var ccc = $(this).parent().prev().children().val();
+            var zzz = $(this).parent().next().children().val();
+            
+            
+            var ddd = aaa * zzz;
+            
+            console.log(잘자);
+               $(bbb).val(ddd);
+               result()
+            
+         })
+         
+         
+         
+         
          function result() {
             
             
@@ -394,36 +414,53 @@
 
 
             $("#modalbtn").on("click", function () {
-               var tbody = $('#tbody1');
+            var tbody = $('#tbody1');
 
-               var tr = $('<tr>');
-               var th1 = $('<th>').append($('<input>').val(gin).addClass('thth1').attr('type', 'text').attr('name', 'fing'));
-               var th2 = $('<th>').append($('<input>').val(gic).addClass('thth2').attr('type', 'text').attr('name', 'cal'));
-               var th3 = $('<th>').append($('<input>').val(gia).addClass('thth3').attr('type', 'text').attr('name', 'amount'));
-               var td4 = $('<td>').addClass('shoping__cart__item__close');
-               var button = $('<button>').addClass('icon_close');
-               var td5 = $(td4).append(button);
-               button.on("click", function () {
-                  console.log($(this));
-                  $(this).closest("tr").remove();
+            var tr = $('<tr>');
+            var th1 = $('<th>').append($('<input>').val(gin).addClass('thth1').attr('type', 'text').attr('name', 'ddname'));
+            var th2 = $('<th>').append($('<input>').val(gic).addClass('thth2').attr('type', 'text').attr('name', 'cal'));
+            var th3 = $('<th>').append($('<input>').val(gia).addClass('thth3').attr('type', 'text').attr('name', 'amount'));
+            var thhi = $('<th>').append($('<input>').val(gic).addClass('thth2').attr('type', 'hidden'));
+            $(".thth3").on("keyup", function () {
+               var aaa = $(this).val();
+               var bbb = $(this).parent().prev().children();
+               var ccc = $(this).parent().prev().children().val();
+               var zzz = $(this).parent().next().children().val();
+               
+               
+               var ddd = aaa * zzz;
+               
+               console.log(잘자);
+                  $(bbb).val(ddd);
                   result()
-               })
-
-
-               var b = $(tr).append(th1, th2, th3, td5);
-
-               var d = $(tbody).append(b);
-
-               result()
-
+               
             })
+                        
+            var td4 = $('<td>').addClass('shoping__cart__item__close');
+            var button = $('<button>').addClass('icon_close');
+            var td5 = $(td4).append(button);
+            button.on("click", function () {
+               console.log($(this));
+               $(this).closest("tr").remove();
+               result()
+            })
+            
 
 
+            var b = $(tr).append(th1, th2, th3,thhi,td5);
+
+            var d = $(tbody).append(b);
+
+            result()
 
          })
 
 
+
       })
+
+
+   })
       var index = 0;
       $(".trre").on("click", function(){
          index = $(this).closest('tr').index();

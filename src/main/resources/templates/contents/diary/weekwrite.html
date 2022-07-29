@@ -282,19 +282,19 @@
 
 <script>
 
-	  
+     
          
               
   
 
 
-	var gin;
-	var gic;
-	var gia;
+   var gin;
+   var gic;
+   var gia;
     const body = document.querySelector('body');
     const modal = document.querySelector('.modal');
 
-	/*제품정보 그리드*/
+   /*제품정보 그리드*/
             const giupData = [];
 
 
@@ -324,161 +324,167 @@
                } ]
             });
 
-		$(function () {
-			
-			
-			
-			$(".thth3").on("keyup", function () {
-				var aaa = $(this).val();
-				var bbb = $(this).parent().prev().children();
-				var ccc = $(this).parent().prev().children().val();
-				  
-			      var ddd = aaa * ccc;
-			      console.log(ccc);
-			      $(bbb).val(ddd);
-				
+      $(function () {
+         
+         
+         
+         $(".thth3").on("keyup", function () {
+            var aaa = $(this).val();
+            var bbb = $(this).parent().prev().children();
+            var ccc = $(this).parent().prev().children().val();
+            var zzz = $(this).parent().next().children().val();
+            
+            
+            var ddd = aaa * zzz;
+            
+            console.log(잘자);
+               $(bbb).val(ddd);
+               result()
+         })
+         
+         
+          
+         
+         
+         
+         
+
+         function result() {
+            
+            
+               var sum = 0;
+            $(".thth2").each(function () {
+               sum += Number($(this).val());
+            });
 
 
+            $("#seipSum").val(sum);
 
-			})
-			
-			
-			 
-			
-			
-			
-			
+         }
 
-			function result() {
-				
-				
-					var sum = 0;
-				$(".thth2").each(function () {
-					sum += Number($(this).val());
-				});
-
-
-				$("#seipSum").val(sum);
-
-			}
-
-			result()
-
-
-
-
-
-			$(".icon_close").on("click", function () {
-
-				$(this).closest("tr").remove();
-
-				result()
-				
-
-
-
-			})
+         result()
 
 
 
 
 
-			$('.blog__btn').click((e) => {
-				jepoom.refreshLayout();
-				modal.style.display = "flex";
-				body.style.overflow = 'hidden';
-			})
-			const closeBtn = modal.querySelector(".modal_c")
-			closeBtn.addEventListener("click", e => {
-				modal.style.display = "none";
-				body.style.overflow = 'auto';
-			})
+         $(".icon_close").on("click", function () {
+
+            $(this).closest("tr").remove();
+
+            result()
+            
+
+
+
+         })
 
 
 
 
 
-			/*음식조회*/
-			$("#btnbtn").on("click", function () {
-				var btnbtn = $('#textex').val();
-				console.log(btnbtn);
-				$.ajax({
-					url: '/diary/flist',
-					type: 'GET', // == method
-					data: {
-						btnbtn
-					},
-
-				}).done(function (response) {
-					jepoom.refreshLayout();
-					jepoom.resetData(response)
-					jepoom.on('click', e => {
-						var rok = e.rowKey
-						gin = jepoom.getRow(rok).ing
-						gic = jepoom.getRow(rok).cal
-						gia = jepoom.getRow(rok).amount
-
-					})
-				})
+         $('.blog__btn').click((e) => {
+            jepoom.refreshLayout();
+            modal.style.display = "flex";
+            body.style.overflow = 'hidden';
+         })
+         const closeBtn = modal.querySelector(".modal_c")
+         closeBtn.addEventListener("click", e => {
+            modal.style.display = "none";
+            body.style.overflow = 'auto';
+         })
 
 
 
 
 
-				$("#modalbtn").on("click", function () {
-					var tbody = $('#tbody1');
+         /*음식조회*/
+         $("#btnbtn").on("click", function () {
+            var btnbtn = $('#textex').val();
+            console.log(btnbtn);
+            $.ajax({
+               url: '/diary/flist',
+               type: 'GET', // == method
+               data: {
+                  btnbtn
+               },
 
-					var tr = $('<tr>');
-					var th1 = $('<th>').append($('<input>').val(gin).addClass('thth1').attr('type', 'text').attr('name', 'ddname'));
-					var th2 = $('<th>').append($('<input>').val(gic).addClass('thth2').attr('type', 'text').attr('name', 'cal'));
-					var th3 = $('<th>').append($('<input>').val(gia).addClass('thth3').attr('type', 'text').attr('name', 'amount'));
-					$(".thth3").on("keyup", function () {
-						var aaa = $(this).val();
-						var bbb = $(this).parent().prev().children();
-						var ccc = $(this).parent().prev().children().val();
-						var ddd = aaa * ccc;
-					      console.log($(this));
-					      $(bbb).val(ddd);
-						
-					})
-									
-					var td4 = $('<td>').addClass('shoping__cart__item__close');
-					var button = $('<button>').addClass('icon_close');
-					var td5 = $(td4).append(button);
-					button.on("click", function () {
-						console.log($(this));
-						$(this).closest("tr").remove();
-						result()
-					})
-					
+            }).done(function (response) {
+               jepoom.refreshLayout();
+               jepoom.resetData(response)
+               jepoom.on('click', e => {
+                  var rok = e.rowKey
+                  gin = jepoom.getRow(rok).ing
+                  gic = jepoom.getRow(rok).cal
+                  gia = jepoom.getRow(rok).amount
 
+               })
+            })
 
-					var b = $(tr).append(th1, th2, th3, td5);
-
-					var d = $(tbody).append(b);
-
-					result()
-
-				})
+            
 
 
 
-			})
+            $("#modalbtn").on("click", function () {
+               var tbody = $('#tbody1');
+
+               var tr = $('<tr>');
+               var th1 = $('<th>').append($('<input>').val(gin).addClass('thth1').attr('type', 'text').attr('name', 'ddname'));
+               var th2 = $('<th>').append($('<input>').val(gic).addClass('thth2').attr('type', 'text').attr('name', 'cal'));
+               var th3 = $('<th>').append($('<input>').val(gia).addClass('thth3').attr('type', 'text').attr('name', 'amount'));
+               var thhi = $('<th>').append($('<input>').val(gic).attr('type', 'hidden'));
+               $(".thth3").on("keyup", function () {
+                  var aaa = $(this).val();
+                  var bbb = $(this).parent().prev().children();
+                  var ccc = $(this).parent().prev().children().val();
+                  var zzz = $(this).parent().next().children().val();
+                  
+                  
+                  var ddd = aaa * zzz;
+                  
+                  console.log(잘자);
+                     $(bbb).val(ddd);
+                     result()
+                  
+               })
+                           
+               var td4 = $('<td>').addClass('shoping__cart__item__close');
+               var button = $('<button>').addClass('icon_close');
+               var td5 = $(td4).append(button);
+               button.on("click", function () {
+                  console.log($(this));
+                  $(this).closest("tr").remove();
+                  result()
+               })
+               
 
 
-		})
+               var b = $(tr).append(th1, th2, th3,thhi,td5);
 
-		function diaryde() {
-			$("#frm").attr("action", "delete").submit();
+               var d = $(tbody).append(b);
 
-		}
+               result()
 
-
-
+            })
 
 
 
-	</script>
+         })
+
+
+      })
+
+      function diaryde() {
+         $("#frm").attr("action", "delete").submit();
+
+      }
+
+
+
+
+
+
+   </script>
     
 
 
