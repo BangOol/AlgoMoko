@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper
-	namespace="com.co.algomoko.challenge.mapper.ChallengeMapper">
+<mapper namespace="com.co.algomoko.challenge.mapper.ChallengeMapper">
+
 	<!-- 챌린지 조회 -->
 	<select id="getPage"
 		resultType="com.co.algomoko.challenge.domain.ChallengeVO">
@@ -10,6 +10,7 @@
 		where cno = #{cno}
 		order by ctitle
 	</select>
+	
 	<!-- 챌린지 목록 -->
 	<select id="cList"
 		resultType="com.co.algomoko.challenge.domain.ChallengeVO">
@@ -19,6 +20,7 @@
 		 		   order by ctitle)
 			 where rownum <=6]]>
 	</select>
+	
 	<!-- 챌린지 작성 -->
 	<insert id="cInsert"
 		parameterType="com.co.algomoko.challenge.domain.ChallengeVO">
@@ -28,6 +30,7 @@
 		#{filepath},
 		#{filename})
 	</insert>
+	
 	<!-- 챌린지 수정 -->
 	<update id="cUpdate"
 		parameterType="com.co.algomoko.challenge.domain.ChallengeVO">
@@ -38,6 +41,7 @@
 		where
 		cno = #{cno}
 	</update>
+	
 	<!-- 챌린지 삭제 -->
 	<delete id="cDelete" parameterType="int">
 		delete
@@ -45,12 +49,14 @@
 		where cno
 		= #{cno}
 	</delete>
+	
 	<!-- 진행중인 챌린지 포기 -->
 	<delete id="deleting" parameterType="map">
 		delete
 		from my_challenge
-		where cno2 = #{cno2} and mid = #{mid}
+		where cno2 = #{cno2} and mid = #{mid} and ck = 0
 	</delete>
+	
 	<!-- 진행중인 챌린지 추가 -->
 	<insert id="mcInsert" parameterType="map">
 		insert into my_challenge
@@ -58,51 +64,35 @@
 		values(mycno.nextval, #{cno}, #{mid},
 		sysdate, sysdate+#{cdday})
 	</insert>
+	
 	<!--진행중인 챌린지 목록 -->
 	<select id="mcList"
 		resultType="com.co.algomoko.challenge.domain.MyChallengeVO">
 	<![CDATA[select *
 			 from challenge a, my_challenge b 
-			 where (a.cno = b.cno2 and b.mid = #{mid} and b.cper < 100 and b.edate > sysdate) ]]>
+			 where (a.cno = b.cno2 and b.mid = #{mid} and ck=0 and b.cper < 100 and b.edate > sysdate) ]]>
 	</select>
+	
 	<!-- 완료한 챌린지 목록 -->
 	<select id="eList"
 		resultType="com.co.algomoko.challenge.domain.MyChallengeVO">
 	<![CDATA[select *
 			 from challenge a, my_challenge b
-			 where (a.cno = b.cno2 and b.mid = #{mid} and b.cper >= 100) 
-			 	or (a.cno = b.cno2 and b.mid = #{mid} and b.edate <= sysdate)
-			 	or (a.cno = b.cno2 and b.mid = #{mid} and b.cper >= 100 and b.edate <= sysdate)]]>
+			 where a.cno = b.cno2 and b.mid = #{mid} and ck=1 and b.cper >= 100 or b.edate <= sysdate]]>
 	</select>
-	<!-- 진행중인 챌린지 상세 -->
-	<select id="dList"
-		resultType="com.co.algomoko.challenge.domain.ChallengeValidationVO">
-		select *
-		from challenge a
-		join my_challenge b
-		on a.cno =
-		b.cno2
-		left outer join challenge_validation c
-		on b.cno2 = c.cno3
-		where
-		a.cno = #{cno}
-	</select>
+	
 	<!-- 챌린지 간소화인증 이동 -->
-	<select id="getd"
-		resultType="com.co.algomoko.challenge.domain.MyChallengeVO"
-		parameterType="map">
+	<select id="getd" resultType="com.co.algomoko.challenge.domain.MyChallengeVO" parameterType="map">
 		select *
 		from my_challenge
-		where cno2 = #{cno2} and mid =
-		#{mid}
+		where cno2 = #{cno2} and mid = #{mid} and ck =0  and mycno = #{mycno}
 	</select>
 
 	<!-- 챌린지 간소화인증 -->
 	<insert id="valid" parameterType="map">
 		insert into
 		challenge_validation (cvno, cno3, cvdate, round, attyn, vcon, mid)
-		values(cvno.nextval, #{cno}, to_date(sysdate,'yyyy-mm-dd'), #{round},
-		'1', #{vcon}, #{mid})
+		values(cvno.nextval, #{cno}, to_date(sysdate,'yyyy-mm-dd'), #{round}, '1', #{vcon}, #{mid})
 	</insert>
 
 	<!-- 오늘 일차 구하기 -->
@@ -125,7 +115,7 @@
 		update my_challenge
 		set
 		cper = #{cper}
-		where cno2 = #{cno} and mid = #{mid}
+		where cno2 = #{cno} and mid = #{mid} and ck=0
 	</update>
 
 	<!-- 인증 중복 체크 -->
@@ -136,7 +126,7 @@
 	</select>
 
 	<!-- ck 업데이트 -->
-	<update id="ck" parameterType="int">
+	<update id="ck" parameterType="map">
 		update my_challenge
 		set ck = 1
 		where cno2 =#{cno} and mid=#{mid}

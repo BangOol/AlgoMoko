@@ -16,7 +16,7 @@ public interface ChallengeMapper {
 	public ChallengeVO getPage(int cno);
 
 	// 챌린지 인증 화면
-	public List<MyChallengeVO> getd(int cno2, String mid);
+	public List<MyChallengeVO> getd(int cno2, String mid, int ck, int mycno);
 
 	// 챌린지 검색
 	public List<ChallengeVO> cSearch(ChallengeVO cVO);
@@ -64,6 +64,6 @@ public interface ChallengeMapper {
 	public int getDup(int cno, String cvdate, String mid);
 	
 	// 완료된 챌린지로 이동
-	public List<MyChallengeVO> ck();
+	public int ck(int cno, int ck, String mid);
 
 }

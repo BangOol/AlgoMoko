@@ -80,8 +80,8 @@ public class ChallengeServiceImpl implements ChallengeService {
 
 	// 챌린지 인증 페이지 이동
 	@Override
-	public List<MyChallengeVO> getd(int cno2, String mid) {
-		return mapper.getd(cno2, mid);
+	public List<MyChallengeVO> getd(int cno2, String mid, int ck, int mycno) {
+		return mapper.getd(cno2, mid, ck, mycno);
 	}
 
 	// 챌린지 인증
@@ -127,10 +127,11 @@ public class ChallengeServiceImpl implements ChallengeService {
 	}
 
 	@Override
-	public List<MyChallengeVO> ck() {
-		mapper.ck();
-		return null;
+	public int ck(int cno, int ck, String mid) {
+		return mapper.ck(cno, ck, mid);
 	}
+
+
 
 	
 

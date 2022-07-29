@@ -87,7 +87,7 @@
 										<!-- <a th:href="@{/challenge/challengeDetail(cno=${mc.cno2})}" class="blog__btn">인증하기 <span class="arrow_right"></span></a> -->
 										<div style="margin-left: 152px;">
 											<a sec:authorize="hasAuthority('u1')"
-												th:href="@{/challenge/cValidation(cno2=${mc.cno2})}"
+												th:href="@{/challenge/cValidation(cno2=${mc.cno2}, mycno=${mc.mycno})}"												
 												class="blog__btn">인증하기</a> <a
 												id="ff" sec:authorize="hasAuthority('u1')"
 												th:href="@{/challenge/deleting(cno2=${mc.cno2})}"
