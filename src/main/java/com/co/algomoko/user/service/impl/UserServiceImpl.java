@@ -137,8 +137,9 @@ public class UserServiceImpl implements UserService{
 		//예외처리
        
         //전송 후 암호화후 db에 저장.
-        UserVO vo = null;
-        @SuppressWarnings("null")
+        //UserVO vo = null;
+        UserVO vo = new UserVO();
+        //@SuppressWarnings("null")
         String encodepw = passwordEncoder.encode(pw);
         System.out.println("비밀번호 발급대상: " + mid);
         System.out.println("암호화: " +encodepw);
