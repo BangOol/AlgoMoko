@@ -28,10 +28,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.co.algomoko.admin.domain.AdminVO;
 import com.co.algomoko.diary.domain.DiaryVO;
 import com.co.algomoko.diary.domain.DiaryVO1;
+import com.co.algomoko.diary.domain.DiaryVO2;
 import com.co.algomoko.diary.domain.RecipeVO;
 import com.co.algomoko.diary.domain.ReqVO;
 import com.co.algomoko.diary.mapper.DiaryMapper;
@@ -161,7 +163,7 @@ public class DiaryController {
 		  
 		  dao.reinsert(recipeVO);
 
-               return "contents/diary/succ"; 
+               return "redirect:/diary/myre"; 
 
 	}
    @RequestMapping("succ")
@@ -200,7 +202,7 @@ public class DiaryController {
    @RequestMapping(value="daysic") 
     public String daysic(@RequestParam("date") String date, Model model, DiaryVO diaryVO,Authentication authentication ,HttpServletResponse response)
        throws IOException, ParseException{
-      
+      DiaryVO2 diaryVO2 = new DiaryVO2();
       SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String strDate = date;
       String std = date;
@@ -208,6 +210,9 @@ public class DiaryController {
       UserDetails mid = (UserDetails) authentication.getPrincipal();
       diaryVO.setMid(mid.getUsername());
       diaryVO.setDdate(date1);
+      
+     
+      
       
       diaryVO.setDddo("aa");
       model.addAttribute("aade",dao.detail(diaryVO));
@@ -217,7 +222,30 @@ public class DiaryController {
       model.addAttribute("tcal",dao.tcal(diaryVO.getMid()));
       model.addAttribute("ccde",dao.detail(diaryVO));
       model.addAttribute("std",std);
-      model.addAttribute("resultCal",dao.resultCal(diaryVO));
+      
+      if(dao.resultCal(diaryVO).isEmpty()) {
+    	  diaryVO2.setMid(mid.getUsername());
+    	  diaryVO2.setDdate(date1);
+    	  diaryVO2.setDddo("aa");
+          model.addAttribute("aade",dao.detail(diaryVO));
+          diaryVO2.setDddo("bb");
+          model.addAttribute("bbde",dao.detail(diaryVO));
+          diaryVO2.setDddo("cc");
+          model.addAttribute("tcal",dao.tcal(diaryVO.getMid()));
+          model.addAttribute("ccde",dao.detail(diaryVO));
+          model.addAttribute("std",std);
+          model.addAttribute("resultCal",dao.resultCal1(diaryVO2));
+      }else {
+    	  model.addAttribute("resultCal",dao.resultCal(diaryVO));
+	}
+      
+         	 
+    	    
+      
+      
+      
+      
+      
       
       
       return "contents/diary/daysic";
@@ -316,7 +344,7 @@ public String modifyde(HttpServletResponse response,DiaryVO diaryVO,DiaryVO1 dia
            dao.insertdetail(res);
         }
 
-                return "contents/diary/succ"; 
+                return "redirect:/diary"; 
 
    }
    @RequestMapping("delete")
@@ -327,7 +355,7 @@ public String delete(HttpServletResponse response,DiaryVO diaryVO,Authentication
       dao.detade(diaryVO);
       
       
-                return "contents/diary/succ"; 
+                return "redirect:/diary"; 
 
    }
    @RequestMapping("redelete") 
@@ -340,7 +368,7 @@ public String delete(HttpServletResponse response,DiaryVO diaryVO,Authentication
       dao.rededelete(recipeVO);
       
 
-                return "contents/diary/succ"; 
+                return "redirect:/diary/myre"; 
 
    }
    
@@ -413,7 +441,7 @@ public String delete(HttpServletResponse response,DiaryVO diaryVO,Authentication
 	           dao.insertdetail(res);
 	        }
 
-	                return "contents/diary/succ"; 
+	                return "redirect:/diary"; 
 
    }
    
@@ -441,7 +469,7 @@ public String delete(HttpServletResponse response,DiaryVO diaryVO,Authentication
 		UserDetails mid = (UserDetails) authentication.getPrincipal();
 		recipeVO.setMid(mid.getUsername());
 		recipeVO.setNick(dao.tomem(recipeVO.getMid()));
-		
+		System.out.println(recipeVO);
 		String[] fings = recipeVO.getFing().split(",");
 		List<String> ddnameList = new ArrayList<String>();	
 		DiaryVO res = new DiaryVO();
@@ -457,7 +485,7 @@ public String delete(HttpServletResponse response,DiaryVO diaryVO,Authentication
 			
 			
 		}
-
+		
 		  for(int i=0;i< ddnameList.size();i++) { 
 			  res = dao.fonlist(fings[i]);
 			 
@@ -476,11 +504,11 @@ public String delete(HttpServletResponse response,DiaryVO diaryVO,Authentication
 		  recipeVO.setCarb(carb);
 		  recipeVO.setProt(prot);
 		  recipeVO.setRfat(rfat);
-		 
+		  System.out.println("2");
 		  
 		  dao.reinsert(recipeVO);
 
-               return "contents/diary/succ"; 
+               return "redirect:/diary/myre"; 
 
 	}
    

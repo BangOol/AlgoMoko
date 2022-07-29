@@ -1,6 +1,7 @@
 package com.co.algomoko.diary.service;
 
 import com.co.algomoko.diary.domain.DiaryVO;
+import com.co.algomoko.diary.domain.DiaryVO2;
 import com.co.algomoko.diary.domain.RecipeVO;
 import com.co.algomoko.user.domain.UserVO;
 import com.co.algomoko.user.mapper.UserMapper;
@@ -35,5 +36,6 @@ public interface DiaryService {
 	 public void redeinsert(RecipeVO recipeVO);
 	 public void redelete(RecipeVO recipeVO);
 	 public void rededelete(RecipeVO recipeVO);
+	 public List<DiaryVO2> resultCal1(DiaryVO2 diaryVO2);
 }
 
