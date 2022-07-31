@@ -50,6 +50,8 @@ public class AdminController {
                                @RequestParam(value = "pageSize", defaultValue = "10") int pageSize,
                                @RequestParam(value = "type", defaultValue = "null") String type,
                                @RequestParam(value = "keyword", defaultValue = "null") String keyword) throws Exception{
+
+
         ModelAndView modelAndView = new ModelAndView();
 
 
