@@ -103,5 +103,10 @@
     <select id="TableCount" resultType="int">
         SELECT count(*) FROM
             MEMBERS
+        <choose>
+            <when test = " (!keyword.equals(null))">
+                WHERE NICK LIKE '%'||#{keyword}||'%'
+            </when>
+        </choose>
     </select>
 </mapper>

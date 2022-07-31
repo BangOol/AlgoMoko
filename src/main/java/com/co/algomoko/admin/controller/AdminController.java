@@ -41,7 +41,7 @@ public class AdminController {
     // 관리자 메인 페이지 이동
     @GetMapping("")
     public String moveAdminpage() throws Exception{
-        return "contents/admin/userFormMain";
+        return "contents/admin/userFormMain ";
     }
 
     @GetMapping("UserList")
@@ -52,10 +52,11 @@ public class AdminController {
                                @RequestParam(value = "keyword", defaultValue = "null") String keyword) throws Exception{
         ModelAndView modelAndView = new ModelAndView();
 
-        // 전체 회원 수
-        int listCnt = pagingService.TableCount();
-        //view 단에서 받은 현재 페이지, 페이지 당 출력 페이지 개수, 화면 하단 페이지 사이즈 가져와서 입력.
 
+
+        // 전체 회원 수
+        int listCnt = pagingService.TableCount(keyword);
+        //view 단에서 받은 현재 페이지, 페이지 당 출력 페이지 개수, 화면 하단 페이지 사이즈 가져와서 입력.
         PaginationUser paginationUser = new PaginationUser(currentPage, cntPerPage, pageSize);
         paginationUser.setKeyword(keyword);
         paginationUser.setType(type);
@@ -65,6 +66,7 @@ public class AdminController {
         이전 페이지 존재 여부, 다음 페이지 존재 여부를 확인하고, paginationUser에 넣는다.
         */
         paginationUser.setTotalRecordCount(listCnt);
+
         modelAndView.addObject("pagination", paginationUser); // 값을 paginantion으로 뿌림.
         modelAndView.addObject("Alllist", pagingService.SelectAllList(paginationUser)); // 회원 전체 데이터를 뿌림.
         modelAndView.setViewName("contents/admin/userFormUserlist");
