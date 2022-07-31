@@ -1,11 +1,13 @@
 package com.co.algomoko.diary.serviceImpl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.co.algomoko.diary.domain.DiaryVO;
 import com.co.algomoko.diary.domain.DiaryVO2;
+import com.co.algomoko.diary.domain.Diarypage;
 import com.co.algomoko.diary.domain.RecipeVO;
 import com.co.algomoko.diary.mapper.DiaryMapper;
 import com.co.algomoko.diary.service.DiaryService;
@@ -138,6 +140,16 @@ public class DiaryServiceImpl implements DiaryService {
 	@Override
 	public List<DiaryVO2> resultCal1(DiaryVO2 diaryVO2) {
 		return diaryMapper.resultCal1(diaryVO2);
+	}
+
+	@Override
+	public List<Map<String, Object>> myrecipelist(Diarypage diarypage) throws Exception {
+		return diaryMapper.myrecipelist(diarypage);
+	}
+
+	@Override
+	public int TableCount() throws Exception {
+		return diaryMapper.TableCount();
 	}
 
 	

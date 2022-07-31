@@ -1,12 +1,14 @@
 package com.co.algomoko.diary.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 import com.co.algomoko.diary.domain.DiaryVO;
 import com.co.algomoko.diary.domain.DiaryVO2;
+import com.co.algomoko.diary.domain.Diarypage;
 import com.co.algomoko.diary.domain.RecipeVO;
 
 public interface DiaryMapper {
@@ -33,5 +35,9 @@ public interface DiaryMapper {
 	 public void redeinsert(RecipeVO recipeVO);
 	 public void redelete(RecipeVO recipeVO);
 	 public void rededelete(RecipeVO recipeVO);
-	
+	//Paging
+	    public List<Map<String, Object>> myrecipelist(Diarypage diarypage) throws Exception;
+
+	    //count
+	    public int TableCount() throws Exception;
 }

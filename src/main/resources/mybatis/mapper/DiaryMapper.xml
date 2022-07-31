@@ -27,10 +27,9 @@ where TO_CHAR(a.ddate,'iw')  =TO_CHAr(to_date(sysdate,'yy-MM-dd'),'iw') and a.dd
    GROUP BY a.ddate, a.mid
 </select>
 <select id="resultCal1" resultType="DiaryVO2">
-select trunc(a.ddate) as ddate, a.mid, sum(b.cal) as sumcal, to_char(a.ddate, 'day') as dday , sum(b.carb) as carb, sum(b.prot) as prot, sum(b.fat) fat
-from diary a,diary_detail b
-where TO_CHAR(a.ddate,'iw')  =TO_CHAr(to_date(sysdate,'yy-MM-dd'),'iw') and a.dddo=b.dddo and a.mid = b.mid and TRUNC(a.ddate) = trunc(b.ddate) and trunc(#{ddate})=TRUNC(a.ddate) and b.mid = #{mid}
-   GROUP BY a.ddate, a.mid
+SELECT
+    * FROM diary_detail where mid='exex'
+
 </select>
 
 <select id="detail" resultType="DiaryVO">
@@ -136,5 +135,26 @@ delete recipe_ing
 where mid = #{mid} and rname = #{rname}
 </select>
 
-
+     <select id="myrecipelist" resultType="hashmap">
+        SELECT *
+        FROM (
+        SELECT ROW_NUMBER() OVER(ORDER BY rname DESC) AS
+        ROW_NUM
+        ,rname
+        ,cal
+        ,carb
+        ,prot
+        ,rfat
+        FROM recipe
+        )
+        <if test="firstRecordIndex != null and lastRecordIndex != null">
+            WHERE ROW_NUM BETWEEN #{firstRecordIndex} AND
+            #{lastRecordIndex}
+        </if>
+       
+    </select>
+<select id="TableCount" resultType="int">
+        SELECT count(*) FROM
+            recipe
+    </select>
 </mapper>
