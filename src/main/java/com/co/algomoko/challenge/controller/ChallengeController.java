@@ -165,7 +165,8 @@ public class ChallengeController {
 
 		// 챌린지 인증 중복 체크		 
 		ChallengeValidationVO vVO = new ChallengeValidationVO();
-		// round = 
+		// round :
+		// lstRound : 마지막으로 인증한 일차
 		Integer round = dao.getRound(mycno, mid);
 		Integer lastRound = dao.getLastRound(mycno, mid);
 		if (round != lastRound) {
@@ -196,7 +197,7 @@ public class ChallengeController {
 			}
 			dao.ck(cno2, ck, mid, mycno);
 		} else {
-			ra.addFlashAttribute("msg", "오늘은 이미 인증했습니다.");
+			ra.addFlashAttribute("msg", "오늘은 이미 인증하셨습니다.");
 			return "redirect:/challenge/challenging";
 		}
 		return "redirect:/challenge/challenging";
