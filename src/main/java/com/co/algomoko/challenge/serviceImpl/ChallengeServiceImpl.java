@@ -72,12 +72,6 @@ public class ChallengeServiceImpl implements ChallengeService {
 		return mapper.cSearch(cVO);
 	}
 
-	// 챌린지 인증 페이지
-	@Override
-	public ChallengeValidationVO dList(int cno) {
-		return mapper.dList(cno);
-	}
-
 	// 챌린지 인증 페이지 이동
 	@Override
 	public List<MyChallengeVO> getd(int cno2, String mid, int ck, int mycno) {
@@ -92,20 +86,20 @@ public class ChallengeServiceImpl implements ChallengeService {
 
 	// 일차 구하기
 	@Override
-	public int getRound(int cno, String mid) {
-		return mapper.getRound(cno, mid);
+	public Integer getRound(int mycno, String mid) {
+		return mapper.getRound(mycno, mid);
 	}
 
 	// 인증 갯수 구하기
 	@Override
-	public int getCertiCount(int cno, String mid) {
-		return mapper.getCertiCount(cno, mid);
+	public int getCertiCount(int cno, String mid, int mycno) {
+		return mapper.getCertiCount(cno, mid, mycno);
 	}
 
 	// 이행률 업데이트
 	@Override
-	public int cperUpdate(int cno, int cper, String mid) {
-		return mapper.cperUpdate(cno, cper, mid);
+	public int cperUpdate(int cno, int cper, String mid, int mycno, Integer round) {
+		return mapper.cperUpdate(cno, cper, mid, mycno, round);
 	}
 
 	// 완료된 챌린지
@@ -116,8 +110,8 @@ public class ChallengeServiceImpl implements ChallengeService {
 	
 	// 챌린지 인증 중복 체크
 	@Override
-	public int getDup(int cno, String cvdate, String mid) {
-		return mapper.getDup(cno, cvdate, mid);
+	public int getDup(int cno, String cvdate, String mid, int mycno) {
+		return mapper.getDup(cno, cvdate, mid, mycno);
 	}
 	
 	// 진행중인 챌린지 포기
@@ -125,10 +119,22 @@ public class ChallengeServiceImpl implements ChallengeService {
 	public void deleting(int cno2, String mid) {
 		mapper.deleting(cno2, mid);
 	}
+	
+	// 완료된 챌린지, 진행중인 챌린지 구분
+	@Override
+	public int ck(int cno, int ck, String mid,int mycno) {
+		return mapper.ck(cno, ck, mid, mycno);
+	}
 
 	@Override
-	public int ck(int cno, int ck, String mid) {
-		return mapper.ck(cno, ck, mid);
+	public ChallengeValidationVO dList(int cno) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Integer getLastRound(int mycno, String mid) {
+		return mapper.getLastRound(mycno, mid);
 	}
 
 
