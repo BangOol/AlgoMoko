@@ -123,7 +123,7 @@ public class ChallengeController {
 	@GetMapping("deleting")
 	public String deleting(int cno2, RedirectAttributes ra, Authentication authentication) {
 		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-		String mid = userDetails.getUsername();
+		String mid = userDetails.getUsername();		
 		dao.deleting(cno2, mid);
 		return "redirect:/challenge/challenging";
 	}
@@ -158,35 +158,47 @@ public class ChallengeController {
 
 	// 챌린지 인증
 	@PostMapping("cValidation/certi")
-	public String valid(int cno2, @RequestParam("vcon") String vcon, Authentication at) {
+	public String valid(int cno2, int mycno, @RequestParam("vcon") String vcon, Authentication at, RedirectAttributes ra) {
 		// 로그인 ID 가져오기
 		UserDetails userDetails = (UserDetails) at.getPrincipal();
 		String mid = userDetails.getUsername();
-		// 챌린지 인증 중복 체크
-		
-		// 챌린지 인증
-		ChallengeValidationVO vVO = new ChallengeValidationVO();
-		vVO.setCno(cno2);
-		vVO.setVcon(vcon);
-		vVO.setMid(mid);
-		System.out.println("번호:" + vVO.getCno() + " 내용 : " + vcon + "아이디 : " + mid);		 
-		dao.valid(vVO);
 
-		// 이행률 업데이트
-		ChallengeVO cddayVO = dao.getPage(cno2);
-		System.out.println("전체개수 : " + cddayVO.getCdday());
-		int certiCount = dao.getCertiCount(cno2, mid);
-		System.out.println("인증개수 : " + certiCount);
-		double cper = (double) certiCount / (double) cddayVO.getCdday() * 100;
-		int ck = 0;
-		System.out.println("전체개수 : " + cddayVO.getCdday() + " 인증개수 : " + certiCount + " 이행률 : "
-				+ Math.round(cper * 100 / 100.0) + "%");
-		dao.cperUpdate(cno2, (int) cper, mid);
-		// 이행률 100% 채우면 ck가 1로 바뀌면서 완료된 챌린지로 이동 / 이미 완료된 챌린지를 새로 도전할때 생기는 중복을 ck0/1로 구분하여 방지
-		if (cper != 100) {
+		// 챌린지 인증 중복 체크		 
+		ChallengeValidationVO vVO = new ChallengeValidationVO();
+		// round = 
+		Integer round = dao.getRound(mycno, mid);
+		Integer lastRound = dao.getLastRound(mycno, mid);
+		if (round != lastRound) {
+			vVO.setCno(cno2);
+			vVO.setVcon(vcon);
+			vVO.setMid(mid);
+			vVO.setMycno(mycno);
+			vVO.setRound(round);
+			System.out.println("번호:" + vVO.getCno() + " 내용 : " + vcon + "아이디 : " + mid);
+			// 챌린지 인증
+			dao.valid(vVO);
+
+			// 이행률 업데이트
+			ChallengeVO cddayVO = dao.getPage(cno2);
+			System.out.println("전체개수 : " + cddayVO.getCdday());
+			int certiCount = dao.getCertiCount(cno2, mid, mycno);
+			System.out.println("인증개수 : " + certiCount);
+			double cper = (double) certiCount / (double) cddayVO.getCdday() * 100;
+			int ck = 0;
+			System.out.println("전체개수 : " + cddayVO.getCdday() + " 인증개수 : " + certiCount + " 이행률 : "
+					+ Math.round(cper * 100 / 100.0) + "%");
+			dao.cperUpdate(cno2, (int) cper, mid, mycno, round);
+			// 이행률 100% 채우면 ck가 1로 바뀌면서 완료된 챌린지로 이동 / 이미 완료된 챌린지를 새로 도전할때 생기는 중복을 ck0/1로
+			// 구분하여 방지
+
+			if (cper != 100) {
+				return "redirect:/challenge/challenging";
+			}
+			dao.ck(cno2, ck, mid, mycno);
+		} else {
+			ra.addFlashAttribute("msg", "오늘은 이미 인증했습니다.");
 			return "redirect:/challenge/challenging";
 		}
-		dao.ck(cno2, ck, mid);
 		return "redirect:/challenge/challenging";
 	}
 
@@ -196,10 +208,9 @@ public class ChallengeController {
 		UserDetails userDetails = (UserDetails) at.getPrincipal();
 		String mid = userDetails.getUsername();
 		int ck = 0;
-		
+
 		model.addAttribute("getd", dao.getd(cno2, mid, ck, mycno));
 		return "contents/challenge/cValidation";
 	}
-
 
 }

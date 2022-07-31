@@ -50,18 +50,21 @@ public interface ChallengeService {
 	public int valid(ChallengeValidationVO vVO);
 
 	// 오늘 일차 구하기
-	public int getRound(int cno, String mid);
+	public Integer getRound(int mycno, String mid);
 
 	// 인증 갯수 구하기
-	public int getCertiCount(int cno, String mid);
+	public int getCertiCount(int cno, String mid, int mycno);
 
 	// 이행률업데이트
-	public int cperUpdate(int cno, int cper, String mid);
+	public int cperUpdate(int cno, int cper, String mid, int mycno, Integer round);
 
 	// 인증 중복 체크
-	public int getDup(int cno, String cvdate, String mid);
+	public int getDup(int cno, String cvdate, String mid, int mycno);
 
 	// 완료된 챌린지로 이동
-	public int ck(int cno, int ck, String mid);
+	public int ck(int cno, int ck, String mid, int mycno);
+	
+	// 마지막 챌린지 인증
+	public Integer getLastRound(int mycno, String mid);
 
 }
