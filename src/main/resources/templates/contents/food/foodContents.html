@@ -65,15 +65,15 @@
 												</div>
 												<ul style="margin-top: 30px;">
 													<li><b>단위</b> <span
-														th:text="${food.amount}+${food.f0}"></span></li>
+														th:text="${food.weight}+${food.f0}"></span></li>
 													<li><b>칼로리</b> <span th:text="${food.cal}+'kcal'"></span></li>
 													<li><b>탄수화물</b> <span th:text="${food.carb}+'g'"></span></li>
 													<li><b>단백질</b> <span th:text="${food.prot}+'g'"></span></li>
 													<li><b>지방</b> <span th:text="${food.fat}+'g'"></span></li>
 												</ul>
-												</br>
+												<br>
 												<hr>
-												</br>
+												<br>
 											</div>
 										</div>
 									</div>
@@ -102,7 +102,7 @@
 												</td>
 												<td class="shoping__cart__price"></td>
 												<td th:text="${rel.cal}+kcal"+ class="shoping__cart__total"></td>
-												<td th:text="${rel.amount}+${rel.f0}" class="shoping__cart__total"></td>
+												<td th:text="${rel.weight}+${rel.f0}" class="shoping__cart__total"></td>
 											</tr>
 										</tbody>
 									</table>

@@ -5,8 +5,8 @@
 	<!-- 음식 검색 결과 리스트 -->
 	<select id="fList"
 		resultType="com.co.algomoko.food.domain.FoodVO">
-		<![CDATA[select ing, cal, amount, F0
-				 from (select ing, cal, amount, F0
+		<![CDATA[select ing, cal, amount, F0, weight
+				 from (select ing, cal, amount, F0, weight
 					   from food
 		 			   where ing like '%' || #{ing} || '%'	order by ing)
 				 ]]>
@@ -14,7 +14,7 @@
 	<!-- 음식 검색 결과 단건 조회 -->
 	<select id="fListOne"
 		resultType="com.co.algomoko.food.domain.FoodVO">
-		select ing, amount, cal, carb, prot, fat, F0
+		select ing, amount, cal, carb, prot, fat, F0, weight
 		from food
 		where
 		ing = #{ing}
@@ -35,7 +35,7 @@
 	<!-- 연관 검색어 -->
 	<select id="rList"
 		resultType="com.co.algomoko.food.domain.FoodVO">
-		select ing, amount, cal, f0
+		select ing, amount, cal, f0, weight
 		from food
 		where ing like '%' || #{ing} || '%' and ing not like #{ing}
 	</select>
