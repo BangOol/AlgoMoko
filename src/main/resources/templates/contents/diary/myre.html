@@ -102,9 +102,93 @@
 				</div>
 			</div>
 		</div>
+<div class="paginate">
+                <div class="paging" style="text-align: center">
+                    <!-- 이전 페이지 이동 버튼 생성 -->
 
-	</div>
-	</div>
+                    <!-- hasPreviousPage의 값을 통해, 이전 페이지가 있을 때 해당하는 버튼이 생성되도록 함. -->
+                    <!-- 1 page의 경우, 이전 페이지가 존재하지 않으므로 이전 페이지로 넘어가는 버튼이 생성되지 않음. -->
+
+                    <!-- 이전 페이지가 있는 경우 -->
+                    <div th:if="${pagination.hasPreviousPage == true}" style="display: inline-block; margin: 0 10px">
+                        <a class="direction prev" href="javascript:void(0);"
+                           th:data-type="${pagination.type}"
+                           th:data-keyword="${pagination.keyword}"
+                           th:onclick="|location.href='/myre?currentPage=1&cntPerPage=${pagination.cntPerPage}&pageSize=${pagination.pageSize}&type=this.getAttribute(data-type)&keyword=this.getAttribute(data-keyword)'|">
+                        </a>
+                        <a class="direction prev" href="javascript:void(0);"
+                           th:data-type="${pagination.type}"
+                           th:data-keyword="${pagination.keyword}"
+                           th:onclick="|location.href='/myre?currentPage=${pagination.currentPage-1}&cntPerPage=${pagination.cntPerPage}&pageSize=${pagination.pageSize}&type=this.getAttribute(data-type)&keyword=this.getAttribute(data-keyword)'|">
+                        </a>
+                    </div>
+                    <!-- 이전 페이지가 없는 경우 -->
+                    <div th:if="${pagination.hasPreviousPage == false}" style=" display: inline-block; margin: 0 10px">
+                        <a class="direction prev" href="javascript:void(0);"
+                           th:data-type="${pagination.type}"
+                           th:data-keyword="${pagination.keyword}"
+                           th:onclick="|location.href='/myre?currentPage=1&cntPerPage=${pagination.cntPerPage}&pageSize=${pagination.pageSize}&type=this.getAttribute(data-type)&keyword=this.getAttribute(data-keyword)'|">
+                            &lt;&lt;
+                        </a>
+                        <a class="direction prev" href="javascript:void(0);"
+                           th:data-type="${pagination.type}"
+                           th:data-keyword="${pagination.keyword}"
+                           th:onclick="|location.href='/myre?currentPage=${pagination.currentPage}&cntPerPage=${pagination.cntPerPage}&pageSize=${pagination.pageSize}&type=this.getAttribute(data-type)&keyword=this.getAttribute(data-keyword)'|">
+                            &lt;
+                        </a>
+                    </div>
+
+
+                    <!-- 페이지 숫자 번호 출력 -->
+                    <div th:each="idx:${#numbers.sequence(pagination.firstPage, pagination.lastPage)}"
+                         style="display: inline-block; margin: 0 10px">
+                        <a style="color: #cc0000; font-weight:700; margin-bottom: 2px; "
+                           href="javascript:void(0)"
+                           th:data-type="${pagination.type}"
+                           th:data-keyword="${pagination.keyword}"
+                           th:onclick="|location.href='/myre?currentPage=${idx}&cntPerPage=${pagination.cntPerPage}&pageSize=${pagination.pageSize}&type=this.getAttribute(data-type)&keyword=this.getAttribute(data-keyword)'|"
+                           th:value="${idx}">
+
+
+                           
+                        </a>
+                    </div>
+                    <!-- 다음 페이지 이동 있을 시 -->
+                    <div th:if="${pagination.hasNextPage == true}" style="display: inline-block; margin: 0 10px">
+                        <a class="direction next" href="javascript:void(0);"
+                           th:data-type="${pagination.type}"
+                           th:data-keyword="${pagination.keyword}"
+                           th:onclick="|location.href='/myre?currentPage=${pagination.currentPage+1}&cntPerPage=${pagination.cntPerPage}&pageSize=${pagination.pageSize}&type=this.getAttribute(data-type)&keyword=this.getAttribute(data-keyword)'|">
+                            &gt;</a>
+                    </div>
+                    <!-- CSS적 요소를 위해 위와 분리함. -->
+                    <div th:if="${pagination.hasNextPage == true}" style=" display: inline-block; margin: 0 10px">
+                        <a class="direction next" href="javascript:void(0);"
+                           th:data-type="${pagination.type}"
+                           th:data-keyword="${pagination.keyword}"
+                           th:onclick="|location.href='/myre?currentPage=${pagination.currentPage}&cntPerPage=${pagination.cntPerPage}&pageSize=${pagination.pageSize}&type=this.getAttribute(data-type)&keyword=this.getAttribute(data-keyword)'|">
+                            &gt;&gt;</a>
+                    </div>
+
+                    <!-- 다음 페이지 이동 없을 시 -->
+                    <div th:if="${pagination.hasNextPage == false}" style=" display: inline-block; margin: 0 10px">
+                        <a class="direction next" href="javascript:void(0);"
+                           th:data-type="${pagination.type}"
+                           th:data-keyword="${pagination.keyword}"
+                           th:onclick="|location.href='/myre?currentPage=${pagination.totalRecordCount}&cntPerPage=${pagination.cntPerPage}&pageSize=${pagination.pageSize}&type=this.getAttribute(data-type)&keyword=this.getAttribute(data-keyword)'|">
+                            &gt;</a>
+                    </div>
+                    <div th:if="${pagination.hasNextPage == false}" style=" display: inline-block; margin: 0 10px">
+                        <a class="direction next" href="javascript:void(0);"
+                           th:data-type="${pagination.type}"
+                           th:data-keyword="${pagination.keyword}"
+                           th:onclick="|location.href='/myre?currentPage=${pagination.totalRecordCount}&cntPerPage=${pagination.cntPerPage}&pageSize=${pagination.pageSize}&type=this.getAttribute(data-type)&keyword=this.getAttribute(data-keyword)'|">
+                            >>
+                        </a>
+                    </div>
+                    <!-- /paginate -->
+                </div>
+            </div>
 </section>
 <!-- Blog Section End -->
 

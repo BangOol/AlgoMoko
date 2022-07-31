@@ -70,7 +70,7 @@
 
 <div th:replace="~{fragments/header}"></div>
 <div th:replace="~{fragments/aside}"></div>
-
+[[${resultCal}]]
 
 
         <!-- Shoping Cart Section Begin -->
@@ -179,7 +179,7 @@
                              
                               
                               
-                              <tr th:if="${#lists.size(resultCal)} == 0">
+                               <tr th:if="${resultCal[0].sumcal == 0}">
                               
                               <td  class="shoping__product" style="text-align:center;">일지를 등록해주세요
                                           </td>
@@ -191,7 +191,7 @@
                               
                               
                               
-                              <tr th:unless="${#lists.size(resultCal)} == 0" id="concon">
+                              <tr th:unless="${resultCal[0].sumcal == 0}" id="concon">
                               
                               <td th:text="${resultCal[0].sumcal}" id="tocal"  class="shoping__product" style="text-align:center;">
                                           </td>
@@ -199,7 +199,7 @@
                                           <td th:text="${tcal}" id="daycal" class="shoping__product" style="text-align:center;">
                                           </td>
                                           <td></td>
-                                          
+                                          <th><div id="donutchart1"></div></th>
                                   </tr>
                                   
                                   
@@ -286,7 +286,29 @@
     <script src="/js/owl.carousel.min.js"></script>
     <script src="/js/main.js"></script>
 
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script th:inline="javascript">
+        <!-- 성별 통계 -->
+        document.addEventListener('DOMContentLoaded', function () {
+            google.charts.load("current", {packages: ["corechart"]});
+            google.charts.setOnLoadCallback(drawChart1);
 
+            function drawChart1() {
+                var data = google.visualization.arrayToDataTable([
+                    ['Task', 'Hours per Day'],
+                    ['탄', [[${resultCal[0].carb}]]],
+                    ['단', [[${resultCal[0].prot}]]],
+                    ['지', [[${resultCal[0].fat}]]]
+                ]);
+                var options = {
+                    title: '3대영양소',
+                    pieHole: 0.4,
+                };
+                var chart = new google.visualization.PieChart(document.getElementById('donutchart1'));
+                chart.draw(data, options);
+            }
+        })
+    </script>
 
 </body>
 

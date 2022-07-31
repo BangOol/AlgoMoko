@@ -2,11 +2,13 @@ package com.co.algomoko.diary.service;
 
 import com.co.algomoko.diary.domain.DiaryVO;
 import com.co.algomoko.diary.domain.DiaryVO2;
+import com.co.algomoko.diary.domain.Diarypage;
 import com.co.algomoko.diary.domain.RecipeVO;
 import com.co.algomoko.user.domain.UserVO;
 import com.co.algomoko.user.mapper.UserMapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,5 +39,10 @@ public interface DiaryService {
 	 public void redelete(RecipeVO recipeVO);
 	 public void rededelete(RecipeVO recipeVO);
 	 public List<DiaryVO2> resultCal1(DiaryVO2 diaryVO2);
+		//Paging
+	    public List<Map<String, Object>> myrecipelist(Diarypage diarypage) throws Exception;
+
+	    //count
+	    public int TableCount() throws Exception;
 }
 

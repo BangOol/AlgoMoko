@@ -28,12 +28,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.co.algomoko.admin.domain.AdminVO;
+import com.co.algomoko.admin.paging.PaginationUser;
 import com.co.algomoko.diary.domain.DiaryVO;
 import com.co.algomoko.diary.domain.DiaryVO1;
 import com.co.algomoko.diary.domain.DiaryVO2;
+import com.co.algomoko.diary.domain.Diarypage;
 import com.co.algomoko.diary.domain.RecipeVO;
 import com.co.algomoko.diary.domain.ReqVO;
 import com.co.algomoko.diary.mapper.DiaryMapper;
@@ -73,16 +76,7 @@ public class DiaryController {
     public String cal(){
         return "contents/diary/cal";
     }
-   @RequestMapping("myre")
-    public String myre(Model model , RecipeVO recipeVO,Authentication authentication){
-      UserDetails mid = (UserDetails) authentication.getPrincipal();
-      recipeVO.setMid(mid.getUsername());
-      
-      model.addAttribute("rlist",dao.rlist(recipeVO));
-      
-      
-      return "contents/diary/myre";
-   }
+  
    @RequestMapping("redetail")
        public String redetail(@RequestParam("rname") String rname ,Model model , RecipeVO recipeVO,Authentication authentication){
          
@@ -223,6 +217,7 @@ public class DiaryController {
       model.addAttribute("ccde",dao.detail(diaryVO));
       model.addAttribute("std",std);
       
+      
       if(dao.resultCal(diaryVO).isEmpty()) {
     	  diaryVO2.setMid(mid.getUsername());
     	  diaryVO2.setDdate(date1);
@@ -235,9 +230,11 @@ public class DiaryController {
           model.addAttribute("ccde",dao.detail(diaryVO));
           model.addAttribute("std",std);
           model.addAttribute("resultCal",dao.resultCal1(diaryVO2));
+          System.out.println(dao.resultCal1(diaryVO2));
       }else {
     	  model.addAttribute("resultCal",dao.resultCal(diaryVO));
 	}
+	
       
          	 
     	    
@@ -523,6 +520,47 @@ public String delete(HttpServletResponse response,DiaryVO diaryVO,Authentication
       return dao1.fList(foodvo);
       
     }
+//   @RequestMapping("myre")
+//   public String myre(Model model , RecipeVO recipeVO,Authentication authentication){
+//     UserDetails mid = (UserDetails) authentication.getPrincipal();
+//     recipeVO.setMid(mid.getUsername());
+//     
+//     model.addAttribute("rlist",dao.rlist(recipeVO));
+//     
+//     
+//     return "contents/diary/myre";
+//  }
+   @RequestMapping("myre")
+   public ModelAndView moveUserList(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage,
+                              @RequestParam(value = "cntPerPage", defaultValue = "10") int cntPerPage,
+                              @RequestParam(value = "pageSize", defaultValue = "10") int pageSize,
+                              @RequestParam(value = "type", defaultValue = "null") String type,
+                              @RequestParam(value = "keyword", defaultValue = "null") String keyword,Model model,RecipeVO recipeVO,Authentication authentication) throws Exception{
+       ModelAndView modelAndView = new ModelAndView();
+       UserDetails mid = (UserDetails) authentication.getPrincipal();
+       recipeVO.setMid(mid.getUsername());
+       
+       
+       // 전체 회원 수
+       int listCnt = dao.TableCount();
+       //view 단에서 받은 현재 페이지, 페이지 당 출력 페이지 개수, 화면 하단 페이지 사이즈 가져와서 입력.
+
+       Diarypage Diarypage = new Diarypage(currentPage, cntPerPage, pageSize);
+       Diarypage.setKeyword(keyword);
+       Diarypage.setType(type);
+       /*
+       전체 회원 수를 입력하여 0보다 컸을 때
+       전체 페이지 수, 리스트의 첫 페이지 번호, 마지막 번호, ROW_NUM의 첫, 마지막 값,
+       이전 페이지 존재 여부, 다음 페이지 존재 여부를 확인하고, paginationUser에 넣는다.
+       */
+       Diarypage.setTotalRecordCount(listCnt);
+       modelAndView.addObject("pagination", Diarypage); // 값을 paginantion으로 뿌림.
+       modelAndView.addObject("Alllist", dao.myrecipelist(Diarypage)); // 회원 전체 데이터를 뿌림.
+       modelAndView.addObject("rlist",dao.rlist(recipeVO));
+       modelAndView.setViewName("contents/diary/myre");
+      
+       return modelAndView;
+   }
    
    
 }
