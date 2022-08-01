@@ -23,6 +23,13 @@ public class Account implements UserDetails{
     private String mid;
     private String mpw;
     private String nick;
+    private String birth;
+    private String height;
+    private String weight;
+    private String tcal;
+    private String tweight;
+    private String bmi;
+    private String sex;
     //private Boolean enabled;
 //    private Collection<GrantedAuthority> authorities;
     //권한 !!

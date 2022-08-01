@@ -149,6 +149,12 @@ public class UserServiceImpl implements UserService{
         
 		
 	}
+	//회원정보 변경
+	@Override
+	public int insertMyPage(UserVO vo) {
+		
+		return mapper.updateMyPage(vo);
+	}
 	
 	}
 	

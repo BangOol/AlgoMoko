@@ -30,5 +30,8 @@ public interface UserService {
 	public String findIdCheck(String uname, String nick, String birth);
 	//임시 비밀번호 전송
 	public void sendpw(String mid) throws Exception;
+	//회원정보 변경
+	public int insertMyPage(UserVO vo);
+	
 	
 }

@@ -117,7 +117,6 @@ public class UserController {
 		if(num == 1) {
 			return "redirect:registerIdForm3";
 		} else {
-
 			return "contents/login/signup";
 		}
 	}
@@ -136,6 +135,7 @@ public class UserController {
 		System.out.println(result);
 //		if(result == null)
 //			return ResponseEntity.status(HttpStatus.CONFLICT).body("입력한 회원 정보를 확인해주세요");
+		
 		return ResponseEntity.status(HttpStatus.OK).body(result);				
 	}
 	
@@ -146,29 +146,32 @@ public class UserController {
 		userService.sendpw(mid);
 		return "contents/login/findAccount";
 	}
-	//아이디 찾기 이동
-//    @GetMapping("/member/find_id")
-//    public void findId() {
-//    }
-
-    // REST 방식에서 값을 읽어내는 동작은 GET이다. ★ 매핑 주소 find_id 아닌 find/id으로 주는 것 주의!
-//    @ResponseBody
-//   
-//    @GetMapping("/member/find/id")
-//    public ResponseEntity<String> findId(String mid) {
-//        String findmid = userService.findId2(mid);
-//        if(findmid == null)
-//            return ResponseEntity.status(HttpStatus.CONFLICT).body("아이디를 찾지 못했습니다.");
-//        return ResponseEntity.ok(findmid);
-//    }
-//
-//   
-//    @GetMapping("/member/reset_password")
-//    public void resetPassword() {
-//    }
-
-    
-    
-
-
+	
+	//회원정보 수정
+	@GetMapping("/insertMyPage")
+    public String insertMyPage() {
+		return "contents/user/insertMyPage";
+	}
+    @PostMapping("/insertMyPage")
+	public String insertMyPage2(UserVO vo) {
+    	int num = userService.insertMyPage(vo);
+    	System.out.println(vo);
+		if(num == 1) {
+			return "redirect:myPage";
+		} else {
+			return "contents/user/insertMyPage";
+		}
+    	
+    }
+	//비밀번호 변경
+	@GetMapping("/myPageSecurityInsertPW")
+	public String myPageSecurityInsertPW() {
+		return "contents/user/myPageSecurityInsertPW";
+	}
+	
+	//회원탈퇴
+	@GetMapping("/myPageSecurityDeleteId")
+	public String myPageSecurityDeleteId() {
+		return "contents/user/myPageSecurityDeleteId";
+	}
 }

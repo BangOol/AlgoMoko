@@ -95,7 +95,7 @@
                                     <tr>
                                         <th>*비밀번호 : </th>
                                         <td>
-                                            <input id="mpw" name="mpw"type = "password" style = "width: 400px; border-radius: 10px;" placeholder="8자 이상의 문자, 숫자, 특수문자를 입력하세요">
+                                            <input id="mpw" name="mpw" type = "password" style = "width: 400px; border-radius: 10px;" placeholder="8자 이상의 문자, 숫자, 특수문자를 입력하세요">
                                             <span id="mpw_msg"></span>
                                         </td>
                                     </tr>
@@ -272,7 +272,7 @@
 
         $('#code').click((e)=>{
             var result = $('#mdData').val()
-            console.log(result)
+            
             $.ajax({
                 url:"verify",
                 type:"POST",
@@ -327,7 +327,7 @@
 
         //생년월일 --> 나이(숫자)변환
         function calcAge(b) {
-            console.log(b)
+            
             var date = new Date();
             var year = date.getFullYear();
             var month = (date.getMonth() + 1);
