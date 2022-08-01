@@ -117,7 +117,7 @@
                                     <a class="direction prev" href="javascript:void(0);"
                                        th:data-type="${pagination.type}"
                                        th:data-keyword="${pagination.keyword}"
-                                       th:onclick="|location.href='/Admin/UserList?currentPage=1&cntPerPage=${pagination.cntPerPage}&pageSize=${pagination.pageSize}&type=this.getAttribute(data-type)&keyword=this.getAttribute(data-keyword)'|">
+                                       th:onclick="|location.href='@{/Admin/UserList(currentPage=${1},cntPerPage=${pagination.cntPerPage},pageSize=${pagination.pageSize},type=${pagination.type},keyword=${pagination.keyword})}'|">
 <!--                                       th:onclick="|movepage=(${pagination.currentPage}, ${pagination.cntPerPage}, ${pagination.pageSize}, this.getAttribute('data-type'), this.getAttribute('data-keyword'))|">-->
 <!--                                       th:onclick="|location.href='/Admin/UserList?currentPage=1&cntPerPage=${pagination.cntPerPage}&pageSize=${pagination.pageSize}&type=(this.getAttribute('data-type'))&keyword=(this.getAttribute('data-keyword')'|">-->
                                         <img src="/img/angles-left-solid.svg" style="width: 15px; height: 15px">
@@ -127,7 +127,7 @@
                                     <a class="direction prev" href="javascript:void(0);"
                                        th:data-type="${pagination.type}"
                                        th:data-keyword="${pagination.keyword}"
-                                       th:onclick="|location.href='/Admin/UserList?currentPage=${pagination.currentPage-1}&cntPerPage=${pagination.cntPerPage}&pageSize=${pagination.pageSize}&type=this.getAttribute(data-type)&keyword=this.getAttribute(data-keyword)'|">
+                                       th:onclick="|location.href='@{/Admin/UserList(currentPage=${pagination.currentPage-1},cntPerPage=${pagination.cntPerPage},pageSize=${pagination.pageSize},type=${pagination.type},keyword=${pagination.keyword})}'|">
 <!--                                       th:onclick="|location.href='/Admin/UserList?currentPage=${pagination.currentPage-1}&cntPerPage=${pagination.cntPerPage}&pageSize=${pagination.pageSize}&type=(this.getAttribute('data-type'))&keyword=(this.getAttribute('data-keyword')'|">-->
                                         <img src="/img/angle-left-solid.svg" style="width: 15px; height: 15px">
                                     </a>
@@ -137,7 +137,7 @@
                                     <a class="direction prev" href="javascript:void(0);"
                                        th:data-type="${pagination.type}"
                                        th:data-keyword="${pagination.keyword}"
-                                       th:onclick="|location.href='/Admin/UserList?currentPage=1&cntPerPage=${pagination.cntPerPage}&pageSize=${pagination.pageSize}&type=this.getAttribute(data-type)&keyword=this.getAttribute(data-keyword)'|">
+                                       th:onclick="|location.href='@{/Admin/UserList(currentPage=${1},cntPerPage=${pagination.cntPerPage},pageSize=${pagination.pageSize},type=${pagination.type},keyword=${pagination.keyword})}'|">
 <!--                                       th   :onclick="|location.href='/Admin/UserList?currentPage=1&cntPerPage=${pagination.cntPerPage}&pageSize=${pagination.pageSize}&type=(this.getAttribute('data-type'))&keyword=(this.getAttribute('data-keyword')'|">-->
                                         <img src="/img/angles-left-solid.svg" style="width: 15px; height: 15px">
                                     </a>
@@ -146,7 +146,7 @@
                                     <a class="direction prev" href="javascript:void(0);"
                                        th:data-type="${pagination.type}"
                                        th:data-keyword="${pagination.keyword}"
-                                       th:onclick="|location.href='/Admin/UserList?currentPage=${pagination.currentPage}&cntPerPage=${pagination.cntPerPage}&pageSize=${pagination.pageSize}&type=this.getAttribute(data-type)&keyword=this.getAttribute(data-keyword)'|">
+                                       th:onclick="|location.href='@{/Admin/UserList(currentPage=${pagination.currentPage},cntPerPage=${pagination.cntPerPage},pageSize=${pagination.pageSize},type=${pagination.type},keyword=${pagination.keyword})}'|">
                                         <img src="/img/angle-left-solid.svg" style="width: 15px; height: 15px">
                                     </a>
                                 </div>
@@ -158,7 +158,7 @@
                                            href="javascript:void(0)"
                                            th:data-type="${pagination.type}"
                                            th:data-keyword="${pagination.keyword}"
-                                           th:onclick="|location.href='/Admin/UserList?currentPage=${idx}&cntPerPage=${pagination.cntPerPage}&pageSize=${pagination.pageSize}&type=this.getAttribute(data-type)&keyword=this.getAttribute(data-keyword)'|"
+                                           th:onclick="|location.href='@{/Admin/UserList(currentPage=${idx},cntPerPage=${pagination.cntPerPage},pageSize=${pagination.pageSize},type=${pagination.type},keyword=${pagination.keyword})}'|"
                                            th:value="${idx}">
                                             [[${idx}]]
                                         </a>
@@ -166,9 +166,10 @@
                                 <!-- 다음 페이지 이동 있을 시 -->
                                 <div th:if="${pagination.hasNextPage == true}"  style="display: inline-block; margin: 0 10px">
                                     <a class="direction next" href="javascript:void(0);"
-                                       th:data-type="${pagination.type}"
-                                       th:data-keyword="${pagination.keyword}"
-                                       th:onclick="|location.href='/Admin/UserList?currentPage=${pagination.currentPage+1}&cntPerPage=${pagination.cntPerPage}&pageSize=${pagination.pageSize}&type=this.getAttribute(data-type)&keyword=this.getAttribute(data-keyword)'|">
+                                       th:onclick="|location.href='@{/Admin/UserList(currentPage=${pagination.currentPage+1},cntPerPage=${pagination.cntPerPage},pageSize=${pagination.pageSize},type=${pagination.type},keyword=${pagination.keyword})}'|">
+<!--                                       틀린 내용 : (this.getAttribute 인식 x)th:onclick="|location.href='/Admin/UserList?currentPage=${pagination.currentPage+1}&cntPerPage=${pagination.cntPerPage}&pageSize=${pagination.pageSize}&type=this.getAttribute(data-type)&keyword=this.getAttribute(data-keyword)'|">-->
+                                        <!--                                       th:data-type="${pagination.type}"-->
+                                        <!--                                       th:data-keyword="${pagination.keyword}"-->
                                         <img src="/img/angle-right-solid.svg" style="width: 15px; height: 15px">
                                     </a>
                                 </div>
@@ -177,7 +178,7 @@
                                     <a class="direction next" href="javascript:void(0);"
                                        th:data-type="${pagination.type}"
                                        th:data-keyword="${pagination.keyword}"
-                                       th:onclick="|location.href='/Admin/UserList?currentPage=${pagination.currentPage}&cntPerPage=${pagination.cntPerPage}&pageSize=${pagination.pageSize}&type=this.getAttribute(data-type)&keyword=this.getAttribute(data-keyword)'|">
+                                       th:onclick="|location.href='@{/Admin/UserList(currentPage=${pagination.totalRecordCount},cntPerPage=${pagination.cntPerPage},pageSize=${pagination.pageSize},type=${pagination.type},keyword=${pagination.keyword})}'|">
                                         <img src="/img/angles-right-solid.svg" style="width: 15px; height: 15px">
                                     </a>
                                 </div>
@@ -187,7 +188,7 @@
                                     <a class="direction next" href="javascript:void(0);"
                                        th:data-type="${pagination.type}"
                                        th:data-keyword="${pagination.keyword}"
-                                       th:onclick="|location.href='/Admin/UserList?currentPage=${pagination.totalRecordCount}&cntPerPage=${pagination.cntPerPage}&pageSize=${pagination.pageSize}&type=this.getAttribute(data-type)&keyword=this.getAttribute(data-keyword)'|">
+                                       th:onclick="|location.href='@{/Admin/UserList(currentPage=${pagination.totalRecordCount},cntPerPage=${pagination.cntPerPage},pageSize=${pagination.pageSize},type=${pagination.type},keyword=${pagination.keyword})}'|">
                                         <img src="/img/angle-right-solid.svg" style="width: 15px; height: 15px">
                                     </a>
                                 </div>
@@ -195,7 +196,7 @@
                                     <a class="direction next" href="javascript:void(0);"
                                        th:data-type="${pagination.type}"
                                        th:data-keyword="${pagination.keyword}"
-                                       th:onclick="|location.href='/Admin/UserList?currentPage=${pagination.totalRecordCount}&cntPerPage=${pagination.cntPerPage}&pageSize=${pagination.pageSize}&type=this.getAttribute(data-type)&keyword=this.getAttribute(data-keyword)'|">
+                                       th:onclick="|location.href='@{/Admin/UserList(currentPage=${pagination.totalRecordCount},cntPerPage=${pagination.cntPerPage},pageSize=${pagination.pageSize},type=${pagination.type},keyword=${pagination.keyword})}'|">
                                         <img src="/img/angles-right-solid.svg" style="width: 15px; height: 15px">
                                     </a>
                                 </div>
@@ -213,7 +214,7 @@
                                 <input type ="hidden" name = "currentPage" value = 1>
                                 <input type ="hidden" name = "cntPerPage" value = 10>
                                 <input type ="hidden" name = "pageSize" value = 10>
-                                <input type="text" placeholder="검색어 입력" style="border: 1px solid;  width: 210px; margin:0 40px 0 10px; text-align: center" name="keyword" id="findUserPress">
+                                <input type="text" placeholder="검색어 입력" style="border: 1px solid;  width: 210px; margin:0 40px 0 10px" name="keyword" id="findUserPress">
                                 <select id="selectOption" name="type">
                                     <option value="email">이메일</option>
                                     <option value="nick">닉네임</option>
