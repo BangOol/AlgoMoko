@@ -23,19 +23,20 @@
         ,NICK
         ,GET_CODE(B0) AS B0
         FROM MEMBERS
+        <choose>
+            <when test="type != null and type.equals('email')">
+                WHERE MID LIKE '%'||#{keyword}||'%'
+            </when>
+            <when test="type != null and type.equals('nick')">
+                WHERE NICK LIKE '%'||#{keyword}||'%'
+            </when>
+        </choose>
         )
         <if test="firstRecordIndex != null and lastRecordIndex != null">
             WHERE ROW_NUM BETWEEN #{firstRecordIndex} AND
             #{lastRecordIndex}
         </if>
-        <choose>
-            <when test="type != null and type.equals('email')">
-                AND MID LIKE '%'||#{keyword}||'%'
-            </when>
-            <when test="type != null and type.equals('nick')">
-                AND NICK LIKE '%'||#{keyword}||'%'
-            </when>
-        </choose>
+
     </select>
 
     <select id="findDetailUser" resultMap="members" resultType="com.co.algomoko.admin.domain.AdminVO">
