@@ -6,7 +6,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -83,12 +85,13 @@ public class DiaryController {
       UserDetails mid = (UserDetails) authentication.getPrincipal();
       recipeVO.setMid(mid.getUsername());
       
-      //System.out.println(dao.onelist(recipeVO).get(0).getRrecipe());
+      
       
       
       	
       
       	String[] rearry = dao.onelist(recipeVO).get(0).getRrecipe().split(",");
+      	
       	List<String> rearrys = new ArrayList<String>();
       		for(int i=0;i< rearry.length;i++) {
       			if(rearry[i].equals("")||rearry[i].isBlank()||rearry[i].isEmpty()) {
@@ -98,7 +101,7 @@ public class DiaryController {
       			
 			
       	}
-      	 
+      		
 			
 			
          
@@ -120,6 +123,7 @@ public class DiaryController {
 		
 		dao.redelete(recipeVO);
 		dao.rededelete(recipeVO);
+		
 		int cal = 0;//총칼
 		int carb = 0;//총탄
 		int prot = 0;//총단
@@ -134,7 +138,7 @@ public class DiaryController {
 			
 			
 		}
-
+		
 		  for(int i=0;i< ddnameList.size();i++) { 
 			  res = dao.fonlist(fings[i]);
 			
@@ -153,7 +157,7 @@ public class DiaryController {
 		  recipeVO.setCarb(carb);
 		  recipeVO.setProt(prot);
 		  recipeVO.setRfat(rfat);
-		 
+		  
 		  
 		  dao.reinsert(recipeVO);
 
@@ -230,7 +234,7 @@ public class DiaryController {
           model.addAttribute("ccde",dao.detail(diaryVO));
           model.addAttribute("std",std);
           model.addAttribute("resultCal",dao.resultCal1(diaryVO2));
-          System.out.println(dao.resultCal1(diaryVO2));
+          
       }else {
     	  model.addAttribute("resultCal",dao.resultCal(diaryVO));
 	}
@@ -251,9 +255,12 @@ public class DiaryController {
     public String weeklybest(Model model,RecipeVO recpvo,Authentication authentication){
       UserDetails mid = (UserDetails) authentication.getPrincipal();
       recpvo.setMid(mid.getUsername());
-      model.addAttribute("rank",dao.rerank(recpvo));
       
-      
+      List<RecipeVO>ranlist = new ArrayList<RecipeVO>();
+      ranlist = dao.rerank(recpvo);
+      Collections.shuffle(ranlist);
+		System.out.println(ranlist);
+		model.addAttribute("rank",ranlist);
         return "contents/diary/weeklybest";
     }
    @RequestMapping("write")
@@ -389,7 +396,7 @@ public String delete(HttpServletResponse response,DiaryVO diaryVO,Authentication
       
 	   UserDetails mid = (UserDetails) authentication.getPrincipal();
 	      diaryVO.setMid(mid.getUsername());
-	      System.out.println(diaryVO);
+	     
 	      dao.insert(diaryVO);
 	 
 	      
@@ -466,8 +473,9 @@ public String delete(HttpServletResponse response,DiaryVO diaryVO,Authentication
 		UserDetails mid = (UserDetails) authentication.getPrincipal();
 		recipeVO.setMid(mid.getUsername());
 		recipeVO.setNick(dao.tomem(recipeVO.getMid()));
-		System.out.println(recipeVO);
+		
 		String[] fings = recipeVO.getFing().split(",");
+		
 		List<String> ddnameList = new ArrayList<String>();	
 		DiaryVO res = new DiaryVO();
 		
@@ -501,7 +509,7 @@ public String delete(HttpServletResponse response,DiaryVO diaryVO,Authentication
 		  recipeVO.setCarb(carb);
 		  recipeVO.setProt(prot);
 		  recipeVO.setRfat(rfat);
-		  System.out.println("2");
+		
 		  
 		  dao.reinsert(recipeVO);
 
@@ -532,7 +540,7 @@ public String delete(HttpServletResponse response,DiaryVO diaryVO,Authentication
 //  }
    @RequestMapping("myre")
    public ModelAndView moveUserList(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage,
-                              @RequestParam(value = "cntPerPage", defaultValue = "10") int cntPerPage,
+                              @RequestParam(value = "cntPerPage", defaultValue = "5") int cntPerPage,
                               @RequestParam(value = "pageSize", defaultValue = "10") int pageSize,
                               @RequestParam(value = "type", defaultValue = "null") String type,
                               @RequestParam(value = "keyword", defaultValue = "null") String keyword,Model model,RecipeVO recipeVO,Authentication authentication) throws Exception{
@@ -541,18 +549,20 @@ public String delete(HttpServletResponse response,DiaryVO diaryVO,Authentication
        recipeVO.setMid(mid.getUsername());
        
        
-       // 전체 회원 수
-       int listCnt = dao.TableCount();
-       //view 단에서 받은 현재 페이지, 페이지 당 출력 페이지 개수, 화면 하단 페이지 사이즈 가져와서 입력.
+       
 
        Diarypage Diarypage = new Diarypage(currentPage, cntPerPage, pageSize);
        Diarypage.setKeyword(keyword);
        Diarypage.setType(type);
+       Diarypage.setMid(recipeVO.getMid());
        /*
        전체 회원 수를 입력하여 0보다 컸을 때
        전체 페이지 수, 리스트의 첫 페이지 번호, 마지막 번호, ROW_NUM의 첫, 마지막 값,
        이전 페이지 존재 여부, 다음 페이지 존재 여부를 확인하고, paginationUser에 넣는다.
        */
+    // 전체 회원 수
+       int listCnt = dao.TableCount(recipeVO.getMid());
+       //view 단에서 받은 현재 페이지, 페이지 당 출력 페이지 개수, 화면 하단 페이지 사이즈 가져와서 입력.
        Diarypage.setTotalRecordCount(listCnt);
        modelAndView.addObject("pagination", Diarypage); // 값을 paginantion으로 뿌림.
        modelAndView.addObject("Alllist", dao.myrecipelist(Diarypage)); // 회원 전체 데이터를 뿌림.
@@ -561,6 +571,35 @@ public String delete(HttpServletResponse response,DiaryVO diaryVO,Authentication
       
        return modelAndView;
    }
-   
+   @RequestMapping("bestre") 
+   public String bestre(@RequestParam("rname") String rname ,Model model , RecipeVO recipeVO,Authentication authentication)throws IOException, ParseException { 
+	   recipeVO.setMid("admin");
+	   
+	   
+	   String[] rearry = dao.onelist(recipeVO).get(0).getRrecipe().split(",");
+	  	
+	  	List<String> rearrys = new ArrayList<String>();
+	  		for(int i=0;i< rearry.length;i++) {
+	  			if(rearry[i].equals("")||rearry[i].isBlank()||rearry[i].isEmpty()) {
+				continue;
+				
+			}rearrys.add(rearry[i]);
+	  			
+			
+	  	}
+	  		
+
+	 
+	 
+   model.addAttribute("rrecp",dao.onelist(recipeVO));
+   model.addAttribute("redetail",dao.redetail(recipeVO));
+   model.addAttribute("rname",rname);
+   model.addAttribute("rearrys",rearrys);
+   return "contents/diary/bestre";
+
+
+
+}
+
    
 }

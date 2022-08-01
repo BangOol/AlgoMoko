@@ -18,6 +18,7 @@ public class Diarypage {
     * 4. SQL - ROW_NUM
     *   -
      */
+	private String mid;
     // 현재페이지
     private int currentPage;
     // 페이지당 출력할 페이지 갯수
@@ -53,7 +54,7 @@ public class Diarypage {
         }
         //10,20,30개 단위 이외 처리 방지 : 10,20,30개 단위를 제외한 나머지는 모두 10개 단위로 변경되도록 설정.
         if (cntPerPage != 10 && cntPerPage != 20 && cntPerPage != 30) {
-            cntPerPage = 10;
+            cntPerPage = 5;
         }
         // 하단 페이지 갯수 10개로 제한 : 하단에 보이는 페이지 버튼의 수 10개로 제한?
         if (pageSize != 10) {

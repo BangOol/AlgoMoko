@@ -425,15 +425,15 @@
 
 
 
-            $("#modalbtn").on("click", function () {
+                        $("#modalbtn").on("click", function () {
                var tbody = $('#tbody1');
-
+			var qqq = $('<input>').val(gia).addClass('thth3').attr('type', 'text').attr('name', 'amount');
                var tr = $('<tr>');
                var th1 = $('<th>').append($('<input>').val(gin).addClass('thth1').attr('type', 'text').attr('name', 'ddname'));
                var th2 = $('<th>').append($('<input>').val(gic).addClass('thth2').attr('type', 'text').attr('name', 'cal'));
-               var th3 = $('<th>').append($('<input>').val(gia).addClass('thth3').attr('type', 'text').attr('name', 'amount'));
-               var thhi = $('<th>').append($('<input>').val(gic).addClass('thth2').attr('type', 'hidden'));
-               $(".thth3").on("keyup", function () {
+               var th3 = $('<th>').append(qqq);
+               var thhi = $('<th>').append($('<input>').val(gic).attr('type', 'hidden'));
+              qqq.on("keyup", function () {
                   var aaa = $(this).val();
                   var bbb = $(this).parent().prev().children();
                   var ccc = $(this).parent().prev().children().val();

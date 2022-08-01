@@ -73,7 +73,7 @@ order by b.ucon
 </select>
 
 <select id="rerank" resultType="recipeVO">
-select*from recipe order by hit desc
+select*from recipe where mid = 'admin'
 </select>
 
 	<select id="fonlist"
@@ -145,16 +145,20 @@ where mid = #{mid} and rname = #{rname}
         ,carb
         ,prot
         ,rfat
+        ,rrecipe
+        ,amount
+        ,mid
         FROM recipe
+        WHERE mid=#{mid}
         )
         <if test="firstRecordIndex != null and lastRecordIndex != null">
-            WHERE ROW_NUM BETWEEN #{firstRecordIndex} AND
+            where ROW_NUM BETWEEN #{firstRecordIndex} AND
             #{lastRecordIndex}
         </if>
        
     </select>
 <select id="TableCount" resultType="int">
         SELECT count(*) FROM
-            recipe
+            recipe where mid=#{mid}
     </select>
 </mapper>

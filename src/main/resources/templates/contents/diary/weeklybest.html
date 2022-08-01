@@ -61,68 +61,93 @@
               <div class="row">
                   <div class="col-lg-12">
                       <div class="shoping__cart__table">
-                          <table>
+                          <table style="width:600px; margin-left:150px;">
                               <thead>
                                   <tr>
-                                      <th class="shoping__product">음식</th>
-                                      <th>kcal</th>
-                                      <th>인분(양)</th>
-                                      <th>3대영양소</th>
                                       <th></th>
+                                      <th>kcal</th>
+                                      <th>탄수화물</th>
+                                      <th>단백질</th>
+                                      <th>지방</th>
+                                      <th>수량</th>
                                   </tr>
                               </thead>
                               <tbody>
-                              
-                                  <tr>
-                                      <td th:text="${rank[0].rname}"class="shoping__cart__item">
+                              <tr class="detail">
+                                  
+                                      <td th:text="${rank[0].rname}"class="shoping__cart__total">
                                           
                                          
                                       </td>
-                                      <td th:text="${rank[0].cal}" class="shoping__cart__price">
+                                      <td th:text="${rank[0].cal}" class="shoping__cart__total">
                                           
                                       </td>
-                                      <td th:text="${rank[0].amount}" class="shoping__cart__quantity">
+                                     
+                                      <td th:text="|${rank[0].carb}g|" class="shoping__cart__total">
                                           
                                       </td>
-                                      <td th:text="|${rank[0].carb},${rank[0].prot},${rank[0].rfat}|" class="shoping__cart__total">
+                                      <td th:text="|${rank[0].prot}g|" class="shoping__cart__total">
                                           
                                       </td>
-
-                                  </tr>
-                                  <tr>
-                                      <td th:text="${rank[1].rname}"class="shoping__cart__item">
-                                          
-                                         
-                                      </td>
-                                      <td th:text="${rank[1].cal}" class="shoping__cart__price">
+                                      <td th:text="|${rank[0].rfat}g|" class="shoping__cart__total">
                                           
                                       </td>
-                                      <td th:text="${rank[1].amount}" class="shoping__cart__quantity">
-                                          
-                                      </td>
-                                      <td th:text="|${rank[1].carb},${rank[1].prot},${rank[1].rfat}|" class="shoping__cart__total">
+                                       <td th:text="${rank[0].amount}" class="shoping__cart__total">
                                           
                                       </td>
 
                                   </tr>
                                   <tr>
-                                      <td th:text="${rank[2].rname}"class="shoping__cart__item">
+                                  
+                                      <td th:text="${rank[1].rname}"class="shoping__cart__total">
                                           
                                          
                                       </td>
-                                      <td th:text="${rank[2].cal}" class="shoping__cart__price">
+                                      <td th:text="${rank[1].cal}" class="shoping__cart__total">
                                           
                                       </td>
-                                      <td th:text="${rank[2].amount}" class="shoping__cart__quantity">
+                                     
+                                      <td th:text="|${rank[1].carb}g|" class="shoping__cart__total">
                                           
                                       </td>
-                                      <td th:text="|${rank[2].carb},${rank[2].prot},${rank[2].rfat}|" class="shoping__cart__total">
+                                      <td th:text="|${rank[1].prot}g|" class="shoping__cart__total">
+                                          
+                                      </td>
+                                      <td th:text="|${rank[1].rfat}g|" class="shoping__cart__total">
+                                          
+                                      </td>
+                                       <td th:text="${rank[1].amount}" class="shoping__cart__total">
                                           
                                       </td>
 
                                   </tr>
+                                  <tr>
+                                  
+                                      <td th:text="${rank[2].rname}"class="shoping__cart__total">
+                                          
+                                         
+                                      </td>
+                                      <td th:text="${rank[2].cal}" class="shoping__cart__total">
+                                          
+                                      </td>
+                                     
+                                      <td th:text="|${rank[2].carb}g|" class="shoping__cart__total">
+                                          
+                                      </td>
+                                      <td th:text="|${rank[2].prot}g|" class="shoping__cart__total">
+                                          
+                                      </td>
+                                      <td th:text="|${rank[2].rfat}g|" class="shoping__cart__total">
+                                          
+                                      </td>
+                                       <td th:text="${rank[2].amount}" class="shoping__cart__total">
+                                          
+                                      </td>
 
                                   </tr>
+                                  
+
+                                  
                               </tbody>
                           </table>
                       </div>
@@ -151,7 +176,28 @@
     <script src="/js/mixitup.min.js"></script>
     <script src="/js/owl.carousel.min.js"></script>
     <script src="/js/main.js"></script>
+<script>
 
+
+
+
+	$(function () {
+
+		$(".detail").click(function () {
+
+			var rname = $(this).children().first().html()
+			
+
+
+			location.href='/diary/bestre?rname='+rname;
+
+
+		})
+
+
+	})
+
+</script>
 
 
 </body>

@@ -70,7 +70,7 @@
 
 <div th:replace="~{fragments/header}"></div>
 <div th:replace="~{fragments/aside}"></div>
-[[${resultCal}]]
+
 
 
         <!-- Shoping Cart Section Begin -->
@@ -82,24 +82,27 @@
                   <div class="col-lg-12">
                       <div class="shoping__cart__table">
                       
-                          <table style="width:600px; margin-left:300px;">
+                          <table style=" width: 800px; margin-left:150px;">
                               <thead>
                                   <tr>
                                       <th></th>
 									  <th>kcal</th>
+                                      
+                                      <th>탄수화물</th>
+                                      <th>단백질</th>
+                                      <th>지방</th>
                                       <th>인분(양)</th>
-                                      <th>3대영양소</th>
                                   </tr>
                               </thead>
                                
                               <thead>
                                   <tr style="width:300px;">
-                                      <th class="shoping__product" >아침</th>
+                                      <th class="shoping__product">아침</th>
                                   </tr>
                               </thead>
                               
                               <tbody data-dddo='aa'>
-                             <th:if="${#lists.size(aade) != 0}">
+                             <!--<th:if="${#lists.size(aade) != 0}">-->
                               <th:block th:each="aade:${aade}">
                               
                               <tr class="detail">
@@ -107,19 +110,22 @@
                               <td th:text="${aade.ddname}" class="shoping__cart__total" >
                                       <img src="img/cart/cart-1.jpg" alt=""> </td>
                                       <td td th:text="|${aade.cal}kcal|"  class="shoping__cart__total"> </td>
+                                      
+                                      <td th:text="|${aade.carb}g|" class="shoping__cart__total"></td>
+                                      <td th:text="|${aade.prot}g|" class="shoping__cart__total"></td>
+                                      <td th:text="|${aade.fat}g|" class="shoping__cart__total"></td>
                                       <td th:text="${aade.amount}" class="shoping__cart__total"></td></td>
-                                      <td th:text="|${aade.carb},${aade.prot},${aade.fat}|" class="shoping__cart__total"></td>
                                   </tr>
                              </th:block>
                              
                              <tr th:unless="${#lists.size(aade) != 0}" class="pinsert">
                              
-                                  <td><img class="plusnew" src="/img/plus.jpg" style="margin-left:250px; width: 100px;"></td>
+                                  <td colspan="6"><img class="plusnew" src="/img/plus.jpg" style="width: 100px; margin-left: 350px; "></td>
                                   </tr>
                              
                              <thead>
                                   <tr>
-                                      <th class="shoping__product" >점심</th>
+                                       <th class="shoping__product">점심</th>
                                   </tr>
                               </thead>
                               
@@ -132,19 +138,22 @@
                               <td th:text="${bbde.ddname}" class="shoping__cart__total" style="text-align:center;">
                                           <img src="img/cart/cart-1.jpg" alt=""></td>
                                       <td td th:text="|${bbde.cal}kcal|"  class="shoping__cart__total"></td>
-                                      <td th:text="${bbde.amount}" class="shoping__cart__total"></td></td>
-                                      <td th:text="|${bbde.carb},${bbde.prot},${bbde.fat}|" class="shoping__cart__total"></td>
+                                      
+                                      <td th:text="|${bbde.carb}g|" class="shoping__cart__total"></td>
+                                      <td th:text="|${bbde.prot}g|" class="shoping__cart__total"></td>
+                                      <td th:text="|${bbde.fat}g|" class="shoping__cart__total"></td>
+                                      <td th:text="${bbde.amount}" class="shoping__cart__total"></td>
                                   </tr>
                              </th:block>
                              
                              <tr th:unless="${#lists.size(bbde) != 0}" class="pinsert">
-                                  <td><img src="/img/plus.jpg" class="plusnew" style="margin-left:250px; width: 100px;"></td>
+                                  <td colspan="6"><img src="/img/plus.jpg" class="plusnew" style=" margin-left: 350px; width: 100px;"></td>
                                   </tr>
                              </tbody>
                              
                              <thead>
                                   <tr>
-                                      <th class="shoping__product">저녁</th>
+                                       <th class="shoping__product">저녁</th>
                                   </tr>
                               </thead>
                               
@@ -157,20 +166,23 @@
                               <td th:text="${ccde.ddname}" class="shoping__cart__total" style="text-align:center;">
                                       <img src="img/cart/cart-1.jpg" alt=""></td>
                                       <td td th:text="|${ccde.cal}kcal|"  class="shoping__cart__total"></td>
+                                      
+                                      <td th:text="|${ccde.carb}g|" class="shoping__cart__total"></td>
+                                      <td th:text="|${ccde.prot}g|" class="shoping__cart__total"></td>
+                                      <td th:text="|${ccde.fat}g|" class="shoping__cart__total"></td>
                                       <td th:text="${ccde.amount}" class="shoping__cart__total"></td></td>
-                                      <td th:text="|${ccde.carb},${ccde.prot},${ccde.fat}|" class="shoping__cart__total"></td>
                                   </tr>
                              </th:block>
                              
                              <tr th:unless="${#lists.size(ccde) != 0}" class="pinsert">
-                                  <td><img src="/img/plus.jpg" class="plusnew" style="margin-left:250px; width: 100px;"></td>
+                                  <td colspan="6"><img src="/img/plus.jpg" class="plusnew" style=" margin-left: 350px; width: 100px;"></td>
                                   </tr>
                              </tbody>
                              </th:block>
                              <thead>
                                   <tr id="recal">
-                                  	  <th class="shoping__product" style="text-align:center;">총 칼로리</th>
-                                      <th class="shoping__product" style="text-align:center;">일일 칼로리</th>
+                                  	  <th class="shoping__product" style="text-align:center;">권장 칼로리</th>
+                                      <th class="shoping__product" style="text-align:center;">총 칼로리</th>
                                       <th></th>
                                   </tr>
                               </thead>
@@ -181,11 +193,13 @@
                               
                                <tr th:if="${resultCal[0].sumcal == 0}">
                               
+                              <td th:text="${tcal}" class="shoping__product" style="text-align:center;">
+                                          </td>
+                              
                               <td  class="shoping__product" style="text-align:center;">일지를 등록해주세요
                                           </td>
                                           
-                                          <td th:text="${tcal}" class="shoping__product" style="text-align:center;">
-                                          </td>
+                                          
                                   </tr>
                              
                               
@@ -234,15 +248,15 @@
 					var recal = $("#recal");
 					var concon = $("#concon");
 					if(a<=b){
-						$("#recal").append($("<th>").addClass('shoping__product').html("비교").css("text-align", "center"))
+						$("#recal").append($("<th>").addClass('shoping__product').html("영양소").css("text-align", "center"))
 						
-						$("#concon").append($("<td>").addClass('shoping__product').html("적당히 먹었네").css("text-align", "center"))
+						$("#concon").append($("<td>").addClass('shoping__product').html("적당히 먹었네").css("text-align", "center").css("color","blue"))
 						
 						//잘먹었다
 					}else{
-						$("#recal").append($("<th>").addClass('shoping__product').html("비교").css("text-align", "center"))
+						$("#recal").append($("<th>").addClass('shoping__product').html("영양소").css("text-align", "center"))
 						
-						$("#concon").append($("<td>").addClass('shoping__product').html("줜나 처먹었네").css("text-align", "center"))
+						$("#concon").append($("<td>").addClass('shoping__product').html("줜나 처먹었네").css("text-align", "center").css("color","red"))
 					}
 			
 				
@@ -296,13 +310,16 @@
             function drawChart1() {
                 var data = google.visualization.arrayToDataTable([
                     ['Task', 'Hours per Day'],
-                    ['탄', [[${resultCal[0].carb}]]],
-                    ['단', [[${resultCal[0].prot}]]],
-                    ['지', [[${resultCal[0].fat}]]]
+                    ['탄수화물', [[${resultCal[0].carb}]]],
+                    ['단백질', [[${resultCal[0].prot}]]],
+                    ['지방', [[${resultCal[0].fat}]]]
                 ]);
                 var options = {
                     title: '3대영양소',
-                    pieHole: 0.4,
+                    'width':200,
+                    'height':200,
+                    pieSliceText:'label',
+                    legend:'none' 
                 };
                 var chart = new google.visualization.PieChart(document.getElementById('donutchart1'));
                 chart.draw(data, options);
