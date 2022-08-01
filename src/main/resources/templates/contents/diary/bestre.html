@@ -128,145 +128,100 @@
    <div th:replace="~{fragments/header}"></div>
    <div th:replace="~{fragments/aside}"></div>
 
-
-
-   <!-- Table End -->
-   </section>
-   <!-- Blog Section End -->
-      <input type="text" readonly placeholder="재료 입력" style="outline:1px solid #c3bfbf;">
-      <button type="button" id="btnmod dialog" class="btn btn-primary blog__btn">검색</button>
-      <div id="dialog" title="재료 검색"></div>
-      <!-- 모달창 시작 -->
-      <div class="modal">
-         <div class="modal1_body">
-            <div class="modal_title">
-               <input type="text" id="textex"><button id="btnbtn" name="btnbtn" class="btn btn-primary">검색</button>
-               <div class="modal_content">
-
-               </div>
-            </div>
-            <!-- 제품모달 그리드 -->
-            <div class="container-fluid px-4">
-
-               <div id="gridpro"></div>
-               <div class="modal_btn">
-                  <button id="modalbtn" class="modal_s">등록</button>
-                  <button class="modal_c">취소</button>
-            </div>
-         </div>
-      </div>
-   </div>
-   </div>
-
-
-
-   <!-- 모달창 종료 -->
-
-
    <br><br>
- <form method="post" action="/diary/insert" name="frm" id="frm">
-   <div class="checked">
-      <div class="form-check">
-
-         <label class="form-check-label">
-            <input type="radio" class="form-check-input" name="dddo" value="aa" onclick="return(false);"
-               th:checked="${dddo eq 'aa'}">아침
-
-            <i class="input-helper">
-      </div>
-      <div class="form-check">
-         <label class="form-check-label">
-            <input type="radio" class="form-check-input" name="dddo" value="bb" onclick="return(false);"
-               th:checked="${dddo eq 'bb'}">점심
-            <i class="input-helper">
-      </div>
-      <div class="form-check">
-         <label class="form-check-label">
-            <input type="radio" class="form-check-input" name="dddo" value="cc" onclick="return(false);"
-               th:checked="${dddo eq 'cc'}">저녁
-            <i class="input-helper">
-      </div>
-      <button id="che">찾기</button>
+ <form method="post" action="/diary/remodify" name="frm" id="frm">
 
 
-      <div class="mb-2 row">
-         <label for="html5-date-input" class="col-md-2 col-form-label"></label>
-         <div class="col-md-2">
-            <input class="form-control" readonly type="date" name="ddate" th:value="${date}" id="html5-date-input">
-         </div>
-      </div>
-   </div>
-
-
-
-
+   
    <div class="container">
       <div class="row">
          <div class="col-sm-7 col-xl-6">
+      <input th:value="${redetail[0].rname}" name="rname" readonly>
 
 
-
-           <table class="table table-borderless">
-          <thead>
-              <tr>
+            <table class="table table-borderless">
+               <thead>
+                  <tr>
+                  <th scope="col">재료</th>
+                  <th scope="col">칼로리</th>
+                  <th scope="col">수량</th>
+                  </tr>
+               </thead>
+               <tbody id="tbody1">
+                  <th:block th:each="redetail:${redetail}">
                   
-                  <th class="thth" scope="col">재료명</th>
-                  <th class="thth" scope="col">칼로리</th>
-                  <th class="thth" scope="col">수량</th>
-              </tr>
-          </thead>
-          <tbody id ="tbody1">
+                     <tr>
+                        <th>
+                        <input th:value="${redetail.fing}" readonly class="thth1" type="text" name="fing">
+                        </th>
+                        <th>
+                        <input th:value="${redetail.cal}" readonly  class="thth2" type="text" name="cal">
+                        </th>
+                        <th>
+                        <input th:value="${redetail.aamount}" readonly class="thth3" type="text" name="aamount">
+                        </th>
+                        <th>
+                  <input th:value="${redetail.cal}/${redetail.aamount}" type="hidden">
+                  </th>
+                        
+                        
+                     </tr>
+
+                  
+
+              </tbody>
+
+
+               </table>
+
+</th:block>
+            </div>
+            <div class="col-sm-2 col-xl-3" style="margin-left: 200px;">
             
-                       
-              
+            <table class ="generic" width="100">
+            <tbody id="rebody">
+            
+            <button type="button" id="addrebtn" class="btn btn-primary">추가</button>
+            
+            레시피   
+               
+            <tr th:block th:each="rearrys:${rearrys}">
+               <td style="width:150px" id="recnt"></td>
+               <td width="500" class="trre">
+               
+                  <textarea readonly  th:text="${rearrys}" class="form-control" row="5" name="rrecipe" id="rrecipe" style="width: 500px;"></textarea>
+               </td>
+            </tr>
+               
+               
+            
+            
+               
+               
 
-          </tbody>
-          
-          
-      </table>
-      
-      
-    </div>
-    <div class="col-sm-2 col-xl-3" style="margin-left: 200px;">
-      <div class="tab-content">
-        
+            </tbody>
+            
+            
+            </table>
+            
+            
+            </div>
+
+         </div>
+
+      </div>
+      </div>
+      <!-- Progress Bar -->
+
+
          
-            <div class="product__details__tab__desc">
-                <h3>내용</h3>
-                <br>
 
-               <input type = textarea required class="form-control" name="ucon" rows="15" cols="30" style="width : 200px; height:200px; resize: both;" ></textarea>
-              </div>
-        </div>
-      </div>
-    </div>
-    
-    </div>
-</div>
-<!-- Progress Bar -->
+ 
 
-<div class="flex flex-1 flex-col md:flex-row lg:flex-row mx-2 mt-2">
-  <div class="rounded overflow-hidden shadow bg-white mx-2 w-50 pt-2">
-      <div class="px-6 py-2 border-b border-light-grey">
-          <div class="font-bold text-xl">kcal</div>
-      </div>
+      </th:block>
       
-          
-
-              <td><input type="text" id="seipSum"></td>
-
-
-              
-              
-          
-      </div>
-      
-  </div>
-  
-</div>
-<button class="btn btn-primary" id="che">등록</button>
-<button type="button" class="btn btn-primary " onclick="location.href='/diary'">취소</button>
-    </form>
+      <button type="button" class="btn btn-primary " onclick="history.go(-1);">확인</button>
+ </form>
 
       <div th:replace="~{fragments/footer}"></div>
 
@@ -280,52 +235,46 @@
     <script src="/js/owl.carousel.min.js"></script>
     <script src="/js/main.js"></script>
 
-<script>
+      <script>
+      var gin;
+      var gic;
+      var gia;
+      const body = document.querySelector('body');
+      const modal = document.querySelector('.modal');
 
-     
-         
-              
-  
-
-
-  
-    const body = document.querySelector('body');
-    const modal = document.querySelector('.modal');
-
-   /*제품정보 그리드*/
-            const giupData = [];
+      /*제품정보 그리드*/
+      const giupData = [];
 
 
-            const jepoom = new tui.Grid({
-               el : document.getElementById('gridpro'),
-               data : giupData,
-               scrollY : true,
-               rowHeaders : [ 'rowNum' ],
-               bodyHeight : 300,
-               
-               
-               columns : [ {
-                  header : '재료명',
-                  name : 'ing',
-                  align : 'center',
-                  
-               }, {
-                  header : '칼로리',
-                  name : 'cal',
-                  align : 'center',
-                  
-               }, {
-                  header : '수량',
-                  name : 'amount',
-                  align : 'center',
-                  
-               } ]
-            });
+      const jepoom = new tui.Grid({
+         el: document.getElementById('gridpro'),
+         data: giupData,
+         scrollY: true,
+         rowHeaders: ['rowNum'],
+         bodyHeight: 300,
+
+
+         columns: [{
+            header: '재료명',
+            name: 'ing',
+            align: 'center',
+
+         }, {
+            header: '칼로리',
+            name: 'cal',
+            align: 'center',
+
+         }, {
+            header: '수량',
+            name: 'amount',
+            align: 'center',
+
+         }]
+      });
 
       $(function () {
          
-         
-         
+      
          $(".thth3").on("keyup", function () {
             var aaa = $(this).val();
             var bbb = $(this).parent().prev().children();
@@ -338,15 +287,12 @@
             console.log(zzz);
                $(bbb).val(ddd);
                result()
+            
          })
          
          
-          
          
          
-         
-         
-
          function result() {
             
             
@@ -388,7 +334,6 @@
          })
          const closeBtn = modal.querySelector(".modal_c")
          closeBtn.addEventListener("click", e => {
-			jepoom.refreshLayout();
             modal.style.display = "none";
             body.style.overflow = 'auto';
          })
@@ -413,22 +358,22 @@
                jepoom.resetData(response)
                jepoom.on('click', e => {
                   var rok = e.rowKey
-                 gin = jepoom.getRow(rok).ing
+                  gin = jepoom.getRow(rok).ing
                   gic = jepoom.getRow(rok).cal
                   gia = jepoom.getRow(rok).amount
 
                })
             })
 
-            
 
 
 
-            $("#modalbtn").on("click", function () {
+
+                        $("#modalbtn").on("click", function () {
                var tbody = $('#tbody1');
 			var qqq = $('<input>').val(gia).addClass('thth3').attr('type', 'text').attr('name', 'amount');
                var tr = $('<tr>');
-               var th1 = $('<th>').append($('<input>').val(gin).addClass('thth1').attr('type', 'text').attr('name', 'ddname'));
+               var th1 = $('<th>').append($('<input>').val(gin).addClass('thth1').attr('type', 'text').attr('name', 'fing'));
                var th2 = $('<th>').append($('<input>').val(gic).addClass('thth2').attr('type', 'text').attr('name', 'cal'));
                var th3 = $('<th>').append(qqq);
                var thhi = $('<th>').append($('<input>').val(gic).attr('type', 'hidden'));
@@ -472,19 +417,55 @@
 
 
       })
+      var index = 0;
+      $(".trre").on("click", function(){
+         index = $(this).closest('tr').index();
+         console.log(index);
+      })
 
-      function diaryde() {
-         $("#frm").attr("action", "delete").submit();
+               function diaryde() {
+                  $("#frm").attr("action", "redelete").submit();
+         
+               }
+               var a = 1;
+               var b = 0;
+            $("#addrebtn").on("click", function () {
+                  
+                   var tbody = $('.generic >tbody >tr > .trre').length;
+                  console.log(tbody);
+                  var recnt = Number($("#recnt").html());
+                  if(tbody >= 6){
+                     
+                     alert('더이상 추가할수없다');
+                           
+                     return false;
+                     
+               }else{
+                     
+                     b += tbody;
+                     var tr = `<tr>
+                              <td style="width:150px" id="recnt"></td>
+                              <td width="500" class="trre">
+                              <textarea class="form-control" row="5" name="rrecipe" id="rrecipe" style="width: 500px;"></textarea>
+                              </tr>`
+                     $("#rebody").append(tr)
+                     
+                     
+                     
+                     
+                  }      
+                  
+                   
+                  
+               
 
-      }
-
-
+         })
 
 
 
 
    </script>
-    
+
 
 
 

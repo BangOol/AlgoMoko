@@ -39,5 +39,5 @@ public interface DiaryMapper {
 	    public List<Map<String, Object>> myrecipelist(Diarypage diarypage) throws Exception;
 
 	    //count
-	    public int TableCount() throws Exception;
+	    public int TableCount(String mid) throws Exception;
 }

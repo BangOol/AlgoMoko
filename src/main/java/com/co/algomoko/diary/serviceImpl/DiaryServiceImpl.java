@@ -148,8 +148,8 @@ public class DiaryServiceImpl implements DiaryService {
 	}
 
 	@Override
-	public int TableCount() throws Exception {
-		return diaryMapper.TableCount();
+	public int TableCount(String mid) throws Exception {
+		return diaryMapper.TableCount(mid);
 	}
 
 	
