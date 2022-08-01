@@ -24,8 +24,13 @@ public class PagingServiceImpl implements PagingService{
     }
 
     @Override
-    public int TableCount(String keyword) throws Exception {
-        return adminMapper.TableCount(keyword);
+    public int TableCount(PaginationUser paginationUser) throws Exception {
+        return adminMapper.TableCount(paginationUser);
+    }
+
+    @Override
+    public int TableCountAll() throws Exception {
+        return adminMapper.TableCountAll();
     }
 
 

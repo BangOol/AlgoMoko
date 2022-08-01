@@ -36,5 +36,7 @@ public interface AdminMapper {
     public List<Map<String, Object>> SelectAllList(PaginationUser paginationUser) throws Exception;
 
     //count
-    public int TableCount(String keyword) throws Exception;
+    public int TableCount(PaginationUser paginationUser) throws Exception;
+
+    public int TableCountAll() throws Exception;
 }
