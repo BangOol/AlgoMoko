@@ -102,11 +102,18 @@
 
     <select id="TableCount" resultType="int">
         SELECT count(*) FROM
-            MEMBERS
+        MEMBERS
         <choose>
-            <when test = " (!keyword.equals(null))">
+            <when test="type != null and type.equals('email')">
+                WHERE MID LIKE '%'||#{keyword}||'%'
+            </when>
+            <when test="type != null and type.equals('nick')">
                 WHERE NICK LIKE '%'||#{keyword}||'%'
             </when>
         </choose>
+    </select>
+    <select id="TableCountAll" resultType="int">
+        SELECT count(*) FROM
+        MEMBERS
     </select>
 </mapper>
