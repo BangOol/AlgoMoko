@@ -54,7 +54,6 @@ public class SupportController {
                                     @RequestParam(value = "cntPerPage", defaultValue = "10") int cntPerPage,
                                     @RequestParam(value = "pageSize", defaultValue = "10") int pageSize,
                                     @RequestParam(value = "type", defaultValue = "null") String type,
-                                    @RequestParam(value = "keyword", defaultValue = "null") String keyword,
                                     Authentication authentication) throws Exception {
 
         ModelAndView modelAndView = new ModelAndView();
@@ -68,7 +67,6 @@ public class SupportController {
         int listCnt = pagingService.inqTableCount(); // 전체 테이블 계산
         PaginationUser paginationUser = new PaginationUser(currentPage, cntPerPage, pageSize);
         paginationUser.setType(type);
-        paginationUser.setKeyword(keyword);
         paginationUser.setTotalRecordCount(listCnt);
 
         modelAndView.addObject("pagination",paginationUser);
@@ -162,6 +160,7 @@ public class SupportController {
                             @RequestParam("option") String c0,
                             Model model, HttpServletResponse response,
                             Authentication authentication) throws IOException {
+        
         InquiryVO inquiryVO = new InquiryVO();
         inquiryVO.setQcon(qcon);
         inquiryVO.setQno(qno);
@@ -181,7 +180,7 @@ public class SupportController {
             response.setCharacterEncoding("UTF-8");
             response.setContentType("text/html; charset=utf-8");
             PrintWriter w = response.getWriter();
-            String msg = "어떠한 문제로 인해 등록이 실패하였습니다.";
+            String msg = "예기지 않은 문제로 인해 등록이 실패하였습니다.";
             String url = "/Inquiry/detail?nick=" +nick + "&qno=" +qno;
             w.write("<script>alert('"+msg+"');location.href='"+url+"';</script>");
         }
