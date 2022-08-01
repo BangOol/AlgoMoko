@@ -33,7 +33,10 @@ public interface UserMapper {
 	public String findIdCheck(String uname, String nick, String birth);
 	
 	//임시 비밀번호로 변경 
-	
 	public void updatepw(@Param("mid") String mid,@Param("mpw") String encodepw);
+	//회원정보 수정
+	public int updateMyPage(UserVO vo);
+	
+	
 
 }

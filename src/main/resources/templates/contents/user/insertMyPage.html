@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="zxx">
+<html lang="ko" xmlns:th= "http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+ layout:decorate="~{layouts/layout}">
 
 <head>
     <meta charset="UTF-8">
@@ -9,96 +10,23 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Ogani | Template</title>
 
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
-
-
-    <!-- Css Styles -->
-    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
-    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
-    <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
-    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="css/style.css" type="text/css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Jua:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+   
 </head>
 
 <body>
-    <!-- Page Preloder -->
-    <div id="preloder">
-        <div class="loader"></div>
-    </div>  
-
-
-
-            <!-- Header Section Begin -->
-            <header class="header">
-                <div class="header__top">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-8">
-                                
-                            </div>
-                            <div class="col-md-4">
-                                <div class="header__top__right">
-                                    <div class="header__top__right__auth" style="font-family: 'Jua'">
-                                        <a href="#" style="float: right; margin : 0 0 0 10px"><i class="fa fa-user" ></i>Login</a>
-                                        <a href="#" style="float: right; margin : 0 10px">아이디 찾기</a>
-                                        <a href="#" style="float: right; margin : 0 10px">비밀번호 찾기</a>
-                                        <a href="#" style="float: right; margin : 0 10px">회원 가입</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-3">
-                            <div class="header__logo">
-                                <a href="./index.html"><img src="/img/로고.PNG" alt=""></a>
-                            </div>
-                        </div>
-                        <div class="col-lg-9">
-                            <nav class="header__menu">
-                                <div class = "text-right">
-                                    <ul style="font-family: 'Jua'; margin: 80px 0 0 0;">
-                                        <!-- <li class="active"><a href="./index.html">식단일지</a></li> -->
-                                        <li><a href="./index.html">식단일지</a></li>
-                                        <li><a href="./shop-grid.html">챌린지</a></li>
-                                        <li><a href="#">음식</a></li>
-                                        <li><a href="./blog.html">게시판</a></li>
-                                        <li>
-                                            <a href="./contact.html">고객센터</a>
-                                            <ul class="header__menu__dropdown">
-                                                <li><a href="./shop-details.html">고객센터</a></li>
-                                                <li><a href="./shoping-cart.html">1:1 문의</a></li>
-                                                <li><a href="./checkout.html">FAQ</a></li>
-                                                <li><a href="./blog-details.html">공지사항</a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </nav>
-                          </div>
-                    </div>
-                </div>
-            </header>
+    <th:block layout:fragment="content">
+	
         <!--회원 목록 body-->
        <!-- Breadcrumb Section Begin -->
        <section class="breadcrumb-section set-bg" data-setbg="img/breadcrumb.jpg">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <div class="breadcrumb__text" style="font-family: 'Jua'">
-                        <h2 style="font-family: 'Jua'">회원 목록</h2>
+                    <div class="breadcrumb__text" >
+                        <h2 style="font-family: 'Jua'">회원 정보 수정</h2>
                         <div class="breadcrumb__option">
-                            <a href="./index.html">마이페이지</a>
-                            <span>자신의 정보를 확인 가능합니다.</span>
+                            
+                            <span style="font-family: 'Jua';">자신의 정보를 수정하는 페이지입니다.</span>
                         </div>
                     </div>
                 </div>
@@ -117,15 +45,12 @@
                       <div class="sidebar__item" style="background-color:#f5f5f5; height :600px;">
                           <h4>my Page</h4>
                           <ul style="margin: 0 0 0 20px;">
-                            <li ><a href="myPage.html">회원 정보</a></li>
-                            <li><a href="insertMyPage.html">- 정보 수정</a></li>
-                            <li><a href="myPageAlarm.html">알람</a></li>
-                            <li><a href="myPageAlarm.html">- 알람 목록</a></li>
-                            <li><a href="myPageAlarmDetail.html">- 알람 등록</a></li>
-                            <li><a href="myPageActivities.html">활동 내역</a></li>
-                            <li><a href="myPageSecurity.html">보안 설정</a></li>
-                            <li><a href="myPageSecurityInsertPW.html">- 비밀번호 변경</a></li>
-                            <li><a href="myPageSecurityDeleteId.html">- 회원 탈퇴</a></li>
+                            <li ><a href="myPage">회원 정보</a></li>
+	                        <li><a href="insertMyPage">- 정보 수정</a></li>                                                
+	                        <li><a href="">활동 내역(삭제예정)</a></li>
+	                        <li><a href="">보안 설정</a></li>
+	                        <li><a href="myPageSecurityInsertPW">- 비밀번호 변경</a></li>
+	                        <li><a href="myPageSecurityDeleteId">- 회원 탈퇴</a></li>
                           </ul>
                       </div>
                   </div>
@@ -137,132 +62,171 @@
                     <h3 style="font-family: 'Jua';">내 정보</h3>
                 </div>
                 회원 정보
+                <form id="insertMyPage_form" method="post" action="/insertMyPage">
                   <table>
                       <tr style="border-top: 1px solid;">
-                        <th style="padding:  15px 300px 15px 0; ">아이디</th><td style="padding:  0 300px 0 0;">test@gmail.com</td>
-                      </tr >
+                          <th style="padding:  15px 300px 15px 0; ">아이디</th>
+	                          <td  style="padding:  0 300px 0 0;">
+	                          	<input th:value = "${#authentication.principal.mid}" id="mid" readonly>
+	                          </td>
+                        </tr >
+                        <tr style="border-top: 1px solid;">
+                          <th  style="padding:  15px 300px 15px 0; ">닉네임</th>
+	                          <td style="padding:  0 300px 0 0;">
+		                          <input th:value = "${#authentication.principal.nick}" type="text" id="nick">
+		                          <span id="nick_msg"></span>
+	                          </td>
+                        </tr>
+                        <tr style="border-top: 1px solid; border-bottom: 1px solid;">
+                          <th style="padding:  15px 300px 15px 0; ">생년월일</th>
+	                          <td style="padding:  0 300px 0 0;">
+		                          <input th:value = "${#strings.substring(#authentication.principal.birth,0,10)}" type="birth" id="birth">
+		                          <span id="birth_msg"></span>
+	                          </td>
+                        </tr>
+                    </table>
+                    <br><br><br><br>
+                    체중 정보
+                    <table>
                       <tr style="border-top: 1px solid;">
-                        <th style="padding:  15px 300px 15px 0; ">닉네임</th><td style="padding:  0 300px 0 0;">testUser</td>
+                        <th style="padding:  15px 300px 15px 0; ">키</th>
+	                        <td style="padding:  0 330px 0 0;">
+		                        <input th:value = "${#authentication.principal.height}" type="text" id="height">
+		                        <span id="height_msg"></span>
+                        	</td>
+                      </tr>
+                      <tr style="border-top: 1px solid;">
+                        <th style="padding:  15px 300px 15px 0; ">몸무게</th>
+	                        <td style="padding:  0 330px 0 0;">
+		                        <input th:value = "${#authentication.principal.weight}" type="text" id="weight">
+		                        <span id="weight_msg"></span>
+                       		</td>
+                      </tr>
+                      <tr style="border-top: 1px solid;">
+                        <th style="padding:  15px 300px 15px 0; ">목표체중</th>
+	                        <td style="padding:  0 330px 0 0;">
+	                        <input th:value = "${#authentication.principal.tweight}" type="text" id="tweight">
+                        </td>
                       </tr>
                       <tr style="border-top: 1px solid; border-bottom: 1px solid;">
-                        <th style="padding:  15px 300px 15px 0; ">생년월일</th><td style="padding:  0 300px 0 0;">2000.01.01</td>
+                        <th style="padding:  15px 300px 15px 0; ">기초 대사량</th>
+	                        <td style="padding:  0 330px 0 0;">
+	                        <input th:value = "${#authentication.principal.tcal}" type="text" id="tcal" readonly>
+	                        <span id="tcal_msg"></span>
+                        </td>
                       </tr>
-                  </table>
-                  <br><br><br><br>
-                  체중 정보
-                  <table>
-                    <tr style="border-top: 1px solid;">
-                      <th style="padding:  15px 300px 15px 0; ">키</th><td style="padding:  0 220px 0 0;"><input type = "text" placeholder="값을 입력하세요"></td>
-                    </tr>
-                    <tr style="border-top: 1px solid;">
-                      <th style="padding:  15px 300px 15px 0; ">몸무게</th><td style="padding:  0 220px 0 0;"><input type = "text" placeholder="값을 입력하세요"></td>
-                    </tr>
-                    <tr style="border-top: 1px solid;">
-                      <th style="padding:  15px 300px 15px 0; ">목표체중</th><td style="padding:  0 220px 0 0;"><input type = "text" placeholder="값을 입력하세요"></td>
-                    </tr>
-                    <tr style="border-top: 1px solid; border-bottom: 1px solid;">
-                      <th style="padding:  15px 300px 15px 0; ">기초 대사량</th><td style="padding:  0 220px 0 0;"><input type = "text" placeholder="값을 입력하세요"></td>
-                    </tr>
+                      <tr style="border-top: 1px solid; border-bottom: 1px solid;">
+                        <th style="padding:  15px 300px 15px 0; ">BMI</th>
+	                        <td style="padding:  0 330px 0 0;">
+	                        <input th:value = "${#authentication.principal.bmi}" type="text" id="bmi" readonly>
+	                        <span id="bmi_msg"></span>
+                        </td>
+                      </tr>
                 </table>
+                </form>
             </div>
-            <input type = "button" value = "수정하기" style="margin-left:770px; width: 80px; height: 30px;">
+            <input th:value = "${#authentication.principal.sex}" type="text" id="sex" readonly style="display: none;">
+            <input type = "button" id="checkHealth" value = "계산하기" style="margin-left:770px; width: 80px; height: 30px;">
+            <br>
+            <input type = "button" id="nextBtn" value = "수정하기" style="margin-left:770px; width: 80px; height: 30px;">
               
-              <!-- <div class="row">
-                  <div class="col-lg-4 col-md-6 col-sm-6">
-                     
-                  </div>
-                  <div class="col-lg-4 col-md-6 col-sm-6">
-                     
-                  </div>
-                  <div class="col-lg-4 col-md-6 col-sm-6">
-                     
-                  </div>
-                  <div class="col-lg-4 col-md-6 col-sm-6">
-                      
-              </div> -->
-              <!-- <div class="product__pagination">
-                  <a href="#">1</a>
-                  <a href="#">2</a>
-                  <a href="#">3</a>
-                  <a href="#"><i class="fa fa-long-arrow-right"></i></a>
-              </div> -->
+             
           </div>
       </div>
   </div>
 </section>
 <!-- Product Section End -->
+<script type="text/javascript">
+	  $(document).ready(function() {          
+            $('#birth').focusout(birthCheck);           
+            $('#height').focusout(heightCheck);
+            $('#weight').focusout(weightCheck);
+      $('#nextBtn').click(function() {  
+      	 bmrCheck();
+         bmiCheck();
+      if ((birthCheck() && heightCheck() && weightCheck()) == false)
+                   
+        return alert="입력값을 확인해 주세요";
+        
+        $.ajax("/insertMyPage")
+       	 	.done(()=>{ $('#insertMyPage_form').submit();
+        		alert ("회원정보 변경이 완료되었습니다.");    
+        }).fail(()=>alert ("입력값을 확인해 주세요"))
+       })     
+	})
+	
+	 $('#checkHealth').click(function(){
+            bmrCheck();
+            bmiCheck();
+        })
 
-    <!-- Footer Section Begin -->
-    <footer class="footer spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="footer__about">
-                        <div class="footer__about__logo">
-                            <a href="./index.html"><img src="img/로고.PNG" alt=""></a>
-                        </div>
-                        <ul>
-                            <li style="font-size: 16px">Address: 대구광역시 중구 남일동 중앙대로 403 </li>
-                            <li>Phone: +65 11.188.888</li>
-                            <li>Email: hello@colorlib.com</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-6 offset-lg-1">
-                    <div class="footer__widget">
-                        <h6>Useful Links</h6>
-                        <ul>
-                            <li><a href="#" style="font-weight: 650;">About Us</a></li>
-                            <li><a href="#">식단일지</a></li>
-                            <li><a href="#">음식검색</a></li>
-                        </ul>
-                        <ul>
-                            <li><a href="#">챌린지</a></li>
-                            <li><a href="#">게시판</a></li>
-                            <li><a href="#">고객센터</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-12">
-                    <div class="footer__widget">
-                        <h6>Join Our Newsletter Now</h6>
-                        <p>Get E-mail updates about our latest shop and special offers.</p>
-                        <form action="#">
-                            <input type="text" placeholder="Enter your mail">
-                            <button type="submit" class="site-btn">Subscribe</button>
-                        </form>
-                        <div class="footer__widget__social">
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#"><i class="fa fa-instagram"></i></a>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-pinterest"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="footer__copyright">
-                        <div class="footer__copyright__text"><p style="margin-left:440px"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved</a>
-  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <!-- Footer Section End -->
+        //bmr 계산
+        function bmrCheck(){
+            var h = document.getElementById('height').value;
+            var w = document.getElementById('weight').value;
+            var b = document.getElementById('birth').value;
+            var s = document.getElementById('sex').value;
 
-    <!-- Js Plugins -->
-    <script src="js/jquery-3.3.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.nice-select.min.js"></script>
-    <script src="js/jquery-ui.min.js"></script>
-    <script src="js/jquery.slicknav.js"></script>
-    <script src="js/mixitup.min.js"></script>
-    <script src="js/owl.carousel.min.js"></script>
-    <script src="js/main.js"></script>
+            var age = calcAge(b);
+            if(s=='female'){
+                var r1 =655.1 + (9.56 * w ) + (1.85 * h) - (4.68 * age)
+                var bmr1 = Math.round(r1);
+                return $('#tcal').val(bmr1)
+                //결과 뿌려주기
+            }else{
+                var r2 = 66.47 + (13.75 * w) + (5 * h) - (6.76 * age)
+                Math.round(r2);
+                var bmr2 = Math.round(r2)
+                return $('#tcal').val(bmr2)
+            }
+        }
+        //bmr 계산 기능 끝
 
+        //생년월일 --> 나이(숫자)변환
+        function calcAge(b) {
+            var date = new Date();
+            var year = date.getFullYear();
+            var month = (date.getMonth() + 1);
+            var day = date.getDate();
+            if (month < 10) month = '0' + month;
+            if (day < 10) day = '0' + day;
+            var monthDay = month + day;
+            b = b.replace('-', '').replace('-', '');
+            var birthdayy = b.substr(0, 4);
+            var birthdaymd = b.substr(4, 4);
+            var age = monthDay < birthdaymd ? year - birthdayy - 1 : year - birthdayy;
+
+            return age;
+        }
+
+        // bmi 계산
+        function bmiCheck(){
+            var h = document.getElementById('height').value;
+            var w = document.getElementById('weight').value;
+            var r = w / ((h / 100) * (h / 100)) ;
+
+            if (r>30){
+                var bmi1 = Math.round(r);
+                $("#bmi").val(bmi1);
+                return $("#bmi_msg").text("당신의 현재 BMI는 비만입니다");
+            }else if ((r>25.0)&&(r<=29.9)){
+                var bmi1 = Math.round(r);
+                $("#bmi").val(bmi1);
+                return $("#bmi_msg").text("당신의 현재 BMI는 과제중입니다");
+            }else if ((r>18.5)&&(r<=24.9)){
+                var bmi1 = Math.round(r);
+                $("#bmi").val(bmi1);
+                return $("#bmi_msg").text("당신의 현재 BMI는 정상입니다");
+            }else if (r<=18.5){
+                var bmi1 = Math.round(r);
+                $("#bmi").val(bmi1);
+                return $("#bmi_msg").text("당신의 현재 BMI는 저체중입니다");
+            }
+        }
+	
+	</script>
+
+</th:block>
 
 
 </body>
