@@ -52,10 +52,6 @@
         ,QNO
         FROM QUESTION
         )
-        <if test="firstRecordIndex != null and lastRecordIndex != null">
-            WHERE ROW_NUM BETWEEN #{firstRecordIndex} AND
-            #{lastRecordIndex}
-        </if>
         <choose>
             <when test="type != null and type.equals('email')">
                 AND MID LIKE '%'||#{keyword}||'%'
@@ -64,6 +60,11 @@
                 AND NICK LIKE '%'||#{keyword}||'%'
             </when>
         </choose>
+        <if test="firstRecordIndex != null and lastRecordIndex != null">
+            WHERE ROW_NUM BETWEEN #{firstRecordIndex} AND
+            #{lastRecordIndex}
+        </if>
+
     </select>
 
     <insert id="insertInquiry" parameterType="com.co.algomoko.support.domain.InquiryVO">
