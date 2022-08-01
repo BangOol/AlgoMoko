@@ -72,12 +72,10 @@
 							<div th:each="mc:${mcList}" class="col-lg-6 col-md-6 col-sm-6">
 								<div class="blog__item">
 									<div class="blog__item__cpic">
-										<img th:src="@{${mc.filepath}}" alt="">
+										<img class="cimg" th:src="@{download(img=${mc.filepath})}">
 									</div>
 									<div class="blog__item__text">
 										<ul>
-											<!-- <li><i th:text="' '+'D-'+${chl.cdday}"
-												class="fa fa-calendar-o"></i></li> -->
 											<li><i th:text="| 시작날짜 : ${mc.sdate}|"
 												class="fa fa-calendar-o"></i></li>
 											<li><i th:text="| 종료날짜 : ${mc.edate}|"

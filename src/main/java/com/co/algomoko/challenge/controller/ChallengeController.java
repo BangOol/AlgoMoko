@@ -1,8 +1,12 @@
 package com.co.algomoko.challenge.controller;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.OutputStream;
 import java.util.List;
 import java.util.UUID;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -13,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -27,6 +32,7 @@ public class ChallengeController {
 
 	@Autowired
 	ChallengeMapper dao;
+	String filepath = "D:/upload/";
 
 	// 챌린지 목록
 	@GetMapping("")
@@ -78,7 +84,7 @@ public class ChallengeController {
 	@PostMapping("cWrite")
 	public String cInsert(@RequestParam("filename2") MultipartFile file, ChallengeVO cVO) throws Exception {
 		// file == multi 스트링변환
-		String projectpath = System.getProperty("user.dir") + "/src/main/resources/static/img/chl"; // user.dir은 프로젝트
+		String projectpath = filepath+"/img/chl/"; 
 		UUID uuid = UUID.randomUUID(); // 랜덤으로 이름 생성
 		String filename = uuid + "_" + file.getOriginalFilename(); // 파일 이름은 UUID에 있는 랜덤값 + 원래 파일 이름
 		File saveFile = new File(projectpath, filename); // 위에 적힌 경로에, name으로 저장
@@ -87,6 +93,31 @@ public class ChallengeController {
 		cVO.setFilepath("/img/chl/" + filename); // DB에 파일 경로 저장
 		dao.cInsert(cVO);
 		return "redirect:/challenge";
+	}
+	
+	@ResponseBody
+	@GetMapping("download")
+	public void download(HttpServletResponse response, @RequestParam String img) throws Exception {
+
+		try {
+			String path = filepath+img; // 경로에 접근할 때 역슬래시('\') 사용
+
+			File file = new File(path);
+			response.setHeader("Content-Disposition", "attachment;filename=" + file.getName()); // 다운로드 되거나 로컬에 저장되는 용도로
+																								// 쓰이는지를 알려주는 헤더
+
+			FileInputStream fileInputStream = new FileInputStream(path); // 파일 읽어오기
+			OutputStream out = response.getOutputStream();
+
+			int read = 0;
+			byte[] buffer = new byte[1024];
+			while ((read = fileInputStream.read(buffer)) != -1) { // 1024바이트씩 계속 읽으면서 outputStream에 저장, -1이 나오면 더이상 읽을 파일이 없음
+				out.write(buffer, 0, read);
+			}
+
+		} catch (Exception e) {
+			throw new Exception("download error");
+		}
 	}
 
 	// 챌린지 수정페이지로 이동
@@ -100,13 +131,17 @@ public class ChallengeController {
 	// 챌린지 수정
 	@PostMapping("cUpdate")
 	public String cUpdate(@RequestParam("filename2") MultipartFile file, ChallengeVO cVO) throws Exception, Exception {
-		String projectpath = System.getProperty("user.dir") + "/src/main/resources/static/img/chl";
-		UUID uuid = UUID.randomUUID();
-		String filename = uuid + "_" + file.getOriginalFilename();
-		File saveFile = new File(projectpath, filename);
-		file.transferTo(saveFile);
-		cVO.setFilename(filename);
-		cVO.setFilepath("/img/chl/" + filename);
+		if(file != null && file.getSize() > 0) {
+			String projectpath = filepath+"/img/chl/";
+			UUID uuid = UUID.randomUUID();
+			
+			String filename = uuid + "_" + file.getOriginalFilename();
+			System.out.println(filename);
+			File saveFile = new File(projectpath, filename);
+			file.transferTo(saveFile);
+			cVO.setFilename(filename);		
+			cVO.setFilepath("/img/chl/" + filename);
+		}
 		dao.cUpdate(cVO);
 		return "redirect:/challenge";
 	}
@@ -123,7 +158,7 @@ public class ChallengeController {
 	@GetMapping("deleting")
 	public String deleting(int cno2, RedirectAttributes ra, Authentication authentication) {
 		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-		String mid = userDetails.getUsername();		
+		String mid = userDetails.getUsername();
 		dao.deleting(cno2, mid);
 		return "redirect:/challenge/challenging";
 	}
@@ -158,12 +193,13 @@ public class ChallengeController {
 
 	// 챌린지 인증
 	@PostMapping("cValidation/certi")
-	public String valid(int cno2, int mycno, @RequestParam("vcon") String vcon, Authentication at, RedirectAttributes ra) {
+	public String valid(int cno2, int mycno, @RequestParam("vcon") String vcon, Authentication at,
+			RedirectAttributes ra) {
 		// 로그인 ID 가져오기
 		UserDetails userDetails = (UserDetails) at.getPrincipal();
 		String mid = userDetails.getUsername();
 
-		// 챌린지 인증 중복 체크		 
+		// 챌린지 인증 중복 체크
 		ChallengeValidationVO vVO = new ChallengeValidationVO();
 		// round :
 		// lstRound : 마지막으로 인증한 일차

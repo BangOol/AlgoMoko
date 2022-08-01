@@ -15,7 +15,8 @@
 	<select id="fListOne"
 		resultType="com.co.algomoko.food.domain.FoodVO">
 		select ing, amount, cal, carb, prot, fat, F0, weight
-		from food
+		from
+		food
 		where
 		ing = #{ing}
 	</select>
@@ -37,7 +38,30 @@
 		resultType="com.co.algomoko.food.domain.FoodVO">
 		select ing, amount, cal, f0, weight
 		from food
-		where ing like '%' || #{ing} || '%' and ing not like #{ing}
+		where ing like
+		'%' || #{ing} || '%' and ing not like #{ing}
 	</select>
-
+	<!-- 페이징 -->
+	<select id="fListPage" resultType="hashmap">
+		select *
+		from(
+			select row_number() over(order by ing asc) as
+			row_num,
+			ing,
+			cal,
+			weight,
+			f0
+			from food
+			)	
+		 <if test="firstRecordIndex !=null and lastRecordIndex != null">
+            WHERE row_num BETWEEN #{firstRecordIndex} AND
+            #{lastRecordIndex}
+        </if>
+	</select>
+	<!-- 테이블 로우 개수 -->
+	<select id="TableCount" resultType="int" parameterType="com.co.algomoko.food.domain.FoodVO">
+		select count(*)
+		from food
+		where ing like '%' || #{ing, jdbcType=VARCHAR} || '%'	
+	</select>
 </mapper>

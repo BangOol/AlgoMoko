@@ -57,8 +57,8 @@
 									<div class="col-lg-4">
 										<div class="checkout__input">
 											<label for="cimg">파일첨부<span>*</span></label> <input
-												th:value="${chl.filepath}" type="file" class="form-control"
-												id="cimg" name="filename2">
+												th:value="@{challenge/download(img=${chl.filepath})}"
+												type="file" class="form-control" id="cimg" name="filename2">
 										</div>
 									</div>
 								</div>

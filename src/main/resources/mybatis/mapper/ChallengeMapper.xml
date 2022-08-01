@@ -18,7 +18,7 @@
 		 	 from (select * from challenge
 		 		   where ctitle like '%' || #{ctitle,jdbcType=VARCHAR} || '%'
 		 		   order by ctitle)
-			 where rownum <=6]]>
+			 where rownum <=10]]>
 	</select>
 	
 	<!-- 챌린지 작성 -->
@@ -34,12 +34,16 @@
 	<!-- 챌린지 수정 -->
 	<update id="cUpdate"
 		parameterType="com.co.algomoko.challenge.domain.ChallengeVO">
-		update challenge
-		set ctitle = #{ctitle}, ccon = #{ccon},
-		cdday = #{cdday}, filepath =
-		#{filepath}, filename = #{filename}
-		where
-		cno = #{cno}
+		update  challenge
+		   <set>  ctitle = #{ctitle}, 
+				ccon = #{ccon},
+				cdday = #{cdday}, 
+			<if test = "filename != null and filename != ''">	
+				filepath =	#{filepath}, 
+				filename = #{filename}
+			</if>
+			</set>
+		where	cno = #{cno}
 	</update>
 	
 	<!-- 챌린지 삭제 -->
@@ -77,7 +81,8 @@
 	<select id="eList" resultType="com.co.algomoko.challenge.domain.MyChallengeVO">
 	<![CDATA[select *
 			 from challenge a, my_challenge b
-			 where (a.cno = b.cno2 and b.mid = #{mid} and ck=1)]]>
+			 where (a.cno = b.cno2 and b.mid = #{mid} and ck=1)
+			 	or (a.cno = b.cno2 and b.mid = #{mid} and b.edate < sysdate)]]>
 	</select>
 	
 	<!-- 챌린지 간소화인증 이동 -->

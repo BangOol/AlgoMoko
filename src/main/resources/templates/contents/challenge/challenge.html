@@ -14,12 +14,6 @@
 <script
 	src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
 <title>challenge</title>
-<style type="text/css">
-.blog__item__cpic img:hover {
-	background: rgba(0, 0, 0, .7);
-	opacity: 1;
-}
-</style>
 </head>
 <body>
 	<th:block layout:fragment="content">
@@ -29,6 +23,15 @@
 			alert(result);
 		}		
 	</script>
+	<script>
+	$(document).ready(function(){
+		$("#si").hover(function(){
+			$("a").css("color",red);
+		}, function(){
+				$("a").css("color","black");
+			})
+	});
+	</script>
 		<!-- 모달창 시작 -->
 		<div class="modal">
 			<div class="modal_body">
@@ -37,7 +40,7 @@
 				</div>
 				<div class="modal_content">
 					<p id="contents"></p>
-					<p>한번 도전 시 취소는 불가능합니다.</p>
+					<p>당신의 한계에 도전해보세요!</p>
 				</div>
 				<div class="modal_btn">
 					<a href="" id="chl">
@@ -101,9 +104,9 @@
 								<div class="col-lg-6 col-md-6 col-sm-6">
 									<div class="blog__item">
 										<div class="blog__item__cpic">
-											<img class="cimg" th:src="@{${chl.filepath}}"
+											<img class="cimg" th:src="@{challenge/download(img=${chl.filepath})}"
 												onerror="this.src='img/loading.png';">
-												<a th:text="${chl.ccon}"></a>
+												<!-- <a th:text="${chl.ccon}"></a> -->
 										</div>
 										<div class="blog__item__text">
 											<ul>

@@ -61,17 +61,16 @@
 							<div th:each="e:${eList}" class="col-lg-6 col-md-6 col-sm-6">
 								<div class="blog__item">
 									<div class="blog__item__cpic">
-										<img th:src="@{${e.filepath}}" alt="">
+										<img th:src="@{download(img=${e.filepath})}">
 									</div>
 									<div class="blog__item__text">
 										<ul>
 											<li><i th:text="| 시작날짜 : ${e.sdate}|" class="fa fa-calendar-o"></i></li>
 											<li><i th:text="| 종료날짜 : ${e.edate}|" class="fa fa-calendar-o"></i></li>
 										</ul>
-										<h1 th:text="${e.mycno}"></h1>
 										<h5 ><a th:text="${e.ctitle}">탄산 끊기</a></h5>										
-										<p th:if ="${e.cper} == 100" th:text="|${e.cdday}일 동안 ${e.ctitle} 도전을 완료했습니다.|"></p>										
-										<p th:unless ="${e.cper} == 100" th:text="|${e.cdday}일 동안 ${e.ctitle} 도전에 실패했습니다.|"></p>
+										<p th:if ="${e.cper} == 100" th:text="|${e.cdday}일 동안 도전하는 ${e.ctitle}에 성공했습니다.|"></p>										
+										<p th:unless ="${e.cper} == 100" th:text="|${e.cdday}일 동안 도전하는 ${e.ctitle}에 실패했습니다.|"></p>
 										<p th:text="|이행률 : ${e.cper}%|"></p>													
 									</div>
 								</div>
