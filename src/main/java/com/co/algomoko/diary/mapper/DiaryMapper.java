@@ -40,4 +40,5 @@ public interface DiaryMapper {
 
 	    //count
 	    public int TableCount(String mid) throws Exception;
+	    public List<RecipeVO> reexli(RecipeVO recipeVO); 
 }

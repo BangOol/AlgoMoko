@@ -135,6 +135,10 @@ delete recipe_ing
 where mid = #{mid} and rname = #{rname}
 </select>
 
+<select id="reexli" resultType="RecipeVO">
+select*from recipe where rname =#{rname}
+</select>
+
      <select id="myrecipelist" resultType="hashmap">
         SELECT *
         FROM (

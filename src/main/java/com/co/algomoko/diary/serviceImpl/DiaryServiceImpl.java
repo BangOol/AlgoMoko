@@ -152,6 +152,11 @@ public class DiaryServiceImpl implements DiaryService {
 		return diaryMapper.TableCount(mid);
 	}
 
+	@Override
+	public List<RecipeVO> reexli(RecipeVO recipeVO) {
+		return diaryMapper.reexli(recipeVO);
+	}
+
 	
 
 	
