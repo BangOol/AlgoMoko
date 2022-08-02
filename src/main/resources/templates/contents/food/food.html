@@ -30,19 +30,15 @@
 			</div>
 		</section>
 		<!-- Breadcrumb Section End -->
-
 		<!-- Blog Section Begin -->
 		<section class="blog spad" style="padding-bottom: 20px;">
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-8 col-md-7">
 						<div class="blog__sidebar__search" style="margin-bottom: 30px;">
-							<form action="/food?ing=" method="get">
-								<input name="ing" type="text" placeholder="검색어 입력"> <input
-									name="currentPage" type="hidden" value=1> <input
-									name="cntPerPage" type="hidden" value=4> <input
-									name="pageSize" type="hidden" value=10>
-								<button type="submit" value="검색">
+							<form action="/food" method="get">
+								<input name="ing" type="text" placeholder="검색어 입력"> 
+								<button type="submit" value="검색" id="food_button">
 									<span class="icon_search"></span>
 								</button>
 							</form>
@@ -77,7 +73,7 @@
 														</tr>
 													</tbody>
 												</table>
-												<div class="paginate">
+												<div class="paginate" th:if="${pagination != null}">
 													<div class="paging" style="text-align: center">
 														<!-- 이전 페이지 이동 버튼 생성 -->
 
@@ -85,15 +81,16 @@
 														<!-- 1 page의 경우, 이전 페이지가 존재하지 않으므로 이전 페이지로 넘어가는 버튼이 생성되지 않음. -->
 
 														<!-- 이전 페이지가 있는 경우 -->
-														<div th:if="${pagination.hasPreviousPage == true}"
-															style="display: inline-block; margin: 0 10px"
-															th:ing="${ing}">
+														<div th:if="${pagination.hasPreviousPage == true}" style="display: inline-block; margin: 0 10px" th:ing="${ing}">
 															<a class="direction prev" href="javascript:void(0);"
 																th:data-ing="${pagination.ing}"
-																th:onclick="|location.href='@{/food?ing(currentPage=1&cntPerPage=${pagination.cntPerPage},pageSize=${pagination.pageSize},ing=${pagination.ing})}'|">
-																> </a> <a class="direction prev" href="javascript:void(0);"
+																th:onclick="|location.href='@{/food(currentPage=1,ing=${pagination.ing})}'|">
+																&lt;&lt; 
+															</a> 
+															<a class="direction prev" href="javascript:void(0);"
 																th:data-ing="${pagination.ing}"
-																th:onclick="|location.href='/food?currentPage=${pagination.currentPage-1}&cntPerPage=${pagination.cntPerPage}&pageSize=${pagination.pageSize}&ing=this.getAttribute(data-ing)'|">
+																th:onclick="|location.href='@{/food(currentPage=${pagination.currentPage-1},ing=${pagination.ing})}'|">
+																&lt; 
 															</a>
 														</div>
 														<!-- 이전 페이지가 없는 경우 -->
@@ -101,57 +98,53 @@
 															style="display: inline-block; margin: 0 10px">
 															<a class="direction prev" href="javascript:void(0);"
 																th:data-ing="${pagination.ing}"
-																th:onclick="|location.href='/food?currentPage=1&cntPerPage=${pagination.cntPerPage}&pageSize=${pagination.pageSize}&ing=this.getAttribute(data-ing)'|">
-																&lt;&lt; </a> <a class="direction prev"
+																th:onclick="|location.href='@{/food(currentPage=1,ing=${pagination.ing})}'|">																
+															</a> 
+															<a class="direction prev"
 																href="javascript:void(0);"
 																th:data-ing="${pagination.ing}"
-																th:onclick="|location.href='/food?currentPage=${pagination.currentPage}&cntPerPage=${pagination.cntPerPage}&pageSize=${pagination.pageSize}&ing=this.getAttribute(data-ing)'|">
-																&lt; </a>
+																th:onclick="|location.href='@{/food(currentPage=${pagination.currentPage},ing=${pagination.ing})}'|">																
+															</a>
 														</div>
-
-
 														<!-- 페이지 숫자 번호 출력 -->
-														<div
-															th:each="idx:${#numbers.sequence(pagination.firstPage, pagination.lastPage)}"
+														<div th:each="idx:${#numbers.sequence(pagination.firstPage, pagination.lastPage)}"
 															style="display: inline-block; margin: 0 10px">
 															<a
 																style="color: #cc0000; font-weight: 700; margin-bottom: 2px;"
 																href="javascript:void(0)"
 																th:data-ing="${pagination.ing}"
-																th:onclick="|location.href='/food?currentPage=${idx}&cntPerPage=${pagination.cntPerPage}&pageSize=${pagination.pageSize}&ing=this.getAttribute(data-ing)'|"
-																th:value="${idx}"> [[${idx}]] </a>
+																th:onclick="|location.href='@{/food(currentPage=${idx},ing=${pagination.ing})}'|"
+																th:value="${idx}"> [[${idx}]] 
+															</a>
 														</div>
 														<!-- 다음 페이지 이동 있을 시 -->
 														<div th:if="${pagination.hasNextPage == true}"
 															style="display: inline-block; margin: 0 10px">
 															<a class="direction next" href="javascript:void(0);"
 																th:data-ing="${pagination.ing}"
-																th:onclick="|location.href='/food?currentPage=${pagination.currentPage+1}&cntPerPage=${pagination.cntPerPage}&pageSize=${pagination.pageSize}&ing=this.getAttribute(data-ing)'|">
-																&gt;</a>
-														</div>
-														<!-- CSS적 요소를 위해 위와 분리함. -->
-														<div th:if="${pagination.hasNextPage == true}"
-															style="display: inline-block; margin: 0 10px">
+																th:onclick="|location.href='@{/food(currentPage=${pagination.currentPage+1},ing=${pagination.ing})}'|">
+																&gt;
+															</a>
 															<a class="direction next" href="javascript:void(0);"
-																th:data-ing="${pagination.ing}"
-																th:onclick="|location.href='/food?currentPage=${pagination.currentPage}&cntPerPage=${pagination.cntPerPage}&pageSize=${pagination.pageSize}&ing=this.getAttribute(data-ing)'|">
-																&gt;&gt;</a>
+															   th:data-ing="${pagination.ing}"
+															   th:onclick="|location.href='@{/food(currentPage=${pagination.lastPage},ing=${pagination.ing})}'|">
+															   &gt;&gt;
+															</a>
 														</div>
-
 														<!-- 다음 페이지 이동 없을 시 -->
 														<div th:if="${pagination.hasNextPage == false}"
 															style="display: inline-block; margin: 0 10px">
 															<a class="direction next" href="javascript:void(0);"
 																th:data-ing="${pagination.ing}"
-																th:onclick="|location.href='/food?currentPage=${pagination.totalRecordCount}&cntPerPage=${pagination.cntPerPage}&pageSize=${pagination.pageSize}&ing=this.getAttribute(data-ing)'|">
-																&gt;</a>
+																th:onclick="|location.href='@{/food(currentPage=${pagination.totalRecordCount},ing=${pagination.ing})}'|">																
+															</a>
 														</div>
 														<div th:if="${pagination.hasNextPage == false}"
 															style="display: inline-block; margin: 0 10px">
 															<a class="direction next" href="javascript:void(0);"
 																th:data-ing="${pagination.ing}"
-																th:onclick="|location.href='/food?currentPage=${pagination.totalRecordCount}&cntPerPage=${pagination.cntPerPage}&pageSize=${pagination.pageSize}&ing=this.getAttribute(data-ing)'|">
-																>> </a>
+																th:onclick="|location.href='@{/food(currentPage=${pagination.totalRecordCount},ing=${pagination.ing})}'|">																 
+															</a>
 														</div>
 														<!-- /paginate -->
 													</div>
