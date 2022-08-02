@@ -4,6 +4,7 @@ package com.co.algomoko.admin.mapper;
 import com.co.algomoko.admin.domain.AdminVO;
 import com.co.algomoko.admin.domain.StatisticVO;
 import com.co.algomoko.admin.paging.PaginationUser;
+import com.co.algomoko.admin.service.AdminService;
 
 import java.util.List;
 import java.util.Map;
@@ -39,4 +40,6 @@ public interface AdminMapper {
     public int TableCount(PaginationUser paginationUser) throws Exception;
 
     public int TableCountAll() throws Exception;
+
+
 }

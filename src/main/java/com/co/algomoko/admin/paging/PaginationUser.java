@@ -93,7 +93,7 @@ public class PaginationUser {
         }
 
         // SQL의 조건절에 사용되는 첫 ROW_NUM
-        firstRecordIndex = (this.getCurrentPage() - 1) * this.getCntPerPage();
+        firstRecordIndex = (this.getCurrentPage() - 1) * this.getCntPerPage() + 1;
 
         // SQL의 조건절에 사용되는 마지막 ROW_NUM
         lastRecordIndex = this.getCurrentPage() * this.getCntPerPage();
