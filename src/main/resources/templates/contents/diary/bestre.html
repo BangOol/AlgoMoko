@@ -173,7 +173,7 @@
 	</div>
 	
 	
-	<form method="post" action="/diary/remodify" name="frm" id="frm">
+	<form action="/diary/download" method="get">
 		<div class="row">
 			<div class="col-md-2 mb-1" style="margin-right:152px;">
 				<div class="input-group mb-3">
@@ -223,7 +223,7 @@
 			<div class="row">
 
 
-
+					
 				<div class="col-sm-12 col-xl-5">
 					<table class="table table-borderless" style="min-height: 200px;">
 						<thead>
@@ -305,6 +305,7 @@
 			<div class="row justify-content-center mt-6">
 				<div class="col-sm-4">
 					<button type="button" class="btn btn-success " onclick="history.go(-1);">확인</button>
+					<button type="submit" class="btn btn-success" >Excel</button>
 				</div>
 			</div>
 		</div>
@@ -313,10 +314,15 @@
 		</div>
 
 		</div>
+<div>
+        
+        
+            
+        </form>
+    </div>
 
 
-
-	</form>
+	
 
 	<div th:replace="~{fragments/footer}"></div>
 
