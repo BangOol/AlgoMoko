@@ -15,15 +15,15 @@
 
     <!-- 회원 정보 Begin -->
     <!-- Breadcrumb Section Begin -->
-    <section class="breadcrumb-section set-bg"
-             data-setbg="/img/breadcrumb.jpg">
+    <section class="breadcrumb-section set-bg" data-setbg="/img/documents-gcdd7a37e5_1920.jpg">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <div class="breadcrumb__text" style="font-family: 'Cairo', 'Jua', sans-serif">
-                        <h2>유저 관리</h2>
+                        <h2 style="font-family: 'Cairo', 'Jua', sans-serif; font-weight: lighter">관리자</h2>
                         <div class="breadcrumb__option">
-                            <span>유저 관리를 하는 페이지입니다.</span>
+                            <a href="./index.html" style="font-family: 'Cairo', 'Jua', sans-serif; font-weight: normal">관리자 페이지</a>
+                            <span>관리자 페이지의 메인 화면입니다.</span>
                         </div>
                     </div>
                 </div>
@@ -33,63 +33,61 @@
     <section class="product spad">
         <div class="container">
             <div class="row">
-                <div class="col-lg-3 col-md-5">
+                <div class="col-lg-3 col-md-5" style="background: linear-gradient(to bottom, #f3feff, #b9cad1); padding: 0">
                     <!-- menu bar Begin -->
                     <div class="sidebar">
-                        <div class="sidebar__item" style="font-family: 'Cairo', 'Jua', sans-serif">
-                            <h4>관리자 페이지</h4>
-                            <ul>
-                                <ul>
-                                    <li><a href="/Admin/UserList">회원 관리</a></li>
-                                    <li><a href="/Admin/Statistics">통계</a></li>
-                                    <li><a href="/Admin/UserStatistics">- 회원 통계</a></li>
-                                    <li><a href="/Admin/Statistics">- 식단 통계</a></li>
-                                    <li><a href="/Admin/Statistics">- 챌린지 통계</a></li>
-                                    <li><a href="/Inquiry">1:1문의 내역 확인</a></li>
-                                    <li><a href="/FAQ">FAQ 이동</a></li>
-                                </ul>
+                        <div class="sidebar__item" style="font-family: 'Cairo', 'Jua', sans-serif; margin-top: 20px">
+                            <a href="/Admin">
+                                <h4 style="font-family: 'Cairo', 'Jua', sans-serif; font-weight: normal">관리자 페이지</h4>
+                            </a>
+                            <ul style="padding-left: 15px">
+                                <li><a href="/Admin/UserList">회원 관리</a></li>
+                                <li><a href="/Admin/Statistics">통계</a></li>
+                                <li><a href="/Admin/UserStatistics">- 회원 통계</a></li>
+                                <li><a href="/Admin/Statistics">- 식단 통계</a></li>
+                                <li><a href="/Admin/Statistics">- 챌린지 통계</a></li>
+                                <li><a href="/Inquiry">1:1문의 내역 확인</a></li>
+                                <li><a href="/FAQ">FAQ 이동</a></li>
                             </ul>
                         </div>
                     </div>
-                    <!-- menu bar end -->
                 </div>
-                <div class="col-lg-9 col-md-7">
+                <div class="col-lg-9 col-md-7" style=" padding-left: 0">
+                    <h4 style="font-family: 'Cairo', 'Jua', sans-serif;  padding : 0 0 10px 70px; width: 840px;
+                     margin-right: 30px">유저 정보</h4>
                     <div class="product__discount">
-                        <div class="section-title product__discount__title"
-                             style="border-bottom: 2px solid; padding-bottom:10px ; font-family: 'Cairo', 'Jua', sans-serif">
-                            <h3>유저 정보</h3>
-                        </div>
-                        회원 정보
-                        <table th:each="dt:${detailList}">
-                            <tr style="border-top: 1px solid;">
-                                <th style="padding:  15px 300px 15px 0; ">아이디</th>
-                                <td style="padding:  0 300px 0 0;" th:text="${dt?.uid}">test@gmail.com</td>
+                        <table th:each="dt:${detailList}" style="padding-left: 10px; margin:90px 0 0 120px; text-align: center;
+                         width: 600px; border:1px solid #a0aec0;">
+                            <tr style="font-family: 'Cairo', 'Jua', sans-serif;">
+                                <th style="width: 250px;padding:25px 0;">아이디</th>
+                                <td style="width: 350px ;" th:text="${dt?.uid}">test@gmail.com</td>
                             </tr>
-                            <tr style="border-top: 1px solid;">
-                                <th style="padding:  15px 300px 15px 0; ">닉네임</th>
-                                <td style="padding:  0 300px 0 0;" th:text="${dt?.nick}">testUser</td>
+                            <tr style="font-family: 'Cairo', 'Jua', sans-serif;">
+                                <th style="width: 250px; padding:25px 0;">닉네임</th>
+                                <td style="width: 350px ; " th:text="${dt?.nick}">testUser</td>
                             </tr>
-                            <tr style="border-top: 1px solid; border-bottom: 1px solid;">
-                                <th style="padding:  15px 300px 15px 0; ">생년월일</th>
-                                <td style="padding:  0 300px 0 0;" th:text="${dt?.birth}">2000.01.01</td>
+                            <tr style="font-family: 'Cairo', 'Jua', sans-serif;">
+                                <th style="width: 250px;padding:25px 0;">생년월일</th>
+                                <td style="width: 350px; " th:text="${dt?.birth}">2000.01.01</td>
                             </tr>
-                            <tr style="border-top: 1px solid; border-bottom: 1px solid;">
-                                <th style="padding:  15px 300px 15px 0; ">제한상태</th>
-                                <td style="padding:  0 300px 0 0;" th:text="${dt?.B0}">2000.01.01</td>
+                            <tr style="font-family: 'Cairo', 'Jua', sans-serif;">
+                                <th style="width: 250px;padding:25px 0;">제한상태</th>
+                                <td style="width: 350px;" th:text="${dt?.B0}">2000.01.01</td>
                             </tr>
                         </table>
                         <br><br><br><br>
 
                     </div>
-                    <form  action="/Admin" method="POST">
-                        <select id="selectOption" name="type">
+                    <form  action="/Admin" method="POST" style="float: right">
+                        <select id="selectOption" name="type" style=" font-family: 'Cairo', 'Jua', sans-serif">
                             <option value="정상">정상</option>
                             <option value="3일 제한">3일 제한</option>
                             <option value="7일 제한">7일 제한</option>
                             <option value="영구 제한">영구 제한</option>
                         </select>
                         <input type="hidden" name="uid" th:value="${detailList[0].uid}"/>
-                        <button type="submit" style="margin-left:770px; width: 80px; height: 30px; border: 1px solid">수정</button>
+                        <button type="submit" style=" width: 70px; height: 50px; border: 1px #dddddd solid; border-radius: 10px;
+                         font-family: 'Cairo', 'Jua', sans-serif">수정</button>
                     </form>
                 </div>
             </div>

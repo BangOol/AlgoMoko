@@ -16,7 +16,7 @@
 <th:block layout:fragment="content">
 
     <!-- Breadcrumb Section Begin -->
-    <section class="breadcrumb-section set-bg" data-setbg="/img/breadcrumb.jpg">
+    <section class="breadcrumb-section set-bg" data-setbg="/img/faqUnsplash.jpg">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
@@ -33,85 +33,98 @@
 
     <!-- Contact Section Begin -->
     <section class="contact spad">
-        <div>
-            <h2 style="margin: 0 0 0 370px; font-family: 'Cairo', 'Jua', sans-serif">자주 나오는 질문들</h2>
-        </div>
+        <h2 style="padding: 10px 0 10px 410px; font-family: 'Cairo', 'Jua', sans-serif; border-top: 3px solid #796d38; border-bottom: 3px solid #796d38;">자주 나오는 질문들</h2>
         <div class="container">
-            <div class="row">
+            <div class="row" style="padding: 0 0 0 30px">
                 <div class="col-lg-3 col-md-3 col-sm-6 text-center">
                     <div class="contact__widget"
                          style="border: 1px solid #a0aec0 ;margin:20px 0; width: 280px; padding : 20px 10px; border-radius: 15px">
                         <h4>01</h4>
-                        <a href=""><p>등록된 음식이 나오지 않아요.</p></a>
+                        <a onclick="num1()"><p style="font-family: 'Cairo', 'Jua', sans-serif">등록된 음식이 나오지 않아요.</p></a>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-6 text-center">
                     <div class="contact__widget"
                          style="border: 1px solid #a0aec0;margin:20px 0; width: 280px;  padding : 20px 10px; border-radius: 15px">
                         <h4>02</h4>
-                        <a href=""><p>제한된 계정이라고 나와요.</p></a>
+                        <a onclick="num2()"><p style="font-family: 'Cairo', 'Jua', sans-serif">제한된 계정이라고 나와요.</p></a>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-6 text-center">
                     <div class="contact__widget"
                          style="border: 1px solid #a0aec0;margin:20px 0; width: 280px;  padding : 20px 10px; border-radius: 15px">
                         <h4>03</h4>
-                        <a href=""><p>비밀번호를 잊었어요.</p></a>
+                        <a onclick="num3()"><p style="font-family: 'Cairo', 'Jua', sans-serif">비밀번호를 잊었어요.</p></a>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-6 text-center">
                     <div class="contact__widget"
                          style="border: 1px solid #a0aec0;margin:20px 0; width: 280px;  padding : 20px 10px; border-radius: 15px">
                         <h4>04</h4>
-                        <a href=""><p>식단일지 작성이 안돼요.</p></a>
+                        <a onclick="num4()"><p style="font-family: 'Cairo', 'Jua', sans-serif">식단일지 작성이 안돼요.</p></a>
                     </div>
                 </div>
             </div>
         </div>
+        <!-- Contact Section End -->
+        <div class="container">
+            <table class="table table-hover" style="text-align: center; margin: 100px 0 300px 0; font-family: 'Cairo', 'Jua', sans-serif">
+                <thead>
+                <tr>
+                    <form action="/FAQList" name="FAQ-form" style="border-spacing:0px">
+                        <th>
+                            <div class="p-2 border"><input type="button" onclick="FAQList('q0')" value="챌린지 문의" id="chbtn"
+                                                           style=" background-color: #ffffff; width: 200px"></div>
+                        </th>
+                        <th>
+                            <div class="p-2 border"><input type="button" onclick="FAQList('q1')" value="일지 문의" id="dibtn"
+                                                           style=" background-color: #ffffff; width: 200px"></div>
+                        </th>
+                        <th>
+                            <div class="p-2 border"><input type="button" onclick="FAQList('q2')" value="음식검색 문의" id="sebtn"
+                                                           style=" background-color: #ffffff; width: 200px"></div>
+                        </th>
+                        <th>
+                            <div class="p-2 border"><input type="button" onclick="FAQList('q3')" value="신고 문의" id="rebtn"
+                                                           style="background-color: #ffffff; width: 200px"></div>
+                        </th>
+                        <th>
+                            <div class="p-2 border"><input type="button" onclick="FAQList('q4')" value="일반 문의" id="etbtn"
+                                                           style=" background-color: #ffffff; width: 200px"></div>
+                        </th>
+                    </form>
+                </tr>
+                <tr>
+                    <th scope="col" colspan="2" style="margin:20px 0">제목</th>
+                    <th scope="col" colspan="3">내용</th>
+                </tr>
+                </thead>
+                <tbody id='FAQTable' style="font-family: 'Cairo', 'Jua', sans-serif">
+                <tr>
+                    <td colspan="2">등록된 음식이 나오지 않아요.</td>
+                    <td colspan="3">등록되는 과정에서 오류가 발생하여 제대로 등록되지 않거나<br>
+                        동일한 이름으로 음식이 등록되어 회원님이 등록하신 음식의 정보가 사라졌을 수 있습니다.<br>
+                        그러므로 문의를 남겨 주시면 최대한 친절하게 도와드리겠습니다.</td>
+                </tr>
+                <tr>
+                    <td  colspan="2">제한된 계정이라고 나와요.</td>
+                    <td colspan="3">제한된 계정은 일반적으로 다른 유저의 신고에 의해 접수가 되고, 운영자가 판단하기에 부적절하다 판단되면<br>
+                        그에 맞는 조치를 취하게 됩니다. 총 3번의 제한 종류가 있으며 3일, 7일, 영구 정지로 구성되어 있으며
+                        <br>영구 정지 시 복구가 불가능함을 알려드립니다.</td>
+                </tr>
+                <tr>
+                    <td colspan="2">비밀번호를 잊었어요.</td>
+                    <td colspan="3">비밀 번호 찾기를 클릭 후, 로그인 시 사용하였던 이메일을 통해 임시 비밀번호를 얻을 수 있습니다.</td>
+                </tr>
+                <tr>
+                    <td colspan="2">식단 일지 작성이 안되요.</td>
+                    <td colspan="3">양식의 문제 혹은 내용을 적지 않은 부분으로 인해 오류가 발생할 수 있습니다. 자세한 부분은 1:1 문의를 부탁드립니다.</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </section>
-    <!-- Contact Section End -->
-    <div class="container">
-<!--        <table class="table table-hover" style="text-align: center; margin: 100px 0 300px 0">-->
-<!--            <div class="d-flex flex-row-reverse col-lg-12 ">-->
 
-<!--            </div>-->
-<!--        </table>-->
-        <table class="table table-hover" style="text-align: center; margin: 100px 0 300px 0; font-family: 'Cairo', 'Jua', sans-serif">
-            <thead>
-            <tr>
-                <form action="/FAQList" name="FAQ-form" style="border-spacing:0px">
-                <th>
-                    <div class="p-2 border"><input type="button" onclick="FAQList('q0')" value="챌린지 문의" id="chbtn"
-                                                   style=" background-color: #ffffff; width: 200px"></div>
-                </th>
-                <th>
-                    <div class="p-2 border"><input type="button" onclick="FAQList('q1')" value="일지 문의" id="dibtn"
-                                                   style=" background-color: #ffffff; width: 200px"></div>
-                </th>
-                <th>
-                    <div class="p-2 border"><input type="button" onclick="FAQList('q2')" value="음식검색 문의" id="sebtn"
-                                                   style=" background-color: #ffffff; width: 200px"></div>
-                </th>
-                <th>
-                    <div class="p-2 border"><input type="button" onclick="FAQList('q3')" value="신고 문의" id="rebtn"
-                                                   style="background-color: #ffffff; width: 200px"></div>
-                </th>
-                <th>
-                    <div class="p-2 border"><input type="button" onclick="FAQList('q4')" value="일반 문의" id="etbtn"
-                                                   style=" background-color: #ffffff; width: 200px"></div>
-                </th>
-                </form>
-            </tr>
-            <tr>
-                <th scope="col" colspan="2" style="margin:20px 0">제목</th>
-                <th scope="col" colspan="3">내용</th>
-            </tr>
-            </thead>
-            <tbody id='FAQTable'>
-
-            </tbody>
-        </table>
-    </div>
     <script>
         function FAQList(q0) {
             $.ajax({
@@ -138,6 +151,7 @@
             //
             // })
         }
+
     </script>
 </th:block>
 </body>

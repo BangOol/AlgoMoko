@@ -14,14 +14,14 @@
 <body>
 <th:block layout:fragment="content">
     <!-- Breadcrumb Section Begin -->
-    <section class="breadcrumb-section set-bg" data-setbg="img/bicycle-gb638434d7_1920.jpg">
+    <section class="breadcrumb-section set-bg" data-setbg="/img/questionPixabay.jpg">
         <div class="container" style="font-family: 'Cairo', 'Jua', sans-serif">
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <div class="breadcrumb__text">
-                        <a href="/Inquiry"><h2>1:1 문의</h2>
+                        <a href="/Inquiry"><h2  style="font-family: 'Cairo', 'Jua', sans-serif">1:1 문의</h2>
                             <div class="breadcrumb__option">
-                                <span>Algomokgo</span>
+                                <span >Algomokgo</span>
                             </div>
                         </a>
                     </div>
@@ -31,13 +31,13 @@
     </section>
     <div class="container">
         <div class="col-lg-4">
-            <div class="contact__form__title" style="margin: 50px 0 0 0; font-family: 'Cairo', 'Jua', sans-serif">
-                <h2>1:1 문의</h2>
-                <sub style="padding: 10px 0 50px 15px">만족스런 답변을 위해 노력하겠습니다.</sub>
+            <div class="contact__form__title" style="margin: 50px 0 0 0; font-family: 'Cairo', 'Jua', sans-serif; width: 200px">
+                <h2  style="font-family: 'Cairo', 'Jua', sans-serif">1:1 문의</h2>
+                <sub style="padding: 10px 0 50px 25px">만족스런 답변을 위해 노력하겠습니다.</sub>
             </div>
         </div>
     </div>
-    </section>
+
     <div class="container" style="font-family: 'Cairo', 'Jua', sans-serif; padding-top: 50px">
         <table class="table table-hover" style="text-align: center">
             <thead>
@@ -84,24 +84,26 @@
                     <div th:if="${pagination.hasPreviousPage == true}" style="display: inline-block; margin: 0 10px">
                         <a class="direction prev" href="javascript:void(0);"
                            th:onclick="|location.href='@{/Inquiry(currentPage=${1},cntPerPage=${pagination.cntPerPage},pageSize=${pagination.pageSize},type=${pagination.type})}'|">
+                            <img src="/img/angles-left-solid.svg" style="width: 15px; height: 15px">
                         </a>
                     </div>
                     <div th:if="${pagination.hasPreviousPage == true}" style="display: inline-block; margin: 0 10px">
                         <a class="direction prev" href="javascript:void(0);"
                            th:onclick="|location.href='@{/Inquiry(currentPage=${pagination.currentPage-1},cntPerPage=${pagination.cntPerPage},pageSize=${pagination.pageSize},type=${pagination.type})}'|">
+                            <img src="/img/angle-left-solid.svg" style="width: 15px; height: 15px">
                         </a>
                     </div>
                     <!-- 이전 페이지가 없는 경우 -->
                     <div th:if="${pagination.hasPreviousPage == false}" style=" display: inline-block; margin: 0 10px">
                         <a class="direction prev" href="javascript:void(0);"
                            th:onclick="|location.href='@{/Inquiry(currentPage=${1},cntPerPage=${pagination.cntPerPage},pageSize=${pagination.pageSize},type=${pagination.type})}'|">
-                            &lt;&lt;
+                            <img src="/img/angles-left-solid.svg" style="width: 15px; height: 15px">
                         </a>
                     </div>
                     <div th:if="${pagination.hasPreviousPage == false}" style=" display: inline-block; margin: 0 10px">
                         <a class="direction prev" href="javascript:void(0);"
                            th:onclick="|location.href='@{/Inquiry(currentPage=${pagination.currentPage},cntPerPage=${pagination.cntPerPage},pageSize=${pagination.pageSize},type=${pagination.type})}'|">
-                            &lt;
+                            <img src="/img/angle-left-solid.svg" style="width: 15px; height: 15px">
                         </a>
                     </div>
 
@@ -120,25 +122,27 @@
                     <div th:if="${pagination.hasNextPage == true}" style="display: inline-block; margin: 0 10px">
                         <a class="direction next" href="javascript:void(0);"
                            th:onclick="|location.href='@{/Inquiry(currentPage=${pagination.currentPage+1},cntPerPage=${pagination.cntPerPage},pageSize=${pagination.pageSize},type=${pagination.type})}'|">
-                            &gt;</a>
+                            <img src="/img/angle-right-solid.svg" style="width: 15px; height: 15px">
+                        </a>
                     </div>
                     <!-- CSS적 요소를 위해 위와 분리함. -->
                     <div th:if="${pagination.hasNextPage == true}" style=" display: inline-block; margin: 0 10px">
                         <a class="direction next" href="javascript:void(0);"
                            th:onclick="|location.href='@{/Inquiry(currentPage=${pagination.totalRecordCount},cntPerPage=${pagination.cntPerPage},pageSize=${pagination.pageSize},type=${pagination.type})}'|">
-                            &gt;&gt;</a>
+                            <img src="/img/angles-right-solid.svg" style="width: 15px; height: 15px"></a>
                     </div>
 
                     <!-- 다음 페이지 이동 없을 시 -->
                     <div th:if="${pagination.hasNextPage == false}" style=" display: inline-block; margin: 0 10px">
                         <a class="direction next" href="javascript:void(0);"
                            th:onclick="|location.href='@{/Inquiry(currentPage=${pagination.totalRecordCount},cntPerPage=${pagination.cntPerPage},pageSize=${pagination.pageSize},type=${pagination.type})}'|">
-                            &gt;</a>
+                            <img src="/img/angle-right-solid.svg" style="width: 15px; height: 15px">
+                        </a>
                     </div>
                     <div th:if="${pagination.hasNextPage == false}" style=" display: inline-block; margin: 0 10px">
                         <a class="direction next" href="javascript:void(0);"
                            th:onclick="|location.href='@{/Inquiry(currentPage=${pagination.totalRecordCount},cntPerPage=${pagination.cntPerPage},pageSize=${pagination.pageSize},type=${pagination.type})}'|">
-                            >>
+                            <img src="/img/angles-right-solid.svg" style="width: 15px; height: 15px">
                         </a>
                     </div>
                     <!-- /paginate -->
@@ -156,26 +160,12 @@
                     </select>
                 </div>
             </div>
-<!--            <div style="text-align: center; font-family: 'Cairo', 'Jua', sans-serif">-->
-<!--                <form id="search-form" method="get" action="UserList">-->
-<!--                    <input type="hidden" name="currentPage" value=1>-->
-<!--                    <input type="hidden" name="cntPerPage" value=10>-->
-<!--                    <input type="hidden" name="pageSize" value=10>-->
-<!--                    <input type="text" placeholder="검색어 입력" style="border: 1px solid" name="keyword" id="findUserPress">-->
-<!--                    <select id="selectOption" name="type">-->
-<!--                        <option value="email">이메일</option>-->
-<!--                        <option value="nick">닉네임</option>-->
-<!--                    </select>-->
-<!--                    <label for="findUserPress">-->
-<!--                        <button class="btn btn-success" type="submit">-->
-<!--                            검색-->
-<!--                        </button>-->
-<!--                    </label>-->
 
-<!--                </form>-->
-<!--            </div>-->
             <a href="/Inquiry/writeInquiry">
-                <button type="button" class="btn btn-success" style="text-align: right; margin-bottom: 100px">글쓰기
+                <button type="button"  style="text-align: right; margin-bottom: 100px; width: 74px;
+                 height: 40px; border-radius: 8px; background-color: #ff3222;
+                font-family: 'Cairo', 'Jua', sans-serif; text-align: center;
+                margin-right: 20px; color: #ffffff">글쓰기
                 </button>
             </a>
         </div>

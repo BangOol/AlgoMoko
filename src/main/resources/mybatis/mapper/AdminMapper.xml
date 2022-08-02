@@ -12,6 +12,11 @@
             <result property="B0" column="B0"/>
             <result property="nick" column="NICK"/>
         </resultMap>
+
+
+    <select id="selectSomeInquiry" resultType="com.co.algomoko.admin.domain.StatisticVO">
+
+    </select>
     <!-- 관리자 유저 목록 조희 -->
     <select id="SelectAllList" resultType="hashmap" resultMap="members">
         SELECT *

@@ -19,4 +19,6 @@ public interface AdminService {
     List<StatisticVO> ageRate(); // 회원 나이 비율
 
     List<StatisticVO> bmiRate(); // 회원 BMI 비율
+
+
 }

@@ -1,5 +1,6 @@
 package com.co.algomoko.admin.service;
 
+import com.co.algomoko.admin.domain.AdminVO;
 import com.co.algomoko.admin.paging.PaginationUser;
 
 import java.util.List;
@@ -12,7 +13,6 @@ public interface PagingService {
     public int TableCount(PaginationUser paginationUser) throws Exception;
 
     public int TableCountAll() throws Exception;
-
 
 
 }
