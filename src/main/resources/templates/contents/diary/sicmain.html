@@ -36,16 +36,19 @@
     <link rel="stylesheet" href="/css/jquery-ui.min.css" type="text/css">
     <link rel="stylesheet" href="/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="/css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="/css/style.css" type="text/css">
-    <link rel="stylesheet" href="/css/mainsic.css" type="text/css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css2?family=Jua:wght@200;300;400;600;900&display=swap"
+	rel="stylesheet">
+    
     <link href="https://fonts.googleapis.com/css?family=Roboto:300&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.css" rel="stylesheet">  
-    <link rel="stylesheet" href="/StyleCards.css"/>
+    
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
     <script>
         
    $(function(){
@@ -127,7 +130,7 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
 
 
 
-        <div class="card-category-1 row">
+        <div class="card-category-1 row" style="font-family: 'Cairo', 'Jua', sans-serif;">
         	
             <div class="basic-card basic-card-light m-10" >
                 
@@ -136,12 +139,12 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
                     
                 </div>
     
-                <div class="card-link">
+                <div class="card-link" style="font-family: 'Cairo', 'Jua', sans-serif;">
                     
                     <table>
                               <thead>
                                   <tr>
-                                      <th class="shoping__product" >아침</th>
+                                      <th  class="shoping__product">아침</th>
 
                                   </tr>
                               </thead>
@@ -151,7 +154,7 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
                               
                               
                               <tr th:if= "${today.dddo == 'aa'} and ${today.dday}=='월요일'">
-                              		  <td th:text="${today.ddname}" class="shoping__cart__item" >
+                              		  <td  th:text="${today.ddname}" class="shoping__cart__item" >
                                           <img src="img/cart/cart-1.jpg" alt="">
                                           <br><br>
                                       </td>
@@ -351,7 +354,7 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
                                           <img src="img/cart/cart-1.jpg" alt="">
                                           <h5></h5>
                                       </td>
-                                      <td <td th:text="|${today.cal}kcal|"  class="shoping__cart__price">
+                                      <td th:text="|${today.cal}kcal|"  class="shoping__cart__price">
                                           
                                       
                                   </tr>
@@ -371,7 +374,7 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
                                           <img src="img/cart/cart-1.jpg" alt="">
                                           <h5></h5>
                                       </td>
-                                      <td <td th:text="|${today.cal}kcal|"  class="shoping__cart__price">
+                                      <td th:text="|${today.cal}kcal|"  class="shoping__cart__price">
                                           
                                       
                                   </tr>
@@ -391,7 +394,7 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
                                           <img src="img/cart/cart-1.jpg" alt="">
                                           <h5></h5>
                                       </td>
-                                      <td <td th:text="|${today.cal}kcal|"  class="shoping__cart__price">
+                                      <td th:text="|${today.cal}kcal|"  class="shoping__cart__price">
                                           
                                       
                                   </tr>

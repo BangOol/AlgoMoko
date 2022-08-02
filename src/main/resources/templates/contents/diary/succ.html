@@ -127,18 +127,12 @@
     
 
    <div th:replace="~{fragments/aside}"></div>
-    <div id='wrap'>
- <div id='wrap'>
-
-    <!-- calendar 태그 -->
-    <div id='calendar-wrap'>
-      <div id='calendar1'></div>
+<div>
+        <h1>Excel Download</h1>
+        <form action="/diary/download" method="get">
+            <button type="submit">Excel</button>
+        </form>
     </div>
-  </div>
-  처리 완료
-<button onclick="location.href='../diary'">메인으로</button>
-    
-    <br/>
 
 <div th:replace="~{fragments/footer}"></div>
     

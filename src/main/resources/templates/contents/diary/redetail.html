@@ -25,7 +25,10 @@
    <link rel="stylesheet" href="/css/owl.carousel.min.css" type="text/css">
    <link rel="stylesheet" href="/css/slicknav.min.css" type="text/css">
    <link rel="stylesheet" href="/css/style.css" type="text/css">
-
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css2?family=Jua:wght@200;300;400;600;900&display=swap"
+	rel="stylesheet">
    <link rel="stylesheet" href="https://uicdn.toast.com/grid/latest/tui-grid.css" />
    <script src="https://uicdn.toast.com/grid/latest/tui-grid.js">
    </script>
@@ -116,8 +119,29 @@
          margin-bottom: 10px;
          margin-top: -10px;
       }
+      th {
+			width: 120px;
+			height: 49px;
+		}
 
+		tr {
+			width: 400px;
+		}
 
+		.thth1 {
+			width: 100px;
+			height: 45px;
+		}
+
+		.thth2 {
+			width: 100px;
+			height: 45px;
+		}
+
+		.thth3 {
+			width: 50px;
+			height: 45px;
+		}
    </style>
 
 
@@ -125,67 +149,94 @@
 </head>
 
 <body>
-   <div th:replace="~{fragments/header}"></div>
-   <div th:replace="~{fragments/aside}"></div>
+	<div th:replace="~{fragments/header}"></div>
+	<div th:replace="~{fragments/aside}"></div>
+	<!-- 모달창 시작 -->
+	<div class="modal">
+		<div class="modal1_body">
+			<div class="modal_title">
+				<input type="text" id="textex"><button id="btnbtn" name="btnbtn" class="btn btn-primary">검색</button>
+				<div class="modal_content">
+
+				</div>
+			</div>
+			<!-- 제품모달 그리드 -->
+			<div class="container-fluid px-4">
+
+				<div id="gridpro"></div>
+				<div class="modal_btn">
+					<button id="modalbtn" class="modal_s">등록</button>
+					<button class="modal_c">취소</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	<form method="post" action="/diary/remodify" name="frm" id="frm">
+		<div class="row">
+			<div class="col-md-2 mb-1" style="margin-right:152px;">
+				<div class="input-group mb-3">
+
+					<input type="text" class="form-control blog__btn" placeholder="재료검색">
+
+				</div>
+
+			</div>
+			
+					<div class="col-md-3 mb-1 ml-5">
+				<div class="input-group mb-3">
+
+					<input type="text" class="form-control" th:value="${redetail[0].rname}" name="rname" placeholder="레시피 명">
+
+				</div>
+
+			</div>
+		
 
 
 
-   <!-- Table End -->
-   </section>
-   <!-- Blog Section End -->
-      <input type="text" readonly placeholder="재료 입력" style="outline:1px solid #c3bfbf;">
-      <button type="button" id="btnmod dialog" class="btn btn-primary blog__btn">검색</button>
-      <div id="dialog" title="재료 검색"></div>
-      <!-- 모달창 시작 -->
-      <div class="modal">
-         <div class="modal1_body">
-            <div class="modal_title">
-               <input type="text" id="textex"><button id="btnbtn" name="btnbtn" class="btn btn-primary">검색</button>
-               <div class="modal_content">
+			
 
-               </div>
-            </div>
-            <!-- 제품모달 그리드 -->
-            <div class="container-fluid px-4">
-
-               <div id="gridpro"></div>
-               <div class="modal_btn">
-                  <button id="modalbtn" class="modal_s">등록</button>
-                  <button class="modal_c">취소</button>
-            </div>
-         </div>
-      </div>
-   </div>
-   </div>
+		</div>
 
 
 
-   <!-- 모달창 종료 -->
+
+		<!-- 모달창 종료 -->
 
 
-   <br><br>
 
 
- <form method="post" action="/diary/remodify" name="frm" id="frm">
 
 
-   
-   <div class="container">
-      <div class="row">
-         <div class="col-sm-7 col-xl-6">
-      <input th:value="${redetail[0].rname}" name="rname" readonly>
 
 
-            <table class="table table-borderless">
-               <thead>
-                  <tr>
-                  <th scope="col">재료</th>
-                  <th scope="col">칼로리</th>
-                  <th scope="col">수량</th>
-                  </tr>
-               </thead>
-               <tbody id="tbody1">
-                  <th:block th:each="redetail:${redetail}">
+
+		</div>
+		</div>
+
+
+
+
+		<div class="container">
+			<div class="row">
+
+
+
+				<div class="col-sm-12 col-xl-5">
+					<table class="table table-borderless" style="min-height: 200px;">
+						<thead>
+							<tr>
+
+								<th class="thth1">재료명</th>
+								<th class="thth2">칼로리</th>
+								<th colspan="3" class="thth3">수량</th>
+
+							</tr>
+						</thead>
+						<tbody id="tbody1">
+					<th:block th:each="redetail:${redetail}">
                   
                      <tr>
                         <th>
@@ -204,82 +255,84 @@
                         <td class="shoping__cart__item__close"><button class="icon_close"></td>
                      </tr>
 
-                  
 
-              </tbody>
+			</block>
+						</tbody>
 
 
-               </table>
+					</table>
 
-</th:block>
-            </div>
-            <div class="col-sm-2 col-xl-3" style="margin-left: 200px;">
-            
-            <table class ="generic" width="100">
+					<div class="font-bold text-xl">kcal
+
+
+
+
+						<td><input type="text" id="seipSum"></td>
+					</div>
+				</div>
+
+				<div class="col-sm-12 col-xl-5">
+<table class ="generic" width="100">
             <tbody id="rebody">
-            
-            <button type="button" id="addrebtn" class="btn btn-primary">추가</button>
-            
-            레시피   
                
-            <tr th:block th:each="rearrys:${rearrys}">
+               
+               레시피      
+               <tr th:block th:each="rearrys:${rearrys}">
                <td style="width:150px" id="recnt"></td>
-               <td width="500" class="trre">
-               
-                  <textarea  th:text="${rearrys}" class="form-control" row="5" name="rrecipe" id="rrecipe" style="width: 500px;"></textarea>
-               </td>
-            </tr>
-               
-               
-            
-            
-               
-               
+              <td width="500" class="trre">
+               <input type="text" th:value="${rearrys}" class="form-control" row="5" name="rrecipe" id="rrecipe" style="width: 440px;">
+              </td>
+             
+             
+             </block>
+               </tr>
 
+          
+            
+            
+            
             </tbody>
             
             
             </table>
             
-            
-            </div>
+				</div>
+				<div class="col-sm-12 col-xl-2 mt-4">
+				 <button type="button" id="addrebtn" class="btn btn-success">추가</button>
+				</div>
+				
+			</div>
+			<div class="row justify-content-center mt-6">
+				<div class="col-sm-4">
+					<button type="submit" class="btn btn-success" id="che">수정</button>
+					<button type="button" class="btn btn-success" onclick="diaryde()" id="insert">삭제</button>
+					<button type="button" class="btn btn-secondary" onclick="history.go(-1);">취소</button>
+				</div>
+			</div>
+		</div>
 
-         </div>
+		</div>
+		</div>
 
-      </div>
-      </div>
-      <!-- Progress Bar -->
+		</div>
 
-   <div class="flex flex-1 flex-col md:flex-row lg:flex-row mx-2 mt-2">
-      <div class="rounded overflow-hidden shadow bg-white mx-2 w-50 pt-2">
-         <div class="px-6 py-2 border-b border-light-grey">
-            <div class="font-bold text-xl">kcal</div>
-         </div>
 
-      <td><input type="text" id="seipSum"></td>
 
-      </div>
+	</form>
 
-   </div>
-      </th:block>
-      <button type="submit" class="btn btn-primary" id="insert">수정</button>
-      <button type="button" class="btn btn-primary" onclick="diaryde()" id="insert">삭제</button>
-      <button type="button" class="btn btn-primary " onclick="history.go(-1);">취소</button>
- </form>
+	<div th:replace="~{fragments/footer}"></div>
 
-      <div th:replace="~{fragments/footer}"></div>
+	<!-- Js Plugins -->
+	<script src="/js/jquery-3.3.1.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script src="/js/jquery.nice-select.min.js"></script>
+	<script src="/js/jquery-ui.min.js"></script>
+	<script src="/js/jquery.slicknav.js"></script>
+	<script src="/js/mixitup.min.js"></script>
+	<script src="/js/owl.carousel.min.js"></script>
+	<script src="/js/main.js"></script>
 
-    <!-- Js Plugins -->
-    <script src="/js/jquery-3.3.1.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-    <script src="/js/jquery.nice-select.min.js"></script>
-    <script src="/js/jquery-ui.min.js"></script>
-    <script src="/js/jquery.slicknav.js"></script>
-    <script src="/js/mixitup.min.js"></script>
-    <script src="/js/owl.carousel.min.js"></script>
-    <script src="/js/main.js"></script>
-
-      <script>
+	<script>
       var gin;
       var gic;
       var gia;
@@ -317,6 +370,9 @@
       });
 
       $(function () {
+         
+         
+         
          
       
          $(".thth3").on("keyup", function () {
@@ -374,7 +430,7 @@
          $('.blog__btn').click((e) => {
             jepoom.refreshLayout();
             modal.style.display = "flex";
-            body.style.overflow = 'hidden';
+            body.style.overflow = 'auto';
          })
          const closeBtn = modal.querySelector(".modal_c")
          closeBtn.addEventListener("click", e => {
@@ -413,7 +469,7 @@
 
 
 
-                        $("#modalbtn").on("click", function () {
+          $("#modalbtn").off("click").on("click", function () {
                var tbody = $('#tbody1');
 			var qqq = $('<input>').val(gia).addClass('thth3').attr('type', 'text').attr('name', 'amount');
                var tr = $('<tr>');
@@ -452,7 +508,8 @@
                var d = $(tbody).append(b);
 
                result()
-
+				modal.style.display = "none";
+            	body.style.overflow = 'auto';	
             })
 
 
@@ -471,6 +528,10 @@
                   $("#frm").attr("action", "redelete").submit();
          
                }
+               
+               
+               
+               
                var a = 1;
                var b = 0;
             $("#addrebtn").on("click", function () {
@@ -490,7 +551,8 @@
                      var tr = `<tr>
                               <td style="width:150px" id="recnt"></td>
                               <td width="500" class="trre">
-                              <textarea class="form-control" row="5" name="rrecipe" id="rrecipe" style="width: 500px;"></textarea>
+                              <input type="text" class="form-control" row="5" name="rrecipe" id="rrecipe" style="width: 440px;">
+                              
                               </tr>`
                      $("#rebody").append(tr)
                      
@@ -504,7 +566,7 @@
                
 
          })
-
+		
 
 
 

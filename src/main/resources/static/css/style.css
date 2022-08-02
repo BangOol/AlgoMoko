@@ -94,7 +94,7 @@
   left: 50%;
   width: 700px;
   height: 500px;
-  
+  padding: 40px;
   text-align: center;
   background: rgba(69, 139, 197, 0.70);
   border: 1px solid rgba(255, 255, 255, 0.18);
@@ -139,6 +139,7 @@
   border-radius: 25px;
   background-color: black;
 }
+
 
 .modal_btn .modal_c {
   display: inline-block;
@@ -57690,7 +57691,7 @@ body {
 html,
 body {
 	height: 100%;
-	font-family: "Cairo", sans-serif;
+	font-family: "Cairo", 'Jua' ,sans-serif;
 	-webkit-font-smoothing: antialiased;
 	font-smoothing: antialiased;
 }
