@@ -28,12 +28,7 @@ public class UserServiceImpl implements UserService{
 	private PasswordEncoder passwordEncoder 
 	= new BCryptPasswordEncoder();
 
-	//회원정보보기
-	@Override
-	public UserVO  memberInfo(UserVO uservo){
-		return mapper.search(uservo);
-
-	}
+	
 	//로그인
 	@Override
 	public UserVO login(UserVO uservo){
@@ -155,6 +150,16 @@ public class UserServiceImpl implements UserService{
 		
 		return mapper.updateMyPage(vo);
 	}
+
+
+	@Override
+	public void deleteId(String mid) {
+		mapper.delete(mid);
+		
+	}
+	
+	
+	
 	
 	}
 	

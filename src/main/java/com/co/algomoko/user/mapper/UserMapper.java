@@ -13,9 +13,11 @@ import com.co.algomoko.user.domain.UserVO;
 @Mapper
 public interface UserMapper {
 	public int insert(UserVO uservo);
-	public int delete(UserVO uservo);
+	public int delete(String mid);
 	public int update(UserVO uservo);
 	
+	//회원정보 
+	public UserVO search2(String mid);
 	public UserVO search(UserVO uservo);
 	public List<UserVO> userlist(UserVO uservo);
 
@@ -36,6 +38,8 @@ public interface UserMapper {
 	public void updatepw(@Param("mid") String mid,@Param("mpw") String encodepw);
 	//회원정보 수정
 	public int updateMyPage(UserVO vo);
+	//회원탈퇴
+	public void deleteId(String mid);
 	
 	
 

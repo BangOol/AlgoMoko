@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="zxx">
+<html lang="zxx" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
 
 <head>
     <meta charset="UTF-8">
@@ -9,235 +11,100 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Ogani | Template</title>
 
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
-
-
-    <!-- Css Styles -->
-    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
-    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
-    <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
-    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="css/style.css" type="text/css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Jua:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+   
 </head>
 
 <body>
-    <!-- Page Preloder -->
-    <div id="preloder">
-        <div class="loader"></div>
-    </div>  
+<th:block layout:fragment="content">
+
+  
 
 
 
-                      <!-- Header Section Begin -->
-        <header class="header">
-            <div class="header__top">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-8">
-                            
-                        </div>
-                        <div class="col-md-4">
-                            <div class="header__top__right">
-                                <div class="header__top__right__auth" style="font-family: 'Jua'">
-                                    <a href="#" style="float: right; margin : 0 0 0 10px"><i class="fa fa-user" ></i>Login</a>
-                                    <a href="#" style="float: right; margin : 0 10px">아이디 찾기</a>
-                                    <a href="#" style="float: right; margin : 0 10px">비밀번호 찾기</a>
-                                    <a href="#" style="float: right; margin : 0 10px">회원 가입</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-3">
-                        <div class="header__logo">
-                            <a href="./index.html"><img src="/img/로고.PNG" alt=""></a>
-                        </div>
-                    </div>
-                    <div class="col-lg-9">
-                        <nav class="header__menu">
-                            <div class = "text-right">
-                                <ul style="font-family: 'Jua'; margin: 80px 0 0 0;">
-                                    <!-- <li class="active"><a href="./index.html">식단일지</a></li> -->
-                                    <li><a href="./index.html">식단일지</a></li>
-                                    <li><a href="./shop-grid.html">챌린지</a></li>
-                                    <li><a href="#">음식</a></li>
-                                    <li><a href="./blog.html">게시판</a></li>
-                                    <li>
-                                        <a href="./contact.html">고객센터</a>
-                                        <ul class="header__menu__dropdown">
-                                            <li><a href="./shop-details.html">고객센터</a></li>
-                                            <li><a href="./shoping-cart.html">1:1 문의</a></li>
-                                            <li><a href="./checkout.html">FAQ</a></li>
-                                            <li><a href="./blog-details.html">공지사항</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </div>
-                        </nav>
-                      </div>
-                </div>
-            </div>
-        </header>
-    <!--회원 목록 body-->
-   <!-- Breadcrumb Section Begin -->
-   <section class="breadcrumb-section set-bg" data-setbg="img/breadcrumb.jpg">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <div class="breadcrumb__text" style="font-family: 'Jua'">
-                    <h2 style="font-family: 'Jua'">회원 목록</h2>
-                    <div class="breadcrumb__option">
-                        <a href="./index.html">마이페이지</a>
-                        <span>자신의 정보를 확인 가능합니다.</span>
-                    </div>
+<!--회원 목록 body-->
+<!-- Breadcrumb Section Begin -->
+<section class="breadcrumb-section set-bg" data-setbg="img/breadcrumb.jpg">
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 text-center">
+            <div class="breadcrumb__text" style="font-family: 'Jua'">
+                <h2 style="font-family: 'Jua'">비밀번호 변경</h2>
+                <div class="breadcrumb__option">
+                    <span>비밀 번호를 변경합니다.</span>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </section>
 
 <!-- 회원 정보 Begin -->
 
 <section class="product spad" style="font-family: 'Jua';">
-  <div class="container">
-      <div class="row">
-          <div class="col-lg-3 col-md-5">
-            <!-- menu bar Begin -->
-              <div class="sidebar" >
-                  <div class="sidebar__item" style="background-color:#f5f5f5; height :600px;">
-                      <h4>my Page</h4>
-                      <ul style="margin: 0 0 0 20px;">
-                        <li ><a href="myPage.html">회원 정보</a></li>
-                        <li><a href="insertMyPage.html">- 정보 수정</a></li>
-                        <li><a href="myPageAlarm.html">알람</a></li>
-                        <li><a href="myPageAlarm.html">- 알람 목록</a></li>
-                        <li><a href="myPageAlarmDetail.html">- 알람 등록</a></li>
-                        <li><a href="myPageActivities.html">활동 내역</a></li>
-                        <li><a href="myPageSecurity.html">보안 설정</a></li>
-                        <li><a href="myPageSecurityInsertPW.html">- 비밀번호 변경</a></li>
-                        <li><a href="myPageSecurityDeleteId.html">- 회원 탈퇴</a></li>
-                      </ul>
-                  </div>
+<div class="container">
+  <div class="row">
+      <div class="col-lg-3 col-md-5">
+        <!-- menu bar Begin -->
+          <div class="sidebar" >
+              <div class="sidebar__item" style="background-color:#f5f5f5; height :600px;">
+                  <h4>my Page</h4>
+                  <ul style="margin: 0 0 0 20px;">
+                    <li ><a href="myPage">회원 정보</a></li>
+	                        <li><a href="insertMyPage">- 정보 수정</a></li>                                                
+	                        <li><a href="">활동 내역(삭제예정)</a></li>
+	                        <li><a href="">보안 설정</a></li>
+	                        <li><a href="myPageSecurityInsertPW">- 비밀번호 변경</a></li>
+	                        <li><a href="myPageSecurityDeleteId">- 회원 탈퇴</a></li>
+                  </ul>
               </div>
-              <!-- menu bar end -->
           </div>
-      <div class="col-lg-9 col-md-7">
-        <h3 style="border-bottom: 2px solid; font-family: 'Jua';">비밀번호 변경</h3>
-        <div>
-          <table style="margin: 60px 0 0 60px; ">
-            <tr>
-                <th>비밀번호 :</th>
-                <td><input type = "password"style = "width: 400px; border-radius: 10px;
-                    border: 1px solid; height: 30px; margin: 10px 0 10px 0 ;" placeholder="8자 이상의 문자, 숫자, 특수문자를 입력하세요"></td>
-            </tr>
-            <tr>
-                <th>비밀번호 확인: </th>
-                <td><input type = "password" style = "width: 400px; border-radius: 10px;
-                    border: 1px solid; height: 30px; margin: 10px 0 10px 0 ;" placeholder="8자 이상의 문자, 숫자, 특수문자를 입력하세요"></td>
-                <!--pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*()_-+=[]{}~?:;`|/]).{8,50}$"  : 8자 이상의 문자, 숫자 정규식-->
-            </tr>
-            <tr>
-                <th>아이디 :</th>
-                <td><input type = "text" style = "width: 400px; border-radius: 10px;
-                 border: 1px solid; height: 30px; margin: 10px 0 10px 0 ;" placeholder="이메일 형식으로 입력하세요"> <input type = "button" value ="발송" style="width: 80px; height:30px; "></td>
-            </tr>
-            <tr>
-                <th>인증번호</th>
-                <td style="border:none"><input type = "text"  style = "width: 200px; border-radius: 10px;
-                    border: 1px solid; height: 30px; margin: 10px 0 10px 0 ;" placeholder="인증 번호를 입력하세요"></td>
-            </tr>
-            </table>
-            <button type="submit" style="float:right; background-color: #f5f5f5; width: 100px; height: 30px;">비밀번호 변경</button>
-        </div>
+          <!-- menu bar end -->
+          </div>
+          <div class="col-lg-9 col-md-7">
+            <h3 style="border-bottom: 2px solid; font-family: 'Jua';">비밀번호 변경</h3>
+            <div>
+              <table style="margin: 60px 0 0 60px; ">
+                <tr>
+                    <th>새 비밀번호 :</th>
+                    <td><input type = "password" style = "width: 400px; border-radius: 10px;
+                        border: 1px solid; height: 30px; margin: 10px 0 10px 0 ;" placeholder="8자 이상의 문자, 숫자, 특수문자를 입력하세요"></td>
+                </tr>
+                <tr>
+                    <th>새 비밀번호 확인: </th>
+                    <td><input type = "password" style = "width: 400px; border-radius: 10px;
+                        border: 1px solid; height: 30px; margin: 10px 0 10px 0 ;" placeholder="8자 이상의 문자, 숫자, 특수문자를 입력하세요"></td>
+                    <!--pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*()_-+=[]{}~?:;`|/]).{8,50}$"  : 8자 이상의 문자, 숫자 정규식-->
+                </tr>
+                <tr>
+                    <th>아이디 :</th>
+                    <td><input type = "text" style = "width: 400px; border-radius: 10px;
+                     border: 1px solid; height: 30px; margin: 10px 0 10px 0 ;" placeholder="이메일 형식으로 입력하세요"> <input type = "button" value ="발송" style="width: 80px; height:30px; "></td>
+                </tr>
+                <tr>
+                    <th>인증번호</th>
+                    <td style="border:none"><input type = "text"  style = "width: 200px; border-radius: 10px;
+                        border: 1px solid; height: 30px; margin: 10px 0 10px 0 ;" placeholder="인증 번호를 입력하세요"><input type = "button" value ="확인" style="width: 80px; height:30px; "></td>
+                </tr>
+                </table>
+                <button type="submit" style="float:right; background-color: #f5f5f5; width: 100px; height: 30px;">비밀번호 변경</button>
+            </div>
+          </div>
       </div>
-  </div>
-</div>
-</section>
+    </div>
+    </section>
+    <script>
+  function search_check(num) {
+		if (num == '1') {
+			document.getElementById("searchP").style.display = "none";
+			document.getElementById("searchI").style.display = "";	
+		} else {
+			document.getElementById("searchI").style.display = "none";
+			document.getElementById("searchP").style.display = "";
+		}
+	}
+  </script> 
 <!-- Product Section End -->
-
-    <!-- Footer Section Begin -->
-    <footer class="footer spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="footer__about">
-                        <div class="footer__about__logo">
-                            <a href="./index.html"><img src="img/로고.PNG" alt=""></a>
-                        </div>
-                        <ul>
-                            <li style="font-size: 16px">Address: 대구광역시 중구 남일동 중앙대로 403 </li>
-                            <li>Phone: +65 11.188.888</li>
-                            <li>Email: hello@colorlib.com</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-6 offset-lg-1">
-                    <div class="footer__widget">
-                        <h6>Useful Links</h6>
-                        <ul>
-                            <li><a href="#" style="font-weight: 650;">About Us</a></li>
-                            <li><a href="#">식단일지</a></li>
-                            <li><a href="#">음식검색</a></li>
-                        </ul>
-                        <ul>
-                            <li><a href="#">챌린지</a></li>
-                            <li><a href="#">게시판</a></li>
-                            <li><a href="#">고객센터</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-12">
-                    <div class="footer__widget">
-                        <h6>Join Our Newsletter Now</h6>
-                        <p>Get E-mail updates about our latest shop and special offers.</p>
-                        <form action="#">
-                            <input type="text" placeholder="Enter your mail">
-                            <button type="submit" class="site-btn">Subscribe</button>
-                        </form>
-                        <div class="footer__widget__social">
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#"><i class="fa fa-instagram"></i></a>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-pinterest"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="footer__copyright">
-                        <div class="footer__copyright__text"><p style="margin-left:440px"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved</a>
-  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <!-- Footer Section End -->
-
-    <!-- Js Plugins -->
-    <script src="js/jquery-3.3.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.nice-select.min.js"></script>
-    <script src="js/jquery-ui.min.js"></script>
-    <script src="js/jquery.slicknav.js"></script>
-    <script src="js/mixitup.min.js"></script>
-    <script src="js/owl.carousel.min.js"></script>
-    <script src="js/main.js"></script>
-
-
-
+</th:block>
 </body>
 
 </html>

@@ -9,7 +9,7 @@ import com.co.algomoko.user.domain.Account;
 import com.co.algomoko.user.domain.UserVO;
 
 public interface UserService {
-	public UserVO memberInfo(UserVO uservo);
+
 	public UserVO login(UserVO uservo);
 	
 	//회원가입
@@ -32,6 +32,11 @@ public interface UserService {
 	public void sendpw(String mid) throws Exception;
 	//회원정보 변경
 	public int insertMyPage(UserVO vo);
+
+	
+	//회원탈퇴
+	public void deleteId(String mid);
+	
 	
 	
 }
