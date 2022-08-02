@@ -15,7 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.co.algomoko.admin.paging.PaginationUser;
 import com.co.algomoko.food.domain.FoodVO;
-import com.co.algomoko.food.domain.page;
+import com.co.algomoko.food.domain.Page;
 import com.co.algomoko.food.mapper.FoodMapper;
 
 @Controller
@@ -44,41 +44,25 @@ public class FoodController {
 	@RequestMapping("food")
 	public ModelAndView AllListView(
 			@RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage,
-			@RequestParam(value = "cntPerPage", required = false, defaultValue = "4") int cntPerPage,
-			@RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize,
-			Map<String, Object> map, HttpServletRequest request,
-			@RequestParam(value = "ing", required = false) String ing) throws Exception {
+			Map<String, Object> map, FoodVO foodVO) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		
-		if (ing != null) {
+		if (foodVO.getIng() != null) {
 			// 검색어가 있으면 검색해서 띄우기
-			FoodVO foodVO = new FoodVO();
-			foodVO.setIng(ing);
-			List<FoodVO> result = dao.fList(foodVO);
-			mav.addObject("fList", result);
 			int listCnt = dao.TableCount(foodVO);
-			page page = new page(currentPage, cntPerPage, pageSize);
+			Page page = new Page(currentPage,4,10);
 			page.setTotalRecordCount(listCnt);
+			foodVO.setFirstRecordIndex(page.getFirstRecordIndex());
+			foodVO.setLastRecordIndex(page.getLastRecordIndex());
+			
 			mav.addObject("pagination", page);
-			mav.addObject("Alllist", dao.fListPage(page));
-			mav.setViewName("contents/food/food");
+			mav.addObject("fList", dao.fListPage(foodVO));	
 		}
 		// 인기 검색어 1~6등 조회수 순으로 표시
-		FoodVO foodVO3 = new FoodVO();
-		foodVO3.setIng(ing);		
-		List<FoodVO> result3 = dao.pList(foodVO3);
-		mav.addObject("pList", result3);	
+		List<FoodVO> result3 = dao.pList(foodVO);
+		mav.addObject("pList", result3);		
 		
-		int listCnt = dao.TableCount(foodVO3);
-		
-		
-		page page = new page(currentPage, cntPerPage, pageSize);
-		page.setTotalRecordCount(listCnt);
-		page.setIng(ing);
-		mav.addObject("pagination", page);
-		mav.addObject("Alllist", dao.fListPage(page));
 		mav.setViewName("contents/food/food");
-	
 		return mav;
 	}
 

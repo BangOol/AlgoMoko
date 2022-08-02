@@ -3,7 +3,7 @@ package com.co.algomoko.food.domain;
 import lombok.Data;
 
 @Data
-public class page {
+public class Page {
 	/*
 	 * 변수 1. 개수 - 페이지 당 출력 페이지 수 - 전체 데이터 수 - 전체 페이지 수 2. 번호 - 페이지 리스트의 첫 페이지 번호 -
 	 * 페이지 리스트의 마지막 페이지 번호 3. 사이즈 - 화면 하단 페이지 사이즈 4. SQL - ROW_NUM -
@@ -32,10 +32,10 @@ public class page {
 	private boolean hasNextPage;
 
 	// 검색 변수
-	String type;
 	String ing;
-
-	public page(int currentPage, int cntPerPage, int pageSize) {
+	String title;
+	
+	public Page(int currentPage, int cntPerPage, int pageSize) {
 	        //강제입력방지
 	        if (currentPage < 1) {
 	            currentPage = 1;
@@ -82,7 +82,7 @@ public class page {
 		}
 
 		// SQL의 조건절에 사용되는 첫 ROW_NUM
-		firstRecordIndex = (this.getCurrentPage() - 1) * this.getCntPerPage();
+		firstRecordIndex = (this.getCurrentPage() - 1) * this.getCntPerPage()+1;
 
 		// SQL의 조건절에 사용되는 마지막 ROW_NUM
 		lastRecordIndex = this.getCurrentPage() * this.getCntPerPage();

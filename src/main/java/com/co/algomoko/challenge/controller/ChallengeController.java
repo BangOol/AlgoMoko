@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.OutputStream;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletResponse;
@@ -19,12 +20,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.co.algomoko.challenge.domain.ChallengeVO;
 import com.co.algomoko.challenge.domain.ChallengeValidationVO;
 import com.co.algomoko.challenge.domain.MyChallengeVO;
 import com.co.algomoko.challenge.mapper.ChallengeMapper;
+import com.co.algomoko.food.domain.FoodVO;
+import com.co.algomoko.food.domain.Page;
 
 @RequestMapping("/challenge") // 기본 url 머리셋팅
 @Controller
@@ -35,27 +39,51 @@ public class ChallengeController {
 	String filepath = "D:/upload/";
 
 	// 챌린지 목록
-	@GetMapping("")
-	public String challenge(@RequestParam(value = "ctitle", required = false) String ctitle, Model model,
-			ChallengeVO cVO) {
-		// 검색
-		if (ctitle != null) {
-			cVO.setCtitle(ctitle);
-			List<ChallengeVO> result = dao.cList(cVO);
-			model.addAttribute("search", result);
-		}
-		List<ChallengeVO> cList = dao.cList(cVO);
-		model.addAttribute("cList", cList);
+//	@GetMapping("")
+//	public String challenge(@RequestParam(value = "ctitle", required = false) String ctitle, Model model,
+//			ChallengeVO cVO) {
+//		// 검색
+//		if (ctitle != null) {
+//			cVO.setCtitle(ctitle);
+//			List<ChallengeVO> result = dao.cList(cVO);
+//			model.addAttribute("search", result);
+//		}
+//		List<ChallengeVO> cList = dao.cList(cVO);
+//		model.addAttribute("cList", cList);
+//
+//		return "contents/challenge/challenge";
+//	}
 
-		return "contents/challenge/challenge";
-	}
+	// 챌린지 목록
+	@GetMapping("")
+		public ModelAndView challenge(
+				@RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage,	
+				Map<String, Object> map, ChallengeVO cVO) throws Exception {
+				ModelAndView mav = new ModelAndView();
+			// 검색		
+			if (cVO.getCtitle() != null) {
+				cVO.setCtitle(cVO.getCtitle());
+				int listCnt = dao.TableCount(cVO);
+				Page page = new Page(currentPage, 6, 3);
+				page.setTotalRecordCount(listCnt);
+				cVO.setFirstRecordIndex(page.getFirstRecordIndex());
+				cVO.setLastRecordIndex(page.getLastRecordIndex());
+				
+				mav.addObject("pagination",page);				
+				mav.addObject("cList", dao.fListPage(cVO));
+			}
+			List<ChallengeVO> cList = dao.cList(cVO);
+			mav.addObject("cList", cList);
+			mav.setViewName("contents/challenge/challenge");
+			return mav;
+		}
 
 	// 진행중인 챌린지 목록
 
 	@GetMapping("challenging")
-	public String challenging(Model model, Authentication authentication) {
+	public String challenging(Model model, Authentication at) {
 
-		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+		UserDetails userDetails = (UserDetails) at.getPrincipal();
 		String mid = userDetails.getUsername();
 
 		List<MyChallengeVO> mcList = dao.mcList(mid);
@@ -84,7 +112,7 @@ public class ChallengeController {
 	@PostMapping("cWrite")
 	public String cInsert(@RequestParam("filename2") MultipartFile file, ChallengeVO cVO) throws Exception {
 		// file == multi 스트링변환
-		String projectpath = filepath+"/img/chl/"; 
+		String projectpath = filepath + "/img/chl/";
 		UUID uuid = UUID.randomUUID(); // 랜덤으로 이름 생성
 		String filename = uuid + "_" + file.getOriginalFilename(); // 파일 이름은 UUID에 있는 랜덤값 + 원래 파일 이름
 		File saveFile = new File(projectpath, filename); // 위에 적힌 경로에, name으로 저장
@@ -94,13 +122,13 @@ public class ChallengeController {
 		dao.cInsert(cVO);
 		return "redirect:/challenge";
 	}
-	
+
 	@ResponseBody
 	@GetMapping("download")
 	public void download(HttpServletResponse response, @RequestParam String img) throws Exception {
 
 		try {
-			String path = filepath+img; // 경로에 접근할 때 역슬래시('\') 사용
+			String path = filepath + img; // 경로에 접근할 때 역슬래시('\') 사용
 
 			File file = new File(path);
 			response.setHeader("Content-Disposition", "attachment;filename=" + file.getName()); // 다운로드 되거나 로컬에 저장되는 용도로
@@ -111,7 +139,8 @@ public class ChallengeController {
 
 			int read = 0;
 			byte[] buffer = new byte[1024];
-			while ((read = fileInputStream.read(buffer)) != -1) { // 1024바이트씩 계속 읽으면서 outputStream에 저장, -1이 나오면 더이상 읽을 파일이 없음
+			while ((read = fileInputStream.read(buffer)) != -1) { // 1024바이트씩 계속 읽으면서 outputStream에 저장, -1이 나오면 더이상 읽을
+																	// 파일이 없음
 				out.write(buffer, 0, read);
 			}
 
@@ -131,15 +160,15 @@ public class ChallengeController {
 	// 챌린지 수정
 	@PostMapping("cUpdate")
 	public String cUpdate(@RequestParam("filename2") MultipartFile file, ChallengeVO cVO) throws Exception, Exception {
-		if(file != null && file.getSize() > 0) {
-			String projectpath = filepath+"/img/chl/";
+		if (file != null && file.getSize() > 0) {
+			String projectpath = filepath + "/img/chl/";
 			UUID uuid = UUID.randomUUID();
-			
+
 			String filename = uuid + "_" + file.getOriginalFilename();
 			System.out.println(filename);
 			File saveFile = new File(projectpath, filename);
 			file.transferTo(saveFile);
-			cVO.setFilename(filename);		
+			cVO.setFilename(filename);
 			cVO.setFilepath("/img/chl/" + filename);
 		}
 		dao.cUpdate(cVO);

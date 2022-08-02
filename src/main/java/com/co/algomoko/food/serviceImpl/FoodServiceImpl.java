@@ -6,7 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.co.algomoko.food.domain.FoodVO;
-import com.co.algomoko.food.domain.page;
+import com.co.algomoko.food.domain.Page;
 import com.co.algomoko.food.mapper.FoodMapper;
 import com.co.algomoko.food.service.FoodService;
 
@@ -41,8 +41,8 @@ public class FoodServiceImpl implements FoodService {
 	}
 
 	@Override
-	public List<Map<String, Object>> fListPage(page page) throws Exception {
-		return mapper.fListPage(page);
+	public List<Map<String, Object>> fListPage(FoodVO foodVO) throws Exception {
+		return mapper.fListPage(foodVO);
 	}
 
 	@Override

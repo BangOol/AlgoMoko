@@ -12,4 +12,7 @@ public class FoodVO {
 	private int fat; // 지방
 	private String f0; // 단위('g' or 'ml')
 	private int weight; // 1회당 제공량
+	private int firstRecordIndex; // SQL의 조건절에 사용되는 첫번째 ROW_NUM	 
+	private int lastRecordIndex; //SQL의 조건절에 사용되는 마지막 ROW_NUM
+	
 }

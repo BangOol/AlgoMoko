@@ -1,6 +1,7 @@
 package com.co.algomoko.challenge.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -9,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.co.algomoko.challenge.domain.ChallengeVO;
 import com.co.algomoko.challenge.domain.ChallengeValidationVO;
 import com.co.algomoko.challenge.domain.MyChallengeVO;
+import com.co.algomoko.food.domain.FoodVO;
 
 public interface ChallengeService {
 	// 챌린지 조회
@@ -63,8 +65,14 @@ public interface ChallengeService {
 
 	// 완료된 챌린지로 이동
 	public int ck(int cno, int ck, String mid, int mycno);
-	
+
 	// 마지막 챌린지 인증
 	public Integer getLastRound(int mycno, String mid);
+
+	// 페이징
+	public List<Map<String, Object>> fListPage(ChallengeVO cVO) throws Exception;
+
+	// count
+	public int TableCount(ChallengeVO cVO) throws Exception;
 
 }

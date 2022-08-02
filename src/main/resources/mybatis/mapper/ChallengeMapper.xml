@@ -18,7 +18,7 @@
 		 	 from (select * from challenge
 		 		   where ctitle like '%' || #{ctitle,jdbcType=VARCHAR} || '%'
 		 		   order by ctitle)
-			 where rownum <=10]]>
+			 where rownum <=6]]>
 	</select>
 	
 	<!-- 챌린지 작성 -->
@@ -140,6 +140,32 @@
 	select round
 	from my_challenge
 	where mycno = #{mycno} and mid = #{mid}
+	</select>
+	
+	<!-- 페이징 -->
+	<select id="fListPage" resultType="hashmap">
+		select  ctitle "ctitle",
+				ccon "ccon",
+				cdday "cdday",
+				filepath "filepath"
+		from(
+			select row_number() over(order by ctitle asc) as row_num,
+					ctitle,
+					ccon,
+					cdday,
+					filepath
+			from challenge
+			where cno = #{cno}
+			order by ctitle asc
+			)	
+		 <if test="firstRecordIndex !=null and lastRecordIndex != null">
+            WHERE row_num BETWEEN #{firstRecordIndex} AND #{lastRecordIndex}
+        </if>
+	</select>
+	<!-- 테이블 로우 개수 -->
+	<select id="TableCount" resultType="int" parameterType="com.co.algomoko.challenge.domain.ChallengeVO">
+		select count(*)
+		from challenge		
 	</select>
 
 </mapper>

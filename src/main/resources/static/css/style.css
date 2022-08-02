@@ -59949,6 +59949,17 @@ ol {
   width: 360px;
   height: 240px;
 }
+.blog__item__cpic > ul {font-size:0;}
+.blog__item__cpic > ul > li {display:inline-block;vertical-align:top;}
+.blog__item__cpic > ul > li > a {display:block;width:auto;text-decoration: none;margin:5px;}
+.blog__item__cpic > ul > li > a .screen {position:relative;overflow:hidden;}
+.blog__item__cpic > ul > li > a .screen .top {position:absolute;bottom:150%;left:30px;z-index:2;color:#fff;font-size:26px;font-weight:900;transition:all .55s;}
+.blog__item__cpic > ul > li > a .screen .bottom {position:absolute;top:150%;left:30px; right:30px; z-index:2;color:#fff;font-size:15px;transition:all .55s;}
+.blog__item__cpic > ul > li > a .screen img {width: 360px; height: 240px;}
+.blog__item__cpic > ul > li > a .screen::after {content:'';display:block;position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.5);z-index:1;opacity:0;transition:all .35s;}
+.blog__item__cpic > ul > li > a:hover .top {bottom:52%;}
+.blog__item__cpic > ul > li > a:hover .bottom {top:52%;}
+.blog__item__cpic > ul > li > a:hover .screen::after {opacity:1;}
 
 .blog__item__text {
 	padding-top: 25px;

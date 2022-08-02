@@ -1,6 +1,7 @@
 package com.co.algomoko.challenge.serviceImpl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import com.co.algomoko.challenge.domain.ChallengeValidationVO;
 import com.co.algomoko.challenge.domain.MyChallengeVO;
 import com.co.algomoko.challenge.mapper.ChallengeMapper;
 import com.co.algomoko.challenge.service.ChallengeService;
+import com.co.algomoko.food.domain.FoodVO;
 
 public class ChallengeServiceImpl implements ChallengeService {
 	@Autowired
@@ -135,6 +137,16 @@ public class ChallengeServiceImpl implements ChallengeService {
 	@Override
 	public Integer getLastRound(int mycno, String mid) {
 		return mapper.getLastRound(mycno, mid);
+	}
+
+	@Override
+	public List<Map<String, Object>> fListPage(ChallengeVO cVO) throws Exception {
+		return mapper.fListPage(cVO);
+	}
+
+	@Override
+	public int TableCount(ChallengeVO cVO) throws Exception {
+		return mapper.TableCount(cVO);
 	}
 
 

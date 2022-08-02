@@ -1,6 +1,7 @@
 package com.co.algomoko.challenge.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.co.algomoko.challenge.domain.ChallengeVO;
 import com.co.algomoko.challenge.domain.ChallengeValidationVO;
 import com.co.algomoko.challenge.domain.MyChallengeVO;
+import com.co.algomoko.food.domain.FoodVO;
 
 @Repository
 public interface ChallengeMapper {
@@ -68,4 +70,10 @@ public interface ChallengeMapper {
 
 	// 마지막 챌린지 인증
 	public Integer getLastRound(int mycno, String mid);
+
+	// 페이징
+	public List<Map<String, Object>> fListPage(ChallengeVO cVO) throws Exception;
+
+	// count
+	public int TableCount(ChallengeVO cVO) throws Exception;
 }

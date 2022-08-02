@@ -43,25 +43,28 @@
 	</select>
 	<!-- 페이징 -->
 	<select id="fListPage" resultType="hashmap">
-		select *
+		select  ing "ing",
+				cal "cal",
+				weight "weight",
+				f0 "f0"
 		from(
-			select row_number() over(order by ing asc) as
-			row_num,
-			ing,
-			cal,
-			weight,
-			f0
+			select row_number() over(order by ing asc) as row_num,
+					ing,
+					cal,
+					weight,
+					f0
 			from food
+			where ing like '%' || #{ing} || '%'
+			order by ing asc
 			)	
 		 <if test="firstRecordIndex !=null and lastRecordIndex != null">
-            WHERE row_num BETWEEN #{firstRecordIndex} AND
-            #{lastRecordIndex}
+            WHERE row_num BETWEEN #{firstRecordIndex} AND #{lastRecordIndex}
         </if>
 	</select>
 	<!-- 테이블 로우 개수 -->
 	<select id="TableCount" resultType="int" parameterType="com.co.algomoko.food.domain.FoodVO">
 		select count(*)
 		from food
-		where ing like '%' || #{ing, jdbcType=VARCHAR} || '%'	
+		where ing like '%' || #{ing} || '%'	
 	</select>
 </mapper>
