@@ -32,6 +32,7 @@ public class Page {
 	private boolean hasNextPage;
 
 	// 검색 변수
+	String keyword;
 	String ing;
 	String title;
 	
