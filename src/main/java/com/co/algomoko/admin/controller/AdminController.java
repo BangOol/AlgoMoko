@@ -40,7 +40,7 @@ public class AdminController {
 
     // 관리자 메인 페이지 이동
     @GetMapping("")
-    public String moveAdminpage() throws Exception{
+    public String moveAdminpage(Model model) throws Exception{
         return "contents/admin/userFormMain";
     }
 

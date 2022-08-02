@@ -28,7 +28,7 @@
                 ]);
                 var options = {
                     title: '회원 남녀 비율',
-                    pieHole: 0.4,
+                    pieHole: 0.2,
                 };
                 var chart = new google.visualization.PieChart(document.getElementById('donutchart1'));
                 chart.draw(data, options);
@@ -74,13 +74,12 @@
 
             var options = {
                 title: '회원 키 비율',
-                legend: 'none',
                 pieSliceText: 'label',
                 slices: {
-                    4: {offset: 0.2},
+                    4: {offset: 0.1},
                     5: {offset: 0.2},
-                    6: {offset: 0.3},
-                    7: {offset: 0.3},
+                    6: {offset: 0.2},
+                    7: {offset: 0.1},
                     8: {offset: 0.1}
                 },
             };
@@ -136,7 +135,7 @@
                 ]);
                 var options = {
                     title: '회원 BMI 비율',
-                    pieHole: 0.4,
+                    pieHole: 0.2,
                 };
                 var chart = new google.visualization.PieChart(document.getElementById('donutchart5'));
                 chart.draw(data, options);
@@ -145,14 +144,15 @@
     </script>
     <!--회원 목록 body-->
     <!-- Breadcrumb Section Begin -->
-    <section class="breadcrumb-section set-bg" data-setbg="/img/breadcrumb.jpg">
+    <section class="breadcrumb-section set-bg" data-setbg="/img/documents-gcdd7a37e5_1920.jpg">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12 text-center" style="font-family: 'Cairo', 'Jua', sans-serif">
-                    <div class="breadcrumb__text">
-                        <h2>관리자</h2>
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb__text" style="font-family: 'Cairo', 'Jua', sans-serif">
+                        <h2 style="font-family: 'Cairo', 'Jua', sans-serif; font-weight: lighter">관리자</h2>
                         <div class="breadcrumb__option">
-                            <span>회원에 대한 다양한 통계를 확인할 수 있습니다.</span>
+                            <a href="./index.html" style="font-family: 'Cairo', 'Jua', sans-serif; font-weight: normal">관리자 페이지</a>
+                            <span>관리자 페이지의 메인 화면입니다.</span>
                         </div>
                     </div>
                 </div>
@@ -165,35 +165,36 @@
     <section class="product spad">
         <div class="container">
             <div class="row">
-                <div class="col-lg-3 col-md-5">
+                <div class="col-lg-3 col-md-5" style="; background: linear-gradient(to bottom, #f3feff, #b9cad1);">
                     <!-- menu bar Begin -->
                     <div class="sidebar">
-                        <div class="sidebar__item" style="font-family: 'Cairo', 'Jua', sans-serif">
-                            <h4>관리자 페이지</h4>
+                        <div class="sidebar__item" style="font-family: 'Cairo', 'Jua', sans-serif; margin-top: 20px">
+                            <a href="/Admin">
+                                <h4 style="font-family: 'Cairo', 'Jua', sans-serif; font-weight: normal">관리자 페이지</h4>
+                            </a>
                             <ul>
-                                <ul>
-                                    <li><a href="/Admin/UserList">회원 관리</a></li>
-                                    <li><a href="/Admin/Statistics">통계</a></li>
-                                    <li><a href="/Admin/UserStatistics">- 회원 통계</a></li>
-                                    <li><a href="/Admin/Statistics">- 식단 통계</a></li>
-                                    <li><a href="/Admin/Statistics">- 챌린지 통계</a></li>
-                                    <li><a href="/Inquiry">1:1문의 내역 확인</a></li>
-                                    <li><a href="/FAQ">FAQ 이동</a></li>
-                                </ul>
+                                <li><a href="/Admin/UserList">회원 관리</a></li>
+                                <li><a href="/Admin/Statistics">통계</a></li>
+                                <li><a href="/Admin/UserStatistics">- 회원 통계</a></li>
+                                <li><a href="/Admin/Statistics">- 식단 통계</a></li>
+                                <li><a href="/Admin/Statistics">- 챌린지 통계</a></li>
+                                <li><a href="/Inquiry">1:1문의 내역 확인</a></li>
+                                <li><a href="/FAQ">FAQ 이동</a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
                 <!-- menu bar end -->
-                <div class="container-fluid col-lg-9">
+                <div class="container-fluid col-lg-9" style="font-family: 'Cairo', 'Jua', sans-serif">
                     <div class="row">
-                        <h4 style="font-family:'Jua'">회원통계</h4>
+                        <h4 style="font-family:'Jua'; margin-left: 40px">회원통계</h4>
                     </div>
                     <br>
                     <div class="row">
                         <!-- 회원 남녀 비율 start -->
                         <div id="donutchart1" class="col-lg-12"></div>
-                        <table class="col-lg-12" style="border: 1px solid; padding: 20px 0">
+                        <p class="col-lg-1"></p>
+                        <table class="col-lg-11" style="border: 1px solid; padding: 20px 0 20px 20px; width:855px">
                             <thead>
                             <tr>
                                 <th></th>
@@ -222,7 +223,8 @@
 
                         <!-- 회원 제한 비율 start -->
                         <div id="piechart2" class="col-lg-12"></div>
-                        <table class="col-lg-12" style="border: 1px solid; padding: 20px 0">
+                        <p class="col-lg-1"></p>
+                        <table class="col-lg-11" style="border: 1px solid; padding: 20px 0">
                             <thead>
                             <tr>
                                 <th></th>
@@ -256,7 +258,8 @@
 
                         <!-- 회원 키 비율 start -->
                         <div id="piechart3" class="col-lg-12"></div>
-                        <table  class="col-lg-12" style="border: 1px solid; padding: 20px 0">
+                        <p class="col-lg-1"></p>
+                        <table  class="col-lg-11" style="border: 1px solid; padding: 20px 0">
                             <thead>
                             <tr>
                                 <th></th>
@@ -308,7 +311,8 @@
 
                         <!-- 회원 나이 비율 start -->
                         <div id="piechart4" class="col-lg-12"></div>
-                        <table class="col-lg-12" style="border: 1px solid; padding: 20px 0">
+                        <p class="col-lg-1"></p>
+                        <table class="col-lg-11" style="border: 1px solid; padding: 20px 0">
                             <thead>
                                 <tr>
                                     <th></th>
@@ -354,7 +358,8 @@
 
                         <!-- 회원 BMI 비율 start -->
                         <div id="donutchart5" class="col-lg-12"></div>
-                        <table   class="col-lg-12" style="border: 1px solid; padding: 20px 0">
+                        <p class="col-lg-1"></p>
+                        <table   class="col-lg-11" style="border: 1px solid; padding: 20px 0">
                             <thead>
                                 <tr>
                                     <th></th>

@@ -1,7 +1,9 @@
 package com.co.algomoko.user.controller;
 
+import java.io.IOException;
 import java.security.Principal;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -9,16 +11,18 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.co.algomoko.user.domain.UserVO;
 import com.co.algomoko.user.email.service.EmailService;
@@ -32,7 +36,8 @@ public class UserController {
 	UserService userService;
 	@Autowired 
 	EmailService emailService;
-	
+	private final AuthenticationManager authenticationManager = null;
+	 
 	//메인페이지
 	@GetMapping("main")
 	public String mainPage() {
@@ -46,12 +51,24 @@ public class UserController {
 		return "contents/index";
 	}
 	
+//	@GetMapping("myPage")
+//	public String mypage(HttpServletRequest request, Model model, Authentication auth) {
+//
+////		HttpSession session = request.getSession();
+////		String mid = (String) session.getAttribute("mid");
+//		
+//		UserDetails ud = (UserDetails) auth.getPrincipal();
+//		String mid = ud.getUsername();
+//		model.addAttribute("members",userService.memberInfo(mid));
+//		
+//		return "contents/user/myPage";
+//	}
+	
 	@GetMapping("myPage")
-	public String mypage() {
+	public String mypage2(HttpServletRequest request, Model model, Authentication auth) throws ServletException, IOException{
+
 		return "contents/user/myPage";
 	}
-
-
 	//회원가입 과정 페이지들
 	@GetMapping("/registerIdForm1")
 	public String register1() {
@@ -115,6 +132,7 @@ public class UserController {
 		System.out.println(vo);
 		int num = userService.signup(vo);
 		if(num == 1) {
+			
 			return "redirect:registerIdForm3";
 		} else {
 			return "contents/login/signup";
@@ -152,17 +170,56 @@ public class UserController {
     public String insertMyPage() {
 		return "contents/user/insertMyPage";
 	}
+	
+	//회원정보 수정
     @PostMapping("/insertMyPage")
 	public String insertMyPage2(UserVO vo) {
-    	int num = userService.insertMyPage(vo);
+    	
+    	
     	System.out.println(vo);
+    	
+    	int num = userService.insertMyPage(vo);
+//    	Authentication authentication = authenticationManager.authenticate(
+//    			new UsernamePasswordAuthenticationToken(ud.getUsername(), ud.getPassword()));
+//    	SecurityContextHolder.getContext().setAuthentication(authentication);	
+    	String mid = vo.getMid();
+    	 Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    	 SecurityContextHolder.getContext().setAuthentication(createNewAuthentication(authentication,mid));
+
 		if(num == 1) {
+			
 			return "redirect:myPage";
 		} else {
 			return "contents/user/insertMyPage";
 		}
     	
     }
+    //세션1
+	private Authentication createNewAuthentication(Authentication currentAuth, String mid) {
+		UserDetails newPrincipal =  loadUserByUsername(mid);
+        UsernamePasswordAuthenticationToken newAuth =  
+        		new UsernamePasswordAuthenticationToken(
+        		newPrincipal,currentAuth.getCredentials(),newPrincipal.getAuthorities()); 
+        		newAuth.setDetails(currentAuth.getDetails());
+        		
+
+        return newAuth;
+		
+	}
+
+
+	
+
+
+	
+
+	//세션2
+	private UserDetails loadUserByUsername(String mid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 	//비밀번호 변경
 	@GetMapping("/myPageSecurityInsertPW")
 	public String myPageSecurityInsertPW() {
@@ -173,5 +230,19 @@ public class UserController {
 	@GetMapping("/myPageSecurityDeleteId")
 	public String myPageSecurityDeleteId() {
 		return "contents/user/myPageSecurityDeleteId";
+	}
+	
+	//회원탈퇴 진행
+	@PostMapping("/DeleteId")
+	public String deleteId(HttpServletRequest request, HttpServletResponse response, Principal pr) {
+		HttpSession session = request.getSession();
+		String mid = null ;
+		pr.getName();
+		String mid2 = (String) session.getAttribute("mid");
+		System.out.println(pr);
+		userService.deleteId(mid);
+		new SecurityContextLogoutHandler().logout(request, response, SecurityContextHolder.getContext().getAuthentication());
+		return "contents/index";
+		
 	}
 }
