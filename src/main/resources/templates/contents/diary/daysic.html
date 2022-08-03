@@ -74,11 +74,13 @@
 <div th:replace="~{fragments/header}"></div>
 <div th:replace="~{fragments/aside}"></div>
 
-
+<div>
+<h2 style="margin-top: -100px; margin-left: 900px; margin-bottom: 30px;" th:text="${std}"></h2>
+</div>
 
         <!-- Shoping Cart Section Begin -->
 
-      <p id="date" th:text="${std}"><p>
+      
         <section class="shoping-cart spad" style="padding-top: 10px;">
           <div class="container">
               <div class="row">
@@ -231,6 +233,7 @@
               </div>
           </div>
       </section>
+      <p id="date" th:text="${std}" style="color: white;"><p>
     <!-- Blog Section End -->
     
     

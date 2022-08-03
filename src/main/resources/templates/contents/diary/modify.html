@@ -119,6 +119,29 @@
 			margin-bottom: 10px;
 			margin-top: -10px;
 		}
+		      th {
+			width: 120px;
+			height: 49px;
+		}
+
+		tr {
+			width: 400px;
+		}
+
+		.thth1 {
+			width: 100px;
+			height: 45px;
+		}
+
+		.thth2 {
+			width: 100px;
+			height: 45px;
+		}
+
+		.thth3 {
+			width: 50px;
+			height: 45px;
+		}
 	</style>
 
 
@@ -142,8 +165,8 @@
 
 				<div id="gridpro"></div>
 				<div class="modal_btn">
-					<button id="modalbtn" class="modal_s">등록</button>
-					<button class="modal_c">취소</button>
+					<button id="modalbtn" class="modal_s">추가</button>
+					<button class="modal_c">확인</button>
 				</div>
 			</div>
 		</div>
@@ -152,7 +175,9 @@
 
 
 	<form method="post" action="/diary/modifyde" name="frm" id="frm">
-
+<div>
+<h2 style="margin-top: -100px; margin-left: 850px; margin-bottom: 50px; font-family: 'Cairo', 'Jua', sans-serif">일지 수정</h2>
+</div>
 <div class="row">
 		<div class="col-md-3 mb-1">
 			<div class="input-group mb-3">
@@ -253,7 +278,7 @@
 
 
 						<div class="product__details__tab__desc">
-							<h5 style="text-align: center;">일지 작성</h5>
+							<h5 style="text-align: center; font-family: 'Cairo', 'Jua', sans-serif">일지 작성</h5>
 							<br>
 
 							<textarea class="form-control" name="ucon" rows="15" cols="30" th:text="${con[0].ucon}"></textarea>
@@ -460,7 +485,7 @@
                var d = $(tbody).append(b);
 
                result()
-				modal.style.display = "none";
+				//modal.style.display = "none";
             	body.style.overflow = 'auto';	
             })
 
@@ -471,12 +496,21 @@
 
       })
 
-      function diaryde() {
-         $("#frm").attr("action", "delete").submit();
 
-      }
+			function diaryde() {
+									if (confirm("정말 삭제하시겠습니까??") == true) {    //확인
+										$("#frm").attr("action", "delete").submit();
+						
+									} else {
+						
+										return false;
+						
+									}
 
 
+
+
+							}
 
 
 
