@@ -5,8 +5,6 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="description" content="Ogani Template">
-    <meta name="keywords" content="Ogani, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Ogani | Template</title>
@@ -14,16 +12,15 @@
 
 <body>
 <th:block layout:fragment="content">
-
     <!-- Breadcrumb Section Begin -->
     <section class="breadcrumb-section set-bg" data-setbg="/img/questionPixabay.jpg">
         <div class="container" style="font-family: 'Cairo', 'Jua', sans-serif">
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <div class="breadcrumb__text">
-                        <a href="/Inquiry"><h2  style="font-family: 'Cairo', 'Jua', sans-serif">1:1 문의</h2>
+                        <a href="/Inquiry"><h2 style="font-family: 'Cairo', 'Jua', sans-serif">1:1 문의</h2>
                             <div class="breadcrumb__option">
-                                <span >Algomokgo</span>
+                                <span>Algomokgo</span>
                             </div>
                         </a>
                     </div>
@@ -31,33 +28,48 @@
             </div>
         </div>
     </section>
+    <div class="container">
+        <div class="col-lg-4">
+            <div class="contact__form__title"
+                 style="margin: 50px 0 0 0; font-family:  'Jua', 'Cairo',sans-serif; width: 200px">
+                <h2 style="font-family:  'Jua', 'Cairo',sans-serif; margin-top: 40px">고객 센터</h2>
+                <sub style="padding: 10px 0 50px 25px">만족스런 답변을 위해 노력하겠습니다.</sub>
+            </div>
+        </div>
+    </div>
     <!-- Contact Section End -->
     <div class="container">
         <form action="/Inquiry/insert" method="get">
-        <table class="table table-hover" style="text-align: center; margin: 100px 0 300px 0; border: 1px solid">
-            <tr>
-                <th scope="col">글번호</th>
-                <td><input type="text" th:value="${searchNo[0].qno}" style="width: 600px;" name="qno" readonly></td>
-            </tr>
-            <tr>
-                <th scope="col">제목</th>
-                <td><input type="text" name="title" style="width: 600px;">
-                </td>
-            </tr>
-            <tr>
-                <th scope="col">내용</th>
-                <td><textarea style="width: 600px; height : 300px; resize: none" name="content"></textarea>
-                </td>
-            </tr>
-        </table>
-            <select name = "option" value="c0">
-                <option value = "c0">챌린지 문의</option>
-                <option value = "c1">일지 문의</option>
-                <option value = "c2">음식 문의</option>
-                <option value = "c3">신고 문의</option>
-                <option value = "c4">일반 문의</option>
-            </select>
-            <button type="submit" value="등록">등록</button>
+            <table style="text-align: center; margin: 100px 0 100px 0; width: 1140px; font-family:  'Jua','Cairo', sans-serif">
+                <tr style="border-top: 1px solid; height: 70px">
+                    <th scope="col" style="text-align: center; width: 200px; ; border-right : 1px solid">글번호</th>
+                    <td><input type="text" th:value="${searchNo[0].qno}" style="width: 940px;" name="qno" readonly>  </td>
+                </tr>
+                <tr style="border-top: 1px solid; height: 70px">
+                    <th scope="col" style="text-align: center; width: 200px;; border-right : 1px solid ">제목</th>
+                    <td><input type="text" name="title" style="width: 940px;">
+                    </td>
+                </tr>
+                <tr style="border-top: 1px solid; border-bottom: 1px solid;">
+                    <th scope="col" style="text-align: center; width: 200px; border-right : 1px solid">내용</th>
+                    <td>
+                        <textarea style="width: 940px; height : 300px; resize: none; " name="content"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <select name="option" value="c0" style="float: right; margin: 0 10px">
+                        <option value="c0">챌린지 문의</option>
+                        <option value="c1">일지 문의</option>
+                        <option value="c2">음식 문의</option>
+                        <option value="c3">신고 문의</option>
+                        <option value="c4">일반 문의</option>
+                    </select>
+                    <button type="submit" value="등록" style="float:right; width: 80px; height: 50px; background-color: #ff3222;
+             border-radius: 10px; color: #ffffff; font-family: 'Jua', 'Cairo', sans-serif; text-align: center">
+                        등록
+                    </button>
+                </tr>
+            </table>
         </form>
     </div>
 </th:block>

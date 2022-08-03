@@ -34,7 +34,7 @@
                             <a href="#"  style="float: right; margin : 0 0 0 10px" id="logout"><i class="fa fa-user" ></i>Logout</a>                   			                 	
                            	<a  style="float: right; margin : 0 10px" th:text= "|${#authentication.principal.nick}님, 반갑습니다!|"></a>
                             <a href="myPage" style="float: right; margin : 0 10px">내정보</a>
-                            <a sec:authorize="hasAuthority('u0')" href="Admin" style="float: right; margin : 0 10px">관리자정보</a>
+                            <a sec:authorize="hasAuthority('u0')" href="/Admin" style="float: right; margin : 0 10px">관리자정보</a>
                         </div>
                     </div>
                 </div>

@@ -14,6 +14,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.Writer;
 import java.util.List;
 import java.util.Map;
 
@@ -65,7 +69,7 @@ public class AdminController {
         이전 페이지 존재 여부, 다음 페이지 존재 여부를 확인하고, paginationUser에 넣는다.
         */
 
-        if(keyword.equals(null) || keyword.equals("null")){
+        if(keyword.equals(null) || keyword.equals("null") || keyword.equals("")){
             // 전체 회원 수
             int listCnt = pagingService.TableCountAll();
             paginationUser.setTotalRecordCount(listCnt);
@@ -121,11 +125,21 @@ public class AdminController {
 
     // 유저 리스트 - 유저 제한상태 변경([ex]정상->3일 제한)
     @PostMapping("")
-    public String alertUserRestrict(@RequestParam("type") String type, @RequestParam("uid") String uid, Model model){
+    public String alertUserRestrict(@RequestParam("type") String type, @RequestParam("uid") String uid,
+                                  Model model,
+                                  HttpServletResponse response) throws IOException {
         AdminVO adminVO = new AdminVO();
         adminVO.setType(type);
         adminVO.setUid(uid);
         adminService.insertRestrict(adminVO);
+
+
+        String msg = "정상적으로 등록되었습니다";
+        String url = "/Admin";
+        response.setContentType("text/html; charset=utf-8");
+        response.setCharacterEncoding("UTF-8");
+        PrintWriter w = response.getWriter();
+        w.write("<script>alert('"+msg+"');location.href='"+url+"';</script>");
         return "contents/admin/userFormMain";
     }
 }

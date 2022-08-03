@@ -22,10 +22,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <div class="breadcrumb__text" style="font-family: 'Cairo', 'Jua', sans-serif">
-                        <h2 style="font-family: 'Cairo', 'Jua', sans-serif; font-weight: lighter">관리자</h2>
+                    <div class="breadcrumb__text" style="font-family:  'Jua','Cairo', sans-serif">
+                        <h2 style="font-family:  'Jua','Cairo', sans-serif; font-weight: lighter">관리자</h2>
                         <div class="breadcrumb__option">
-                            <a href="./index.html" style="font-family: 'Cairo', 'Jua', sans-serif; font-weight: normal">관리자 페이지</a>
+                            <a href="./index.html" style="font-family: 'Jua','Cairo',  sans-serif; font-weight: normal">관리자 페이지</a>
                             <span>관리자 페이지의 메인 화면입니다.</span>
                         </div>
                     </div>
@@ -42,9 +42,9 @@
                 <div class="col-lg-3 col-md-5" style="; background: linear-gradient(to bottom, #f3feff, #b9cad1); ">
                     <!-- menu bar Begin -->
                     <div class="sidebar">
-                        <div class="sidebar__item" style="font-family: 'Cairo', 'Jua', sans-serif; margin-top: 20px">
+                        <div class="sidebar__item" style="font-family:  'Jua', 'Cairo',sans-serif; margin-top: 20px">
                             <a href="/Admin">
-                                <h4 style="font-family: 'Cairo', 'Jua', sans-serif; font-weight: normal">관리자 페이지</h4>
+                                <h4 style="font-family: 'Jua', 'Cairo', sans-serif; font-weight: normal">관리자 페이지</h4>
                             </a>
                             <ul style="padding: 0 0 0 20px">
                                 <li><a href="/Admin/UserList">회원 관리</a></li>
@@ -61,14 +61,14 @@
                 <div class="container-fluid col-lg-9">
                     <div class="row" style="padding: 0 0 0 30px">
                         <table class="table table-hover" style="text-align: center; padding: 0 30px 0 0px; width : 800px">
-                            <h4 style="font-family: 'Cairo', 'Jua', sans-serif; padding: 0 0 15px 30px ">회원관리</h4>
+                            <h4 style="font-family:  'Jua','Cairo', sans-serif; padding: 0 0 15px 30px ">회원관리</h4>
 <!--                            <div class="d-flex flex-row-reverse col-lg-12 ">-->
 <!--                                <div class="p-2 border" onclick="findAllList()">전체리스트</div>-->
 <!--                                <div class="p-2 border" onclick="findRestrictList()">제한리스트</div>-->
 <!--                                <div class="p-2 border" onclick="findBlackList()">블랙리스트</div>-->
 <!--                            </div>-->
                             <thead>
-                            <tr style="font-family: 'Cairo', 'Jua', sans-serif">
+                            <tr style="font-family:  'Jua','Cairo', sans-serif">
                                 <th scope="col" style="width: 300px; border: none; margin-left: 20px">아이디</th>
                                 <th scope="col"  style="width: 300px; border: none;">성별</th>
                                 <th scope="col"  style="width: 300px; border: none; ">닉네임</th>
@@ -81,7 +81,7 @@
                             <tbody id='boardtable'>
                             <div th:if="${#lists.size(Alllist)>0}">
                                 <div th:each="Alllist:${Alllist}">
-                                    <tr style="font-family: 'Cairo', 'Jua', sans-serif;margin-left: 20px">
+                                    <tr style="font-family:  'Jua', 'Cairo',sans-serif;margin-left: 20px">
                                         <td>[[${Alllist.uid}]]</td>
                                         <td>[[${Alllist.sex}]]</td>
                                         <td>[[${Alllist.nick}]]</td>
@@ -207,7 +207,7 @@
 
 
                         <!-- 검색 창 -->
-                        <div style="text-align: center; font-family: 'Cairo', 'Jua', sans-serif">
+                        <div style="text-align: center; font-family:  'Jua','Cairo', sans-serif">
                             <form id="search-form" method="get" action="UserList"style="padding: 0 45px 50px 10px" >
                                 <input type ="hidden" name = "currentPage" value = 1>
                                 <input type ="hidden" name = "cntPerPage" value = 10>
@@ -225,7 +225,7 @@
                                 <div class="bottom" style="float: left">
                                     <div class="bottom-left">
                                         <select id="cntSelectBox" name="cntSelectBox"
-                                                class="form-control" style="width: 100px; font-family: 'Cairo', 'Jua', sans-serif; text-align: center; border-radius: 10px"
+                                                class="form-control" style="width: 100px; font-family:  'Jua','Cairo', sans-serif; text-align: center; border-radius: 10px"
                                                 th:onchange="|changeSelectBox(${pagination.currentPage},${pagination.cntPerPage},${pagination.pageSize})|">
                                             <option value="10">10개씩</option>
                                             <option value="20">20개씩</option>

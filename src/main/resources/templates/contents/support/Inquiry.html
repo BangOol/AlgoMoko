@@ -2,7 +2,6 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/layout}">
-
 <head>
     <meta charset="UTF-8">
     <meta name="description" content="Ogani Template">
@@ -15,11 +14,11 @@
 <th:block layout:fragment="content">
     <!-- Breadcrumb Section Begin -->
     <section class="breadcrumb-section set-bg" data-setbg="/img/questionPixabay.jpg">
-        <div class="container" style="font-family: 'Cairo', 'Jua', sans-serif">
+        <div class="container" style="font-family:  'Jua','Cairo', sans-serif">
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <div class="breadcrumb__text">
-                        <a href="/Inquiry"><h2  style="font-family: 'Cairo', 'Jua', sans-serif">1:1 문의</h2>
+                        <a href="/Inquiry"><h2  style="font-family:  'Jua','Cairo', sans-serif">고객 센터</h2>
                             <div class="breadcrumb__option">
                                 <span >Algomokgo</span>
                             </div>
@@ -31,14 +30,14 @@
     </section>
     <div class="container">
         <div class="col-lg-4">
-            <div class="contact__form__title" style="margin: 50px 0 0 0; font-family: 'Cairo', 'Jua', sans-serif; width: 200px">
-                <h2  style="font-family: 'Cairo', 'Jua', sans-serif">1:1 문의</h2>
+            <div class="contact__form__title" style="margin: 50px 0 0 0; font-family:  'Jua', 'Cairo',sans-serif; width: 200px">
+                <h2  style="font-family:  'Jua', 'Cairo',sans-serif">고객 센터</h2>
                 <sub style="padding: 10px 0 50px 25px">만족스런 답변을 위해 노력하겠습니다.</sub>
             </div>
         </div>
     </div>
 
-    <div class="container" style="font-family: 'Cairo', 'Jua', sans-serif; padding-top: 50px">
+    <div class="container" style="font-family:  'Jua', 'Cairo',sans-serif; padding-top: 50px">
         <table class="table table-hover" style="text-align: center">
             <thead>
             <th>작성자</th>
@@ -56,7 +55,7 @@
                         <td>[[${InqList.A0}]]</td>
                         <td>[[${InqList.qdate}]]</td>
                         <td th:value="${InqList.nick}">
-                            <a th:href="@{/Inquiry/detail(nick=${InqList.nick} ,qno=${InqList.qno})}"
+                            <a th:href="@{/Inquiry/detail(mid=${InqList.mid} ,qno=${InqList.qno})}"
                                style="line-height: 100%">이동</a>
                         </td>
                     </tr>
@@ -71,8 +70,8 @@
     </div>
 
     <!-- Shoping Cart Section End -->
-    <div class="form-group" style="text-align: center">
-        <div class="container" style="text-align: right">
+    <div class="form-group" style="text-align: right">
+        <div class="container" style="margin-top: 40px">
             <div class="paginate">
                 <div class="paging" style="text-align: center">
                     <!-- 이전 페이지 이동 버튼 생성 -->
@@ -152,7 +151,7 @@
             <div class="bottom">
                 <div class="bottom-left">
                     <select id="cntSelectBox" name="cntSelectBox"
-                            class="form-control" style="width: 100px; font-family: 'Cairo', 'Jua', sans-serif"
+                            class="form-control" style="width: 100px; font-family:  'Jua','Cairo', sans-serif"
                             th:onchange="|changeSelectBox(${pagination.currentPage},${pagination.cntPerPage},${pagination.pageSize})|">
                         <option value="10">10개씩</option>
                         <option value="20">20개씩</option>
@@ -164,7 +163,7 @@
             <a href="/Inquiry/writeInquiry">
                 <button type="button"  style="text-align: right; margin-bottom: 100px; width: 74px;
                  height: 40px; border-radius: 8px; background-color: #ff3222;
-                font-family: 'Cairo', 'Jua', sans-serif; text-align: center;
+                font-family:  'Jua','Cairo', sans-serif; text-align: center;
                 margin-right: 20px; color: #ffffff">글쓰기
                 </button>
             </a>
