@@ -198,7 +198,7 @@ public class DiaryController {
       model.addAttribute("resultCal",dao.resultCal(diaryVO));
       
       
-      return "contents/diary/todaysic";
+      return "contents/diary/daysic";
     }
    
    
@@ -499,7 +499,7 @@ public String delete(HttpServletResponse response,DiaryVO diaryVO,Authentication
 		
 		  for(int i=0;i< ddnameList.size();i++) { 
 			  res = dao.fonlist(fings[i]);
-			 
+			 System.out.println(ddnameList);
 			 recipeVO.setMid(mid.getUsername());
 			 recipeVO.setFing(res.getDdname());
 			 recipeVO.setCal(res.getCal());

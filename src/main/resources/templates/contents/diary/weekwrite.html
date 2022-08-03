@@ -141,8 +141,8 @@
 
 				<div id="gridpro"></div>
 				<div class="modal_btn">
-					<button id="modalbtn" class="modal_s">등록</button>
-					<button class="modal_c">취소</button>
+					<button id="modalbtn" class="modal_s">추가</button>
+					<button class="modal_c">확인</button>
 				</div>
 			</div>
 		</div>
@@ -151,7 +151,9 @@
 
 
 	<form method="post" action="/diary/insert" name="frm" id="frm">
-
+<div>
+<h2 style="margin-top: -100px; margin-left: 850px; margin-bottom: 50px; font-family: 'Cairo', 'Jua', sans-serif">일지 작성</h2>
+</div>
 <div class="row">
 		<div class="col-md-3 mb-1">
 			<div class="input-group mb-3">
@@ -453,7 +455,7 @@
 					var d = $(tbody).append(b);
 
 					result()
-					modal.style.display = "none";
+					//modal.style.display = "none";
 					body.style.overflow = 'auto';
 				})
 
