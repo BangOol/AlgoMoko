@@ -133,13 +133,13 @@ public class UserServiceImpl implements UserService{
        
         //전송 후 암호화후 db에 저장.
         //UserVO vo = null;
-        UserVO vo = new UserVO();
+        //UserVO vo = new UserVO();
         //@SuppressWarnings("null")
+        //vo.setMpw(encodepw);
         String encodepw = passwordEncoder.encode(pw);
         System.out.println("비밀번호 발급대상: " + mid);
         System.out.println("암호화: " +encodepw);
         
-        vo.setMpw(encodepw);
         mapper.updatepw(mid,encodepw);
         
 		
@@ -155,6 +155,14 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public void deleteId(String mid) {
 		mapper.delete(mid);
+		
+	}
+	@Override
+	public void insertpw(String mpw,String mid) {
+		
+		
+		String encodepw = passwordEncoder.encode(mpw); 
+		mapper.insertPw(mid, encodepw);
 		
 	}
 	
