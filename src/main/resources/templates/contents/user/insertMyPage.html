@@ -47,7 +47,6 @@
                           <ul style="margin: 0 0 0 20px;">
                             <li ><a href="myPage">회원 정보</a></li>
 	                        <li><a href="insertMyPage">- 정보 수정</a></li>                                                
-	                        <li><a href="">활동 내역(삭제예정)</a></li>
 	                        <li><a href="">보안 설정</a></li>
 	                        <li><a href="myPageSecurityInsertPW">- 비밀번호 변경</a></li>
 	                        <li><a href="myPageSecurityDeleteId">- 회원 탈퇴</a></li>
@@ -67,20 +66,20 @@
                       <tr style="border-top: 1px solid;">
                           <th style="padding:  15px 300px 15px 0; ">아이디</th>
 	                          <td  style="padding:  0 300px 0 0;">
-	                          	<input th:value = "${#authentication.principal.mid}" id="mid" name="mid" readonly>
+	                          	<input  th:value = "${#authentication.principal.mid}" id="mid" name="mid" readonly>
 	                          </td>
                         </tr >
                         <tr style="border-top: 1px solid;">
                           <th  style="padding:  15px 300px 15px 0; ">닉네임</th>
 	                          <td style="padding:  0 300px 0 0;">
-		                          <input th:value = "${#authentication.principal.nick}" type="text" id="nick" name="nick">
+		                          <input style="border-radius: 10px; border: 1px solid;" th:value = "${#authentication.principal.nick}" type="text" id="nick" name="nick">
 		                          <span id="nick_msg"></span>
 	                          </td>
                         </tr>
                         <tr style="border-top: 1px solid; border-bottom: 1px solid;">
                           <th style="padding:  15px 300px 15px 0; ">생년월일</th>
 	                          <td style="padding:  0 300px 0 0;">
-		                          <input th:value = "${#strings.substring(#authentication.principal.birth,0,10)}" type="birth" id="birth" name="birth">
+		                          <input style="border-radius: 10px; border: 1px solid;" th:value = "${#strings.substring(#authentication.principal.birth,0,10)}" type="birth" id="birth" name="birth">
 		                          <span id="birth_msg"></span>
 	                          </td>
                         </tr>
@@ -91,21 +90,21 @@
                       <tr style="border-top: 1px solid;">
                         <th style="padding:  15px 300px 15px 0; ">키</th>
 	                        <td style="padding:  0 330px 0 0;">
-		                        <input th:value = "${#authentication.principal.height}" type="text" id="height" name="height">
+		                        <input style="border-radius: 10px; border: 1px solid;" th:value = "${#authentication.principal.height}" type="text" id="height" name="height">
 		                        <span id="height_msg"></span>
                         	</td>
                       </tr>
                       <tr style="border-top: 1px solid;">
                         <th style="padding:  15px 300px 15px 0; ">몸무게</th>
 	                        <td style="padding:  0 330px 0 0;">
-		                        <input th:value = "${#authentication.principal.weight}" type="text" id="weight" name="weight">
+		                        <input style="border-radius: 10px; border: 1px solid;" th:value = "${#authentication.principal.weight}" type="text" id="weight" name="weight">
 		                        <span id="weight_msg"></span>
                        		</td>
                       </tr>
                       <tr style="border-top: 1px solid;">
                         <th style="padding:  15px 300px 15px 0; ">목표체중</th>
 	                        <td style="padding:  0 330px 0 0;">
-	                        <input th:value = "${#authentication.principal.tweight}" type="text" id="tweight" name="tweight">
+	                        <input style="border-radius: 10px; border: 1px solid;" th:value = "${#authentication.principal.tweight}" type="text" id="tweight" name="tweight">
                         </td>
                       </tr>
                       <tr style="border-top: 1px solid; border-bottom: 1px solid;">
@@ -126,7 +125,7 @@
                 </form>
             </div>
             <input th:value = "${#authentication.principal.sex}" type="text" id="sex" name="sex" readonly style="display: none;">
-            <input type = "button" id="checkHealth" value = "계산하기" style="margin-left:770px; width: 80px; height: 30px;">
+            <input type = "button" id="checkHealth" value = "계산하기" style="margin-left:770px; width: 80px; height: 30px; margin-bottom:50px;">
             <br>
             <input type = "button" id="nextBtn" value = "수정하기" style="margin-left:770px; width: 80px; height: 30px;">
               
