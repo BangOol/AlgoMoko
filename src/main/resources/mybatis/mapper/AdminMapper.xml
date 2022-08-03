@@ -29,10 +29,10 @@
         ,GET_CODE(B0) AS B0
         FROM MEMBERS
         <choose>
-            <when test="type != null and type.equals('email')">
+            <when test="type != null and type.equals('email') and #{keyword}!=null and #{keyword} !='null'">
                 WHERE MID LIKE '%'||#{keyword}||'%'
             </when>
-            <when test="type != null and type.equals('nick')">
+            <when test="type != null and type.equals('nick') and #{keyword}!=null and #{keyword} !='null'">
                 WHERE NICK LIKE '%'||#{keyword}||'%'
             </when>
         </choose>

@@ -50,6 +50,7 @@
         ,GET_CODE(A0) AS A0
         ,QDATE
         ,QNO
+        ,MID
         FROM QUESTION
         )
         <choose>
@@ -103,7 +104,7 @@
     <select id="InquiryDetail" resultType="com.co.algomoko.support.domain.InquiryVO">
         SELECT QCON, QTITLE, QDATE, NICK, QANS, A0, GET_CODE(C0) AS C0, QANST, QNO, MID
         FROM QUESTION
-        WHERE NICK = #{nick}
+        WHERE MID = #{mid}
         AND QNO = #{qno}
     </select>
 

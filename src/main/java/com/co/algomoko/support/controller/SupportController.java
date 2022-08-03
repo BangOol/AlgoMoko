@@ -43,7 +43,6 @@ public class SupportController {
     // 관리자 전용 - FAQ 창 이동
     @GetMapping("FAQ")
     public String moveFAQ() throws Exception{
-        
         return "contents/support/FAQ";
     }
 
@@ -81,6 +80,7 @@ public class SupportController {
     public String moveNotice(){
         return "contents/support/Notice";
     }
+
 
     @GetMapping("/Inquiry/writeInquiry")
     public String moveWriteInquiry(Model model){
@@ -220,7 +220,7 @@ public class SupportController {
     }
 
     @GetMapping("/Inquiry/detail")
-    public String InquiryDetail(@RequestParam("nick") String nick,@RequestParam("qno") int qno,
+    public String InquiryDetail(@RequestParam("mid") String mid,@RequestParam("qno") int qno,
                                  Authentication authentication,Model model,
                                 HttpServletResponse response) throws IOException {
         UserDetails userDetails = (UserDetails)authentication.getPrincipal();
@@ -229,9 +229,9 @@ public class SupportController {
 
         // 접속을 시도하는 유저의 nick과 1:1 문의를 등록한 유저의 nick를 비교하기 위함.
         String nickVal = inquiryService.getNick(username);
-        if(nickVal.equals(nick) || u0.equals("u0")){
+        if(nickVal.equals(mid) || u0.equals("u0")){
             InquiryVO inquiryVO = new InquiryVO();
-            inquiryVO.setNick(nick);
+            inquiryVO.setMid(mid);
             inquiryVO.setQno(qno);
             List<InquiryVO> basket = inquiryService.InquiryDetail(inquiryVO);
             model.addAttribute("list",basket);

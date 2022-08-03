@@ -37,31 +37,31 @@
         <div class="container">
             <div class="row" style="padding: 0 0 0 30px">
                 <div class="col-lg-3 col-md-3 col-sm-6 text-center">
-                    <div class="contact__widget"
+                    <div class="contact__widget" id = "faq1" onclick="FAQList2()"
                          style="border: 1px solid #a0aec0 ;margin:20px 0; width: 280px; padding : 20px 10px; border-radius: 15px">
                         <h4>01</h4>
-                        <a onclick="num1()"><p style="font-family: 'Cairo', 'Jua', sans-serif">등록된 음식이 나오지 않아요.</p></a>
+                        <p style="font-family: 'Cairo', 'Jua', sans-serif">등록된 음식이 나오지 않아요.</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-6 text-center">
-                    <div class="contact__widget"
+                    <div class="contact__widget"  id = "faq2" onclick="FAQList2()"
                          style="border: 1px solid #a0aec0;margin:20px 0; width: 280px;  padding : 20px 10px; border-radius: 15px">
                         <h4>02</h4>
-                        <a onclick="num2()"><p style="font-family: 'Cairo', 'Jua', sans-serif">제한된 계정이라고 나와요.</p></a>
+                        <p style="font-family: 'Cairo', 'Jua', sans-serif">제한된 계정이라고 나와요.</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-6 text-center">
-                    <div class="contact__widget"
+                    <div class="contact__widget"  id = "faq3" onclick="FAQList2()"
                          style="border: 1px solid #a0aec0;margin:20px 0; width: 280px;  padding : 20px 10px; border-radius: 15px">
                         <h4>03</h4>
-                        <a onclick="num3()"><p style="font-family: 'Cairo', 'Jua', sans-serif">비밀번호를 잊었어요.</p></a>
+                        <p style="font-family: 'Cairo', 'Jua', sans-serif">비밀번호를 잊었어요.</p>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-3 col-sm-6 text-center">
-                    <div class="contact__widget"
+                <div class="col-lg-3 col-md-3 col-sm-6 text-center" >
+                    <div class="contact__widget" id = "faq4" onclick="FAQList2()"
                          style="border: 1px solid #a0aec0;margin:20px 0; width: 280px;  padding : 20px 10px; border-radius: 15px">
                         <h4>04</h4>
-                        <a onclick="num4()"><p style="font-family: 'Cairo', 'Jua', sans-serif">식단일지 작성이 안돼요.</p></a>
+                        <p style="font-family: 'Cairo', 'Jua', sans-serif">식단일지 작성이 안돼요.</p></a>
                     </div>
                 </div>
             </div>
@@ -100,25 +100,20 @@
                 </tr>
                 </thead>
                 <tbody id='FAQTable' style="font-family: 'Cairo', 'Jua', sans-serif">
+
                 <tr>
-                    <td colspan="2">등록된 음식이 나오지 않아요.</td>
-                    <td colspan="3">등록되는 과정에서 오류가 발생하여 제대로 등록되지 않거나<br>
-                        동일한 이름으로 음식이 등록되어 회원님이 등록하신 음식의 정보가 사라졌을 수 있습니다.<br>
-                        그러므로 문의를 남겨 주시면 최대한 친절하게 도와드리겠습니다.</td>
+                    <td  colspan="2"></td>
+                    <td colspan="3"><br>
+
+                        <br></td>
                 </tr>
                 <tr>
-                    <td  colspan="2">제한된 계정이라고 나와요.</td>
-                    <td colspan="3">제한된 계정은 일반적으로 다른 유저의 신고에 의해 접수가 되고, 운영자가 판단하기에 부적절하다 판단되면<br>
-                        그에 맞는 조치를 취하게 됩니다. 총 3번의 제한 종류가 있으며 3일, 7일, 영구 정지로 구성되어 있으며
-                        <br>영구 정지 시 복구가 불가능함을 알려드립니다.</td>
+                    <td colspan="2">.</td>
+                    <td colspan="3"></td>
                 </tr>
                 <tr>
-                    <td colspan="2">비밀번호를 잊었어요.</td>
-                    <td colspan="3">비밀 번호 찾기를 클릭 후, 로그인 시 사용하였던 이메일을 통해 임시 비밀번호를 얻을 수 있습니다.</td>
-                </tr>
-                <tr>
-                    <td colspan="2">식단 일지 작성이 안되요.</td>
-                    <td colspan="3">양식의 문제 혹은 내용을 적지 않은 부분으로 인해 오류가 발생할 수 있습니다. 자세한 부분은 1:1 문의를 부탁드립니다.</td>
+                    <td colspan="2"></td>
+                    <td colspan="3"></td>
                 </tr>
                 </tbody>
             </table>
@@ -145,13 +140,64 @@
                     }
                 }
             })
-            // fetch("/FAQList",{
-            //     method : "GET"
-            // }).then(response =>{
-            //
-            // })
-        }
 
+        }
+        function FAQList2(){
+            let faq1 = document.getElementById("faq1");
+            let faq2 = document.getElementById("faq2");
+            let faq3 = document.getElementById("faq3");
+            let faq4 = document.getElementById("faq4");
+
+            faq1.addEventListener("click", function(){
+                $('#FAQTable').empty();
+                str = '<tr>'
+                str += "<td colspan='2'>" + "등록된 음식이 나오지 않아요." + "</td>";
+                str += "<td colspan='3'>" +
+                    "등록되는 과정에서 오류가 발생하여 제대로 등록되지 않거나" +
+                    "<br>" +
+                    "동일한 이름으로 음식이 등록되어 회원님이 등록하신 음식의 정보가 사라졌을 수 있습니다." + "<br>" +
+                    "그러므로 문의를 남겨 주시면 최대한 친절하게 도와드리겠습니다." + "<br>" +
+                    "</td>";
+                str += "</tr>"
+                $('#FAQTable').append(str);
+            })
+
+            faq2.addEventListener("click", function(){
+                $('#FAQTable').empty();
+                str = '<tr>'
+                str += "<td colspan='2'>" + "제한된 계정이라고 나와요." + "</td>";
+                str += "<td colspan='3'>" +
+                    "제한된 계정은 일반적으로 다른 유저의 신고에 의해 접수가 되고, 운영자가 판단하기에 부적절하다 판단되면" +
+                    " <br>" +
+                    " 그에 맞는 조치를 취하게 됩니다. 총 3번의 제한 종류가 있으며 3일, 7일, 영구 정지로 구성되어 있으며" + "<br>" +
+                    "영구 정지 시 복구가 불가능함을 알려드립니다." + "<br>" +
+                    "</td>";
+                str += "</tr>"
+                $('#FAQTable').append(str);
+            })
+
+            faq3.addEventListener("click", function(){
+                $('#FAQTable').empty();
+                str = '<tr>'
+                str += "<td colspan='2'>" + "비밀번호를 잊었어요" + "</td>";
+                str += "<td colspan='3'>" +
+                    "비밀 번호 찾기를 클릭 후, 로그인 시 사용하였던 이메일을 통해 임시 비밀번호를 얻을 수 있습니다." +
+                    "</td>";
+                str += "</tr>"
+                $('#FAQTable').append(str);
+            })
+
+            faq4.addEventListener("click", function(){
+                $('#FAQTable').empty();
+                str = '<tr>'
+                str += "<td colspan='2'>" + "식단 일지 작성이 안되요." + "</td>";
+                str += "<td colspan='3'>" +
+                    "양식의 문제 혹은 내용을 적지 않은 부분으로 인해 오류가 발생할 수 있습니다. 자세한 부분은 1:1 문의를 부탁드립니다." +
+                    "</td>";
+                str += "</tr>"
+                $('#FAQTable').append(str);
+            })
+        }
     </script>
 </th:block>
 </body>
