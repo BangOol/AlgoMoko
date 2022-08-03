@@ -10629,7 +10629,7 @@ th {
 }
 
 .hover\:text-white:hover {
-  color: blue;
+  color: #fff;
 }
 
 .hover\:text-gray-100:hover {
