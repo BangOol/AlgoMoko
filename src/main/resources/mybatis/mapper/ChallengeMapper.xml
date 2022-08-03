@@ -74,7 +74,7 @@
 		resultType="com.co.algomoko.challenge.domain.MyChallengeVO">
 	<![CDATA[select *
 			 from challenge a, my_challenge b 
-			 where (a.cno = b.cno2 and b.mid = #{mid} and ck=0 and b.cper < 100 and b.edate > sysdate)]]>
+			 where (a.cno = b.cno2 and b.mid = #{mid} and ck=0 and to_char(b.edate) > sysdate)]]>
 	</select>
 	
 	<!-- 완료한 챌린지 목록 -->
@@ -121,21 +121,13 @@
 		cper = #{cper}, round = #{round}
 		where cno2 = #{cno} and mid = #{mid} and ck=0 and mycno= #{mycno}
 	</update>
-
-	<!-- 인증 중복 체크 -->
-	<select id="getDup" parameterType="map">
-		select to_date(cvdate,'YYYY-MM-DD')-to_date(sysdate,'YYYY-MM-DD')
-		from challenge_validation
-		where cno3=#{cno} and mid=#{mid} 
-	</select>
-
 	<!-- ck 업데이트 -->
 	<update id="ck" parameterType="map">
 		update my_challenge
 		set ck = 1
 		where cno2 =#{cno} and mid=#{mid} and mycno= #{mycno}
 	</update>
-	<!--  -->
+	<!-- 마지막 인증 일자 -->
 	<select id="getLastRound" resultType="Integer">
 	select round
 	from my_challenge
