@@ -218,7 +218,7 @@
                 if ((midCheck() && unameCheck() && mpwCheck() && mpw2Check() && sexCheck()
                     && birthCheck() && heightCheck() && weightCheck()) == false)
                    
-                    return false;
+                    return alert("회원가입 입력값 조건이 맞지않습니다.");
 
                 // 아이디 사용 가능한지 확인한 다음 사용 가능하면 회원 가입 처리
                 $.ajax("/registerIdForm2/id_check?mid=" + $('#mid').val())
@@ -254,7 +254,7 @@
 			
 			            var a = $('#mid').val()
 			
-			            console.log('email: ' +a)
+			            
 			            $.ajax({
 			                url:"email",
 			                type:'post',

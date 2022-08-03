@@ -232,17 +232,25 @@ public class UserController {
 		return "contents/user/myPageSecurityDeleteId";
 	}
 	
-	//회원탈퇴 진행
+	//회원탈퇴 진행, 미완
 	@PostMapping("/DeleteId")
-	public String deleteId(HttpServletRequest request, HttpServletResponse response, Principal pr) {
-		HttpSession session = request.getSession();
-		String mid = null ;
-		pr.getName();
-		String mid2 = (String) session.getAttribute("mid");
-		System.out.println(pr);
+	public String deleteId(HttpServletRequest request, HttpServletResponse response,String mid ) {
+//		HttpSession session = request.getSession();
+//		String mid = null ;
+//		pr.getName();
+//		String mid2 = (String) session.getAttribute("mid");
+//		System.out.println(pr);		
 		userService.deleteId(mid);
 		new SecurityContextLogoutHandler().logout(request, response, SecurityContextHolder.getContext().getAuthentication());
 		return "contents/index";
 		
 	}
+	//비밀번경
+	@PostMapping("/InsertPw")
+	public String insertPw(String mid,String mpw) {
+		userService.insertpw(mid,mpw);
+		
+		return "contents/user/myPage";
+	}
+	
 }
