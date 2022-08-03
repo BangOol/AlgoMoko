@@ -1,14 +1,18 @@
 package com.co.algomoko.food.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -46,31 +50,26 @@ public class FoodController {
 			@RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage,
 			Map<String, Object> map, FoodVO foodVO, @RequestParam(value = "ing", defaultValue = "null") String ing)
 			throws Exception {
-		ModelAndView mav = new ModelAndView();
-
-		if (foodVO.getIng() != null) {
-			// 검색어가 있으면 검색해서 띄우기
-			int listCnt = dao.TableCount(foodVO);
-			Page page = new Page(currentPage, 4, 10);
-			page.setIng(ing);
-			page.setTotalRecordCount(listCnt);
-			foodVO.setFirstRecordIndex(page.getFirstRecordIndex());
-			foodVO.setLastRecordIndex(page.getLastRecordIndex());
-
-			mav.addObject("pagination", page);
-			mav.addObject("fList", dao.fListPage(foodVO));
-			// 인기 검색어 1~6등 조회수 순으로 표시
+			ModelAndView mav = new ModelAndView();
+	
+			if (foodVO.getIng() != null) {
+				// 검색어가 있으면 검색해서 띄우기
+				int listCnt = dao.TableCount(foodVO);
+				Page page = new Page(currentPage, 4, 10);
+				page.setIng(ing);
+				page.setTotalRecordCount(listCnt);				
+				foodVO.setFirstRecordIndex(page.getFirstRecordIndex());
+				foodVO.setLastRecordIndex(page.getLastRecordIndex());
+	
+				mav.addObject("pagination", page);
+				mav.addObject("fList", dao.fListPage(foodVO));		
+			} 
+		
+			//인기 검색어 1~6등 조회수 순으로 표시
 			List<FoodVO> result3 = dao.pList(foodVO);
 			mav.addObject("pList", result3);
 			mav.setViewName("contents/food/food");
 			return mav;
-		} 
-		
-//		 인기 검색어 1~6등 조회수 순으로 표시
-		List<FoodVO> result3 = dao.pList(foodVO);
-		mav.addObject("pList", result3);
-		mav.setViewName("contents/food/food");
-		return mav;
 	}
 
 	@GetMapping("foodContents")
@@ -101,5 +100,21 @@ public class FoodController {
 		model.addAttribute("pList", result3);
 		return "contents/food/foodContents";
 	}
-
+	
+	// 음식 추가 페이지로 이동
+	@GetMapping("food/fWrite")
+	private String fWrite() {
+		return "contents/food/fWrite";
+	}
+	// 음식 추가
+	@PostMapping("/food/fWrite")
+	private String fInsert(FoodVO fVO, HttpServletResponse response) throws IOException {
+		dao.fInsert(fVO);
+		String msg = "정상적으로 등록되었습니다";
+        String url = "/food";
+        response.setContentType("text/html; charset=utf-8");
+        response.setCharacterEncoding("UTF-8");
+        PrintWriter w = response.getWriter();
+		return "redirect:/food";
+	}
 }

@@ -30,5 +30,7 @@ public interface FoodMapper {
 
 	// allcount
 	public int allTableCount(FoodVO foodVO) throws Exception;
-
+	
+	// 음식 작성
+	public void fInsert(FoodVO fVO);
 }
