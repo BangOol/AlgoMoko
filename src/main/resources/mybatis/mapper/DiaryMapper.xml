@@ -23,7 +23,7 @@ order by b.ucon
 <select id="resultCal" resultType="DiaryVO">
 select trunc(a.ddate) as ddate, a.mid, sum(b.cal) as sumcal, to_char(a.ddate, 'day') as dday , sum(b.carb) as carb, sum(b.prot) as prot, sum(b.fat) fat
 from diary a,diary_detail b
-where TO_CHAR(a.ddate,'iw')  =TO_CHAr(to_date(sysdate,'yy-MM-dd'),'iw') and a.dddo=b.dddo and a.mid = b.mid and TRUNC(a.ddate) = trunc(b.ddate) and trunc(#{ddate})=TRUNC(a.ddate) and b.mid = #{mid}
+where TO_CHAR(a.ddate,'iw')  =TO_CHAr(to_date(sysdate,'yy-MM-dd'),'iw') and a.dddo=b.dddo and a.mid = b.mid and TRUNC(a.ddate) = trunc(b.ddate) and trunc(#{ddate,jdbcType=DATE})=TRUNC(a.ddate) and b.mid = #{mid}
    GROUP BY a.ddate, a.mid
 </select>
 <select id="resultCal1" resultType="DiaryVO2">
