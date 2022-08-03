@@ -28,4 +28,7 @@ public interface FoodService {
 	// count
 	public int TableCount(FoodVO foodVO) throws Exception;
 
+	// allcount
+	public int allTableCount(FoodVO foodVO) throws Exception;
+
 }

@@ -27,7 +27,7 @@
 		</script>
 		<!-- Breadcrumb Section Begin -->
 		<section class="breadcrumb-section set-bg"
-			data-setbg="../img/chl/chlmain.jpg">
+			data-setbg="../img/banner/ch.jpg">
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-12 text-center">
@@ -87,13 +87,13 @@
 										<p th:text="${mc.cdday}+'일 동안 '+${mc.ctitle}+' 도전중!'"></p>
 										<p style="color: red;" th:text="'이행률 : '+${mc.cper}+'%'"></p>
 										<!-- <a th:href="@{/challenge/challengeDetail(cno=${mc.cno2})}" class="blog__btn">인증하기 <span class="arrow_right"></span></a> -->
-										<div style="margin-left: 152px;">
+										<div style="margin-left: 172px;">
 											<a sec:authorize="hasAuthority('u1')"
 												th:href="@{/challenge/cValidation(cno2=${mc.cno2}, mycno=${mc.mycno})}"
-												class="blog__btn">인증하기</a> <a id="ff"
-												sec:authorize="hasAuthority('u1')"
+												class="blog__btn">인증하기</a> 
+											<a id="ff" sec:authorize="hasAuthority('u1')"
 												th:href="@{/challenge/deleting(cno2=${mc.cno2})}"
-												class="blog__btn">포기하기</a>
+												class="blog__btn" onclick="return confirm('정말로 포기하시겠습니까?');">포기하기</a>
 										</div>
 
 									</div>

@@ -54,14 +54,18 @@
 					weight,
 					f0
 			from food
-			where ing like '%' || #{ing} || '%'
-			order by ing asc
+			where ing like '%' || #{ing} || '%'	
 			)	
 		 <if test="firstRecordIndex !=null and lastRecordIndex != null">
             WHERE row_num BETWEEN #{firstRecordIndex} AND #{lastRecordIndex}
         </if>
 	</select>
-	<!-- 테이블 로우 개수 -->
+	<!-- 전체 테이블 로우 개수 -->
+	<select id="allTableCount" resultType="int">
+		select count(*)
+		from food	
+	</select>
+	<!-- 검색 테이블 로우 개수 -->
 	<select id="TableCount" resultType="int" parameterType="com.co.algomoko.food.domain.FoodVO">
 		select count(*)
 		from food

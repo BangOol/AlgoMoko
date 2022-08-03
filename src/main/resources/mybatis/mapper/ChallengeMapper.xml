@@ -18,7 +18,7 @@
 		 	 from (select * from challenge
 		 		   where ctitle like '%' || #{ctitle,jdbcType=VARCHAR} || '%'
 		 		   order by ctitle)
-			 where rownum <=6]]>
+			 where rownum <=10]]>
 	</select>
 	
 	<!-- 챌린지 작성 -->
@@ -155,9 +155,8 @@
 					cdday,
 					filepath
 			from challenge
-			where cno = #{cno}
 			order by ctitle asc
-			)	
+			)
 		 <if test="firstRecordIndex !=null and lastRecordIndex != null">
             WHERE row_num BETWEEN #{firstRecordIndex} AND #{lastRecordIndex}
         </if>

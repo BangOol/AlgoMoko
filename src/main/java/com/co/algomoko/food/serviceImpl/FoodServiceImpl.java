@@ -50,6 +50,11 @@ public class FoodServiceImpl implements FoodService {
 		return mapper.TableCount(foodVO);
 	}
 
+	@Override
+	public int allTableCount(FoodVO foodVO) throws Exception {
+		return mapper.allTableCount(foodVO);
+	}
+
 	
 
 
