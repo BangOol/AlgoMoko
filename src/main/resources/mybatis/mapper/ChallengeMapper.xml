@@ -66,7 +66,7 @@
 		insert into my_challenge
 		(mycno, cno2, mid, sdate, edate )
 		values(mycno.nextval, #{cno}, #{mid},
-		sysdate, sysdate+#{cdday})
+		sysdate, sysdate+to_char(#{cdday}))
 	</insert>
 	
 	<!--진행중인 챌린지 목록 -->
