@@ -55,6 +55,11 @@ public class FoodServiceImpl implements FoodService {
 		return mapper.allTableCount(foodVO);
 	}
 
+	@Override
+	public void fInsert(FoodVO fVO) {
+		
+	}
+
 	
 
 

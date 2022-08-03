@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zxx" xmlns:th="http://www.thymeleaf.org"
+	layout:decorate="~{layouts/layout}">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<th:block layout:fragment="content">
+		<!-- Breadcrumb Section Begin -->
+		<section class="breadcrumb-section set-bg"
+			data-setbg="../img/banner/ch.jpg">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12 text-center">
+						<div class="breadcrumb__text">
+							<h2>음식 추가</h2>
+							<div class="breadcrumb__option">
+								<span>Food Insert</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- Breadcrumb Section End -->
+		<!--  본문 시작 -->
+		<section class="checkout spad">
+			<div class="container">
+				<div class="checkout__form">
+					<h4 style="text-align: center;">음식 추가</h4>
+					<form action="/food/fWrite" method="post">
+						<div class="col-lg-12 col-md-6">
+							<div>
+								<div class="row">
+									<div class="col-lg-2">
+										<div class="checkout__input">
+											<label for="ing">이름<span>*</span></label> <input type="text"
+												class="form-control" id="ing" name="ing"required>
+										</div>
+									</div>
+									<div class="col-lg-2">
+										<div class="checkout__input">
+											<label for="cal">칼로리<span>*</span></label> <input type="text"
+												class="form-control" id="cal" name="cal"required>
+										</div>
+									</div>
+									<div class="col-lg-1">
+										<div class="checkout__input">
+											<label for="carb">탄수화물<span>*</span></label> <input
+												type="text" class="form-control" id="carb" name="carb"required>
+										</div>
+									</div>
+									<div class="col-lg-1">
+										<div class="checkout__input">
+											<label for="prot">단백질<span>*</span></label> <input
+												type="text" class="form-control" id="prot" name="prot" required>
+										</div>
+									</div>
+									<div class="col-lg-1">
+										<div class="checkout__input">
+											<label for="fat">지방<span>*</span></label> <input type="text"
+												class="form-control" id="fat" name="fat" required>
+										</div>
+									</div>
+									<div class="col-lg-1">
+										<div class="checkout__input">
+											<label for="f0">단위<span>*</span></label> <input type="text"
+												class="form-control" id="f0" name="f0" required>
+										</div>
+									</div>
+									<div class="col-lg-2">
+										<div class="checkout__input">
+											<label for="ddname">ddname<span>*</span></label> <input
+												type="text" class="form-control" id="ddname" name="ddname" required>
+										</div>
+									</div>
+									<div class="col-lg-2">
+										<div class="checkout__input">
+											<label for="weight">weight<span>*</span></label> <input
+												type="text" class="form-control" id="weight" name="weight" required>
+										</div>
+									</div>
+									<div style="float: right;">
+										<button type="submit" class="site-btn">등록하기</button>
+										<button type="button" class="site-btn"
+											th:onClick="location.href='/food'">돌아가기</button>
+									</div>
+								</div>								
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</section>
+	</th:block>
+</body>
+</html>
