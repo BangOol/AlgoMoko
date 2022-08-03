@@ -44,27 +44,31 @@ public class FoodController {
 	@RequestMapping("food")
 	public ModelAndView AllListView(
 			@RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage,
-			Map<String, Object> map, FoodVO foodVO,@RequestParam(value = "ing", defaultValue = "null") String ing) throws Exception {
+			Map<String, Object> map, FoodVO foodVO, @RequestParam(value = "ing", defaultValue = "null") String ing)
+			throws Exception {
 		ModelAndView mav = new ModelAndView();
-		
+
 		if (foodVO.getIng() != null) {
 			// 검색어가 있으면 검색해서 띄우기
 			int listCnt = dao.TableCount(foodVO);
-			Page page = new Page(currentPage,4,10);
+			Page page = new Page(currentPage, 4, 10);
 			page.setIng(ing);
 			page.setTotalRecordCount(listCnt);
 			foodVO.setFirstRecordIndex(page.getFirstRecordIndex());
 			foodVO.setLastRecordIndex(page.getLastRecordIndex());
-			
+
 			mav.addObject("pagination", page);
-			mav.addObject("fList", dao.fListPage(foodVO));	
+			mav.addObject("fList", dao.fListPage(foodVO));
+			// 인기 검색어 1~6등 조회수 순으로 표시
+			List<FoodVO> result3 = dao.pList(foodVO);
+			mav.addObject("pList", result3);
 			mav.setViewName("contents/food/food");
 			return mav;
-		}
-		// 인기 검색어 1~6등 조회수 순으로 표시
-		List<FoodVO> result3 = dao.pList(foodVO);
-		mav.addObject("pList", result3);		
+		} 
 		
+//		 인기 검색어 1~6등 조회수 순으로 표시
+		List<FoodVO> result3 = dao.pList(foodVO);
+		mav.addObject("pList", result3);
 		mav.setViewName("contents/food/food");
 		return mav;
 	}
@@ -97,7 +101,5 @@ public class FoodController {
 		model.addAttribute("pList", result3);
 		return "contents/food/foodContents";
 	}
-
-	
 
 }

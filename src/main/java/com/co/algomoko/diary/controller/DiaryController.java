@@ -174,32 +174,94 @@ public class DiaryController {
       
         return "contents/diary/succ";
     }
-   @RequestMapping("todaysic")
-    public String todaysic(Model model, DiaryVO diaryVO,Authentication authentication) throws ParseException{
-      Date date = new Date();
-      SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-      String std = sdf.format(date);
-      
-      UserDetails mid = (UserDetails) authentication.getPrincipal();
-      diaryVO.setMid(mid.getUsername());
-      diaryVO.setDdate(date);
-      
-      System.out.println("넘이옴");
-      
-      
-      diaryVO.setDddo("aa");
-      model.addAttribute("aade",dao.detail(diaryVO));
-      diaryVO.setDddo("bb");
-      model.addAttribute("bbde",dao.detail(diaryVO));
-      diaryVO.setDddo("cc");
-      model.addAttribute("tcal",dao.tcal(diaryVO.getMid()));
-      model.addAttribute("ccde",dao.detail(diaryVO));
-      model.addAttribute("std",std);
-      model.addAttribute("resultCal",dao.resultCal(diaryVO));
-      
-      
-      return "contents/diary/todaysic";
-    }
+//   @RequestMapping("todaysic")
+//    public String todaysic(Model model, DiaryVO diaryVO,Authentication authentication) throws ParseException{
+//      Date date = new Date();
+//      SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//      String std = sdf.format(date);
+//      
+//      UserDetails mid = (UserDetails) authentication.getPrincipal();
+//      diaryVO.setMid(mid.getUsername());
+//      diaryVO.setDdate(date);
+//      
+//      System.out.println("넘이옴");
+//      
+//      
+//      diaryVO.setDddo("aa");
+//      model.addAttribute("aade",dao.detail(diaryVO));
+//      diaryVO.setDddo("bb");
+//      model.addAttribute("bbde",dao.detail(diaryVO));
+//      diaryVO.setDddo("cc");
+//      model.addAttribute("tcal",dao.tcal(diaryVO.getMid()));
+//      model.addAttribute("ccde",dao.detail(diaryVO));
+//      model.addAttribute("std",std);
+//      model.addAttribute("resultCal",dao.resultCal(diaryVO));
+//      
+//      
+//      return "contents/diary/daysic";
+//    }
+   
+   @RequestMapping(value="todaysic") 
+   public String todaysic(Model model, DiaryVO diaryVO,Authentication authentication ,HttpServletResponse response)
+      throws IOException, ParseException{
+	   Date date = new Date();
+     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+     String std = sdf.format(date);
+     
+     UserDetails mid = (UserDetails) authentication.getPrincipal();
+     diaryVO.setMid(mid.getUsername());
+     diaryVO.setDdate(date);
+     
+     System.out.println("넘어옴");
+     System.out.println(dao.tcal(diaryVO.getMid()));
+     DiaryVO2 diaryVO2 = new DiaryVO2();
+    
+     
+     diaryVO.setDddo("aa");
+     model.addAttribute("aade",dao.detail(diaryVO));
+     diaryVO.setDddo("bb");
+     model.addAttribute("bbde",dao.detail(diaryVO));
+     diaryVO.setDddo("cc");
+     model.addAttribute("tcal",dao.tcal(diaryVO.getMid()));
+     model.addAttribute("ccde",dao.detail(diaryVO));
+     model.addAttribute("std",std);
+     
+     
+     if(dao.resultCal(diaryVO).isEmpty()) {
+   	  diaryVO2.setMid(mid.getUsername());
+   	  diaryVO2.setDdate(date);
+   	  diaryVO2.setDddo("aa");
+         model.addAttribute("aade",dao.detail(diaryVO));
+         diaryVO2.setDddo("bb");
+         model.addAttribute("bbde",dao.detail(diaryVO));
+         diaryVO2.setDddo("cc");
+         model.addAttribute("tcal",dao.tcal(diaryVO.getMid()));
+         model.addAttribute("ccde",dao.detail(diaryVO));
+         model.addAttribute("std",std);
+         model.addAttribute("resultCal",dao.resultCal1(diaryVO2));
+         
+     }else {
+   	  model.addAttribute("resultCal",dao.resultCal(diaryVO));
+	}
+	
+     
+        	 
+   	    
+     
+     
+     
+     
+     
+     
+     
+     return "contents/diary/daysic";
+   }
+   
+   
+   
+   
+   
+   //0000000
    
    
    @RequestMapping(value="daysic") 
@@ -499,7 +561,7 @@ public String delete(HttpServletResponse response,DiaryVO diaryVO,Authentication
 		
 		  for(int i=0;i< ddnameList.size();i++) { 
 			  res = dao.fonlist(fings[i]);
-			 
+			 System.out.println(ddnameList);
 			 recipeVO.setMid(mid.getUsername());
 			 recipeVO.setFing(res.getDdname());
 			 recipeVO.setCal(res.getCal());

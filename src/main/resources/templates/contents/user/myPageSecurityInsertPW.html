@@ -51,7 +51,6 @@
                   <ul style="margin: 0 0 0 20px;">
                     <li ><a href="myPage">회원 정보</a></li>
 	                        <li><a href="insertMyPage">- 정보 수정</a></li>                                                
-	                        <li><a href="">활동 내역(삭제예정)</a></li>
 	                        <li><a href="">보안 설정</a></li>
 	                        <li><a href="myPageSecurityInsertPW">- 비밀번호 변경</a></li>
 	                        <li><a href="myPageSecurityDeleteId">- 회원 탈퇴</a></li>
@@ -63,45 +62,32 @@
           <div class="col-lg-9 col-md-7">
             <h3 style="border-bottom: 2px solid; font-family: 'Jua';">비밀번호 변경</h3>
             <div>
+            <form id="insertPw_form" method="post" action="/InsertPw">
               <table style="margin: 60px 0 0 60px; ">
                 <tr>
                     <th>새 비밀번호 :</th>
-                    <td><input type = "password" style = "width: 400px; border-radius: 10px;
+                    <td><input id="mpw" name="mpw" type = "password" style = "width: 400px; border-radius: 10px;
                         border: 1px solid; height: 30px; margin: 10px 0 10px 0 ;" placeholder="8자 이상의 문자, 숫자, 특수문자를 입력하세요"></td>
                 </tr>
                 <tr>
                     <th>새 비밀번호 확인: </th>
-                    <td><input type = "password" style = "width: 400px; border-radius: 10px;
+                    <td><input id="mpw2" name="mpw2" type = "password" style = "width: 400px; border-radius: 10px;
                         border: 1px solid; height: 30px; margin: 10px 0 10px 0 ;" placeholder="8자 이상의 문자, 숫자, 특수문자를 입력하세요"></td>
                     <!--pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*()_-+=[]{}~?:;`|/]).{8,50}$"  : 8자 이상의 문자, 숫자 정규식-->
                 </tr>
-                <tr>
-                    <th>아이디 :</th>
-                    <td><input type = "text" style = "width: 400px; border-radius: 10px;
-                     border: 1px solid; height: 30px; margin: 10px 0 10px 0 ;" placeholder="이메일 형식으로 입력하세요"> <input type = "button" value ="발송" style="width: 80px; height:30px; "></td>
-                </tr>
-                <tr>
-                    <th>인증번호</th>
-                    <td style="border:none"><input type = "text"  style = "width: 200px; border-radius: 10px;
-                        border: 1px solid; height: 30px; margin: 10px 0 10px 0 ;" placeholder="인증 번호를 입력하세요"><input type = "button" value ="확인" style="width: 80px; height:30px; "></td>
-                </tr>
                 </table>
-                <button type="submit" style="float:right; background-color: #f5f5f5; width: 100px; height: 30px;">비밀번호 변경</button>
+                <button id="insert" name="insert" type="submit" style="float:right; background-color: #f5f5f5; width: 100px; height: 30px;">비밀번호 변경</button>
+                </form>
             </div>
           </div>
       </div>
     </div>
     </section>
     <script>
-  function search_check(num) {
-		if (num == '1') {
-			document.getElementById("searchP").style.display = "none";
-			document.getElementById("searchI").style.display = "";	
-		} else {
-			document.getElementById("searchI").style.display = "none";
-			document.getElementById("searchP").style.display = "";
-		}
-	}
+  $('#insert').click(function(e){
+  	e.preventDefault();
+  
+  })
   </script> 
 <!-- Product Section End -->
 </th:block>

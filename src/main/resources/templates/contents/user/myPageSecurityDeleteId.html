@@ -49,7 +49,6 @@
                       <ul style="margin: 0 0 0 20px;">
                       <li ><a href="myPage">회원 정보</a></li>
                          <li><a href="insertMyPage">- 정보 수정</a></li>                                                
-	                        <li><a href="">활동 내역(삭제예정)</a></li>
 	                        <li><a href="">보안 설정</a></li>
 	                        <li><a href="myPageSecurityInsertPW">- 비밀번호 변경</a></li>
 	                        <li><a href="myPageSecurityDeleteId">- 회원 탈퇴</a></li>
@@ -62,8 +61,8 @@
         <h3 style="border-bottom: 2px solid; font-family: 'Jua';">회원탈퇴</h3>
         <div style="margin: 60px 0 0 60px; ">
          <h3>정말 탈퇴 하시겠습니까?</h3>
-         <h2 th:value= "${#authentication.principal.mid}"></h2>
-         <input  type="hidden" th:value= "${#authentication.principal.mid}">
+         
+         <input  type="hidden" id="mid" th:value= "${#authentication.principal.mid}">
         </div>
             <button id="userDelete" style="float:right; background-color: #f5f5f5; width: 100px; height: 30px;">회원탈퇴</button>
       </div>
@@ -78,9 +77,11 @@ if(!confirm ("정말 탈퇴하시겠습니까?")){
 	
 	return false;
 }
+	var result = $('#mid').val()
  $.ajax({
 	url:"DeleteId", 
- 	method:"post"
+ 	method:"post",
+ 	data:{mid=result}
  })
 	return alert ("그동안 서비스를 이용해 주셔서 감사합니다.");
 	

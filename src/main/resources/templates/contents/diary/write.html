@@ -154,6 +154,7 @@
 <body>
 	<div th:replace="~{fragments/header}"></div>
 	<div th:replace="~{fragments/aside}"></div>
+
 	<!-- 모달창 시작 -->
 	<div class="modal">
 		<div class="modal1_body">
@@ -168,8 +169,8 @@
 
 				<div id="gridpro"></div>
 				<div class="modal_btn">
-					<button id="modalbtn" class="modal_s">등록</button>
-					<button class="modal_c">취소</button>
+					<button id="modalbtn" class="modal_s">추가</button>
+					<button class="modal_c">확인</button>
 				</div>
 			</div>
 		</div>
@@ -177,6 +178,9 @@
 	
 	
 	<form method="post" action="modifyde" name="frm">
+		<div>
+<h2 style="margin-top: -100px; margin-left: 850px; margin-bottom: 50px; font-family: 'Cairo', 'Jua', sans-serif">일지 작성</h2>
+</div>
 		<div class="row">
 			<div class="col-md-3 mb-1">
 				<div class="input-group mb-3">
@@ -274,7 +278,7 @@
 
 
 						<div class="product__details__tab__desc">
-							<h5 style="text-align: center;">일지 작성</h5>
+							<h5 style="text-align: center; font-family: 'Cairo', 'Jua', sans-serif">일지 내용</h5>
 							<br>
 
 							<textarea required class="form-control" name="ucon" rows="15" cols="30"></textarea>
@@ -282,7 +286,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="row justify-content-center mt-6">
+			<div class="row justify-content-center mt-6" style="margin-bottom: 50px;">
 				<div class="col-sm-4">
 					<button class="btn btn-success" id="che">등록</button>
 					<button type="button" class="btn btn-secondary" onclick="location.href='/diary'">취소</button>
@@ -489,7 +493,7 @@
 					var d = $(tbody).append(b);
 
 					result()
-					modal.style.display = "none";
+					//modal.style.display = "none";
 					body.style.overflow = 'auto';
 				})
 

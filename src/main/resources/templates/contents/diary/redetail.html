@@ -2,124 +2,123 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <head>
-   <meta charset="UTF-8">
-   <meta name="description" content="Ogani Template">
-   <meta name="keywords" content="Ogani, unica, creative, html">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-   <title>Ogani | Template</title>
+	<meta charset="UTF-8">
+	<meta name="description" content="Ogani Template">
+	<meta name="keywords" content="Ogani, unica, creative, html">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Ogani | Template</title>
 
-   <!-- Google Font -->
-   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
-   <!-- Favicon -->
-   <link href="img/favicon.ico" rel="icon">
+	<!-- Google Font -->
+	<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+	<!-- Favicon -->
+	<link href="img/favicon.ico" rel="icon">
 
-   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
 
-   <!-- Css Styles -->
-   <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
-   <link rel="stylesheet" href="/css/font-awesome.min.css" type="text/css">
-   <link rel="stylesheet" href="/css/elegant-icons.css" type="text/css">
-   <link rel="stylesheet" href="/css/nice-select.css" type="text/css">
-   <link rel="stylesheet" href="/css/jquery-ui.min.css" type="text/css">
-   <link rel="stylesheet" href="/css/owl.carousel.min.css" type="text/css">
-   <link rel="stylesheet" href="/css/slicknav.min.css" type="text/css">
-   <link rel="stylesheet" href="/css/style.css" type="text/css">
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
-<link
-	href="https://fonts.googleapis.com/css2?family=Jua:wght@200;300;400;600;900&display=swap"
-	rel="stylesheet">
-   <link rel="stylesheet" href="https://uicdn.toast.com/grid/latest/tui-grid.css" />
-   <script src="https://uicdn.toast.com/grid/latest/tui-grid.js">
-   </script>
+	<!-- Css Styles -->
+	<link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
+	<link rel="stylesheet" href="/css/font-awesome.min.css" type="text/css">
+	<link rel="stylesheet" href="/css/elegant-icons.css" type="text/css">
+	<link rel="stylesheet" href="/css/nice-select.css" type="text/css">
+	<link rel="stylesheet" href="/css/jquery-ui.min.css" type="text/css">
+	<link rel="stylesheet" href="/css/owl.carousel.min.css" type="text/css">
+	<link rel="stylesheet" href="/css/slicknav.min.css" type="text/css">
+	<link rel="stylesheet" href="/css/style.css" type="text/css">
+	<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Jua:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://uicdn.toast.com/grid/latest/tui-grid.css" />
+	<script src="https://uicdn.toast.com/grid/latest/tui-grid.js">
+	</script>
 
-   <script>
-      $(function () {
+	<script>
+		$(function () {
 
-         $("#datepicker").datepicker({
-            dateFormat: 'yy-mm-dd',
-            prevText: '이전 달',
-            nextText: '다음 달',
-            monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-            monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-            dayNames: ['일', '월', '화', '수', '목', '금', '토'],
-            dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
-            dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
-            showMonthAfterYear: true,
-            yearSuffix: '년'
-         })
-      });
-   </script>
-   <style>
-      .btn-secondary {
-         margin-left: 20px;
-      }
+			$("#datepicker").datepicker({
+				dateFormat: 'yy-mm-dd',
+				prevText: '이전 달',
+				nextText: '다음 달',
+				monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+				monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+				dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+				dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+				dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+				showMonthAfterYear: true,
+				yearSuffix: '년'
+			})
+		});
+	</script>
+	<style>
+		.btn-secondary {
+			margin-left: 20px;
+		}
 
-      span {
-         color: #494949;
-         font-weight: bold;
-      }
+		span {
+			color: #494949;
+			font-weight: bold;
+		}
 
-      #pageing {
-         border: 1px solid #e6e6e6;
-         line-height: 30px;
-         background-color: #fff;
-         color: #999999;
-      }
+		#pageing {
+			border: 1px solid #e6e6e6;
+			line-height: 30px;
+			background-color: #fff;
+			color: #999999;
+		}
 
-      .input {
-         height: 23px;
-         margin-left: 10px;
-         margin-right: 10px;
-         display: inline-block;
-         padding: 0 10px;
-         vertical-align: middle;
-         border: 1px solid #dddddd;
-         width: 20%;
-         color: rgb(94, 94, 94);
-         border-radius: 5px;
-         text-align: center;
-      }
+		.input {
+			height: 23px;
+			margin-left: 10px;
+			margin-right: 10px;
+			display: inline-block;
+			padding: 0 10px;
+			vertical-align: middle;
+			border: 1px solid #dddddd;
+			width: 20%;
+			color: rgb(94, 94, 94);
+			border-radius: 5px;
+			text-align: center;
+		}
 
-      #leftinput,
-      #rightinput {
-         margin-right: 18px;
-      }
+		#leftinput,
+		#rightinput {
+			margin-right: 18px;
+		}
 
-      #leftinput1,
-      #rightinput1 {
-         background-color: #f1f1f1;
-      }
+		#leftinput1,
+		#rightinput1 {
+			background-color: #f1f1f1;
+		}
 
-      #startCndate {
-         margin-right: 10px;
-      }
+		#startCndate {
+			margin-right: 10px;
+		}
 
-      #endCndate {
-         margin-left: 5px;
-      }
+		#endCndate {
+			margin-left: 5px;
+		}
 
-      .dataTable-input {
-         height: 40px;
-      }
+		.dataTable-input {
+			height: 40px;
+		}
 
-      .nameing {
-         float: right;
-         font-size: medium;
-         font-weight: normal;
-         margin-top: 15px;
-      }
+		.nameing {
+			float: right;
+			font-size: medium;
+			font-weight: normal;
+			margin-top: 15px;
+		}
 
-      #modal {
-         display: none;
-      }
+		#modal {
+			display: none;
+		}
 
-      .title {
-         text-align: center;
-         margin-bottom: 10px;
-         margin-top: -10px;
-      }
-      th {
+		.title {
+			text-align: center;
+			margin-bottom: 10px;
+			margin-top: -10px;
+		}
+
+		th {
 			width: 120px;
 			height: 49px;
 		}
@@ -142,7 +141,7 @@
 			width: 50px;
 			height: 45px;
 		}
-   </style>
+	</style>
 
 
 
@@ -165,15 +164,21 @@
 
 				<div id="gridpro"></div>
 				<div class="modal_btn">
-					<button id="modalbtn" class="modal_s">등록</button>
-					<button class="modal_c">취소</button>
+					<button id="modalbtn" class="modal_s">추가</button>
+					
+					<button class="modal_c">확인</button>
 				</div>
 			</div>
 		</div>
 	</div>
-	
-	
+
+
 	<form method="post" action="/diary/remodify" name="frm" id="frm">
+		<div>
+			<h2
+				style="margin-top: -100px; margin-left: 820px; margin-bottom: 50px; font-family: 'Cairo', 'Jua', sans-serif">
+				레시피 수정</h2>
+		</div>
 		<div class="row">
 			<div class="col-md-2 mb-1" style="margin-right:152px;">
 				<div class="input-group mb-3">
@@ -183,20 +188,21 @@
 				</div>
 
 			</div>
-			
-					<div class="col-md-3 mb-1 ml-5">
+
+			<div class="col-md-3 mb-1 ml-5">
 				<div class="input-group mb-3">
 
-					<input type="text" class="form-control" th:value="${redetail[0].rname}" name="rname" placeholder="레시피 명">
+					<input type="text" class="form-control" th:value="${redetail[0].rname}" name="rname"
+						placeholder="레시피 명">
 
 				</div>
 
 			</div>
-		
 
 
 
-			
+
+
 
 		</div>
 
@@ -219,7 +225,7 @@
 
 
 
-		<div class="container">
+		<div class="container" style="min-height: 500px;">
 			<div class="row">
 
 
@@ -236,27 +242,27 @@
 							</tr>
 						</thead>
 						<tbody id="tbody1">
-					<th:block th:each="redetail:${redetail}">
-                  
-                     <tr>
-                        <th>
-                        <input th:value="${redetail.fing}" class="thth1" type="text" name="fing">
-                        </th>
-                        <th>
-                        <input th:value="${redetail.cal}" class="thth2" type="text" name="cal">
-                        </th>
-                        <th>
-                        <input th:value="${redetail.aamount}" class="thth3" type="text" name="aamount">
-                        </th>
-                        <th>
-                  <input th:value="${redetail.cal}/${redetail.aamount}" type="hidden">
-                  </th>
-                        
-                        <td class="shoping__cart__item__close"><button class="icon_close"></td>
-                     </tr>
+							<th:block th:each="redetail:${redetail}">
+
+								<tr>
+									<th>
+										<input th:value="${redetail.fing}" class="thth1" type="text" name="fing">
+									</th>
+									<th>
+										<input th:value="${redetail.cal}" class="thth2" type="text" name="cal">
+									</th>
+									<th>
+										<input th:value="${redetail.aamount}" class="thth3" type="text" name="aamount">
+									</th>
+									<th>
+										<input th:value="${redetail.cal}/${redetail.aamount}" type="hidden">
+									</th>
+
+									<td class="shoping__cart__item__close"><button class="icon_close"></td>
+								</tr>
 
 
-			</block>
+								</block>
 						</tbody>
 
 
@@ -272,35 +278,36 @@
 				</div>
 
 				<div class="col-sm-12 col-xl-5">
-<table class ="generic" width="100">
-            <tbody id="rebody">
-               
-               
-               레시피      
-               <tr th:block th:each="rearrys:${rearrys}">
-               <td style="width:150px" id="recnt"></td>
-              <td width="500" class="trre">
-               <input type="text" th:value="${rearrys}" class="form-control" row="5" name="rrecipe" id="rrecipe" style="width: 440px;">
-              </td>
-             
-             
-             </block>
-               </tr>
+					<table class="generic" width="100">
+						<tbody id="rebody">
 
-          
-            
-            
-            
-            </tbody>
-            
-            
-            </table>
-            
+
+							레시피
+							<tr th:block th:each="rearrys:${rearrys}">
+								<td style="width:150px" id="recnt"></td>
+								<td width="500" class="trre">
+									<input type="text" th:value="${rearrys}" class="form-control" row="5" name="rrecipe"
+										id="rrecipe" style="width: 440px;">
+								</td>
+
+
+								</block>
+							</tr>
+
+
+
+
+
+						</tbody>
+
+
+					</table>
+
 				</div>
 				<div class="col-sm-12 col-xl-2 mt-4">
-				 <button type="button" id="addrebtn" class="btn btn-success">추가</button>
+					<button type="button" id="addrebtn" class="btn btn-success">추가</button>
 				</div>
-				
+
 			</div>
 			<div class="row justify-content-center mt-6">
 				<div class="col-sm-4">
@@ -333,244 +340,309 @@
 	<script src="/js/main.js"></script>
 
 	<script>
-      var gin;
-      var gic;
-      var gia;
-      const body = document.querySelector('body');
-      const modal = document.querySelector('.modal');
+		var gin;
+		var gic;
+		var gia;
+		const body = document.querySelector('body');
+		const modal = document.querySelector('.modal');
 
-      /*제품정보 그리드*/
-      const giupData = [];
-
-
-      const jepoom = new tui.Grid({
-         el: document.getElementById('gridpro'),
-         data: giupData,
-         scrollY: true,
-         rowHeaders: ['rowNum'],
-         bodyHeight: 300,
+		/*제품정보 그리드*/
+		const giupData = [];
 
 
-         columns: [{
-            header: '재료명',
-            name: 'ing',
-            align: 'center',
-
-         }, {
-            header: '칼로리',
-            name: 'cal',
-            align: 'center',
-
-         }, {
-            header: '수량',
-            name: 'amount',
-            align: 'center',
-
-         }]
-      });
-
-      $(function () {
-         
-         
-         
-         
-      
-         $(".thth3").on("keyup", function () {
-            var aaa = $(this).val();
-            var bbb = $(this).parent().prev().children();
-            var ccc = $(this).parent().prev().children().val();
-            var zzz = $(this).parent().next().children().val();
-            
-            
-            var ddd = aaa * zzz;
-            
-            console.log(zzz);
-               $(bbb).val(ddd);
-               result()
-            
-         })
-         
-         
-         
-         
-         function result() {
-            
-            
-               var sum = 0;
-            $(".thth2").each(function () {
-               sum += Number($(this).val());
-            });
+		const jepoom = new tui.Grid({
+			el: document.getElementById('gridpro'),
+			data: giupData,
+			scrollY: true,
+			rowHeaders: ['rowNum'],
+			bodyHeight: 300,
 
 
-            $("#seipSum").val(sum);
+			columns: [{
+				header: '재료명',
+				name: 'ing',
+				align: 'center',
 
-         }
+			}, {
+				header: '칼로리',
+				name: 'cal',
+				align: 'center',
 
-         result()
+			}, {
+				header: '수량',
+				name: 'amount',
+				align: 'center',
+
+			}]
+		});
+
+		$(function () {
 
 
 
 
 
-         $(".icon_close").on("click", function () {
-
-            $(this).closest("tr").remove();
-
-            result()
-            
-
+			$(".thth3").on("keyup", function () {
+				var aaa = $(this).val();
+				var bbb = $(this).parent().prev().children();
+				var ccc = $(this).parent().prev().children().val();
+				var zzz = $(this).parent().next().children().val();
 
 
-         })
+				var ddd = aaa * zzz;
 
+				console.log(zzz);
+				$(bbb).val(ddd);
+				result()
 
-
-
-
-         $('.blog__btn').click((e) => {
-            jepoom.refreshLayout();
-            modal.style.display = "flex";
-            body.style.overflow = 'auto';
-         })
-         const closeBtn = modal.querySelector(".modal_c")
-         closeBtn.addEventListener("click", e => {
-            modal.style.display = "none";
-            body.style.overflow = 'auto';
-         })
+			})
 
 
 
 
+			function result() {
 
-         /*음식조회*/
-         $("#btnbtn").on("click", function () {
-            var btnbtn = $('#textex').val();
-            console.log(btnbtn);
-            $.ajax({
-               url: '/diary/flist',
-               type: 'GET', // == method
-               data: {
-                  btnbtn
-               },
 
-            }).done(function (response) {
-               jepoom.refreshLayout();
-               jepoom.resetData(response)
-               jepoom.on('click', e => {
-                  var rok = e.rowKey
-                  gin = jepoom.getRow(rok).ing
-                  gic = jepoom.getRow(rok).cal
-                  gia = jepoom.getRow(rok).amount
+				var sum = 0;
+				$(".thth2").each(function () {
+					sum += Number($(this).val());
+				});
 
-               })
-            })
+
+				$("#seipSum").val(sum);
+
+			}
+
+			result()
 
 
 
 
 
-          $("#modalbtn").off("click").on("click", function () {
-               var tbody = $('#tbody1');
-			var qqq = $('<input>').val(gia).addClass('thth3').attr('type', 'text').attr('name', 'amount');
-               var tr = $('<tr>');
-               var th1 = $('<th>').append($('<input>').val(gin).addClass('thth1').attr('type', 'text').attr('name', 'fing'));
-               var th2 = $('<th>').append($('<input>').val(gic).addClass('thth2').attr('type', 'text').attr('name', 'cal'));
-               var th3 = $('<th>').append(qqq);
-               var thhi = $('<th>').append($('<input>').val(gic).attr('type', 'hidden'));
-              qqq.on("keyup", function () {
-                  var aaa = $(this).val();
-                  var bbb = $(this).parent().prev().children();
-                  var ccc = $(this).parent().prev().children().val();
-                  var zzz = $(this).parent().next().children().val();
-                  
-                  
-                  var ddd = aaa * zzz;
-                  
-                  console.log(zzz);
-                     $(bbb).val(ddd);
-                     result()
-                  
-               })
-                           
-               var td4 = $('<td>').addClass('shoping__cart__item__close');
-               var button = $('<button>').addClass('icon_close');
-               var td5 = $(td4).append(button);
-               button.on("click", function () {
-                  console.log($(this));
-                  $(this).closest("tr").remove();
-                  result()
-               })
-               
+			$(".icon_close").on("click", function () {
+
+				$(this).closest("tr").remove();
+
+				result()
 
 
-               var b = $(tr).append(th1, th2, th3,thhi,td5);
 
-               var d = $(tbody).append(b);
 
-               result()
+			})
+
+
+
+
+
+			$('.blog__btn').click((e) => {
+				jepoom.refreshLayout();
+				modal.style.display = "flex";
+				body.style.overflow = 'auto';
+			})
+			const closeBtn = modal.querySelector(".modal_c")
+			closeBtn.addEventListener("click", e => {
 				modal.style.display = "none";
-            	body.style.overflow = 'auto';	
-            })
+				body.style.overflow = 'auto';
+			})
 
 
 
-         })
 
 
-      })
-      var index = 0;
-      $(".trre").on("click", function(){
-         index = $(this).closest('tr').index();
-         console.log(index);
-      })
+			/*음식조회*/
+			$("#btnbtn").on("click", function () {
+				var btnbtn = $('#textex').val();
+				console.log(btnbtn);
+				$.ajax({
+					url: '/diary/flist',
+					type: 'GET', // == method
+					data: {
+						btnbtn
+					},
 
-               function diaryde() {
-                  $("#frm").attr("action", "redelete").submit();
-         
-               }
-               
-               
-               
-               
-               var a = 1;
-               var b = 0;
-            $("#addrebtn").on("click", function () {
-                  
-                   var tbody = $('.generic >tbody >tr > .trre').length;
-                  console.log(tbody);
-                  var recnt = Number($("#recnt").html());
-                  if(tbody >= 6){
-                     
-                     alert('더이상 추가할수없다');
-                           
-                     return false;
-                     
-               }else{
-                     
-                     b += tbody;
-                     var tr = `<tr>
+				}).done(function (response) {
+					jepoom.refreshLayout();
+					jepoom.resetData(response)
+					jepoom.on('click', e => {
+						var rok = e.rowKey
+						gin = jepoom.getRow(rok).ing
+						gic = jepoom.getRow(rok).cal
+						gia = jepoom.getRow(rok).amount
+
+					})
+				})
+
+
+
+
+
+				$("#modalbtn").off("click").on("click", function () {
+					var tbody = $('#tbody1');
+					var qqq = $('<input>').val(gia).addClass('thth3').attr('type', 'text').attr('name', 'amount');
+					var tr = $('<tr>');
+					var th1 = $('<th>').append($('<input>').val(gin).addClass('thth1').attr('type', 'text').attr('name', 'fing'));
+					var th2 = $('<th>').append($('<input>').val(gic).addClass('thth2').attr('type', 'text').attr('name', 'cal'));
+					var th3 = $('<th>').append(qqq);
+					var thhi = $('<th>').append($('<input>').val(gic).attr('type', 'hidden'));
+					qqq.on("keyup", function () {
+						var aaa = $(this).val();
+						var bbb = $(this).parent().prev().children();
+						var ccc = $(this).parent().prev().children().val();
+						var zzz = $(this).parent().next().children().val();
+
+
+						var ddd = aaa * zzz;
+
+						console.log(zzz);
+						$(bbb).val(ddd);
+						result()
+
+					})
+
+					var td4 = $('<td>').addClass('shoping__cart__item__close');
+					var button = $('<button>').addClass('icon_close');
+					var td5 = $(td4).append(button);
+					button.on("click", function () {
+						console.log($(this));
+						$(this).closest("tr").remove();
+						result()
+					})
+
+
+
+					var b = $(tr).append(th1, th2, th3, thhi, td5);
+
+					var d = $(tbody).append(b);
+
+					result()
+					//modal.style.display = "none";
+					body.style.overflow = 'auto';
+				})
+
+
+
+			})
+
+
+		})
+						
+						
+	$("#modalbtn1").off("click").on("click", function () {
+					var tbody = $('#tbody1');
+					var qqq = $('<input>').val(gia).addClass('thth3').attr('type', 'text').attr('name', 'amount');
+					var tr = $('<tr>');
+					var th1 = $('<th>').append($('<input>').val(gin).addClass('thth1').attr('type', 'text').attr('name', 'fing'));
+					var th2 = $('<th>').append($('<input>').val(gic).addClass('thth2').attr('type', 'text').attr('name', 'cal'));
+					var th3 = $('<th>').append(qqq);
+					var thhi = $('<th>').append($('<input>').val(gic).attr('type', 'hidden'));
+					qqq.on("keyup", function () {
+						var aaa = $(this).val();
+						var bbb = $(this).parent().prev().children();
+						var ccc = $(this).parent().prev().children().val();
+						var zzz = $(this).parent().next().children().val();
+
+
+						var ddd = aaa * zzz;
+
+						console.log(zzz);
+						$(bbb).val(ddd);
+						result()
+
+					})
+
+					var td4 = $('<td>').addClass('shoping__cart__item__close');
+					var button = $('<button>').addClass('icon_close');
+					var td5 = $(td4).append(button);
+					button.on("click", function () {
+						console.log($(this));
+						$(this).closest("tr").remove();
+						result()
+					})
+
+
+
+					var b = $(tr).append(th1, th2, th3, thhi, td5);
+
+					var d = $(tbody).append(b);
+
+					result()
+					
+					body.style.overflow = 'auto';
+				})
+
+
+
+		
+
+
+		
+		
+		
+		
+		
+		var index = 0;
+		$(".trre").on("click", function () {
+			index = $(this).closest('tr').index();
+			console.log(index);
+		})
+
+		function diaryde() {
+			if (confirm("정말 삭제하시겠습니까??") == true) {    //확인
+				$("#frm").attr("action", "redelete").submit();
+
+			} else {
+
+				return false;
+
+			}
+
+
+
+
+		}
+
+
+
+
+		var a = 1;
+		var b = 0;
+		$("#addrebtn").on("click", function () {
+
+			var tbody = $('.generic >tbody >tr > .trre').length;
+			console.log(tbody);
+			var recnt = Number($("#recnt").html());
+			if (tbody >= 6) {
+
+				alert('더이상 추가할수없다');
+
+				return false;
+
+			} else {
+
+				b += tbody;
+				var tr = `<tr>
                               <td style="width:150px" id="recnt"></td>
                               <td width="500" class="trre">
                               <input type="text" class="form-control" row="5" name="rrecipe" id="rrecipe" style="width: 440px;">
                               
                               </tr>`
-                     $("#rebody").append(tr)
-                     
-                     
-                     
-                     
-                  }      
-                  
-                   
-                  
-               
-
-         })
-		
+				$("#rebody").append(tr)
 
 
 
-   </script>
+
+			}
+
+
+
+
+
+		})
+
+
+
+
+	</script>
 
 
 

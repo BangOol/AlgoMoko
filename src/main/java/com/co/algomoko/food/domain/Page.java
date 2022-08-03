@@ -34,7 +34,7 @@ public class Page {
 	// 검색 변수
 	String keyword;
 	String ing;
-	String title;
+	String ctitle;
 	
 	public Page(int currentPage, int cntPerPage, int pageSize) {
 	        //강제입력방지

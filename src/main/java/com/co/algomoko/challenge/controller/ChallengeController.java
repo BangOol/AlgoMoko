@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.co.algomoko.admin.paging.PaginationUser;
 import com.co.algomoko.challenge.domain.ChallengeVO;
 import com.co.algomoko.challenge.domain.ChallengeValidationVO;
 import com.co.algomoko.challenge.domain.MyChallengeVO;
@@ -56,27 +57,50 @@ public class ChallengeController {
 
 	// 챌린지 목록
 	@GetMapping("")
-		public ModelAndView challenge(
-				@RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage,	
-				Map<String, Object> map, ChallengeVO cVO) throws Exception {
-				ModelAndView mav = new ModelAndView();
-			// 검색		
-			if (cVO.getCtitle() != null) {
-				cVO.setCtitle(cVO.getCtitle());
-				int listCnt = dao.TableCount(cVO);
-				Page page = new Page(currentPage, 6, 3);
-				page.setTotalRecordCount(listCnt);
-				cVO.setFirstRecordIndex(page.getFirstRecordIndex());
-				cVO.setLastRecordIndex(page.getLastRecordIndex());
-				
-				mav.addObject("pagination",page);				
-				mav.addObject("cList", dao.fListPage(cVO));
-			}
-			List<ChallengeVO> cList = dao.cList(cVO);
-			mav.addObject("cList", cList);
+	public ModelAndView challenge(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage,
+			
+			@RequestParam(value = "keyword", defaultValue = "null") String keyword, ChallengeVO cVO)
+			throws Exception {
+		ModelAndView mav = new ModelAndView();
+		Page page = new Page(currentPage, 2, 10);
+		page.setKeyword(keyword);
+		
+			int listCnt = dao.TableCount(cVO);
+			page.setTotalRecordCount(listCnt);
+			
+			mav.addObject("pagination", page);
+//			mav.addObject("cList", dao.fListPage(cVO));
+			mav.addObject("cList", dao.cList(cVO));
 			mav.setViewName("contents/challenge/challenge");
-			return mav;
-		}
+			return mav;		
+
+	}
+
+	// 챌린지 목록(페이징)
+//	@GetMapping("")
+//		public ModelAndView challenge(
+//				@RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage,	
+//				Map<String, Object> map, ChallengeVO cVO) throws Exception {
+//				ModelAndView mav = new ModelAndView();
+//			// 검색		
+//			if (cVO.getCtitle() != null) {
+//				cVO.setCtitle(cVO.getCtitle());
+//				int listCnt = dao.TableCount(cVO);
+//				Page page = new Page(currentPage, 6, 3);
+//				page.setTotalRecordCount(listCnt);
+//				cVO.setFirstRecordIndex(page.getFirstRecordIndex());
+//				cVO.setLastRecordIndex(page.getLastRecordIndex());
+//				
+//				mav.addObject("pagination",page);				
+//				mav.addObject("cList", dao.fListPage(cVO));
+//				mav.setViewName("contents/challenge/challenge");
+//				return mav;
+//			}
+//			List<ChallengeVO> cList = dao.cList(cVO);
+//			mav.addObject("cList", cList);
+//			mav.setViewName("contents/challenge/challenge");
+//			return mav;
+//		}
 
 	// 진행중인 챌린지 목록
 
@@ -165,7 +189,6 @@ public class ChallengeController {
 			UUID uuid = UUID.randomUUID();
 
 			String filename = uuid + "_" + file.getOriginalFilename();
-			System.out.println(filename);
 			File saveFile = new File(projectpath, filename);
 			file.transferTo(saveFile);
 			cVO.setFilename(filename);

@@ -173,7 +173,7 @@
 	</div>
 	
 	
-	<form action="/diary/download" method="get">
+	<form action="/diary/download" method="post" name="frm" id="frm">
 		<div class="row">
 			<div class="col-md-2 mb-1" style="margin-right:152px;">
 				<div class="input-group mb-3">
@@ -305,6 +305,7 @@
 			<div class="row justify-content-center mt-6">
 				<div class="col-sm-4">
 					<button type="button" class="btn btn-success " onclick="history.go(-1);">확인</button>
+					<button type="button" class="btn btn-success" onclick="diaryde()" id="insert">내 레시피 저장</button>
 					<button type="submit" class="btn btn-success" >Excel</button>
 				</div>
 			</div>
@@ -337,7 +338,67 @@
 	<script src="/js/main.js"></script>
 
 	<script>
-	function result() {
+      var gin;
+      var gic;
+      var gia;
+      const body = document.querySelector('body');
+      const modal = document.querySelector('.modal');
+
+      /*제품정보 그리드*/
+      const giupData = [];
+
+
+      const jepoom = new tui.Grid({
+         el: document.getElementById('gridpro'),
+         data: giupData,
+         scrollY: true,
+         rowHeaders: ['rowNum'],
+         bodyHeight: 300,
+
+
+         columns: [{
+            header: '재료명',
+            name: 'ing',
+            align: 'center',
+
+         }, {
+            header: '칼로리',
+            name: 'cal',
+            align: 'center',
+
+         }, {
+            header: '수량',
+            name: 'amount',
+            align: 'center',
+
+         }]
+      });
+
+      $(function () {
+         
+         
+         
+         
+      
+         $(".thth3").on("keyup", function () {
+            var aaa = $(this).val();
+            var bbb = $(this).parent().prev().children();
+            var ccc = $(this).parent().prev().children().val();
+            var zzz = $(this).parent().next().children().val();
+            
+            
+            var ddd = aaa * zzz;
+            
+            console.log(zzz);
+               $(bbb).val(ddd);
+               result()
+            
+         })
+         
+         
+         
+         
+         function result() {
             
             
                var sum = 0;
@@ -351,7 +412,170 @@
          }
 
          result()
-         </script>
+
+
+
+
+
+         $(".icon_close").on("click", function () {
+
+            $(this).closest("tr").remove();
+
+            result()
+            
+
+
+
+         })
+
+
+
+
+
+         $('.blog__btn').click((e) => {
+            jepoom.refreshLayout();
+            modal.style.display = "flex";
+            body.style.overflow = 'auto';
+         })
+         const closeBtn = modal.querySelector(".modal_c")
+         closeBtn.addEventListener("click", e => {
+            modal.style.display = "none";
+            body.style.overflow = 'auto';
+         })
+
+
+
+
+
+         /*음식조회*/
+         $("#btnbtn").on("click", function () {
+            var btnbtn = $('#textex').val();
+            console.log(btnbtn);
+            $.ajax({
+               url: '/diary/flist',
+               type: 'GET', // == method
+               data: {
+                  btnbtn
+               },
+
+            }).done(function (response) {
+               jepoom.refreshLayout();
+               jepoom.resetData(response)
+               jepoom.on('click', e => {
+                  var rok = e.rowKey
+                  gin = jepoom.getRow(rok).ing
+                  gic = jepoom.getRow(rok).cal
+                  gia = jepoom.getRow(rok).amount
+
+               })
+            })
+
+
+
+
+
+          $("#modalbtn").off("click").on("click", function () {
+               var tbody = $('#tbody1');
+			var qqq = $('<input>').val(gia).addClass('thth3').attr('type', 'text').attr('name', 'amount');
+               var tr = $('<tr>');
+               var th1 = $('<th>').append($('<input>').val(gin).addClass('thth1').attr('type', 'text').attr('name', 'fing'));
+               var th2 = $('<th>').append($('<input>').val(gic).addClass('thth2').attr('type', 'text').attr('name', 'cal'));
+               var th3 = $('<th>').append(qqq);
+               var thhi = $('<th>').append($('<input>').val(gic).attr('type', 'hidden'));
+              qqq.on("keyup", function () {
+                  var aaa = $(this).val();
+                  var bbb = $(this).parent().prev().children();
+                  var ccc = $(this).parent().prev().children().val();
+                  var zzz = $(this).parent().next().children().val();
+                  
+                  
+                  var ddd = aaa * zzz;
+                  
+                  console.log(zzz);
+                     $(bbb).val(ddd);
+                     result()
+                  
+               })
+                           
+               var td4 = $('<td>').addClass('shoping__cart__item__close');
+               var button = $('<button>').addClass('icon_close');
+               var td5 = $(td4).append(button);
+               button.on("click", function () {
+                  console.log($(this));
+                  $(this).closest("tr").remove();
+                  result()
+               })
+               
+
+
+               var b = $(tr).append(th1, th2, th3,thhi,td5);
+
+               var d = $(tbody).append(b);
+
+               result()
+				modal.style.display = "none";
+            	body.style.overflow = 'auto';	
+            })
+
+
+
+         })
+
+
+      })
+      var index = 0;
+      $(".trre").on("click", function(){
+         index = $(this).closest('tr').index();
+         console.log(index);
+      })
+
+               function diaryde() {
+                  $("#frm").attr("action", "reinsertde").submit();
+         
+               }
+               
+               
+               
+               
+               var a = 1;
+               var b = 0;
+            $("#addrebtn").on("click", function () {
+                  
+                   var tbody = $('.generic >tbody >tr > .trre').length;
+                  console.log(tbody);
+                  var recnt = Number($("#recnt").html());
+                  if(tbody >= 6){
+                     
+                     alert('더이상 추가할수없다');
+                           
+                     return false;
+                     
+               }else{
+                     
+                     b += tbody;
+                     var tr = `<tr>
+                              <td style="width:150px" id="recnt"></td>
+                              <td width="500" class="trre">
+                              <input type="text" class="form-control" row="5" name="rrecipe" id="rrecipe" style="width: 440px;">
+                              
+                              </tr>`
+                     $("#rebody").append(tr)
+                     
+                     
+                     
+                     
+                  }      
+                  
+                   
+                  
+               
+
+         })
+		
+
+
+
+   </script>
          </body>
 
 </html>

@@ -16,7 +16,7 @@ const usernamePattern = /^[0-9A-Z]{8,10}$/;//안쓰는 기능..
 const unamePattern = /^[가-힣]{2,10}$/;
 // ()는 독립된 조건, ?=는 앞부터 찾으라는 것(전방 탐색)
 // .은 임의의 글자가 * 0글자 이상 -> 특수문자가 1 글자 이상
-const passwordPattern = /^(?=.*[!@#$%^&*])^[A-Za-z0-9!@#$%^&*]{8,10}$/;
+const passwordPattern = /^(?=.*[!@#$%^&*])^[A-Za-z0-9!@#$%^&*]{8,50}$/;
 const midPattern = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 const birthPattern = /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/;
 

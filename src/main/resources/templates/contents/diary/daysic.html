@@ -74,11 +74,13 @@
 <div th:replace="~{fragments/header}"></div>
 <div th:replace="~{fragments/aside}"></div>
 
-
+<div >
+<h2 style="margin-top: -100px; margin-left: 900px; margin-bottom: 30px;" th:text="${std}"></h2>
+</div>
 
         <!-- Shoping Cart Section Begin -->
 
-      <p id="date" th:text="${std}"><p>
+      
         <section class="shoping-cart spad" style="padding-top: 10px;">
           <div class="container">
               <div class="row">
@@ -210,10 +212,10 @@
                               
                               <tr th:unless="${resultCal[0].sumcal == 0}" id="concon">
                               
-                              <td th:text="${resultCal[0].sumcal}" id="tocal"  class="shoping__product" style="text-align:center;">
+                              <td th:text="${tcal}" id="tocal"  class="shoping__product" style="text-align:center;">
                                           </td>
                                           
-                                          <td th:text="${tcal}" id="daycal" class="shoping__product" style="text-align:center;">
+                                          <td th:text="${resultCal[0].sumcal}" id="daycal" class="shoping__product" style="text-align:center;">
                                           </td>
                                           <td></td>
                                           <th><div id="donutchart1"></div></th>
@@ -231,6 +233,7 @@
               </div>
           </div>
       </section>
+      <p id="date" th:text="${std}" style="color: white;"><p>
     <!-- Blog Section End -->
     
     
@@ -250,7 +253,7 @@
 					var b = Number($("#daycal").html());
 					var recal = $("#recal");
 					var concon = $("#concon");
-					if(a<=b){
+					if(a>=b){
 						$("#recal").append($("<th>").addClass('shoping__product').html("영양소").css("text-align", "center"))
 						
 						$("#concon").append($("<td>").addClass('shoping__product').html("적당히 먹었네").css("text-align", "center").css("color","blue"))

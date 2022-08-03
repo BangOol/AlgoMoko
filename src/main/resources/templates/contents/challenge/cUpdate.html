@@ -15,7 +15,7 @@
 	<th:block layout:fragment="content">
 		<!-- Breadcrumb Section Begin -->
 		<section class="breadcrumb-section set-bg"
-			data-setbg="../img/chl/chlmain.jpg">
+			data-setbg="../img/banner/ch.jpg">
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-12 text-center">
@@ -40,32 +40,41 @@
 						<div class="col-lg-12 col-md-6">
 							<div>
 								<div class="row">
-									<div class="col-lg-4">
+									<div class="col-lg-6">
 										<div class="checkout__input">
 											<label for="subject">제목</label> <input
 												th:value="${chl.ctitle}" type="text" class="form-control"
 												id="ctitle" name="ctitle">
 										</div>
 									</div>
-									<div class="col-lg-4">
+									<div class="col-lg-6">
 										<div class="checkout__input">
 											<label for="cdday">D-Day</label> <input
 												th:value="${chl.cdday}" type="text" class="form-control"
 												id="cdday" name="cdday">
 										</div>
 									</div>
-									<div class="col-lg-4">
+								</div>
+								<div class="row">
+									<div class="col-lg-6">
 										<div class="checkout__input">
-											<label for="cimg">파일첨부<span>*</span></label> <input
-												th:value="@{challenge/download(img=${chl.filepath})}"
-												type="file" class="form-control" id="cimg" name="filename2">
+											<label for="ccon" style="margin-top: 15px;">내용</label>
+											<textarea th:text="${chl.ccon}" class="form-control"
+												id="ccon" name="ccon" rows="3"></textarea>
+										</div>
+									</div>
+									<div class="col-lg-6">
+										<div class="checkout__input">
+											<label for="cimg" style="margin-top:15px;">이미지</label> <img style="height:86px;"
+												th:src="@{/challenge/download(img=${chl.filepath})}"
+												class="form-control" id="cimg" name="filename2">
 										</div>
 									</div>
 								</div>
 								<div class="checkout__input">
-									<label for="ccon" style="margin-top: 15px;">내용</label>
-									<textarea th:text="${chl.ccon}" class="form-control" id="ccon"
-										name="ccon" rows="3"></textarea>
+									<label for="cimg">파일첨부</label> <input
+										th:value="@{challenge/download(img=${chl.filepath})}"
+										type="file" class="form-control" id="cimg" name="filename2">
 								</div>
 							</div>
 						</div>
