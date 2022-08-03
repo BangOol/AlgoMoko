@@ -55,9 +55,14 @@ function unameCheck() {
 // 3-3. 입력한 비밀번호 확인 함수
 function mpwCheck() {
     $("#mpw_msg").text("");
-    return check($("#mpw").val(), passwordPattern, "비밀번호는 영숫자와 특수문자 8~10자입니다", $("#pw1_msg"));	
+    return check($("#mpw").val(), passwordPattern, "비밀번호는 영숫자와 특수문자 8~10자입니다", $("#mpw_msg"));	
 }
 
+//3-3_1....
+function insertmpwCheck(){
+	$("#insertmpwcheck_msg").text("");
+	return check($("#insertmpwcheck").val(), passwordPattern, "비밀번호는 영숫자와 특수문자 8~10자입니다", $("#insertmpwcheck_msg"));
+}
 // 3-4. 입력한 비밀번호 확인이 비밀번호와 일치하는지 확인 함수 - 패턴이 없으므로 check() 함수를 사용하지 않는다.
 function mpw2Check() {
     $("#mpw2_msg").text("");

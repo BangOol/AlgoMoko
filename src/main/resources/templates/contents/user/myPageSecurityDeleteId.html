@@ -62,7 +62,7 @@
         <div style="margin: 60px 0 0 60px; ">
          <h3>정말 탈퇴 하시겠습니까?</h3>
          
-         <input  type="hidden" id="mid" th:value= "${#authentication.principal.mid}">
+         <input type="hidden" id="mid" th:value= "${#authentication.principal.mid}">
         </div>
             <button id="userDelete" style="float:right; background-color: #f5f5f5; width: 100px; height: 30px;">회원탈퇴</button>
       </div>
@@ -77,11 +77,12 @@ if(!confirm ("정말 탈퇴하시겠습니까?")){
 	
 	return false;
 }
-	var result = $('#mid').val()
+	var result = $('#mid').val();
+	console.log(result);
  $.ajax({
 	url:"DeleteId", 
  	method:"post",
- 	data:{mid=result}
+ 	data:{mid:result}
  })
 	return alert ("그동안 서비스를 이용해 주셔서 감사합니다.");
 	
