@@ -35,7 +35,7 @@ SELECT
 <select id="detail" resultType="DiaryVO">
 select b.mid, a.ddname,a.dddo,a.amount, a.cal, a.carb, a.prot, a.fat, trunc(a.ddate) as ddate, to_char(a.ddate, 'day') as dday, b.ucon
 from diary_detail a, diary b
-where TO_CHAR(a.ddate,'iw')  =TO_CHAr(sysdate,'iw') and a.dddo=b.dddo and a.mid = b.mid and TRUNC(a.ddate) = trunc(b.ddate) and to_char(#{ddate,jdbcType=DATE},'yyyy-mm-dd')=to_char(a.ddate,'yyyy-mm-dd') and b.mid = #{mid} and a.dddo=#{dddo}
+where TO_CHAR(a.ddate,'iw')  =TO_CHAr(sysdate,'iw') and a.dddo=b.dddo and a.mid = b.mid and TRUNC(a.ddate)=trunc(b.ddate) and to_char(#{ddate,jdbcType=DATE},'yyyy-mm-dd')=to_char(a.ddate,'yyyy-mm-dd') and b.mid = #{mid} and a.dddo=#{dddo}
 order by b.ucon
 </select>
 
