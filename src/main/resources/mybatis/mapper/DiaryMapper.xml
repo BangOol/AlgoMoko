@@ -8,7 +8,7 @@
 <mapper namespace="com.co.algomoko.diary.mapper.DiaryMapper">
 <!-- 해당날짜 식단 조회 --> 
 <select id="findDay" resultType="DiaryVO">
-select b.mid, a.ddname,a.dddo,a.amount, a.cal, a.carb, a.prot, a.fat, trunc(a.ddate) as ddate, to_char(a.ddate, 'day') as dday, b.ucon
+select b.mid, a.ddname,a.dddo,a.amount, a.cal, a.carb, a.prot, a.fat, trunc(a.ddate) as ddate, to_char(a.ddate, 'd') as dday, b.ucon
 from diary_detail a, diary b
 where TO_CHAR(a.ddate,'iw')  =TO_CHAr(sysdate,'iw') and a.dddo=b.dddo and a.mid = b.mid and TRUNC(a.ddate) = trunc(b.ddate) and b.mid = #{mid}
 
@@ -47,7 +47,7 @@ where mid= #{mid} and TRUNC(ddate) = trunc(#{ddate}) and dddo=#{dddo}
 </select>
 <!-- 주간칼로리 -->
 <select id="jukcal" resultType="DiaryVO">
-select trunc(a.ddate) as ddate, a.mid, sum(b.cal) as sumcal, to_char(a.ddate, 'day') as dday
+select trunc(a.ddate) as ddate, a.mid, sum(b.cal) as sumcal, to_char(a.ddate, 'd') as dday
 from diary a,diary_detail b
 where TO_CHAR(a.ddate,'iw')  =TO_CHAr(sysdate,'iw') and a.dddo=b.dddo and a.mid = b.mid and TRUNC(a.ddate) = trunc(b.ddate) and b.mid = #{mid}
    GROUP BY a.ddate, a.mid
