@@ -1,4 +1,4 @@
-package com.co.algomoko.support.controller;
+package com.co.algomoko.support.domain.controller;
 
 import com.co.algomoko.admin.paging.PaginationUser;
 import com.co.algomoko.support.domain.FaqVO;
@@ -136,7 +136,7 @@ public class SupportController {
         return "contents/admin/userFormMain";
     }
 
-    @GetMapping("/Inquiry/modify")
+    @PostMapping("/Inquiry/modify")
     public String modifyInquiry(@RequestParam("nick") String nick,
                                 @RequestParam("qno") int qno,
                                 @RequestParam("qcon") String qcon,
@@ -160,7 +160,8 @@ public class SupportController {
                             @RequestParam("option") String c0,
                             Model model, HttpServletResponse response,
                             Authentication authentication) throws IOException {
-        
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        String mid = userDetails.getUsername();
         InquiryVO inquiryVO = new InquiryVO();
         inquiryVO.setQcon(qcon);
         inquiryVO.setQno(qno);
@@ -174,14 +175,14 @@ public class SupportController {
             response.setContentType("text/html; charset=utf-8");
             PrintWriter w = response.getWriter();
             String msg = "정상적으로 등록되었습니다";
-            String url = "/Inquiry/detail?nick=" +nick + "&qno=" +qno;
+            String url = "/Inquiry";
             w.write("<script>alert('"+msg+"');location.href='"+url+"';</script>");
         } else{
             response.setCharacterEncoding("UTF-8");
             response.setContentType("text/html; charset=utf-8");
             PrintWriter w = response.getWriter();
             String msg = "예기지 않은 문제로 인해 등록이 실패하였습니다.";
-            String url = "/Inquiry/detail?nick=" +nick + "&qno=" +qno;
+            String url = "/Inquiry";
             w.write("<script>alert('"+msg+"');location.href='"+url+"';</script>");
         }
     }
@@ -219,7 +220,7 @@ public class SupportController {
         }
     }
 
-    @GetMapping("/Inquiry/detail")
+    @PostMapping("/Inquiry/detail")
     public String InquiryDetail(@RequestParam("mid") String mid,@RequestParam("qno") int qno,
                                  Authentication authentication,Model model,
                                 HttpServletResponse response) throws IOException {
@@ -228,8 +229,8 @@ public class SupportController {
         String u0 = inquiryService.getU0(username);// 아이디를 이용하여 해당 사용자가 관리자인지 확인.
 
         // 접속을 시도하는 유저의 nick과 1:1 문의를 등록한 유저의 nick를 비교하기 위함.
-        String nickVal = inquiryService.getNick(username);
-        if(nickVal.equals(mid) || u0.equals("u0")){
+
+        if(username.equals(mid) || u0.equals("u0")){
             InquiryVO inquiryVO = new InquiryVO();
             inquiryVO.setMid(mid);
             inquiryVO.setQno(qno);

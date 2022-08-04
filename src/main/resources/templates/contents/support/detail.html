@@ -6,13 +6,13 @@
 <body>
 <th:block layout:fragment="content">
     <section class="breadcrumb-section set-bg" data-setbg="/img/questionPixabay.jpg">
-        <div class="container" style="font-family: 'Cairo', 'Jua', sans-serif">
+        <div class="container" style="font-family: 'Jua','Cairo',  sans-serif">
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <div class="breadcrumb__text">
-                        <a href="/Inquiry"><h2  style="font-family: 'Cairo', 'Jua', sans-serif">1:1 문의</h2>
+                        <a href="/Inquiry"><h3 style="font-family: 'Cairo', 'Jua', sans-serif;">문의 내역</h3>
                             <div class="breadcrumb__option">
-                                <span >Algomokgo</span>
+                                <span>Algomokgo</span>
                             </div>
                         </a>
                     </div>
@@ -22,115 +22,149 @@
     </section>
     <div class="container">
         <div class="col-lg-4">
-            <div class="contact__form__title" style="margin: 50px 0 0 0; font-family: 'Cairo', 'Jua', sans-serif; width: 200px">
-                <h2  style="font-family: 'Cairo', 'Jua', sans-serif">1:1 문의</h2>
-                <sub style="padding: 10px 0 50px 25px">만족스런 답변을 위해 노력하겠습니다.</sub>
+            <div class="contact__form__title"
+                 style="margin: 50px 0 0 0; font-family: 'Cairo', 'Jua', sans-serif; width: 200px">
+                <h3 style="font-family: 'Cairo', 'Jua', sans-serif">상세 정보</h3>
             </div>
         </div>
     </div>
-    <div class="container" style="font-family: 'Cairo', 'Jua', sans-serif; padding-top: 50px">
-        <table class="table table-hover" style="text-align: center">
+    <div class="container" style="font-family: 'Jua','Cairo',  sans-serif; padding-top: 50px; margin-bottom: 100px">
+        <div class="col-lg-4">
+        <table style="margin-left:50px; width:1000px; border: 4px solid #d1ecf1;  ">
             <tbody id="MyinquiryList" th:each="list:${list}">
             <div th:if="${#lists.size(list)>0}">
-                <tr>
-                    <th>작성자</th>
+                <tr style="border-bottom: 4px solid #d1ecf1">
+                    <th style="text-align: center; width:250px; background-color: #f1f8ff ;height: 60px; border-right: 4px solid #d1ecf1">작성자</th>
                     <td>[[${list.nick}]]</td>
                 </tr>
-                <tr>
-                    <th>제목</th>
+                <tr style="border-bottom: 4px solid #d1ecf1">
+                    <th style="text-align: center; width:250px; background-color: #f1f8ff ;height: 60px; border-right: 4px solid #d1ecf1">제목</th>
                     <td>[[${list.qtitle}]]</td>
                 </tr>
-                <tr>
-                    <th>작성 날짜</th>
+                <tr style="border-bottom: 4px solid #d1ecf1">
+                    <th style="text-align: center; width:250px; background-color: #f1f8ff ;height: 60px; border-right: 4px solid #d1ecf1">작성 날짜</th>
                     <td>[[${list.qdate}]]</td>
                 </tr>
-                <tr>
-                    <th>질문 유형</th>
+                <tr style="border-bottom: 4px solid #d1ecf1">
+                    <th style="text-align: center; width:250px; background-color: #f1f8ff ;height: 60px; border-right: 4px solid #d1ecf1">질문 유형</th>
                     <td>[[${list.C0}]]</td>
                 </tr>
-                <tr>
-                    <th>내용</th>
+                <tr style="border-bottom: 4px solid #d1ecf1">
+                    <th style="text-align: center; width:250px; background-color: #f1f8ff ;height: 60px; border-right: 4px solid #d1ecf1">내용</th>
                     <td>
-                        <textarea style="width: 800px; height: 300px; resize: none; text-align: left; border-bottom: 1px solid" readonly>[[${list.qcon}]]</textarea>
+                        <textarea
+                                style="width: 800px; height: 300px; resize: none; text-align: left;"
+                                readonly>[[${list.qcon}]]</textarea>
                     </td>
                 </tr>
             </div>
             <div th:if="${#lists.size(list)==null}">
-                <p>해당하는 내용이 없습니다.</p>
+                <p style="font-family: 'Cairo', 'Jua', sans-serif">해당하는 내용이 없습니다.</p>
             </div>
             </tbody>
         </table>
-        <form action = "/Inquiry/modify" method="get" th:if = "${list[0].mid} eq ${username} and ${list[0].a0 == 'a0'}">
-            <button type="submit">수정</button>
-            <input type="hidden" name="nick" th:value="${list[0].nick}">
-            <input type="hidden" name="qtitle" th:value="${list[0].qtitle}">
-            <input type="hidden" name="qcon" th:value="${list[0].qcon}">
-            <input type="hidden" name="C0" th:value="${list[0].c0}">
-            <input type="hidden" name="mid" th:value="${list[0].mid}">
-            <input type="hidden" name="qno" th:value="${list[0].qno}">
-        </form>
-        <form action = "/Inquiry/delete" method="post"  th:if = "${list[0].mid} eq ${username} and ${list[0].a0 == 'a0'}">
-            <button type="submit">삭제</button>
-            <input type="hidden" name="nick" th:value="${list[0].nick}">
-            <input type="hidden" name="qtitle" th:value="${list[0].qtitle}">
-            <input type="hidden" name="qcon" th:value="${list[0].qcon}">
-            <input type="hidden" name="C0" th:value="${list[0].c0}">
-            <input type="hidden" name="mid" th:value="${list[0].mid}">
-            <input type="hidden" name="qno" th:value="${list[0].qno}">
-        </form>
-        <div th:if="${list[0].a0 == 'a1'}">
-            <table class="table table-hover" style="text-align: center">
-                <tbody th:each="list:${list}">
-                <div th:if="${#lists.size(list)>0}">
-                    <tr>
-                        <th>제목</th>
-                        <td>[[${list.qanst}]]</td>
-                    </tr>
-                    <tr>
-                        <th>작성 날짜</th>
-                        <td>[[${list.ansdate}]]</td>
-                    </tr>
-                    <tr>
-                        <th>내용</th>
-                        <td>
-                            <textarea
-                                    style="width: 800px; height: 300px; resize: none; text-align: left; border-bottom: 1px solid"
-                                    readonly>[[${list.qans}]]</textarea>
-                        </td>
-                    </tr>
-
-                </div>
-                </tbody>
-            </table>
         </div>
-        <div th:if="${u0} == 'u0'">
+        <div class="col-lg-12" th:if="${list[0].mid} eq ${username} and ${list[0].a0 == 'a0'}" style="display: inline-block; margin-top: 50px">
+            <form action="/Inquiry/modify" method="post" style="width: 100px; float: right; margin-right: 40px">
+                <button type="submit" style="width: 80px; height: 40px; border-radius: 10px;
+                 font-family:  'Jua','Cairo', sans-serif; background-color:  #d1ecf1" >수정</button>
+                <input type="hidden" name="nick" th:value="${list[0].nick}">
+                <input type="hidden" name="qtitle" th:value="${list[0].qtitle}">
+                <input type="hidden" name="qcon" th:value="${list[0].qcon}">
+                <input type="hidden" name="C0" th:value="${list[0].c0}">
+                <input type="hidden" name="mid" th:value="${list[0].mid}">
+                <input type="hidden" name="qno" th:value="${list[0].qno}">
+            </form>
+            <form action="/Inquiry/delete" method="post" style="width: 100px; float: right">
+                <button type="submit" style="width: 80px; height: 40px; border-radius: 10px;
+                 font-family:  'Jua','Cairo', sans-serif; background-color:  #d1ecf1">삭제</button>
+                <input type="hidden" name="nick" th:value="${list[0].nick}">
+                <input type="hidden" name="qtitle" th:value="${list[0].qtitle}">
+                <input type="hidden" name="qcon" th:value="${list[0].qcon}">
+                <input type="hidden" name="C0" th:value="${list[0].c0}">
+                <input type="hidden" name="mid" th:value="${list[0].mid}">
+                <input type="hidden" name="qno" th:value="${list[0].qno}">
+            </form>
+        </div>
+
+        <div th:if="${u0} == 'u0' and ${list[0].a0 == 'a0'}" style="padding-left: 15px">
             <h3 style="font-family: 'Cairo', 'Jua', sans-serif; padding: 70px 0 30px 0 ">관리자 답변 창</h3>
             <form action="/Inquiry/inqResult" method="post">
-                <table class="table table-hover">
-                    <tbody>
-                    <tr style=" border-top: 1px solid;">
-                        <th style="text-align: center">제목</th>
-                        <td>
-                            <input name="qanst" type="text" placeholder="제목을 입력해주세요" style="width: 920px">
-                        </td>
-                    </tr>
-                    <tr style="border-top: 1px solid;">
-                        <th style="text-align: center">내용</th>
-                        <td style="border-bottom: 1px solid;">
-                        <textarea name="qans" style="resize: none; width: 920px; height: 300px; "
-                                  placeholder="내용을 입력해주세요.">
-                        </textarea>
-                        </td>
-                    </tr>
+                <table style="margin-left:50px; width:1000px; border: 4px solid #d1ecf1;">
+                    <tbody  th:each="list:${list}">
+                    <div th:if="${#lists.size(list)>0}">
+                        <tr style="border-bottom: 4px solid #d1ecf1">
+                            <th style="text-align: center; width:250px; background-color: #f1f8ff ;height: 60px; border-right: 4px solid #d1ecf1">제목</th>
+                            <td>
+                                <input name="qanst" type="text" placeholder="제목을 입력해주세요">
+                            </td>
+                        </tr>
+                        <tr style="border-bottom: 4px solid #d1ecf1">
+                            <th style="text-align: center; width:250px; background-color: #f1f8ff ;height: 60px; border-right: 4px solid #d1ecf1">내용</th>
+                            <td>
+                                <textarea name="qans"
+                                        style="width: 800px; height: 300px; resize: none; text-align: left;" placeholder="내용을 입력해주세요"></textarea>
+                            </td>
+                        </tr>
+                    </div>
+                    <div th:if="${#lists.size(list)==null}">
+                        <p style="font-family: 'Cairo', 'Jua', sans-serif">해당하는 내용이 없습니다.</p>
+                    </div>
                     </tbody>
                 </table>
                 <input type="hidden" name="a0" value="a1">
                 <input type="hidden" name="qno" th:value="${list[0].qno}">
-                <input type="hidden"  name="nick" th:value="${list[0].nick}">
+                <input type="hidden" name="nick" th:value="${list[0].nick}">
                 <button type="submit"
-                        style="width: 80px; height: 40px; border: 1px solid #a0aec0; border-radius: 5px;  padding-bottom: 50px; float: right">
+                        style="width: 80px; height: 40px;
+                        text-align:center; border-radius: 5px;  margin-bottom: 50px; float: right; margin-right: 80px; margin-top:50px;
+                        background-color:#d1ecf1 ">
                     등록
                 </button>
+            </form>
+        </div>
+        <!-- 관리자 내용 수정하기 -->
+        <div th:if="${u0} == 'u0' and ${list[0].a0 == 'a1'}">
+            <form action="" method="post">
+                <button type="submit">수정</button>
+                <input type="hidden" name="nick" th:value="${list[0].nick}">
+                <input type="hidden" name="qtitle" th:value="${list[0].qtitle}">
+                <input type="hidden" name="qcon" th:value="${list[0].qcon}">
+                <input type="hidden" name="C0" th:value="${list[0].c0}">
+                <input type="hidden" name="mid" th:value="${list[0].mid}">
+                <input type="hidden" name="qno" th:value="${list[0].qno}">
+            </form>
+        </div>
+        <div th:if="${u0} == 'u0' and ${list[0].a0 == 'a1'}">
+            <h3 style="font-family: 'Cairo', 'Jua', sans-serif; padding: 70px 0 30px 0 ">관리자 답변 창</h3>
+            <form action="/Inquiry/inqResult" method="post">
+                <table style="margin-left:50px; width:1000px; border: 4px solid #d1ecf1;">
+                    <tbody  th:each="list:${list}">
+                    <div th:if="${#lists.size(list)>0}">
+                        <tr style="border-bottom: 4px solid #d1ecf1">
+                            <th style="text-align: center; width:250px; background-color: #f1f8ff ;height: 60px; border-right: 4px solid #d1ecf1">제목</th>
+                            <td>
+                                <input name="qanst" type="text" placeholder="제목을 입력해주세요">
+                            </td>
+                        </tr>
+                        <tr style="border-bottom: 4px solid #d1ecf1">
+                            <th style="text-align: center; width:250px; background-color: #f1f8ff ;height: 60px; border-right: 4px solid #d1ecf1">내용</th>
+                            <td>
+                                <textarea name="qans"
+                                          style="width: 800px; height: 300px; resize: none; text-align: left;" placeholder="내용을 입력해주세요"></textarea>
+                            </td>
+                        </tr>
+                    </div>
+                    <div th:if="${#lists.size(list)==null}">
+                        <p style="font-family: 'Cairo', 'Jua', sans-serif">해당하는 내용이 없습니다.</p>
+                    </div>
+                    </tbody>
+                </table>
+                <input type="hidden" name="a0" value="a1">
+                <input type="hidden" name="qno" th:value="${list[0].qno}">
+                <input type="hidden" name="nick" th:value="${list[0].nick}">
+                <button class="col-lg-12" type="submit" style="width: 80px; height: 40px; border-radius: 10px;
+                 font-family:  'Jua','Cairo', sans-serif; background-color:  #d1ecf1; ">삭제</button>
             </form>
         </div>
     </div>

@@ -135,4 +135,5 @@
             AND MID = #{mid}
             AND QNO = #{qno}
     </delete>
+
 </mapper>
