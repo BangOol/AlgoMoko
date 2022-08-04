@@ -114,7 +114,7 @@ public class ChallengeController {
 		UUID uuid = UUID.randomUUID(); // 랜덤으로 이름 생성
 		String filename = uuid + "_" + file.getOriginalFilename(); // 파일 이름은 UUID에 있는 랜덤값 + 원래 파일 이름
 		File saveFile = new File(uploadPath, filename); // 위에 적힌 경로에, name으로 저장
-//		file.transferTo(saveFile);
+		file.transferTo(saveFile);
 		cVO.setFilename(filename); // DB에 파일 이름 저장
 		cVO.setFilepath(uploadPath+filename); // DB에 파일 경로 저장
 		dao.cInsert(cVO);
