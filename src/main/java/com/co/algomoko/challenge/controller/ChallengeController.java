@@ -134,6 +134,7 @@ public class ChallengeController {
 
 	// 챌린지 작성
 	@PostMapping("cWrite")
+	@ResponseBody
 	public String cInsert(@RequestParam("filename2") MultipartFile file, ChallengeVO cVO) throws Exception {
 		// file == multi 스트링변환
 		String projectpath = filepath + "/img/chl/";
