@@ -82,7 +82,7 @@
 	<![CDATA[select *
 			 from challenge a, my_challenge b
 			 where (a.cno = b.cno2 and b.mid = #{mid} and ck=1)
-			 	or (a.cno = b.cno2 and b.mid = #{mid} and b.edate < sysdate)]]>
+			 	or (a.cno = b.cno2 and b.mid = #{mid} and to_date(b.edate,'yyyy-mm-dd') < sysdate)]]>
 	</select>
 	
 	<!-- 챌린지 간소화인증 이동 -->

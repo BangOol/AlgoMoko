@@ -49,9 +49,9 @@
 									<div class="row">
 										<div class="col-lg-12">
 											<div class="shoping__cart__table">
-												<h4 style="text-align: center;">검색결과</h4>
+												<h4 th:if="${fList != null}" style="text-align: center;">검색결과</h4>
 												<br>
-												<table id="foodTable">
+												<table id="foodTable" th:if="${fList != null}">
 													<thead>
 														<tr>
 															<th>음식명</th>
@@ -112,13 +112,14 @@
 														<div
 															th:each="idx:${#numbers.sequence(pagination.firstPage, pagination.lastPage)}"
 															style="display: inline-block; margin: 0 10px">
-															<a
+															<a id=""
 																style="color: grey; font-weight: 700; margin-bottom: 2px;"
 																href="javascript:void(0)"
 																th:data-ing="${pagination.ing}"
 																th:onclick="|location.href='@{/food(currentPage=${idx},ing=${pagination.ing})}'|"
-																th:value="${idx}"> [[${idx}]] </a>
+																th:value="${idx}">[[${idx}]]</a>
 														</div>
+
 														<!-- 다음 페이지 이동 있을 시 -->
 														<div th:if="${pagination.hasNextPage == true}"
 															style="display: inline-block; margin: 0 10px">

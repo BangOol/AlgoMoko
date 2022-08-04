@@ -3,6 +3,7 @@ package com.co.algomoko.food.service;
 import java.util.List;
 import java.util.Map;
 
+import com.co.algomoko.challenge.domain.ChallengeVO;
 import com.co.algomoko.food.domain.FoodVO;
 import com.co.algomoko.food.domain.Page;
 
@@ -33,5 +34,11 @@ public interface FoodService {
 
 	// 음식 작성
 	public void fInsert(FoodVO fVO);
+
+	// 챌린지 수정(관리자만)
+	public int fUpdate(FoodVO fVO);
+
+	// 챌린지 삭제(관리자만)
+	public void fDelete(String ing);
 
 }

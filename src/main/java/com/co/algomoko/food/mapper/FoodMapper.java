@@ -33,4 +33,11 @@ public interface FoodMapper {
 	
 	// 음식 작성
 	public void fInsert(FoodVO fVO);
+	
+	// 챌린지 수정(관리자만)
+	public int fUpdate(FoodVO fVO);
+
+	// 챌린지 삭제(관리자만)
+	public void fDelete(String ing);
+
 }
