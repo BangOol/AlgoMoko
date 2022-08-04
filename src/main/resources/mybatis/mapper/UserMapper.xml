@@ -53,10 +53,11 @@
 	</select>
 	
 	<!-- 임시비밀번호 발급 후 설정하기 -->
-	<update id="updatepw" >
+	<update id="insertPw" >
 		UPDATE MEMBERS SET MPW = #{mpw}
 		WHERE MID =#{mid}
 	</update>
+	
 	
 	<!-- 회원정보 업데이트-->
 	<update id="updateMyPage">
