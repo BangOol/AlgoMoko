@@ -63,14 +63,17 @@ public class DiaryController {
    
    @RequestMapping("")
     public String sicmain(Model model, DiaryVO diaryVO,Authentication authentication){
-      Calendar calendar= Calendar.getInstance();
-      calendar.set(Calendar.HOUR_OF_DAY, 0);
-      calendar.set(Calendar.MINUTE, 0);
-      calendar.set(Calendar.SECOND, 0);
-      calendar.set(Calendar.MILLISECOND, 0);
+//      Calendar calendar= Calendar.getInstance();
+//      calendar.set(Calendar.HOUR_OF_DAY, 0);
+//      calendar.set(Calendar.MINUTE, 0);
+//      calendar.set(Calendar.SECOND, 0);
+//      calendar.set(Calendar.MILLISECOND, 0);
+	   Date date = new Date();
+	   SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	   String std = sdf.format(date);
       UserDetails mid = (UserDetails) authentication.getPrincipal();
       diaryVO.setMid(mid.getUsername());
-      diaryVO.setDdate(calendar.getTime());
+      diaryVO.setDdate(date);
       
       
       model.addAttribute("todaysic",dao.findDay(diaryVO));
