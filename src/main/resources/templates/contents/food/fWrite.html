@@ -41,52 +41,54 @@
 									</div>
 									<div class="col-lg-4">
 										<div class="checkout__input">
-											<label for="cal">칼로리<span>*</span></label> <input type="text"
+											<label for="cal">칼로리<span>*</span></label> <input type="text" placeholder="숫자만 입력하세요"
 												class="form-control" id="cal" name="cal" required>
 										</div>
 									</div>
 									<div class="col-lg-4">
 										<div class="checkout__input">
 											<label for="weight">1인분 제공량<span>*</span></label> <input
-												type="text" class="form-control" id="weight" name="weight" required>
+												type="text" class="form-control" id="weight" name="weight" placeholder="숫자만 입력하세요"
+												required>
 										</div>
 									</div>
 									<div class="col-lg-3">
 										<div class="checkout__input">
 											<label for="carb">탄수화물<span>*</span></label> <input
-												type="text" class="form-control" id="carb" name="carb"
+												type="text" class="form-control" id="carb" name="carb" placeholder="숫자만 입력하세요"
 												required>
 										</div>
 									</div>
 									<div class="col-lg-3">
 										<div class="checkout__input">
 											<label for="prot">단백질<span>*</span></label> <input
-												type="text" class="form-control" id="prot" name="prot"
+												type="text" class="form-control" id="prot" name="prot" placeholder="숫자만 입력하세요"
 												required>
 										</div>
 									</div>
 									<div class="col-lg-3">
 										<div class="checkout__input">
-											<label for="fat">지방<span>*</span></label> <input type="text"
-												class="form-control" id="fat" name="fat" required>
+											<label for="fat">지방<span>*</span></label> <input type="text" 
+												class="form-control" id="fat" name="fat" placeholder="숫자만 입력하세요" required>
 										</div>
 									</div>
 									<div class="col-lg-3">
 										<div class="checkout__input">
 											<label for="f0">단위<span>*</span></label> <input type="text"
-												class="form-control" id="f0" name="f0" required>
+												class="form-control" id="f0" name="f0" placeholder="그램이나 밀리리터"required>
 										</div>
-									</div>									
+									</div>
 								</div>
 							</div>
 						</div>
+						<div style="margin: 15px 0 0 450px;">
+							<button type="submit" class="site-btn">등록하기</button>
+							<button type="button" class="site-btn"
+								th:onClick="location.href='/food'">돌아가기</button>
+						</div>
 					</form>
 					<hr>
-					<div style="margin:15px 0 0 450px;">
-						<button type="submit" class="site-btn">등록하기</button>
-						<button type="button" class="site-btn"
-							th:onClick="location.href='/food'">돌아가기</button>
-					</div>
+
 				</div>
 			</div>
 		</section>

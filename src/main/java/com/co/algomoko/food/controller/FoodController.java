@@ -55,7 +55,7 @@ public class FoodController {
 			
 			if (foodVO.getIng() != null) {
 				// 검색어가 있으면 검색해서 띄우기
-				int listCnt = dao.allTableCount(foodVO);
+				int listCnt = dao.TableCount(foodVO);
 				Page page = new Page(currentPage, 4, 10);
 				page.setIng(ing);
 				page.setTotalRecordCount(listCnt);				
