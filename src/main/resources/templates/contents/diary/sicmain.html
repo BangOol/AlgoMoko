@@ -125,7 +125,7 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
 
  <div th:replace="~{fragments/header}"></div>
 <div th:replace="~{fragments/aside}"></div>
-[[${todaysic}]]
+[[$]]
 
 
 
@@ -153,7 +153,7 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
                               <th:block th:each="today:${todaysic}" >
                               
                               
-                              <tr th:if= "${today.dddo == 'aa'} and ${today.dday}=='월요일'">
+                              <tr th:if= "${today.dddo == 'aa'} and ${today.dday}=='2'">
                               		  <td  th:text="${today.ddname}" class="shoping__cart__item" >
                                           <img src="img/cart/cart-1.jpg" alt="">
                                           <br><br>
@@ -174,7 +174,7 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
                               </thead>
                               <tbody class="tftftf">
                               <th:block th:each="today:${todaysic}" >
-                              <tr th:if="${today.dddo == 'bb'} and ${today.dday}=='월요일'">
+                              <tr th:if="${today.dddo == 'bb'} and ${today.dday}=='2'">
                               <td th:text="${today.ddname}" class="shoping__cart__item" onclick="location.href='write'">
                                           <img src="img/cart/cart-1.jpg" alt="">
                                           <h5></h5>
@@ -196,7 +196,7 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
                               <tbody class="tftftf">
                               <th:block th:each="today:${todaysic}">
                               
-                              <tr th:if="${today.dddo == 'cc'} and ${today.dday}=='월요일'">
+                              <tr th:if="${today.dddo == 'cc'} and ${today.dday}=='2'">
                               <td th:text="${today.ddname}" class="shoping__cart__item" onclick="location.href='write'">
                                           <img src="img/cart/cart-1.jpg" alt="">
                                           <h5></h5>
@@ -218,7 +218,7 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
                               </thead>
                               <tbody class="tftftf">
                               <th:block th:each="result:${resultCal}">
-                              <tr th:if="${result.dday=='월요일'}">
+                              <tr th:if="${result.dday=='2'}">
                               <td th:text="|${result.sumcal} kcal|" class="shoping__cart__item">
                                           <img src="img/cart/cart-1.jpg" alt="">
                                           <h5></h5>
@@ -254,7 +254,7 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
                               
                               <th:block th:each="today:${todaysic}" >
                               
-                              <tr th:if="${today.dddo == 'aa'} and ${today.dday}=='화요일'">
+                              <tr th:if="${today.dddo == 'aa'} and ${today.dday}=='3'">
                               <td th:text="${today.ddname}" class="shoping__cart__item" onclick="location.href='write'">
                                           <img src="img/cart/cart-1.jpg" alt="">
                                           <h5></h5>
@@ -274,7 +274,7 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
                               </thead>
                               <tbody class="tftftf">
                               <th:block th:each="today:${todaysic}" >
-                              <tr th:if="${today.dddo == 'bb'} and ${today.dday}=='화요일'">
+                              <tr th:if="${today.dddo == 'bb'} and ${today.dday}=='3'">
                               <td th:text="${today.ddname}" class="shoping__cart__item" onclick="location.href='write'">
                                           <img src="img/cart/cart-1.jpg" alt="">
                                           <h5></h5>
@@ -294,7 +294,7 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
                               </thead>
                               <tbody class="tftftf">
                               <th:block th:each="today:${todaysic}" >
-                              <tr th:if="${today.dddo == 'cc'} and ${today.dday}=='화요일'">
+                              <tr th:if="${today.dddo == 'cc'} and ${today.dday}=='3'">
                               <td th:text="${today.ddname}" class="shoping__cart__item" onclick="location.href='write'">
                                           <img src="img/cart/cart-1.jpg" alt="">
                                           <h5></h5>
@@ -313,7 +313,7 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
                               </thead>
                               <tbody class="tftftf">
                               <th:block th:each="result:${resultCal}">
-                              <tr th:if="${result.dday=='화요일'}">
+                              <tr th:if="${result.dday=='3'}">
                               <td th:text="|${result.sumcal} kcal|" class="shoping__cart__item">
                                           <img src="img/cart/cart-1.jpg" alt="">
                                           <h5></h5>
@@ -349,7 +349,7 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
                               
                               <th:block th:each="today:${todaysic}" >
                               
-                              <tr th:if="${today.dddo == 'aa'} and ${today.dday}=='수요일'">
+                              <tr th:if="${today.dddo == 'aa'} and ${today.dday}=='4'">
                               <td th:text="${today.ddname}" class="shoping__cart__item" onclick="location.href='write'">
                                           <img src="img/cart/cart-1.jpg" alt="">
                                           <h5></h5>
@@ -369,7 +369,7 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
                               </thead>
                               <tbody class="tftftf">
                               <th:block th:each="today:${todaysic}" >
-                              <tr th:if="${today.dddo == 'bb'} and ${today.dday}=='수요일'">
+                              <tr th:if="${today.dddo == 'bb'} and ${today.dday}=='4'">
                               <td th:text="${today.ddname}" class="shoping__cart__item" onclick="location.href='write'">
                                           <img src="img/cart/cart-1.jpg" alt="">
                                           <h5></h5>
@@ -389,7 +389,7 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
                               </thead>
                               <tbody class="tftftf">
                               <th:block th:each="today:${todaysic}" >
-                              <tr th:if="${today.dddo == 'cc'} and ${today.dday}=='수요일'">
+                              <tr th:if="${today.dddo == 'cc'} and ${today.dday}=='4'">
                               <td th:text="${today.ddname}" class="shoping__cart__item" onclick="location.href='write'">
                                           <img src="img/cart/cart-1.jpg" alt="">
                                           <h5></h5>
@@ -408,7 +408,7 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
                               </thead>
                               <tbody>
                               <th:block th:each="result:${resultCal}">
-                              <tr th:if="${result.dday=='수요일'}">
+                              <tr th:if="${result.dday=='4'}">
                               <td th:text="|${result.sumcal} kcal|" class="shoping__cart__item">
                                           <img src="img/cart/cart-1.jpg" alt="">
                                           <h5></h5>
@@ -445,7 +445,7 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
                               
                               <th:block th:each="today:${todaysic}" >
                               
-                              <tr th:if="${today.dddo == 'aa'} and ${today.dday}=='목요일'">
+                              <tr th:if="${today.dddo == 'aa'} and ${today.dday}=='5'">
                               <td th:text="${today.ddname}" class="shoping__cart__item" onclick="location.href='write'">
                                           <img src="img/cart/cart-1.jpg" alt="">
                                           <h5></h5>
@@ -465,7 +465,7 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
                               </thead>
                               <tbody class="tftftf">
                               <th:block th:each="today:${todaysic}" >
-                              <tr th:if="${today.dddo == 'bb'} and ${today.dday}=='목요일'">
+                              <tr th:if="${today.dddo == 'bb'} and ${today.dday}=='5'">
                               <td th:text="${today.ddname}" class="shoping__cart__item" onclick="location.href='write'">
                                           <img src="img/cart/cart-1.jpg" alt="">
                                           <h5></h5>
@@ -485,7 +485,7 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
                               </thead>
                               <tbody class="tftftf">
                               <th:block th:each="today:${todaysic}" >
-                              <tr th:if="${today.dddo == 'cc'} and ${today.dday}=='목요일'">
+                              <tr th:if="${today.dddo == 'cc'} and ${today.dday}=='5'">
                               <td th:text="${today.ddname}" class="shoping__cart__item" onclick="location.href='write'">
                                           <img src="img/cart/cart-1.jpg" alt="">
                                           <h5></h5>
@@ -506,7 +506,7 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
                               </thead>
                               <tbody class="tftftf">
                               <th:block th:each="result:${resultCal}">
-                              <tr th:if="${result.dday=='목요일'}">
+                              <tr th:if="${result.dday=='5'}">
                               <td th:text="|${result.sumcal} kcal|" class="shoping__cart__item">
                                           <img src="img/cart/cart-1.jpg" alt="">
                                           <h5></h5>
@@ -542,7 +542,7 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
                               
                               <th:block th:each="today:${todaysic}" >
                               
-                              <tr th:if="${today.dddo == 'aa'} and ${today.dday}=='금요일'">
+                              <tr th:if="${today.dddo == 'aa'} and ${today.dday}=='6'">
                               <td th:text="${today.ddname}" class="shoping__cart__item" onclick="location.href='write'">
                                           <img src="img/cart/cart-1.jpg" alt="">
                                           <h5></h5>
@@ -562,7 +562,7 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
                               </thead>
                               <tbody class="tftftf">
                               <th:block th:each="today:${todaysic}" >
-                              <tr th:if="${today.dddo == 'bb'} and ${today.dday}=='금요일'">
+                              <tr th:if="${today.dddo == 'bb'} and ${today.dday}=='6'">
                               <td th:text="${today.ddname}" class="shoping__cart__item" onclick="location.href='write'">
                                           <img src="img/cart/cart-1.jpg" alt="">
                                           <h5></h5>
@@ -582,7 +582,7 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
                               </thead>
                               <tbody class="tftftf">
                               <th:block th:each="today:${todaysic}" >
-                              <tr th:if="${today.dddo == 'cc'} and ${today.dday}=='금요일'">
+                              <tr th:if="${today.dddo == 'cc'} and ${today.dday}=='6'">
                               <td th:text="${today.ddname}" class="shoping__cart__item" onclick="location.href='write'">
                                           <img src="img/cart/cart-1.jpg" alt="">
                                           <h5></h5>
@@ -601,7 +601,7 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
                               </thead>
                               <tbody>
                               <th:block th:each="result:${resultCal}">
-                              <tr th:if="${result.dday=='금요일'}">
+                              <tr th:if="${result.dday=='6'}">
                               <td th:text="|${result.sumcal} kcal|" class="shoping__cart__item">
                                           <img src="img/cart/cart-1.jpg" alt="">
                                           <h5></h5>
@@ -637,7 +637,7 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
                               
                               <th:block th:each="today:${todaysic}" >
                               
-                              <tr th:if="${today.dddo == 'aa'} and ${today.dday}=='토요일'">
+                              <tr th:if="${today.dddo == 'aa'} and ${today.dday}=='7'">
                               <td th:text="${today.ddname}" class="shoping__cart__item" onclick="location.href='write'">
                                           <img src="img/cart/cart-1.jpg" alt="">
                                           <h5></h5>
@@ -657,7 +657,7 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
                               </thead>
                               <tbody class="tftftf">
                               <th:block th:each="today:${todaysic}" >
-                              <tr th:if="${today.dddo == 'bb'} and ${today.dday}=='토요일'">
+                              <tr th:if="${today.dddo == 'bb'} and ${today.dday}=='7'">
                               <td th:text="${today.ddname}" class="shoping__cart__item" onclick="location.href='write'">
                                           <img src="img/cart/cart-1.jpg" alt="">
                                           <h5></h5>
@@ -677,7 +677,7 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
                               </thead>
                               <tbody class="tftftf">
                               <th:block th:each="today:${todaysic}" >
-                              <tr th:if="${today.dddo == 'cc'} and ${today.dday}=='토요일'">
+                              <tr th:if="${today.dddo == 'cc'} and ${today.dday}=='7'">
                               <td th:text="${today.ddname}" class="shoping__cart__item" onclick="location.href='write'">
                                           <img src="img/cart/cart-1.jpg" alt="">
                                           <h5></h5>
@@ -696,7 +696,7 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
                               </thead>
                               <tbody>
                               <th:block th:each="result:${resultCal}">
-                              <tr th:if="${result.dday=='토요일'}">
+                              <tr th:if="${result.dday=='7'}">
                               <td th:text="|${result.sumcal} kcal|" class="shoping__cart__item">
                                           <img src="img/cart/cart-1.jpg" alt="">
                                           <h5></h5>
@@ -732,7 +732,7 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
                               
                               <th:block th:each="today:${todaysic}" >
                               
-                              <tr th:if="${today.dddo == 'aa'} and ${today.dday}=='일요일'">
+                              <tr th:if="${today.dddo == 'aa'} and ${today.dday}=='1'">
                               <td th:text="${today.ddname}" class="shoping__cart__item" onclick="location.href='write'">
                                           <img src="img/cart/cart-1.jpg" alt="">
                                           <h5></h5>
@@ -752,7 +752,7 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
                               </thead>
                               <tbody class="tftftf">
                               <th:block th:each="today:${todaysic}" >
-                              <tr th:if="${today.dddo == 'bb'} and ${today.dday}=='일요일'">
+                              <tr th:if="${today.dddo == 'bb'} and ${today.dday}=='1'">
                               <td th:text="${today.ddname}" class="shoping__cart__item" onclick="location.href='write'">
                                           <img src="img/cart/cart-1.jpg" alt="">
                                           <h5></h5>
@@ -772,7 +772,7 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
                               </thead>
                               <tbody class="tftftf">
                               <th:block th:each="today:${todaysic}" >
-                              <tr th:if="${today.dddo == 'cc'} and ${today.dday}=='일요일'">
+                              <tr th:if="${today.dddo == 'cc'} and ${today.dday}=='1'">
                               <td th:text="${today.ddname}" class="shoping__cart__item" onclick="location.href='write'">
                                           <img src="img/cart/cart-1.jpg" alt="">
                                           <h5></h5>
@@ -791,7 +791,7 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
                               </thead>
                               <tbody class="tftftf">
                               <th:block th:each="result:${resultCal}">
-                              <tr th:if="${result.dday=='일요일'}">
+                              <tr th:if="${result.dday=='1'}">
                               <td th:text="|${result.sumcal} kcal|" class="shoping__cart__item">
                                           <img src="img/cart/cart-1.jpg" alt="">
                                           <h5></h5>
