@@ -10,6 +10,7 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -34,7 +35,8 @@ import com.co.algomoko.food.domain.Page;
 @RequestMapping("/challenge") // 기본 url 머리셋팅
 @Controller
 public class ChallengeController {
-
+	@Value("${com.co.algomoko.upload.path}")
+	private String uploadPath;
 	@Autowired
 	ChallengeMapper dao;
 	String filepath = "D:/upload/";
@@ -69,38 +71,10 @@ public class ChallengeController {
 			page.setTotalRecordCount(listCnt);
 			
 			mav.addObject("pagination", page);
-//			mav.addObject("cList", dao.fListPage(cVO));
 			mav.addObject("cList", dao.cList(cVO));
 			mav.setViewName("contents/challenge/challenge");
 			return mav;		
-
 	}
-
-	// 챌린지 목록(페이징)
-//	@GetMapping("")
-//		public ModelAndView challenge(
-//				@RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage,	
-//				Map<String, Object> map, ChallengeVO cVO) throws Exception {
-//				ModelAndView mav = new ModelAndView();
-//			// 검색		
-//			if (cVO.getCtitle() != null) {
-//				cVO.setCtitle(cVO.getCtitle());
-//				int listCnt = dao.TableCount(cVO);
-//				Page page = new Page(currentPage, 6, 3);
-//				page.setTotalRecordCount(listCnt);
-//				cVO.setFirstRecordIndex(page.getFirstRecordIndex());
-//				cVO.setLastRecordIndex(page.getLastRecordIndex());
-//				
-//				mav.addObject("pagination",page);				
-//				mav.addObject("cList", dao.fListPage(cVO));
-//				mav.setViewName("contents/challenge/challenge");
-//				return mav;
-//			}
-//			List<ChallengeVO> cList = dao.cList(cVO);
-//			mav.addObject("cList", cList);
-//			mav.setViewName("contents/challenge/challenge");
-//			return mav;
-//		}
 
 	// 진행중인 챌린지 목록
 
@@ -134,16 +108,15 @@ public class ChallengeController {
 
 	// 챌린지 작성
 	@PostMapping("cWrite")
-	@ResponseBody
 	public String cInsert(@RequestParam("filename2") MultipartFile file, ChallengeVO cVO) throws Exception {
 		// file == multi 스트링변환
-		String projectpath = filepath + "/img/chl/";
+		//String projectpath = filepath + "/img/chl/";
 		UUID uuid = UUID.randomUUID(); // 랜덤으로 이름 생성
 		String filename = uuid + "_" + file.getOriginalFilename(); // 파일 이름은 UUID에 있는 랜덤값 + 원래 파일 이름
-		File saveFile = new File(projectpath, filename); // 위에 적힌 경로에, name으로 저장
-		file.transferTo(saveFile);
+		File saveFile = new File(uploadPath, filename); // 위에 적힌 경로에, name으로 저장
+//		file.transferTo(saveFile);
 		cVO.setFilename(filename); // DB에 파일 이름 저장
-		cVO.setFilepath("/img/chl/" + filename); // DB에 파일 경로 저장
+		cVO.setFilepath(uploadPath+filename); // DB에 파일 경로 저장
 		dao.cInsert(cVO);
 		return "redirect:/challenge";
 	}
@@ -153,7 +126,7 @@ public class ChallengeController {
 	public void download(HttpServletResponse response, @RequestParam String img) throws Exception {
 
 		try {
-			String path = filepath + img; // 경로에 접근할 때 역슬래시('\') 사용
+			String path = uploadPath; // 경로에 접근할 때 역슬래시('\') 사용
 
 			File file = new File(path);
 			response.setHeader("Content-Disposition", "attachment;filename=" + file.getName()); // 다운로드 되거나 로컬에 저장되는 용도로
