@@ -74,12 +74,6 @@
 	<!-- 음식 추가 -->
 	<insert id="fInsert" parameterType="com.co.algomoko.food.domain.FoodVO">
 	insert into food	
-	values(#{ing},#{cal},1,#{carb},#{prot},#{fat},#{f0},0,#{ing},#{weight})
+	values(#{ing},#{cal},1,#{carb},#{prot},#{fat},#{f0},0,#{ddname},#{weight})
 	</insert>
-	<!-- 음식 삭제 -->
-	<delete id="fDelete" parameterType="int">
-	delete
-	from food
-	where ing = #{ing}
-	</delete>
 </mapper>

@@ -74,7 +74,7 @@
 		resultType="com.co.algomoko.challenge.domain.MyChallengeVO">
 	<![CDATA[select *
 			 from challenge a, my_challenge b 
-			 where a.cno = b.cno2 and b.mid = #{mid} and b.ck=0 and to_date(b.edate,'yyyy-mm-dd') > to_date(sysdate,'yyyy-mm-dd')]]>		 
+			 where a.cno = b.cno2 and b.mid = #{mid} and b.ck=0 and to_date(b.edate,'yy/mm/dd') > sysdate]]>		 
 	</select>
 	
 	<!-- 완료한 챌린지 목록 -->
@@ -82,7 +82,7 @@
 	<![CDATA[select *
 			 from challenge a, my_challenge b
 			 where (a.cno = b.cno2 and b.mid = #{mid} and ck=1)
-			 	or (a.cno = b.cno2 and b.mid = #{mid} and to_date(b.edate,'yyyy-mm-dd') < sysdate)]]>
+			 	or (a.cno = b.cno2 and b.mid = #{mid} and to_date(b.edate,'yy/mm/dd') < sysdate)]]>
 	</select>
 	
 	<!-- 챌린지 간소화인증 이동 -->

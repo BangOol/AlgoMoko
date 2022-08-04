@@ -2,7 +2,11 @@ package com.co.algomoko.challenge.controller;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -11,10 +15,17 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.ContentDisposition;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -60,20 +71,19 @@ public class ChallengeController {
 	// 챌린지 목록
 	@GetMapping("")
 	public ModelAndView challenge(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage,
-			
-			@RequestParam(value = "keyword", defaultValue = "null") String keyword, ChallengeVO cVO)
-			throws Exception {
+
+			@RequestParam(value = "keyword", defaultValue = "null") String keyword, ChallengeVO cVO) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		Page page = new Page(currentPage, 2, 10);
 		page.setKeyword(keyword);
-		
-			int listCnt = dao.TableCount(cVO);
-			page.setTotalRecordCount(listCnt);
-			
-			mav.addObject("pagination", page);
-			mav.addObject("cList", dao.cList(cVO));
-			mav.setViewName("contents/challenge/challenge");
-			return mav;		
+
+		int listCnt = dao.TableCount(cVO);
+		page.setTotalRecordCount(listCnt);
+
+		mav.addObject("pagination", page);
+		mav.addObject("cList", dao.cList(cVO));
+		mav.setViewName("contents/challenge/challenge");
+		return mav;
 	}
 
 	// 진행중인 챌린지 목록
@@ -108,44 +118,75 @@ public class ChallengeController {
 
 	// 챌린지 작성
 	@PostMapping("cWrite")
+	@ResponseBody
 	public String cInsert(@RequestParam("filename2") MultipartFile file, ChallengeVO cVO) throws Exception {
 		// file == multi 스트링변환
-		//String projectpath = filepath + "/img/chl/";
-		UUID uuid = UUID.randomUUID(); // 랜덤으로 이름 생성
-		String filename = uuid + "_" + file.getOriginalFilename(); // 파일 이름은 UUID에 있는 랜덤값 + 원래 파일 이름
-		File saveFile = new File(uploadPath, filename); // 위에 적힌 경로에, name으로 저장
-		file.transferTo(saveFile);
-		cVO.setFilename(filename); // DB에 파일 이름 저장
-		cVO.setFilepath(uploadPath+filename); // DB에 파일 경로 저장
+		// String projectpath = filepath + "/img/chl/";
+		String fileName = file.getOriginalFilename();
+		String uid = UUID.randomUUID().toString();
+		String saveFileName = uid + fileName;
+		File target = new File(uploadPath, saveFileName);
+		cVO.setFilename(fileName);
+		cVO.setFilepath(saveFileName);
+		try {
+			FileCopyUtils.copy(file.getBytes(), target);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		dao.cInsert(cVO);
 		return "redirect:/challenge";
 	}
 
+//		UUID uuid = UUID.randomUUID(); // 랜덤으로 이름 생성
+//		String filename = uuid + "_" + file.getOriginalFilename(); // 파일 이름은 UUID에 있는 랜덤값 + 원래 파일 이름
+//		File saveFile = new File(uploadPath, filename); // 위에 적힌 경로에, name으로 저장
+//		file.transferTo(saveFile);
+//		System.out.println("세이브 : "+saveFile);
+//		cVO.setFilename(filename); // DB에 파일 이름 저장
+//		cVO.setFilepath(uploadPath+filename); // DB에 파일 경로 저장
+//		dao.cInsert(cVO);
+//		return "redirect:/challenge";
+//	}
+
 	@ResponseBody
 	@GetMapping("download")
-	public void download(HttpServletResponse response, @RequestParam String img) throws Exception {
-
+	public ResponseEntity<Object> download(String path) {
 		try {
-			String path = uploadPath; // 경로에 접근할 때 역슬래시('\') 사용
-
+			Path filePath = Paths.get(uploadPath, path);
+			Resource resource = new InputStreamResource(Files.newInputStream(filePath));
 			File file = new File(path);
-			response.setHeader("Content-Disposition", "attachment;filename=" + file.getName()); // 다운로드 되거나 로컬에 저장되는 용도로
-																								// 쓰이는지를 알려주는 헤더
 
-			FileInputStream fileInputStream = new FileInputStream(path); // 파일 읽어오기
-			OutputStream out = response.getOutputStream();
+			HttpHeaders headers = new HttpHeaders();
+			headers.setContentDisposition(ContentDisposition.builder("attachment").filename(file.getName()).build());
 
-			int read = 0;
-			byte[] buffer = new byte[1024];
-			while ((read = fileInputStream.read(buffer)) != -1) { // 1024바이트씩 계속 읽으면서 outputStream에 저장, -1이 나오면 더이상 읽을
-																	// 파일이 없음
-				out.write(buffer, 0, read);
-			}
-
+			return new ResponseEntity<Object>(resource, headers, HttpStatus.OK);
 		} catch (Exception e) {
-			throw new Exception("download error");
+			return new ResponseEntity<Object>(null, HttpStatus.CONFLICT);
 		}
 	}
+//	public void download(HttpServletResponse response, @RequestParam String img) throws Exception {
+//
+//		try {
+//			String path = uploadPath; // 경로에 접근할 때 역슬래시('\') 사용
+//
+//			File file = new File(path);
+//			response.setHeader("Content-Disposition", "attachment;filename=" + file.getName()); // 다운로드 되거나 로컬에 저장되는 용도로
+//																								// 쓰이는지를 알려주는 헤더
+//
+//			FileInputStream fileInputStream = new FileInputStream(path); // 파일 읽어오기
+//			OutputStream out = response.getOutputStream();
+//
+//			int read = 0;
+//			byte[] buffer = new byte[1024];
+//			while ((read = fileInputStream.read(buffer)) != -1) { // 1024바이트씩 계속 읽으면서 outputStream에 저장, -1이 나오면 더이상 읽을
+//																	// 파일이 없음
+//				out.write(buffer, 0, read);
+//			}
+//
+//		} catch (Exception e) {
+//			throw new Exception("download error");
+//		}
+//	}
 
 	// 챌린지 수정페이지로 이동
 
