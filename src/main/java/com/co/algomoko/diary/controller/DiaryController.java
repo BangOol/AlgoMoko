@@ -130,6 +130,7 @@ public class DiaryController {
 		recipeVO.setNick(dao.tomem(recipeVO.getMid()));
 		
 		dao.redelete(recipeVO);
+		System.out.println("삭제");
 		dao.rededelete(recipeVO);
 		
 		int cal = 0;//총칼
