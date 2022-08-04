@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.co.algomoko.admin.paging.PaginationUser;
 import com.co.algomoko.food.domain.FoodVO;
@@ -117,5 +118,13 @@ public class FoodController {
         response.setCharacterEncoding("UTF-8");
         PrintWriter w = response.getWriter();
 		return "redirect:/food";
+	}
+	
+	// 음식 삭제
+	@PostMapping("delete")
+	public String fDelete(String ing) {
+		dao.fDelete(ing);	
+		return "redirect:/food";
+		
 	}
 }

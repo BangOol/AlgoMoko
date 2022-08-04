@@ -60,6 +60,16 @@ public class FoodServiceImpl implements FoodService {
 		
 	}
 
+	@Override
+	public int fUpdate(FoodVO fVO) {
+		return mapper.fUpdate(fVO);
+	}
+
+	@Override
+	public void fDelete(String ing) {
+		mapper.fDelete(ing);
+	}
+
 	
 
 
