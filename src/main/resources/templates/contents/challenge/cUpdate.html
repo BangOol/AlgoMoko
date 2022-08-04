@@ -44,14 +44,14 @@
 										<div class="checkout__input">
 											<label for="subject">제목</label> <input
 												th:value="${chl.ctitle}" type="text" class="form-control"
-												id="ctitle" name="ctitle">
+												id="ctitle" name="ctitle" required>
 										</div>
 									</div>
 									<div class="col-lg-6">
 										<div class="checkout__input">
 											<label for="cdday">D-Day</label> <input
 												th:value="${chl.cdday}" type="text" class="form-control"
-												id="cdday" name="cdday">
+												id="cdday" name="cdday" required>
 										</div>
 									</div>
 								</div>
@@ -60,7 +60,7 @@
 										<div class="checkout__input">
 											<label for="ccon" style="margin-top: 15px;">내용</label>
 											<textarea th:text="${chl.ccon}" class="form-control"
-												id="ccon" name="ccon" rows="3"></textarea>
+												id="ccon" name="ccon" rows="3" required></textarea>
 										</div>
 									</div>
 									<div class="col-lg-6">
