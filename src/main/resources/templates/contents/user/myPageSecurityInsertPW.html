@@ -62,15 +62,10 @@
           <div class="col-lg-9 col-md-7">
             <h3 style="border-bottom: 2px solid; font-family: 'Jua';">비밀번호 변경</h3>
             <div>
-            <form id="insertPw_form" method="post" action="/InsertPw">
+            		<input type="hidden" id="mid" name="mid" th:value= "${#authentication.principal.mid}">
+                         <span id="mpwcheck_msg"></span>
+            <form method="post" url="InsertPw">
               <table style="margin: 60px 0 0 60px; ">
-              	<tr>
-                    <th>비밀번호 확인 :</th>
-                    <td><input id="insertmpwcheck" name="insertmpwcheck" type = "password" style = "width: 400px; border-radius: 10px;
-                        border: 1px solid; height: 30px; margin: 10px 0 10px 0 ;" placeholder="현재 비밀번호와 일치 해야합니다."></td>
-                        <span id="insertmpwcheck_msg"></span>
-                       <button id="insertmpw" name="insertmpw" onclick="" type="" style="float:right; background-color: #f5f5f5; width: 100px; height: 30px;">비밀번호 확인</button> 
-                </tr>
                 <tr>
                     <th>새 비밀번호 :</th>
                     <td><input id="mpw" name="mpw" type = "password" style = "width: 400px; border-radius: 10px;
@@ -85,7 +80,7 @@
                     <!--pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*()_-+=[]{}~?:;`|/]).{8,50}$"  : 8자 이상의 문자, 숫자 정규식-->
                 </tr>
                 </table>
-                <button id="insert" name="insert" type="submit" style="float:right; background-color: #f5f5f5; width: 100px; height: 30px;">비밀번호 변경</button>
+                <button id="insert" name="insert" style="float:right; background-color: #f5f5f5; width: 100px; height: 30px;">비밀번호 변경</button>
                 </form>
             </div>
           </div>
@@ -93,43 +88,23 @@
     </div>
     </section>
     <script>
-     $(document).ready(function() {
-     
-     
-     	 $('#mpw').focusout(function() {
-                // 기존 비밀번호를 입력하지 않았거나, 패턴을 통과하지 못했다면 작업 중단
-                if (mpwCheck() == false)
-                    return alert('비밀번호를 다시 입력하세요');
-                // 서버로 ajax 전송, GET 방식일 때는 파라미터를 포함한 주소만 적어도 된다.
-                $.ajax("/myPageSecurityInsertPW/pw_check?mpw=" + $("#mpwcheck").val())
-                    .done(()=>$("#mpwcheck_msg").text("비밀번호 확인이 완료 되었습니다.").attr("class", "success"))
-                    .fail(()=>$("#mpwcheck_msg").text("틀린 비밀번호 입니다.").attr("class", "fail"));
-            });
-            
-            
-     		$('#mpw').focusout(mpwCheck);
-            $('#mpw2').focusout(mpw2Check);
-            
-            
-            
-            //먼저, 현재 비밀번호를 확인
-            $('#insertmpw').click(function() {
-               
-                $.ajax("myPageSecurityInsertPW/pw_check?mpw=" + $('#mpwcheck').val())
-                    .done(() => { $('insertmpwcheck_msg').text("비밀번호가 일치합니다").attr('class', 'success');
-                        
-                    })
-                    .fail(() => {$('insertmpwcheck_msg').text("비밀번호가 일치하지 않습니다").attr('class', 'fail');
-           		 })  
-     	   })
-     	   
+     $(document).ready(function() {        
+     	   $('#mpw').focusout(mpwCheck);
+           $('#mpw2').focusout(mpw2Check);
+                	        	       	        	   
 	  $('#insert').click(function(e){
 	  	e.preventDefault();
-	  
-	  })
-	   function mpwcheck(){
-	   
-	   }
+	  	if (mpwCheck() == false)
+		return alert('비밀번호를 다시 입력하세요');
+		var mpw = $('#mpw').val();
+		var mid = $('#mid').val();
+		$.ajax({
+			method:'post',
+			url:'/InsertPw',
+			data:{mpw:mpw,mid:mid}
+		}).done(()=>$("#mpwcheck_msg").text("비밀번호 변경이 완료 되었습니다.").attr("class", "success"))
+		  .fail(()=>$("#mpwcheck_msg").text("틀린 비밀번호 입니다.").attr("class", "fail"));
+	  })	  	   
 })
   </script> 
 <!-- Product Section End -->

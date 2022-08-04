@@ -151,23 +151,22 @@ public class UserServiceImpl implements UserService{
 		return mapper.updateMyPage(vo);
 	}
 
-
+	//임시회원탈퇴
 	@Override
 	public void deleteId(String mid) {
 		mapper.delete(mid);
 		
 	}
+	//비번변경
 	@Override
 	public void insertpw(String mpw,String mid) {
 		
 		
 		String encodepw = passwordEncoder.encode(mpw); 
 		mapper.insertPw(mid, encodepw);
-		
+	
 	}
-	
-	
-	
+
 	
 	}
 	

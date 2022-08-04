@@ -17,6 +17,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -147,7 +148,7 @@ public class UserController {
 	
 	//아이디찾기
 	@PostMapping("/findId")
-	public ResponseEntity findId(@NotNull @RequestParam("uname") String uname, @RequestParam("nick") String nick, @RequestParam("birth") String birth) {
+	public  ResponseEntity<String> findId(@NotNull @RequestParam("uname") String uname, @RequestParam("nick") String nick, @RequestParam("birth") String birth) {
 		
 		String result = userService.findIdCheck(uname,nick,birth);
 		System.out.println(result);
@@ -182,9 +183,8 @@ public class UserController {
 //    	Authentication authentication = authenticationManager.authenticate(
 //    			new UsernamePasswordAuthenticationToken(ud.getUsername(), ud.getPassword()));
 //    	SecurityContextHolder.getContext().setAuthentication(authentication);	
-    	String mid = vo.getMid();
-    	 Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-    	 SecurityContextHolder.getContext().setAuthentication(createNewAuthentication(authentication,mid));
+    	;
+    	
 
 		if(num == 1) {
 			
@@ -194,18 +194,7 @@ public class UserController {
 		}
     	
     }
-    //세션1
-	private Authentication createNewAuthentication(Authentication currentAuth, String mid) {
-		UserDetails newPrincipal =  loadUserByUsername(mid);
-        UsernamePasswordAuthenticationToken newAuth =  
-        		new UsernamePasswordAuthenticationToken(
-        		newPrincipal,currentAuth.getCredentials(),newPrincipal.getAuthorities()); 
-        		newAuth.setDetails(currentAuth.getDetails());
-        		
-
-        return newAuth;
-		
-	}
+    
 
 
 	
@@ -213,11 +202,7 @@ public class UserController {
 
 	
 
-	//세션2
-	private UserDetails loadUserByUsername(String mid) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 
 	//비밀번호 변경
@@ -245,9 +230,14 @@ public class UserController {
 		return "contents/index";
 		
 	}
+	
+	
 	//비밀번경
 	@PostMapping("/InsertPw")
-	public String insertPw(String mid,String mpw) {
+	public String insertPw(@RequestParam("mid")String mid,@RequestParam("mpw")String mpw) {
+		
+		System.out.println(mid);
+		System.out.println(mpw);
 		userService.insertpw(mid,mpw);
 		
 		return "contents/user/myPage";
