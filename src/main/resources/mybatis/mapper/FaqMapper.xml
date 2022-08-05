@@ -75,7 +75,6 @@
                              nick,
                              mid,
                              A0,
-                             qans,
                              qdate,
                              C0)
         VALUES (#{qno},
@@ -83,8 +82,7 @@
                 #{qcon},
                 #{nick},
                 #{mid},
-                #{a0},
-                #{qans},
+                'a0',
                 sysdate,
                 #{C0}
                 )

@@ -65,7 +65,7 @@ public class UserServiceImpl implements UserService{
 		// TODO Auto-generated method stub
 		return mapper.findId(mid);
 	}
-	//비밀번호 암호화
+	//비밀번호 암호화 기능
 	@Override
 	public PasswordEncoder passwordEncoder() {
 		// TODO Auto-generated method stub
@@ -136,11 +136,14 @@ public class UserServiceImpl implements UserService{
         //UserVO vo = new UserVO();
         //@SuppressWarnings("null")
         //vo.setMpw(encodepw);
+        UserVO vo = new UserVO();
+        
         String encodepw = passwordEncoder.encode(pw);
+        vo.setMpw(encodepw);
         System.out.println("비밀번호 발급대상: " + mid);
         System.out.println("암호화: " +encodepw);
         
-        mapper.updatepw(mid,encodepw);
+        mapper.insertPw(mid,encodepw);
         
 		
 	}
@@ -151,19 +154,25 @@ public class UserServiceImpl implements UserService{
 		return mapper.updateMyPage(vo);
 	}
 
-	//임시회원탈퇴
+	//회원탈퇴
 	@Override
 	public void deleteId(String mid) {
+		
+		System.out.println(mid);
 		mapper.delete(mid);
 		
 	}
 	//비번변경
 	@Override
-	public void insertpw(String mpw,String mid) {
+	public void insertpw(String pwd,String mid) {
+		UserVO vo = new UserVO();
+		System.out.println("아이디:" + mid);
+		System.out.println("암호화 전:"+pwd);
 		
-		
-		String encodepw = passwordEncoder.encode(mpw); 
-		mapper.insertPw(mid, encodepw);
+		String encodepw = passwordEncoder.encode(pwd); 
+		vo.setMpw(encodepw);
+		System.out.println("암호화 후:"+vo.getMpw());
+		mapper.insertPw(mid,encodepw);
 	
 	}
 

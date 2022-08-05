@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.w3c.dom.UserDataHandler;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -83,8 +84,11 @@ public class SupportController {
 
 
     @GetMapping("/Inquiry/writeInquiry")
-    public String moveWriteInquiry(Model model){
+    public String moveWriteInquiry(Authentication authentication,Model model){
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        String mid = userDetails.getUsername();
         model.addAttribute("searchNo",inquiryService.searchNo());
+        model.addAttribute("mid",mid);
         return "contents/support/WriteInquiry";
     }
 
@@ -97,43 +101,29 @@ public class SupportController {
     }
 
 
-    @GetMapping("/Inquiry/insert")
-    public String insertInquiry(@RequestParam("title") String title,
-                              @RequestParam("content") String content,
-                              @RequestParam("qno") int qno,
-                              @RequestParam("option") String C0,
-                              Model model,
-                              Authentication authentication,
-                              HttpServletResponse response) throws IOException {
+    @PostMapping("/Inquiry/insert")
+    public void insertInquiry(InquiryVO inquiryVO,
+                              Model model, HttpServletResponse response,
+                              Authentication authentication) throws IOException {
 
         // 유저의 아이디 값 호출
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         String mid = userDetails.getUsername();
         // user nickname 호출
         String nick = inquiryService.getNick(mid);
-        String a0 = "a0";
-        String qans = "확인 중";
-
-        InquiryVO inquiryVO = new InquiryVO();
-        inquiryVO.setQtitle(title);
-        inquiryVO.setQcon(content);
-        inquiryVO.setQno(qno);
-        inquiryVO.setNick(nick);
         inquiryVO.setMid(mid);
-        inquiryVO.setQans(qans);
-        inquiryVO.setA0(a0);
-        inquiryVO.setC0(C0);
-
+        inquiryVO.setNick(nick);
+        System.out.println(inquiryVO);
         inquiryService.insertInquiry(inquiryVO);
 
+
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html; charset=utf-8");
+        PrintWriter w = response.getWriter();
         String msg = "정상적으로 등록되었습니다";
         String url = "/Inquiry";
-        response.setContentType("text/html; charset=utf-8");
-        response.setCharacterEncoding("UTF-8");
-        PrintWriter w = response.getWriter();
         w.write("<script>alert('"+msg+"');location.href='"+url+"';</script>");
 
-        return "contents/admin/userFormMain";
     }
 
     @PostMapping("/Inquiry/modify")
@@ -268,14 +258,7 @@ public class SupportController {
         inquiryVO.setQno(qno);
 
         int a = inquiryService.insertInqAns(inquiryVO);
-        if(a == 0){
-            response.setContentType("text/html; charset=utf-8");
-            response.setCharacterEncoding("UTF-8");
-            String msg = "등록 과정 중 문제가 발생했습니다. 다시 등록해주시길 바랍니다.";
-            String url = "/Inquiry";
-            PrintWriter w = response.getWriter();
-            w.write("<script>alert('"+msg+"');location.href='"+url+"';</script>");
-        }
+
         response.setContentType("text/html; charset=utf-8");
         response.setCharacterEncoding("UTF-8");
         String msg = "정상적으로 등록되었습니다";
