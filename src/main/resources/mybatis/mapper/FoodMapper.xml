@@ -74,6 +74,6 @@
 	<!-- 음식 추가 -->
 	<insert id="fInsert" parameterType="com.co.algomoko.food.domain.FoodVO">
 	insert into food	
-	values(#{ing},#{cal},1,#{carb},#{prot},#{fat},#{f0},0,#{ddname},#{weight})
+	values(#{ing},#{cal},1,#{carb},#{prot},#{fat},#{f0},0,#{ing},#{weight})
 	</insert>
 </mapper>
