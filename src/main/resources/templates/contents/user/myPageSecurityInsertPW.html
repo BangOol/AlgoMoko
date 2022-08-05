@@ -16,7 +16,28 @@
 
 <body>
 <th:block layout:fragment="content">
-
+<script>
+     $(document).ready(function() {        
+     	   $('#mpw').focusout(mpwCheck);
+           $('#mpw2').focusout(mpw2Check);
+           	        	       	        	   
+	  $('#insert').click(function(){
+	  	
+		var mpwVal = $('#mpw').val();
+		var midVal = $('#mid').val();
+	  	
+		$.ajax("/InsertPw")
+		.done(()=>{
+		$('#insertpw').submit();
+			alert ('비밀번호 변경이 완료되었습니다')
+		})
+		 
+		 
+		return alert ('비밀번호 변경이 완료 되었습니다')
+		 
+	  })	  	   
+})
+  </script> 
   
 
 
@@ -62,10 +83,10 @@
           <div class="col-lg-9 col-md-7">
             <h3 style="border-bottom: 2px solid; font-family: 'Jua';">비밀번호 변경</h3>
             <div>
-            		<input type="hidden" id="mid" name="mid" th:value= "${#authentication.principal.mid}">
                          <span id="mpwcheck_msg"></span>
-            <form method="post" url="InsertPw">
+            	<form id="insertpw" method="post" action="/InsertPw">
               <table style="margin: 60px 0 0 60px; ">
+            		<input type="hidden" id="mid" name="mid" th:value= "${#authentication.principal.mid}">
                 <tr>
                     <th>새 비밀번호 :</th>
                     <td><input id="mpw" name="mpw" type = "password" style = "width: 400px; border-radius: 10px;
@@ -77,36 +98,18 @@
                     <td><input id="mpw2" name="mpw2" type = "password" style = "width: 400px; border-radius: 10px;
                         border: 1px solid; height: 30px; margin: 10px 0 10px 0 ;" placeholder="8자 이상의 문자, 숫자, 특수문자를 입력하세요"></td>
                         <span id="mpw2_msg"></span>
-                    <!--pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*()_-+=[]{}~?:;`|/]).{8,50}$"  : 8자 이상의 문자, 숫자 정규식-->
+                    
                 </tr>
                 </table>
-                <button id="insert" name="insert" style="float:right; background-color: #f5f5f5; width: 100px; height: 30px;">비밀번호 변경</button>
-                </form>
+                <button id="insert"  style="float:right; background-color: #f5f5f5; width: 100px; height: 30px;">비밀번호 변경</button>
+            	</form>
+                
             </div>
           </div>
       </div>
     </div>
     </section>
-    <script>
-     $(document).ready(function() {        
-     	   $('#mpw').focusout(mpwCheck);
-           $('#mpw2').focusout(mpw2Check);
-                	        	       	        	   
-	  $('#insert').click(function(e){
-	  	e.preventDefault();
-	  	if (mpwCheck() == false)
-		return alert('비밀번호를 다시 입력하세요');
-		var mpw = $('#mpw').val();
-		var mid = $('#mid').val();
-		$.ajax({
-			method:'post',
-			url:'/InsertPw',
-			data:{mpw:mpw,mid:mid}
-		}).done(()=>$("#mpwcheck_msg").text("비밀번호 변경이 완료 되었습니다.").attr("class", "success"))
-		  .fail(()=>$("#mpwcheck_msg").text("틀린 비밀번호 입니다.").attr("class", "fail"));
-	  })	  	   
-})
-  </script> 
+    
 <!-- Product Section End -->
 </th:block>
 </body>
