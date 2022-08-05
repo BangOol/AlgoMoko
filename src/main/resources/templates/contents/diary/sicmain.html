@@ -15,14 +15,40 @@
 
 
     <style>
-    
+    /*.minmin{
+	min-height: 350px;
+}*/
+.chdzkf{
+	margin-left: 20px;
+}
+    .totocal{
+	position: relative;
+	bottom: 10px;
+	font-size: 1.5em;
+	color: darkblue;
+	
+}
     .tftftf{
         overflow: hidden;
 	  text-overflow: ellipsis;
 	  display: -webkit-box;
 	  -webkit-line-clamp: 2;
 	  -webkit-box-orient: vertical;
+	  
+	  
     }
+    .shoping__product{
+	padding-top: 20px;
+	
+}
+.card-link thead{
+	height: 50px;
+	
+}
+.card-link{
+	min-height: 400px;
+	padding-left: 20px;
+}
     </style>
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
@@ -138,10 +164,10 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
                     <span id="ssuunn"  class="card-title"></span>
                     
                 </div>
-    
+     <!-- 월요일   -->
                 <div class="card-link" style="font-family: 'Cairo', 'Jua', sans-serif;">
                     
-                    <table>
+                    <table class="minmin">
                               <thead>
                                   <tr>
                                       <th  class="shoping__product">아침</th>
@@ -209,7 +235,18 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
                               </th:block>
                                     
                              
- 								<thead>
+ 							
+                              
+                     		 </th:block>
+                             </tbody>
+                                  
+                               
+                          </table>
+                    
+                    
+                </div>
+                <table class="chdzkf">
+                    	<thead>
                                   <tr>
                                   		
                                       <th class="shoping__product" >총 칼로리</th>
@@ -219,23 +256,17 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
                               <tbody class="tftftf">
                               <th:block th:each="result:${resultCal}">
                               <tr th:if="${result.dday=='2'}">
-                              <td th:text="|${result.sumcal} kcal|" class="shoping__cart__item">
+                              <td th:text="|${result.sumcal} kcal|" class="shoping__cart__item totocal">
                                           <img src="img/cart/cart-1.jpg" alt="">
                                           <h5></h5>
                                       </td>
                                                                          
                                       
                                   </tr>
-                              
-                     		 </th:block>
-                             </tbody>
-                                  
-                               
-                          </table>
-                    
-                </div>
+                    </table>
             </div>
             
+            <!--  화요일  -->
             <div class="basic-card basic-card-light">
                 <div id="ssuunn" class="card-content">
                     <span id="ssuunn" class="card-title">날짜</span>
@@ -243,7 +274,7 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
                 </div>
 
                 <div class="card-link">
-                   <table>
+                   <table class="minmin">
                               <thead>
                                   <tr>
                                       <th class="shoping__product" >아침</th>
@@ -304,7 +335,17 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
                                       
                                   </tr>
                              </th:block>
-                             <thead>
+                           
+                     		 </th:block>
+                             
+                             </tbody>
+                                  
+                               
+                          </table>
+                          
+                </div>
+                <table class="chdzkf">
+                            <thead>
                                   <tr>
                                   		
                                       <th class="shoping__product" >총 칼로리</th>
@@ -314,23 +355,17 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
                               <tbody class="tftftf">
                               <th:block th:each="result:${resultCal}">
                               <tr th:if="${result.dday=='3'}">
-                              <td th:text="|${result.sumcal} kcal|" class="shoping__cart__item">
+                              <td th:text="|${result.sumcal} kcal|" class="shoping__cart__item totocal">
                                           <img src="img/cart/cart-1.jpg" alt="">
                                           <h5></h5>
                                       </td>
                                                                          
                                       
                                   </tr>
-                              
-                     		 </th:block>
-                             </tbody>
-                             </tbody>
-                                  
-                               
+                              </tbody>
                           </table>
-                </div>
             </div>
-            
+             <!--  수요일  -->
             <div class="basic-card basic-card-light">
                 <div id="ssuunn" class="card-content">
                     <span id="ssuunn" class="card-title">날짜</span>
@@ -338,7 +373,7 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
                 </div>
     
                 <div class="card-link">
-                    <table>
+                    <table class="minmin">
                               <thead>
                                   <tr>
                                       <th class="shoping__product" >아침</th>
@@ -394,12 +429,22 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
                                           <img src="img/cart/cart-1.jpg" alt="">
                                           <h5></h5>
                                       </td>
-                                      <td th:text="|${today.cal}kcal|"  class="shoping__cart__price">
+                                      <td th:text="|${today.cal}kcal|"  class="shoping__cart__price ">
                                           
                                       
                                   </tr>
                              </th:block>
-                             <thead>
+                             
+                     		 </th:block>
+                             </tbody>
+                             
+                                  
+                               
+                          </table>
+                          
+                </div>
+                <table class="chdzkf">
+                          <thead>
                                   <tr>
                                   		
                                       <th class="shoping__product" >총 칼로리</th>
@@ -409,23 +454,19 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
                               <tbody>
                               <th:block th:each="result:${resultCal}">
                               <tr th:if="${result.dday=='4'}">
-                              <td th:text="|${result.sumcal} kcal|" class="shoping__cart__item">
+                              <td th:text="|${result.sumcal} kcal|" class="shoping__cart__item totocal">
                                           <img src="img/cart/cart-1.jpg" alt="">
                                           <h5></h5>
                                       </td>
                                                                          
                                       
                                   </tr>
-                              
-                     		 </th:block>
-                             </tbody>
-                             </tbody>
-                                  
-                               
+                                </tbody>
                           </table>
-                </div>
             </div>
-           
+            
+            
+            <!-- 목   -->
             <div class="basic-card basic-card-light">
                 <div id="ssuunn" class="card-content">
                     <span id="ssuunn" class="card-title">날짜</span>
@@ -434,7 +475,7 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
     
                 <div class="card-link">
                 
-                    <table>
+                    <table class="minmin">
                               <thead>
                                   <tr>
                                       <th class="shoping__product" >아침</th>
@@ -494,10 +535,19 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
                                           
                                       
                                   </tr>
-                             
+                             </tbody>
                              
                               </th:block>
-                              <thead>
+                              
+                     		 </th:block>
+                            
+                                  
+                               
+                          </table>
+                         
+                </div>
+                 <table class="chdzkf">
+                          <thead>
                                   <tr>
                                   		
                                       <th class="shoping__product" >총 칼로리</th>
@@ -507,23 +557,18 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
                               <tbody class="tftftf">
                               <th:block th:each="result:${resultCal}">
                               <tr th:if="${result.dday=='5'}">
-                              <td th:text="|${result.sumcal} kcal|" class="shoping__cart__item">
+                              <td th:text="|${result.sumcal} kcal|" class="shoping__cart__item totocal">
                                           <img src="img/cart/cart-1.jpg" alt="">
                                           <h5></h5>
                                       </td>
                                                                          
                                       
                                   </tr>
-                              
-                     		 </th:block>
-                             </tbody>
-                             </tbody>
-                                  
-                               
+                               </tbody>
                           </table>
-                </div>
             </div>
         
+         <!--  금  -->
             <div class="basic-card basic-card-light">
                 <div id="ssuunn" class="card-content">
                     <span id="ssuunn" class="card-title">날짜</span>
@@ -531,7 +576,7 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
                 </div>
     
                 <div class="card-link">
-                   <table>
+                   <table class="minmin">
                               <thead>
                                   <tr>
                                       <th class="shoping__product" >아침</th>
@@ -591,8 +636,20 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
                                           
                                       
                                   </tr>
+                                  </tbody>
                              </th:block>
-                             <thead>
+                             
+                             
+                     		 </th:block>
+                             
+                             
+                                  
+                               
+                          </table>
+                          
+                </div>
+                <table class="chdzkf">
+                          <thead>
                                   <tr>
                                   		
                                       <th class="shoping__product" >총 칼로리</th>
@@ -602,22 +659,18 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
                               <tbody>
                               <th:block th:each="result:${resultCal}">
                               <tr th:if="${result.dday=='6'}">
-                              <td th:text="|${result.sumcal} kcal|" class="shoping__cart__item">
+                              <td th:text="|${result.sumcal} kcal|" class="shoping__cart__item totocal">
                                           <img src="img/cart/cart-1.jpg" alt="">
                                           <h5></h5>
                                       </td>
                                                                          
                                       
                                   </tr>
-                              
-                     		 </th:block>
-                             </tbody>
-                             </tbody>
-                                  
-                               
+                              </tbody>
                           </table>
-                </div>
             </div>
+         
+          <!-- 토   -->
          
             <div class="basic-card basic-card-light">
                 <div id="ssuunn" class="card-content">
@@ -626,7 +679,7 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
                 </div>
     
                 <div class="card-link">
-                   <table>
+                   <table class="minmin">
                               <thead>
                                   <tr>
                                       <th class="shoping__product" >아침</th>
@@ -686,8 +739,19 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
                                           
                                       
                                   </tr>
+                                  </tbody>
                              </th:block>
-                             <thead>
+                             
+                     		 </th:block>
+                             
+                             
+                                  
+                               
+                          </table>
+                          
+                </div>
+                <table class="chdzkf">
+                          <thead>
                                   <tr>
                                   		
                                       <th class="shoping__product" >총 칼로리</th>
@@ -697,23 +761,19 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
                               <tbody>
                               <th:block th:each="result:${resultCal}">
                               <tr th:if="${result.dday=='7'}">
-                              <td th:text="|${result.sumcal} kcal|" class="shoping__cart__item">
+                              <td th:text="|${result.sumcal} kcal|" class="shoping__cart__item totocal">
                                           <img src="img/cart/cart-1.jpg" alt="">
                                           <h5></h5>
                                       </td>
                                                                          
                                       
                                   </tr>
-                              
-                     		 </th:block>
-                             </tbody>
-                             </tbody>
-                                  
-                               
+                              </tbody>
                           </table>
-                </div>
             </div>
          
+         
+          <!--  일  -->
             <div class="basic-card basic-card-light">
                 <div id="ssuunn" class="card-content">
                     <span id="ssuunn" class="card-title">날짜</span>
@@ -721,7 +781,7 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
                 </div>
     
                 <div class="card-link">
-                    <table>
+                    <table class="minmin">
                               <thead>
                                   <tr>
                                       <th class="shoping__product" >아침</th>
@@ -781,32 +841,38 @@ vvv.eq(i).html(thisWeek[i]).parent().parent().attr('class','basic-card basic-car
                                           
                                       
                                   </tr>
+                                  </tbody>
                              </th:block>
-                             <thead>
+                             
+                     		 </th:block>
+                             
+                            
+                                  
+                               
+                          </table>
+                          
+                </div>
+                <table class="chdzkf">
+                          <thead>
                                   <tr>
                                   		
                                       <th class="shoping__product" >총 칼로리</th>
 
                                   </tr>
+                                  
                               </thead>
                               <tbody class="tftftf">
                               <th:block th:each="result:${resultCal}">
                               <tr th:if="${result.dday=='1'}">
-                              <td th:text="|${result.sumcal} kcal|" class="shoping__cart__item">
+                              <td th:text="|${result.sumcal} kcal|" class="shoping__cart__item totocal">
                                           <img src="img/cart/cart-1.jpg" alt="">
                                           <h5></h5>
                                       </td>
                                                                          
                                       
                                   </tr>
-                              
-                     		 </th:block>
-                             </tbody>
-                             </tbody>
-                                  
-                               
+                               </tbody>
                           </table>
-                </div>
             </div>
     
     

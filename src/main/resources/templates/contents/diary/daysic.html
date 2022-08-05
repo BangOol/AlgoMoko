@@ -102,11 +102,11 @@
                                
                               <thead>
                                   <tr style="width:300px;">
-                                      <th class="shoping__product">아침</th>
+                                      <th colspan="6" class="shoping__product alert alert-secondary">아침</th>
                                   </tr>
                               </thead>
                               
-                              <tbody data-dddo='aa'>
+                              <tabledata-dddo='aa'>
                              <!--<th:if="${#lists.size(aade) != 0}">-->
                               <th:block th:each="aade:${aade}">
                               
@@ -130,7 +130,7 @@
                              
                              <thead>
                                   <tr>
-                                       <th class="shoping__product">점심</th>
+                                       <th colspan="6" class="shoping__product alert alert-secondary">점심</th>
                                   </tr>
                               </thead>
                               
@@ -158,7 +158,7 @@
                              
                              <thead>
                                   <tr>
-                                       <th class="shoping__product">저녁</th>
+                                       <th colspan="6" class="shoping__product alert alert-secondary">저녁</th>
                                   </tr>
                               </thead>
                               
@@ -184,6 +184,11 @@
                                   </tr>
                              </tbody>
                              </th:block>
+                             
+                              </table>
+                                                          
+                             <table style="margin-top: 20px; margin-left: 150px; width:800px">
+                             <!-- 총칼 권칼 -->
                              <thead>
                                   <tr id="recal">
                                   	  <th class="shoping__product" style="text-align:center;">권장 칼로리</th>
@@ -212,10 +217,10 @@
                               
                               <tr th:unless="${resultCal[0].sumcal == 0}" id="concon">
                               
-                              <td th:text="${tcal}" id="tocal"  class="shoping__product" style="text-align:center;">
+                              <td th:text="${tcal}" id="tocal"  class="shoping__product align-self-start" style="text-align:center;">
                                           </td>
                                           
-                                          <td th:text="${resultCal[0].sumcal}" id="daycal" class="shoping__product" style="text-align:center;">
+                                          <td th:text="${resultCal[0].sumcal}" id="daycal" class="shoping__product align-self-start" style="text-align:center;">
                                           </td>
                                           <td></td>
                                           <th><div id="donutchart1"></div></th>

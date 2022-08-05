@@ -465,7 +465,8 @@ public String delete(HttpServletResponse response,DiaryVO diaryVO,Authentication
    
    @RequestMapping(value="insert") 
    public String insert(HttpServletResponse response,DiaryVO diaryVO, DiaryVO1 diaryVO1 ,Authentication authentication)throws IOException, ParseException { 
-      
+	   SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+       String strDate = sdf.format(diaryVO.getDdate());
 	   UserDetails mid = (UserDetails) authentication.getPrincipal();
 	      diaryVO.setMid(mid.getUsername());
 	     
@@ -517,7 +518,7 @@ public String delete(HttpServletResponse response,DiaryVO diaryVO,Authentication
 	           dao.insertdetail(res);
 	        }
 	        
-	                return "redirect:/diary"; 
+	                return "redirect:daysic?date="+strDate; 
 
    }
    
@@ -545,6 +546,8 @@ public String delete(HttpServletResponse response,DiaryVO diaryVO,Authentication
 		UserDetails mid = (UserDetails) authentication.getPrincipal();
 		recipeVO.setMid(mid.getUsername());
 		recipeVO.setNick(dao.tomem(recipeVO.getMid()));
+		
+		
 		
 		String[] fings = recipeVO.getFing().split(",");
 		
