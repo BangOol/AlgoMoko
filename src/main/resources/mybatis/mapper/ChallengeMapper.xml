@@ -65,8 +65,7 @@
 	<insert id="mcInsert" parameterType="map">
 		insert into my_challenge
 		(mycno, cno2, mid, sdate, edate )
-		values(mycno.nextval, #{cno}, #{mid},
-		sysdate, sysdate+to_char(#{cdday}))
+		values(mycno.nextval, #{cno}, #{mid}, to_char(sysdate,'yy/mm/dd'), to_char(sysdate+#{cdday},'yy/mm/dd'))
 	</insert>
 	
 	<!--진행중인 챌린지 목록 -->

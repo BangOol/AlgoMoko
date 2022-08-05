@@ -117,7 +117,8 @@ public class FoodController {
         response.setContentType("text/html; charset=utf-8");
         response.setCharacterEncoding("UTF-8");
         PrintWriter w = response.getWriter();
-		return "redirect:/food";
+        w.write("<script>alert('"+msg+"');location.href='"+url+"';</script>");
+		return "contents/food/food";
 	}
 	
 	// 음식 삭제

@@ -7,6 +7,8 @@ import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -125,15 +127,15 @@ public class ChallengeController {
 		String uid = UUID.randomUUID().toString();
 		String saveFileName = uid + fileName;
 		try {
-			//FileCopyUtils.copy(file.getBytes(), target);
-			File target = new File(uploadPath,saveFileName);	
+			// FileCopyUtils.copy(file.getBytes(), target);
+			File target = new File(uploadPath, saveFileName);
 			file.transferTo(target);
 			cVO.setFilepath(saveFileName);
 			cVO.setFilename(fileName);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 		dao.cInsert(cVO);
 		return "redirect:/challenge";
 	}
@@ -168,7 +170,7 @@ public class ChallengeController {
 	public void download(HttpServletResponse response, @RequestParam String img) throws Exception {
 
 		try {
-			String path = uploadPath +"/"+img; // 경로에 접근할 때 역슬래시('\') 사용
+			String path = uploadPath + "/" + img; // 경로에 접근할 때 역슬래시('\') 사용
 
 			File file = new File(path);
 			response.setHeader("Content-Disposition", "attachment;filename=" + file.getName()); // 다운로드 되거나 로컬에 저장되는 용도로
@@ -250,9 +252,12 @@ public class ChallengeController {
 	@GetMapping("start")
 	public String getStart(int cno, int cdday, MyChallengeVO mVO, Model model, RedirectAttributes ra,
 			Authentication at) {
+//		Date date = new Date();
+//		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//	     String std = sdf.format(date);
+//	     System.out.println(std);
 		String mid = at.getName();
 		mVO.setMid(mid);
-
 		System.out.println("아이디 : " + mid);
 		System.out.println("넘어온번호 : " + cno);
 		System.out.println("넘어온데이 : " + cdday);
@@ -270,6 +275,7 @@ public class ChallengeController {
 			ra.addFlashAttribute("msg", "이미 도전중인 챌린지입니다.");
 			return "redirect:/challenge";
 		}
+//		model.addAttribute("std",std);
 		dao.mcInsert(mid, cno, cdday);
 		return "redirect:/challenge/challenging";
 	}
