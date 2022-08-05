@@ -129,11 +129,11 @@
 												<li><i th:text="' '+'D-'+${chl.cdday}"
 													class="fa fa-calendar-o"></i></li>
 											</ul>
-											<h5>
-												<input type="hidden" th:value="${chl.cno}"> <a
-													th:text="${chl.ctitle}"></a>
+											<h5 style="font-family:  'Jua', 'Cairo',sans-serif">
+												<input type="hidden" th:value="${chl.cno}"> 
+												<a th:text="${chl.ctitle}"></a>
 											</h5>
-											<p th:text="${chl.cdday}+'일 동안 '+${chl.ctitle}+'에 도전하세요!'"></p>
+											<p style="font-family:  'Jua', 'Cairo',sans-serif" th:text="${chl.cdday}+'일 동안 '+${chl.ctitle}+'에 도전하세요!'"></p>
 											<a sec:authorize="hasAuthority('u1')" href="#"
 												class="blog__btn" th:cno="${chl.cno}"
 												th:title="${chl.ctitle}" th:dday="${chl.cdday}"

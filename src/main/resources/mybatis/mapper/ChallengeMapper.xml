@@ -95,13 +95,13 @@
 	<insert id="valid" parameterType="map">
 		insert into
 		challenge_validation (cvno, cno3, cvdate, round, attyn, vcon, mid, mycno)
-		values(cvno.nextval, #{cno}, to_date(sysdate,'yyyy-mm-dd'), #{round}, '1', #{vcon}, #{mid}, #{mycno})
+		values(cvno.nextval, #{cno}, sysdate, #{round}, '1', #{vcon}, #{mid}, #{mycno})
 	</insert>
 
 	<!-- 오늘 일차 구하기 -->
 	<select id="getRound" parameterType="map" resultType="integer">
 		select
-		(to_date(sysdate, 'yyyy-mm-dd')-to_date(a.sdate, 'YYYY-MM-DD')) +1
+		(trunc(sysdate) -to_date(a.sdate,'yy/mm/dd')) +1
 		from my_challenge a, challenge b
 		where a.cno2 = b.cno and a.mycno = #{mycno} and a.mid =#{mid}
 	</select>
