@@ -30,13 +30,13 @@
         </rollingPolicy>
     </appender>
 
-    <logger name="com.gaeyou.firstproject" level="DEBUG">
+    <logger name="com.gaeyou.firstproject" level="INFO">
         <appender-ref ref="SAMPLE" />
     </logger>
     <logger name="com.gaeyou.firstproject" level="INFO">
         <appender-ref ref="DAILY_ROLLING_FILE_APPENDER" />
     </logger>
-    <root level="DEBUG">
+    <root level="INFO">
         <appender-ref ref="STDOUT" />
         <appender-ref ref="DAILY_ROLLING_FILE_APPENDER" />
     </root>
