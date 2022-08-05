@@ -193,7 +193,7 @@ public class UserController {
 	
 	//회원탈퇴 진행
 	@PostMapping("/DeleteId")
-	public String deleteId(@RequestParam("mid")String mid ,HttpServletRequest request,HttpSession session) {
+	public String deleteId(@RequestParam("mid")String mid ,HttpSession session) {
 //		HttpSession session = request.getSession();
 //		String mid = null ;
 //		pr.getName();
