@@ -68,10 +68,10 @@
 											<li><i th:text="| 시작날짜 : ${e.sdate}|" class="fa fa-calendar-o"></i></li>
 											<li><i th:text="| 종료날짜 : ${e.edate}|" class="fa fa-calendar-o"></i></li>
 										</ul>
-										<h5 ><a th:text="${e.ctitle}">탄산 끊기</a></h5>										
-										<p th:if ="${e.cper} == 100" th:text="|${e.cdday}일 동안 도전하는 ${e.ctitle}에 성공했습니다.|"></p>										
-										<p th:unless ="${e.cper} == 100" th:text="|${e.cdday}일 동안 도전하는 ${e.ctitle}에 실패했습니다.|"></p>
-										<p th:text="|이행률 : ${e.cper}%|"></p>													
+										<h5 ><a style="font-family: 'Cairo', 'Jua', sans-serif" th:text="${e.ctitle}">탄산 끊기</a></h5>										
+										<p style="font-family: 'Cairo', 'Jua', sans-serif" th:if ="${e.cper} == 100" th:text="|${e.cdday}일 동안 도전하는 ${e.ctitle}에 성공했습니다.|"></p>										
+										<p style="font-family: 'Cairo', 'Jua', sans-serif" th:unless ="${e.cper} == 100" th:text="|${e.cdday}일 동안 도전하는 ${e.ctitle}에 실패했습니다.|"></p>
+										<p style="font-family: 'Cairo', 'Jua', sans-serif" th:text="|이행률 : ${e.cper}%|"></p>													
 									</div>
 								</div>
 							</div>
