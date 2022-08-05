@@ -28,25 +28,16 @@
 		<script>
 	var res = '[[${message}]]'
 	if(res )
-	</script>
-		<script>
-	$(document).ready(function(){
-		$("#si").hover(function(){
-			$("a").css("color",red);
-		}, function(){
-				$("a").css("color","black");
-			})
-	});
-	</script>
+	</script>	
 		<!-- 모달창 시작 -->
 		<div class="modal">
 			<div class="modal_body">
 				<div class="modal_title">
-					<h2 id="title"></h2>
+					<h2 style="font-size:3em; font-family:  'Jua', 'Cairo',sans-serif" id="title"></h2>
 				</div>
 				<div class="modal_content">
-					<p id="contents"></p>
-					<p>당신의 한계에 도전해보세요!</p>
+					<p style="font-size:1.4em; font-family:  'Jua', 'Cairo',sans-serif" id="contents"></p>
+					<p style="font-size:1.4em; font-family:  'Jua', 'Cairo',sans-serif">당신의 한계에 도전해보세요!</p>
 				</div>
 				<div class="modal_btn">
 					<a href="" id="chl">
@@ -91,12 +82,12 @@
 								</form>
 							</div>
 							<div class="blog__sidebar__item">
-								<h4>Categories</h4>
+								<h4 style="font-size:2.5em;">Categories</h4>
 								<ul>
-									<li><a href="challenge">챌린지 목록</a></li>
-									<li><a sec:authorize="hasAuthority('u1')"
+									<li><a style="font-size:1.5em;" href="challenge">챌린지 목록</a></li>
+									<li><a style="font-size:1.5em;" sec:authorize="hasAuthority('u1')"
 										href="challenge/challenging">진행중인 챌린지</a></li>
-									<li><a sec:authorize="hasAuthority('u1')"
+									<li><a style="font-size:1.5em;" sec:authorize="hasAuthority('u1')"
 										href="challenge/challengeEnd">완료한 챌린지</a></li>
 								</ul>
 							</div>
@@ -126,14 +117,14 @@
 										</div>
 										<div class="blog__item__text">
 											<ul>
-												<li><i th:text="' '+'D-'+${chl.cdday}"
+												<li><i  style="font-size:1.2em;" th:text="' '+'D-'+${chl.cdday}"
 													class="fa fa-calendar-o"></i></li>
 											</ul>
 											<h5 style="font-family:  'Jua', 'Cairo',sans-serif">
 												<input type="hidden" th:value="${chl.cno}"> 
-												<a th:text="${chl.ctitle}"></a>
+												<a style="font-size:2em;" th:text="${chl.ctitle}"></a>
 											</h5>
-											<p style="font-family:  'Jua', 'Cairo',sans-serif" th:text="${chl.cdday}+'일 동안 '+${chl.ctitle}+'에 도전하세요!'"></p>
+											<p style="font-size:1.3em; font-family:  'Jua', 'Cairo',sans-serif" th:text="${chl.cdday}+'일 동안 '+${chl.ctitle}+'에 도전하세요!'"></p>
 											<a sec:authorize="hasAuthority('u1')" href="#"
 												class="blog__btn" th:cno="${chl.cno}"
 												th:title="${chl.ctitle}" th:dday="${chl.cdday}"

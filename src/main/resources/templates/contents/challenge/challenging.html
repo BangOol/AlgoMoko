@@ -82,10 +82,10 @@
 												class="fa fa-calendar-o"></i></li>
 										</ul>
 										<h5>
-											<a th:text="${mc.ctitle}">탄산 끊기</a>
+											<a style="font-size:2em; font-family:  'Jua', 'Cairo',sans-serif" th:text="${mc.ctitle}">탄산 끊기</a>
 										</h5>
-										<p th:text="${mc.cdday}+'일 동안 '+${mc.ctitle}+' 도전중!'"></p>
-										<p style="color: red;" th:text="'이행률 : '+${mc.cper}+'%'"></p>
+										<p style="font-size:1.3em; font-family:  'Jua', 'Cairo',sans-serif" th:text="${mc.cdday}+'일 동안 '+${mc.ctitle}+' 도전중!'"></p>
+										<p style="color: red; font-family:  'Jua', 'Cairo',sans-serif; font-size:1.3em;" th:text="'이행률 : '+${mc.cper}+'%'"></p>
 										<!-- <a th:href="@{/challenge/challengeDetail(cno=${mc.cno2})}" class="blog__btn">인증하기 <span class="arrow_right"></span></a> -->
 										<div style="margin-left: 172px;">
 											<a sec:authorize="hasAuthority('u1')"
