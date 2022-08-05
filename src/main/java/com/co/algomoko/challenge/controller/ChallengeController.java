@@ -223,6 +223,7 @@ public class ChallengeController {
 				e.printStackTrace();
 			}
 		}
+		//sysout
 		dao.cUpdate(cVO);
 		String msg = "수정이 완료되었습니다";
         String url = "/challenge";
