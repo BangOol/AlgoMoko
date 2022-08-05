@@ -37,7 +37,9 @@ public interface UserService {
 	//회원탈퇴
 	public void deleteId(String mid);
 	//비밀번호 변경
-	public void insertpw(String mpw, String mid);
+	public void insertpw(String pwd,String mid);
+
+
 	
 	
 	

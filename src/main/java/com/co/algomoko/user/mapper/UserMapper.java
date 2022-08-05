@@ -1,7 +1,6 @@
 package com.co.algomoko.user.mapper;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -13,7 +12,7 @@ import com.co.algomoko.user.domain.UserVO;
 @Mapper
 public interface UserMapper {
 	public int insert(UserVO uservo);
-	public int delete(String mid);
+	public void delete(@Param("mid") String mid);
 	public int update(UserVO uservo);
 	
 	//회원정보 
@@ -34,15 +33,12 @@ public interface UserMapper {
 	//아이디찾기
 	public String findIdCheck(String uname, String nick, String birth);
 	
-	//임시 비밀번호로 변경 
-	public void updatepw(@Param("mid") String mid,@Param("mpw") String encodepw);
+	
 	//회원정보 수정
 	public int updateMyPage(UserVO vo);
 	//회원탈퇴
 	public void deleteId(String mid);
 	//(임시)비밀번호로 변경
 	public void insertPw(@Param("mid") String mid, @Param("mpw") String encodepw);
-	//비밀번호변경
-	public void insertPw2(@Param("mid") String mid, @Param("mpw") String encodepw);
-
+	
 }

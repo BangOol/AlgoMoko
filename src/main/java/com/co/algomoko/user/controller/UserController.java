@@ -29,7 +29,7 @@ import com.co.algomoko.user.domain.UserVO;
 import com.co.algomoko.user.email.service.EmailService;
 import com.co.algomoko.user.service.UserService;
 
-import groovyjarjarantlr4.v4.runtime.misc.NotNull;
+import groovyjarjarantlr4.v4.runtime.misc.NotNull;	
 
 @Controller
 public class UserController {
@@ -51,20 +51,7 @@ public class UserController {
 	public String mainPage3() {
 		return "contents/index";
 	}
-	
-//	@GetMapping("myPage")
-//	public String mypage(HttpServletRequest request, Model model, Authentication auth) {
-//
-////		HttpSession session = request.getSession();
-////		String mid = (String) session.getAttribute("mid");
-//		
-//		UserDetails ud = (UserDetails) auth.getPrincipal();
-//		String mid = ud.getUsername();
-//		model.addAttribute("members",userService.memberInfo(mid));
-//		
-//		return "contents/user/myPage";
-//	}
-	
+		
 	@GetMapping("myPage")
 	public String mypage2(HttpServletRequest request, Model model, Authentication auth) throws ServletException, IOException{
 
@@ -152,8 +139,7 @@ public class UserController {
 		
 		String result = userService.findIdCheck(uname,nick,birth);
 		System.out.println(result);
-//		if(result == null)
-//			return ResponseEntity.status(HttpStatus.CONFLICT).body("입력한 회원 정보를 확인해주세요");
+
 		
 		return ResponseEntity.status(HttpStatus.OK).body(result);				
 	}
@@ -180,9 +166,7 @@ public class UserController {
     	System.out.println(vo);
     	
     	int num = userService.insertMyPage(vo);
-//    	Authentication authentication = authenticationManager.authenticate(
-//    			new UsernamePasswordAuthenticationToken(ud.getUsername(), ud.getPassword()));
-//    	SecurityContextHolder.getContext().setAuthentication(authentication);	
+
     	;
     	
 
@@ -194,16 +178,6 @@ public class UserController {
 		}
     	
     }
-    
-
-
-	
-
-
-	
-
-	
-
 
 	//비밀번호 변경
 	@GetMapping("/myPageSecurityInsertPW")
@@ -217,16 +191,18 @@ public class UserController {
 		return "contents/user/myPageSecurityDeleteId";
 	}
 	
-	//회원탈퇴 진행, 미완
+	//회원탈퇴 진행
 	@PostMapping("/DeleteId")
-	public String deleteId(HttpServletRequest request, HttpServletResponse response,String mid ) {
+	public String deleteId(@RequestParam("mid")String mid ,HttpServletRequest request,HttpSession session) {
 //		HttpSession session = request.getSession();
 //		String mid = null ;
 //		pr.getName();
 //		String mid2 = (String) session.getAttribute("mid");
 //		System.out.println(pr);		
+		System.out.println(mid);
 		userService.deleteId(mid);
-		new SecurityContextLogoutHandler().logout(request, response, SecurityContextHolder.getContext().getAuthentication());
+		
+		session.invalidate();
 		return "contents/index";
 		
 	}
@@ -234,11 +210,10 @@ public class UserController {
 	
 	//비밀번경
 	@PostMapping("/InsertPw")
-	public String insertPw(@RequestParam("mid")String mid,@RequestParam("mpw")String mpw) {
+	public String insertPw(@RequestParam("mpw")String pwd,String mid) {
 		
-		System.out.println(mid);
-		System.out.println(mpw);
-		userService.insertpw(mid,mpw);
+		
+		userService.insertpw(pwd, mid);
 		
 		return "contents/user/myPage";
 	}
