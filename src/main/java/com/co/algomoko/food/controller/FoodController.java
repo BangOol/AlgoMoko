@@ -112,12 +112,13 @@ public class FoodController {
 	@PostMapping("/food/fWrite")
 	private String fInsert(FoodVO fVO, HttpServletResponse response) throws IOException {
 		dao.fInsert(fVO);
-		String msg = "정상적으로 등록되었습니다";
+		String msg = "등록이 완료되었습니다";
         String url = "/food";
         response.setContentType("text/html; charset=utf-8");
         response.setCharacterEncoding("UTF-8");
         PrintWriter w = response.getWriter();
-		return "redirect:/food";
+        w.write("<script>alert('"+msg+"');location.href='"+url+"';</script>");
+		return "contents/food/food";
 	}
 	
 	// 음식 삭제

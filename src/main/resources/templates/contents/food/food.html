@@ -33,8 +33,9 @@
 		<!-- Blog Section Begin -->
 		<section class="blog spad" style="padding-bottom: 20px;">
 			<div class="container">
-				<div class="row">
+				<div class="row">				
 					<div class="col-lg-8 col-md-7">
+					<h3 style="font-family:  'Jua', 'Cairo',sans-serif">음식 검색</h3><br>
 						<div class="blog__sidebar__search" style="margin-bottom: 30px;">
 							<form action="/food" method="get">
 								<input name="ing" type="text" placeholder="검색어 입력">
@@ -49,7 +50,7 @@
 									<div class="row">
 										<div class="col-lg-12">
 											<div class="shoping__cart__table">
-												<h4 th:if="${fList != null}" style="text-align: center;">검색결과</h4>
+												<h4 th:if="${fList != null}" style="font-family:  'Jua', 'Cairo',sans-serif; text-align: center;">검색결과</h4>
 												<br>
 												<table id="foodTable" th:if="${fList != null}">
 													<thead>
@@ -161,9 +162,9 @@
 						<div class="blog__sidebar"
 							style="padding: 0px; margin-left: 30px;">
 							<div class="blog__sidebar__item">
-								<h4>최근 음식 소식</h4>
+								<h4 style="font-family:  'Jua', 'Cairo',sans-serif">최근 음식 소식</h4>
 								<div class="blog__sidebar__recent">
-									<a
+									<a target='_blank'
 										href="https://m.health.chosun.com/svc/news_view.html?contid=2022071101599"
 										class="blog__sidebar__recent__item">
 										<div class="blog__sidebar__recent__item__pic">
@@ -175,7 +176,7 @@
 											</h6>
 											<span>2022.07.11</span>
 										</div>
-									</a> <a
+									</a> <a target='_blank'
 										href="https://health.chosun.com/site/data/html_dir/2022/06/15/2022061502079.html"
 										class="blog__sidebar__recent__item">
 										<div class="blog__sidebar__recent__item__pic">
@@ -187,7 +188,7 @@
 											</h6>
 											<span>2022.06.15</span>
 										</div>
-									</a> <a
+									</a> <a target='_blank'
 										href="https://www.hankyung.com/opinion/article/2022071365071"
 										class="blog__sidebar__recent__item">
 										<div class="blog__sidebar__recent__item__pic">
@@ -203,7 +204,7 @@
 								</div>
 							</div>
 							<div class="blog__sidebar__item">
-								<h4>인기 검색어</h4>
+								<h4 style="font-family:  'Jua', 'Cairo',sans-serif">인기 검색어</h4>
 								<div class="blog__sidebar__item__tags">
 									<a th:each="food:${pList}" th:text="${food.ing}"
 										th:href="@{/foodContents(ing=${food.ing})}"></a>

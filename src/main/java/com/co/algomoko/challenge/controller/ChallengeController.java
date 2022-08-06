@@ -4,9 +4,12 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -118,24 +121,31 @@ public class ChallengeController {
 
 	// 챌린지 작성
 	@PostMapping("cWrite")
-	@ResponseBody
-	public String cInsert(@RequestParam("filename2") MultipartFile file, ChallengeVO cVO) throws Exception {
+	public String cInsert(@RequestParam("filename2") MultipartFile file, ChallengeVO cVO, HttpServletResponse response) throws Exception {
 		// file == multi 스트링변환
 		// String projectpath = filepath + "/img/chl/";
 		System.out.println("업로드"+uploadPath);
 		String fileName = file.getOriginalFilename();
 		String uid = UUID.randomUUID().toString();
 		String saveFileName = uid + fileName;
-		File target = new File(uploadPath, saveFileName);
-		cVO.setFilename(fileName);
-		cVO.setFilepath(saveFileName);
 		try {
-			FileCopyUtils.copy(file.getBytes(), target);
+			// FileCopyUtils.copy(file.getBytes(), target);
+			File target = new File(uploadPath, saveFileName);
+			file.transferTo(target);
+			cVO.setFilepath(saveFileName);
+			cVO.setFilename(fileName);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+
 		dao.cInsert(cVO);
-		return "redirect:/challenge";
+		String msg = "등록이 완료되었습니다";
+        String url = "/challenge";
+		response.setContentType("text/html; charset=utf-8");
+        response.setCharacterEncoding("UTF-8");
+        PrintWriter w = response.getWriter();
+        w.write("<script>alert('"+msg+"');location.href='"+url+"';</script>");
+		return "contents/challenge/challenge";
 	}
 
 //		UUID uuid = UUID.randomUUID(); // 랜덤으로 이름 생성
@@ -151,43 +161,44 @@ public class ChallengeController {
 
 	@ResponseBody
 	@GetMapping("download")
-	public ResponseEntity<Object> download(String path) {
-		try {
-			Path filePath = Paths.get(uploadPath, path);
-			Resource resource = new InputStreamResource(Files.newInputStream(filePath));
-			File file = new File(path);
-
-			HttpHeaders headers = new HttpHeaders();
-			headers.setContentDisposition(ContentDisposition.builder("attachment").filename(file.getName()).build());
-
-			return new ResponseEntity<Object>(resource, headers, HttpStatus.OK);
-		} catch (Exception e) {
-			return new ResponseEntity<Object>(null, HttpStatus.CONFLICT);
-		}
-	}
-//	public void download(HttpServletResponse response, @RequestParam String img) throws Exception {
-//
+//	public ResponseEntity<Object> download(String path) {
 //		try {
-//			String path = uploadPath; // 경로에 접근할 때 역슬래시('\') 사용
+//			Path filePath = Paths.get(uploadPath,path);
+//			Resource resource = new InputStreamResource(Files.newInputStream(filePath));
+//			
+//			HttpHeaders headers = new HttpHeaders();
+//			File file = new File(uploadPath,path);
+//			headers.setContentDisposition(ContentDisposition.builder("attachment").filename(file.getName()).build());
 //
-//			File file = new File(path);
-//			response.setHeader("Content-Disposition", "attachment;filename=" + file.getName()); // 다운로드 되거나 로컬에 저장되는 용도로
-//																								// 쓰이는지를 알려주는 헤더
-//
-//			FileInputStream fileInputStream = new FileInputStream(path); // 파일 읽어오기
-//			OutputStream out = response.getOutputStream();
-//
-//			int read = 0;
-//			byte[] buffer = new byte[1024];
-//			while ((read = fileInputStream.read(buffer)) != -1) { // 1024바이트씩 계속 읽으면서 outputStream에 저장, -1이 나오면 더이상 읽을
-//																	// 파일이 없음
-//				out.write(buffer, 0, read);
-//			}
-//
+//			return new ResponseEntity<Object>(resource, headers, HttpStatus.OK);
 //		} catch (Exception e) {
-//			throw new Exception("download error");
+//			return new ResponseEntity<Object>(null, HttpStatus.CONFLICT);
 //		}
 //	}
+	public void download(HttpServletResponse response, @RequestParam String img) {
+
+		try {
+			String path = uploadPath + "/" + img; // 경로에 접근할 때 역슬래시('\') 사용
+
+			File file = new File(path);
+			response.setHeader("Content-Disposition", "attachment;filename=" + file.getName()); // 다운로드 되거나 로컬에 저장되는 용도로
+																								// 쓰이는지를 알려주는 헤더
+
+			FileInputStream fileInputStream = new FileInputStream(path); // 파일 읽어오기
+			OutputStream out = response.getOutputStream();
+
+			int read = 0;
+			byte[] buffer = new byte[1024];
+			while ((read = fileInputStream.read(buffer)) != -1) { // 1024바이트씩 계속 읽으면서 outputStream에 저장, -1이 나오면 더이상 읽을
+																	// 파일이 없음
+				out.write(buffer, 0, read);
+			}
+
+		} catch (Exception e) {
+			//throw new Exception("download error");
+			System.out.println("에러");
+		}
+	}
 
 	// 챌린지 수정페이지로 이동
 
@@ -199,20 +210,41 @@ public class ChallengeController {
 
 	// 챌린지 수정
 	@PostMapping("cUpdate")
-	public String cUpdate(@RequestParam("filename2") MultipartFile file, ChallengeVO cVO) throws Exception, Exception {
+	public String cUpdate(@RequestParam("filename2") MultipartFile file, ChallengeVO cVO, HttpServletResponse response) throws Exception, Exception {
 		if (file != null && file.getSize() > 0) {
-			String projectpath = filepath + "/img/chl/";
-			UUID uuid = UUID.randomUUID();
-
-			String filename = uuid + "_" + file.getOriginalFilename();
-			File saveFile = new File(projectpath, filename);
-			file.transferTo(saveFile);
-			cVO.setFilename(filename);
-			cVO.setFilepath("/img/chl/" + filename);
+			String fileName = file.getOriginalFilename();
+			String uid = UUID.randomUUID().toString();
+			String saveFileName = uid + fileName;
+			File target = new File(uploadPath, saveFileName);
+			cVO.setFilename(fileName);
+			cVO.setFilepath(saveFileName);
+			try {
+				FileCopyUtils.copy(file.getBytes(), target);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 		dao.cUpdate(cVO);
-		return "redirect:/challenge";
+		String msg = "수정이 완료되었습니다";
+        String url = "/challenge";
+		response.setContentType("text/html; charset=utf-8");
+        response.setCharacterEncoding("UTF-8");
+        PrintWriter w = response.getWriter();
+        w.write("<script>alert('"+msg+"');location.href='"+url+"';</script>");
+		return "contents/challenge/challenge";
 	}
+//			String projectpath = filepath + "/img/chl/";
+//			UUID uuid = UUID.randomUUID();
+//
+//			String filename = uuid + "_" + file.getOriginalFilename();
+//			File saveFile = new File(projectpath, filename);
+//			file.transferTo(saveFile);
+//			cVO.setFilename(filename);
+//			cVO.setFilepath("/img/chl/" + filename);
+//		}
+//		dao.cUpdate(cVO);
+//		return "redirect:/challenge";
+//	}
 
 	// 챌린지 삭제
 	@GetMapping("delete")
@@ -235,9 +267,12 @@ public class ChallengeController {
 	@GetMapping("start")
 	public String getStart(int cno, int cdday, MyChallengeVO mVO, Model model, RedirectAttributes ra,
 			Authentication at) {
+//		Date date = new Date();
+//		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//	     String std = sdf.format(date);
+//	     System.out.println(std);
 		String mid = at.getName();
 		mVO.setMid(mid);
-
 		System.out.println("아이디 : " + mid);
 		System.out.println("넘어온번호 : " + cno);
 		System.out.println("넘어온데이 : " + cdday);
@@ -255,6 +290,7 @@ public class ChallengeController {
 			ra.addFlashAttribute("msg", "이미 도전중인 챌린지입니다.");
 			return "redirect:/challenge";
 		}
+//		model.addAttribute("std",std);
 		dao.mcInsert(mid, cno, cdday);
 		return "redirect:/challenge/challenging";
 	}
@@ -293,9 +329,7 @@ public class ChallengeController {
 			System.out.println("전체개수 : " + cddayVO.getCdday() + " 인증개수 : " + certiCount + " 이행률 : "
 					+ Math.round(cper * 100 / 100.0) + "%");
 			dao.cperUpdate(cno2, (int) cper, mid, mycno, round);
-			// 이행률 100% 채우면 ck가 1로 바뀌면서 완료된 챌린지로 이동 / 이미 완료된 챌린지를 새로 도전할때 생기는 중복을 ck0/1로
-			// 구분하여 방지
-
+			// 이행률 100% 채우면 ck가 1로 바뀌면서 완료된 챌린지로 이동 / 이미 완료된 챌린지를 새로 도전할때 생기는 중복을 ck0/1로 구분하여 방지
 			if (cper != 100) {
 				return "redirect:/challenge/challenging";
 			}

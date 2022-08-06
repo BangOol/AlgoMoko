@@ -52,7 +52,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
    
     @Override
       public void configure(WebSecurity web) {
-        web.ignoring().antMatchers("/","/logout","/css/**", "/js/**", "/img/**","/favicon.ico", "/resources/**", "/error");
+        web.ignoring().antMatchers("/","/logout","/css/**", "/js/**", "/img/**","/favicon.ico", "/resources/**", "/error","/challenge/download/**");
       }
 
     @Override

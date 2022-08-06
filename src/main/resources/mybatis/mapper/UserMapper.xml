@@ -52,10 +52,10 @@
 		WHERE UNAME=#{uname} AND NICK=#{nick} AND BIRTH=#{birth}
 	</select>
 	
-	<!-- 임시비밀번호 발급 후 설정하기 -->
+	<!-- 	비밀번호변경  -->
 	<update id="insertPw" >
 		UPDATE MEMBERS SET MPW = #{mpw}
-		WHERE MID =#{mid}
+		WHERE MID = #{mid}
 	</update>
 	
 	
