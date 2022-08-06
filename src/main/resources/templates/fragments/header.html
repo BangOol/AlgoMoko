@@ -3,15 +3,8 @@
        xmlns:th= "http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
        >
 <!-- xmlns:th="http://www.thymeleaf.org"  -->
-<head>
-    <meta charset="UTF-8">
-    <title>알고 먹자, AlgoMoko!</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-
-</head>
-<body>
 
 <!-- Header Section Begin -->
 <th:block th:fragment="header">
@@ -68,7 +61,6 @@
                                 </ul>
                             </li>
                             <li><a href="/food">음식정보</a></li>
-                            <li><a href="./blog.html">커뮤니티</a></li>
                             <li>
                                 <a href="/Inquiry">고객센터</a>
                                 <ul class="header__menu__dropdown">
@@ -96,7 +88,6 @@
           	 $('#logoutf').submit();
         });
     </script>
-</body>
 
 </th:block>
 </html>
