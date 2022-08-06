@@ -122,6 +122,7 @@ public class ChallengeController {
 	public String cInsert(@RequestParam("filename2") MultipartFile file, ChallengeVO cVO) throws Exception {
 		// file == multi 스트링변환
 		// String projectpath = filepath + "/img/chl/";
+		System.out.println("업로드"+uploadPath);
 		String fileName = file.getOriginalFilename();
 		String uid = UUID.randomUUID().toString();
 		String saveFileName = uid + fileName;
