@@ -1,4 +1,4 @@
-package com.co.algomoko.support.domain.controller;
+package com.co.algomoko.support.controller;
 
 import com.co.algomoko.admin.paging.PaginationUser;
 import com.co.algomoko.support.domain.FaqVO;
@@ -192,21 +192,17 @@ public class SupportController {
             inquiryVO.setMid(mid);
             int a = inquiryService.deleteInquiry(inquiryVO);
 
+            response.setCharacterEncoding("UTF-8");
+            response.setContentType("text/html; charset=utf-8");
+            PrintWriter w = response.getWriter();
+            String msg;
+            String url = "/Inquiry";
             if(a != 0){
-                response.setCharacterEncoding("UTF-8");
-                response.setContentType("text/html; charset=utf-8");
-                PrintWriter w = response.getWriter();
-                String msg = "정상적으로 삭제되었습니다";
-                String url = "/Inquiry";
-                w.write("<script>alert('"+msg+"');location.href='"+url+"';</script>");
+                msg = "정상적으로 삭제되었습니다";
             } else{
-                response.setCharacterEncoding("UTF-8");
-                response.setContentType("text/html; charset=utf-8");
-                PrintWriter w = response.getWriter();
-                String msg = "알 수 없는 오류로 인해 삭제가 중단되었습니다. 1:1 문의 메인 창으로 돌아갑니다.";
-                String url = "/Inquiry";
-                w.write("<script>alert('"+msg+"');location.href='"+url+"';</script>");
+                msg = "알 수 없는 오류로 인해 삭제가 중단되었습니다. 1:1 문의 메인 창으로 돌아갑니다.";
             }
+            w.write("<script>alert('"+msg+"');location.href='"+url+"';</script>");
         }
     }
 
@@ -258,13 +254,16 @@ public class SupportController {
         inquiryVO.setQno(qno);
 
         int a = inquiryService.insertInqAns(inquiryVO);
-
         response.setContentType("text/html; charset=utf-8");
         response.setCharacterEncoding("UTF-8");
-        String msg = "정상적으로 등록되었습니다";
         String url = "/Inquiry";
         PrintWriter w = response.getWriter();
-        w.write("<script>alert(msg);location.href='"+url+"';</script>");
-
+        String msg;
+        if(a != 0){
+            msg = "정상적으로 등록되었습니다";
+        }else{
+            msg = "답변 등록 중 오류가 발생했습니다. 개발자에게 문의 부탁드립니다.";
+        }
+        w.write("<script>alert('"+msg+"');location.href='"+url+"';</script>");
     }
 }

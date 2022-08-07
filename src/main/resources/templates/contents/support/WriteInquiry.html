@@ -12,9 +12,6 @@
                 <div class="col-lg-12 text-center">
                     <div class="breadcrumb__text">
                         <a href="/Inquiry"><h3 style="font-family: 'Cairo', 'Jua', sans-serif">문의 내역</h3>
-                            <div class="breadcrumb__option">
-                                <span>Algomokgo</span>
-                            </div>
                         </a>
                     </div>
                 </div>
@@ -26,43 +23,43 @@
             <h3 style="font-family: 'Jua','Cairo',  sans-serif; padding: 70px 0 30px 0 ">작성 페이지</h3>
         </div>
 
-            <form action="/Inquiry/insert" method="post">
-                <div class="col-lg-12">
-                    <table style="margin-left:50px; border: 4px solid #d1ecf1;">
-                        <tbody>
-                        <tr style="border-bottom: 4px solid #d1ecf1">
-                            <th style="text-align: center; width:250px; background-color: #f1f8ff ;height: 60px; border-right: 4px solid #d1ecf1" >글번호</th>
-                            <td><input type="text" th:value="${searchNo[0].qno}" name="qno" readonly></td>
-                        </tr>
-                        <tr style="border-bottom: 4px solid #d1ecf1">
-                            <th style="text-align: center; width:250px; background-color: #f1f8ff ;height: 60px; border-right: 4px solid #d1ecf1">제목</th>
-                            <td><input name="qtitle" type="text"></td>
-                        </tr>
-                        <tr style="border-bottom: 4px solid #d1ecf1">
-                            <th style="text-align: center; width:250px; background-color: #f1f8ff ;height: 60px; border-right: 4px solid #d1ecf1">내용</th>
-                            <td>
-                                <textarea style="width: 800px; height: 300px; resize: none; text-align: left;"  name ="qcon"></textarea>
-                                <input type="hidden" name="name" th:value="${mid}">
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <select name="C0" style=" margin: 100px 0 0 60px;">
-                    <option value="c0">챌린지 문의</option>
-                    <option value="c1">일지 문의</option>
-                    <option value="c2">음식 문의</option>
-                    <option value="c3">신고 문의</option>
-                    <option value="c4">일반 문의</option>
-                </select>
-                <div class="col-lg-12">
-                    <button type="submit" value="등록" style="float:right; width: 80px; height: 50px; background-color: #ff3222;
+        <form action="/Inquiry/insert" method="post">
+            <div class="col-lg-12">
+                <table style="margin-left:50px; border: 4px solid #d1ecf1;">
+                    <tbody>
+                    <tr style="border-bottom: 4px solid #d1ecf1">
+                        <th style="text-align: center; width:250px; background-color: #f1f8ff ;height: 60px; border-right: 4px solid #d1ecf1" >글번호</th>
+                        <td><input type="text" th:value="${searchNo[0].qno}" name="qno" readonly></td>
+                    </tr>
+                    <tr style="border-bottom: 4px solid #d1ecf1">
+                        <th style="text-align: center; width:250px; background-color: #f1f8ff ;height: 60px; border-right: 4px solid #d1ecf1">제목</th>
+                        <td><input  style="width: 800px;" name="qtitle" type="text"></td>
+                    </tr>
+                    <tr style="border-bottom: 4px solid #d1ecf1">
+                        <th style="text-align: center; width:250px; background-color: #f1f8ff ;height: 60px; border-right: 4px solid #d1ecf1">내용</th>
+                        <td>
+                            <textarea style="width: 800px; height: 300px; resize: none; text-align: left;"  name ="qcon"></textarea>
+                            <input  type="hidden" name="name" th:value="${mid}">
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <select name="C0" style=" margin: 100px 0 0 60px;">
+                <option value="c0">챌린지 문의</option>
+                <option value="c1">일지 문의</option>
+                <option value="c2">음식 문의</option>
+                <option value="c3">신고 문의</option>
+                <option value="c4">일반 문의</option>
+            </select>
+            <div class="col-lg-12">
+                <button type="submit" value="등록" style="float:right; width: 80px; height: 50px; background-color: #ff3222;
              border-radius: 10px; color: #ffffff; font-family: 'Jua', 'Cairo', sans-serif; text-align: center; margin:100px 0">
-                        등록
-                    </button>
-                </div>
-            </form>
-        </div>
+                    등록
+                </button>
+            </div>
+        </form>
+    </div>
 </th:block>
 </body>
 </html>
