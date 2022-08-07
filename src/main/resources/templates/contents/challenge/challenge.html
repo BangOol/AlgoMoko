@@ -84,10 +84,10 @@
 							<div class="blog__sidebar__item">
 								<h4 style="font-size:2.5em;">Categories</h4>
 								<ul>
-									<li><a style="font-size:1.5em;" href="challenge">챌린지 목록</a></li>
-									<li><a style="font-size:1.5em;" sec:authorize="hasAuthority('u1')"
+									<li style="line-height: 70px;"><a style="font-size:1.5em;" href="challenge">챌린지 목록</a></li>
+									<li style="line-height: 70px;"><a style="font-size:1.5em;" sec:authorize="hasAuthority('u1')"
 										href="challenge/challenging">진행중인 챌린지</a></li>
-									<li><a style="font-size:1.5em;" sec:authorize="hasAuthority('u1')"
+									<li style="line-height: 70px;"><a style="font-size:1.5em;" sec:authorize="hasAuthority('u1')"
 										href="challenge/challengeEnd">완료한 챌린지</a></li>
 								</ul>
 							</div>
@@ -182,7 +182,7 @@
 		   	let b = document.getElementById('contents');
 			let c = document.getElementById('chl');
 			a.innerHTML = title;
-		   	b.innerHTML = dday+"일 동안 "+title+"에 도전하시겠습니까?";
+		   	b.innerHTML = dday+"일 동안 "+title+"에 <br>도전하시겠습니까?";
 		   	c.href = "/challenge/start?cno="+cno+"&cdday="+dday;		   
 	   		}	      
 	    
