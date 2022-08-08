@@ -367,7 +367,8 @@ public class DiaryController {
 public String modifyde(HttpServletResponse response,DiaryVO diaryVO,DiaryVO1 diaryVO1,Authentication authentication)throws IOException, ParseException { 
       UserDetails mid = (UserDetails) authentication.getPrincipal();
       diaryVO.setMid(mid.getUsername());
-      
+      SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+      String strDate = sdf.format(diaryVO.getDdate());
       
       dao.diaryde(diaryVO);
       dao.detade(diaryVO);
@@ -419,7 +420,7 @@ public String modifyde(HttpServletResponse response,DiaryVO diaryVO,DiaryVO1 dia
            dao.insertdetail(res);
         }
 
-                return "redirect:/diary"; 
+        return "redirect:daysic?date="+strDate; 
 
    }
    @RequestMapping("delete")
