@@ -134,12 +134,14 @@ public class AdminController {
         adminService.insertRestrict(adminVO);
 
 
+        // 등록 후 Alert를 띄우기 위해 작성.
         String msg = "정상적으로 등록되었습니다";
         String url = "/Admin";
         response.setContentType("text/html; charset=utf-8");
         response.setCharacterEncoding("UTF-8");
         PrintWriter w = response.getWriter();
         w.write("<script>alert('"+msg+"');location.href='"+url+"';</script>");
+        // 적용되진 않는 코드
         return "contents/admin/userFormMain";
     }
 }
