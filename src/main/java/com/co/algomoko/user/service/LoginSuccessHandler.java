@@ -18,7 +18,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @Component
 public class LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
-		private UserService service;
+		
 		 @Override
 		    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 		            Authentication authentication) throws IOException, ServletException {
@@ -29,10 +29,10 @@ public class LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 			 
 			 
 			 
-			 //가려고 하는곳이 있으면
+			 //가려고 하는곳이 있으면 원래 있던 페이지
 			 if (savedRequest != null)
 				 new DefaultRedirectStrategy().sendRedirect(request, response, savedRequest.getRedirectUrl());
-			 //없으면 메인
+			 //없으면 메인페이지
 			 else 
 	            new DefaultRedirectStrategy().sendRedirect(request, response, "/main");
 	        }

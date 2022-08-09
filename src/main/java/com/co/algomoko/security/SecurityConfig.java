@@ -27,29 +27,26 @@ import lombok.AllArgsConstructor;
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
 
-		
+		// 구현한 서비스
 		private UserLoginService userLoginService;
 		
-		private final LoginFailureHandler failureHandler;
-			
+		
+		// 로그인 성공 처리	
 		private final LoginSuccessHandler successHandler;
 		
-		//private PasswordEncoder passwordEncoder;	
-		
+			
+		// 로그인 암호화
 		@Bean
 		public PasswordEncoder passwordEncoder() {
 			return new BCryptPasswordEncoder();
-		}
-						
-	    		 
-		 @Bean 
-		 @Override    
-		 public AuthenticationManager authenticationManagerBean() throws Exception {     
+		}				
+	    // 로그인 처리		 
+		@Bean 
+		@Override    
+		public AuthenticationManager authenticationManagerBean() throws Exception {     
 			 return super.authenticationManagerBean();   
 			 }
-		 
 
-   
     @Override
       public void configure(WebSecurity web) {
         web.ignoring().antMatchers("/","/logout","/css/**", "/js/**", "/img/**","/favicon.ico", "/resources/**", "/error","/challenge/download/**");
@@ -58,32 +55,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     @Override
     protected void configure(HttpSecurity http) throws Exception{
         http
+        // csrf 비활성화
         .csrf().disable()
-        
+        // 권한 접근 처리
         .authorizeRequests()
 	        .antMatchers("/contents/**").permitAll()
 	        .antMatchers("/loginForm").permitAll()
 	        .antMatchers("/login").permitAll()
-
-	        //.antMatchers("/diary/**").hasRole("u1")
-	        //.antMatchers("/diary/**").hasAuthority("u1")
 	        .antMatchers("/diary/**").hasAnyAuthority("u1","u0")
 	        .antMatchers("/challenge/**").hasAnyAuthority("u1","u0")
-
-	        
-
 	        .antMatchers("/Admin/**").hasAuthority("u0")
-	        
-
         .and()
-
+        //로그인 관련 처리
         .formLogin()
             .loginPage("/loginForm").loginProcessingUrl("/loginForm/login")
             .usernameParameter("mid").passwordParameter("mpw")
             .successHandler(successHandler)
-            .defaultSuccessUrl("/main").permitAll()
-            //권한 관련 오류처리
-        
+            .defaultSuccessUrl("/main").permitAll()     
         //로그아웃 설정, 로그 아웃 후 세션 제거
         .and()
             .logout()
@@ -101,7 +89,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 //   }
    
    
-    
+    // 서비스에서 비밀번호 암호화
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userLoginService)
