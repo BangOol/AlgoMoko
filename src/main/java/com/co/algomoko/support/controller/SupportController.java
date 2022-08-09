@@ -69,6 +69,7 @@ public class SupportController {
         paginationUser.setType(type);
         paginationUser.setTotalRecordCount(listCnt);
 
+        // view 단으로 값 보내기
         modelAndView.addObject("pagination",paginationUser);
         modelAndView.addObject("InqList", pagingService.inqAllList(paginationUser));
         modelAndView.addObject("U0", u0);
@@ -77,15 +78,18 @@ public class SupportController {
         return modelAndView;
     }
 
+    // 공지사항 이동
     @GetMapping("/Notice")
     public String moveNotice(){
         return "contents/support/Notice";
     }
 
 
+    // 문의내역 글 작성
     @GetMapping("/Inquiry/writeInquiry")
     public String moveWriteInquiry(Authentication authentication,Model model){
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        // 현재 로그인 중인 사용자의 아이디 값 확인
         String mid = userDetails.getUsername();
         model.addAttribute("searchNo",inquiryService.searchNo());
         model.addAttribute("mid",mid);
@@ -101,6 +105,7 @@ public class SupportController {
     }
 
 
+    // 문의내역 수정 창
     @PostMapping("/Inquiry/insert")
     public void insertInquiry(InquiryVO inquiryVO,
                               Model model, HttpServletResponse response,
@@ -113,10 +118,12 @@ public class SupportController {
         String nick = inquiryService.getNick(mid);
         inquiryVO.setMid(mid);
         inquiryVO.setNick(nick);
-        System.out.println(inquiryVO);
+
+        // 문의 내역 수정
         inquiryService.insertInquiry(inquiryVO);
 
 
+        // alert로 등록되었다고 알리기
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=utf-8");
         PrintWriter w = response.getWriter();
@@ -126,6 +133,7 @@ public class SupportController {
 
     }
 
+    // 문의 내역 수정 창 이동
     @PostMapping("/Inquiry/modify")
     public String modifyInquiry(@RequestParam("nick") String nick,
                                 @RequestParam("qno") int qno,
@@ -133,6 +141,8 @@ public class SupportController {
                                 @RequestParam("qtitle") String qtitle,
                                 Model model, Authentication authentication){
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+
+        // 필요한 값 들고 view 단에 던지기
         InquiryVO inquiryVO = new InquiryVO();
         inquiryVO.setQno(qno);
         inquiryVO.setNick(nick);
@@ -142,6 +152,7 @@ public class SupportController {
         return "contents/support/insertInquiry";
     }
 
+    // 문의 내역
     @PostMapping("/Inquiry/updateInq")
     public void updateInq(@RequestParam("qno") int qno,
                             @RequestParam("qcon") String qcon,
@@ -177,6 +188,7 @@ public class SupportController {
         }
     }
 
+    // 문의내역 삭제
     @PostMapping("/Inquiry/delete")
     public void InquiryDelete(@RequestParam("qno") int qno,
                               @RequestParam("mid") String mid,
@@ -206,6 +218,7 @@ public class SupportController {
         }
     }
 
+    // 문의 내역 상세 정보 확인
     @PostMapping("/Inquiry/detail")
     public String InquiryDetail(@RequestParam("mid") String mid,@RequestParam("qno") int qno,
                                  Authentication authentication,Model model,
@@ -237,6 +250,7 @@ public class SupportController {
         return "contents/index";
     }
 
+    // 답변 결과
     @PostMapping("/Inquiry/inqResult")
     public void inqResult(@RequestParam("qanst") String qanst,
                           @RequestParam("qans") String qans,
