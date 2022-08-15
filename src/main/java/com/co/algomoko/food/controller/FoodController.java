@@ -52,7 +52,7 @@ public class FoodController {
 			Map<String, Object> map, FoodVO foodVO, @RequestParam(value = "ing", defaultValue = "null") String ing)
 			throws Exception {
 		
-			ModelAndView mav = new ModelAndView();
+			ModelAndView mav = new ModelAndView(); //객체 생성
 			
 			if (foodVO.getIng() != null) {
 				// 검색어가 있으면 검색해서 띄우기
@@ -62,7 +62,7 @@ public class FoodController {
 				page.setTotalRecordCount(listCnt);				
 				foodVO.setFirstRecordIndex(page.getFirstRecordIndex());
 				foodVO.setLastRecordIndex(page.getLastRecordIndex());
-	
+				// view에 전달할 값을 설정 addObject("변수 이름", "데이터 값");
 				mav.addObject("pagination", page);
 				mav.addObject("fList", dao.fListPage(foodVO));		
 			} 
@@ -70,6 +70,7 @@ public class FoodController {
 			//인기 검색어 1~6등 조회수 순으로 표시
 			List<FoodVO> result3 = dao.pList(foodVO);
 			mav.addObject("pList", result3);
+			//뷰 이름 설정 setViewName("경로")
 			mav.setViewName("contents/food/food");
 			return mav;
 	}
