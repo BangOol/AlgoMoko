@@ -83,6 +83,7 @@ public class AdminController {
             int listCnt = pagingService.TableCount(paginationUser);
             paginationUser.setTotalRecordCount(listCnt);
 
+
             modelAndView.addObject("pagination", paginationUser); // 값을 paginantion으로 뿌림.
             modelAndView.addObject("Alllist", pagingService.SelectAllList(paginationUser)); // 회원 전체 데이터를 뿌림.
             modelAndView.setViewName("contents/admin/userFormUserlist");
