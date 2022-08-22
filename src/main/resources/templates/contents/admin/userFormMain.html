@@ -89,9 +89,24 @@
             </div>
         </div>
     </div>
-    </div>
 </section>
+    <input type="button" value="API" onclick=apiTest()>
 </th:block>
 </body>
+
+<script>
+    let key = 'aEjgVgZFiHE8u%2FS439rhMqWoRBpNR6zYY%2Bag0O7pRBu7LfMrips7fmLF11EfQmcdsy0USjY4MifQSrVutEAz2Q%3D%3D';
+    let numOfRows = 10;
+    let pageNo = 1;
+    let type = 'xml';
+    let url = 'http://apis.data.go.kr/1470000/FoodNtrIrdntInfoService/getFoodNtrItdntList?ServiceKey=' + key + '&numOfRows=' + numOfRows + '&pageNo=' + pageNo + '&type=' + type;
+    function apiTest(){
+        fetch(url,{
+
+        }).then(response=>{
+            console.log(response);
+        })
+    }
+</script>
 
 </html>
