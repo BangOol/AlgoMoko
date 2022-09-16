@@ -58,7 +58,6 @@ public class AdminController {
 
         ModelAndView modelAndView = new ModelAndView();
 
-
         //view 단에서 받은 현재 페이지, 페이지 당 출력 페이지 개수, 화면 하단 페이지 사이즈 가져와서 입력.
         PaginationUser paginationUser = new PaginationUser(currentPage, cntPerPage, pageSize);
         paginationUser.setKeyword(keyword);
